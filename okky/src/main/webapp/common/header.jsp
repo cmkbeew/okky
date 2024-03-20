@@ -10,7 +10,7 @@
 
 <body>
 <style> 
-* {
+header * {
     margin :0;
     padding: 0;
     list-style: none;
@@ -24,7 +24,7 @@ header {
     justify-content: center;
     border-bottom: 1px solid #505050;
 } 
-#logo {
+header #logo {
     width : 180px;
     height : 50px; 
     display : flex;
@@ -53,15 +53,15 @@ header {
     text-align: center;
     margin: 0 10px;
 }
-li a {
+header li a {
     /* padding: 150px; */
     width: 150px;
     color: black;
 } 
-ul a:link, ul a:visited {
+header ul a:link, header ul a:visited {
     color: black;
 }
-ul a:hover {
+header ul a:hover {
     background-color: #39b6ff;
 }
 .button {
