@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>main</title>
 <style>
        #container {
             width:100%;
@@ -78,12 +78,13 @@
         .info {
             height: 50px;
             line-height: 50px;
-            border: 2px solid black;
-            border-radius: 20px;
+            border: 0;
+            border-radius: 10px;
             display: flex;
             justify-content: space-between;
             padding-left: 20px;
             padding-right: 20px;
+            background-color: rgb(227, 227, 232);
         }
        
 
@@ -156,7 +157,7 @@
                         <li>
                             <a href="#">
                                 <div>
-                                    공지사항
+                                    구인구
                                 </div>
                             </a>
                         </li>
