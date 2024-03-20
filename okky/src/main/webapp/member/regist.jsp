@@ -123,7 +123,7 @@
 		const EngChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		const numChars = "0123456789";
 		const specialChars = "`~!@#$%^&*()-=_+,<.>/?;':\"\"'{}[]";
-		const name_check = new Regexp("/[가-힣]/");
+		const emailCheck = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
 		
 		function combi_check(inputValue, chars) {
 			let cnt = 0;
@@ -144,10 +144,10 @@
 			}else {
 				// 4~15자 이내 => input 배경색 변경
 				if(memberId.value.length >= 4 && memberId.value.length <= 15) {
-					memberId.style.border = "3px solid lightgreen";
 					// 영문 + 숫자
 					if((combi_check(memberId.value, engChars) > 0 || combi_check(memberId.value, EngChars) > 0) 
 							&& combi_check(memberId.value, numChars) > 0) {
+						memberId.style.border = "3px solid lightgreen";
 					} else {
 						memberId.style.border = "1px solid red";
 					}
@@ -179,34 +179,54 @@
 		}, false);
 		
 		// 이메일 체크 이벤트
-		pwd.addEventListener("keyup", function(e) {
+		email.addEventListener("keyup", function(e) {
 			// 이메일 형식(@, .) 확인
-			
-			
+		    if(emailCheck.test(email.value) === true) {
+		    	email.style.border = "3px solid lightgreen";
+		    } else {
+		    	if(email.value.length == 0) {
+					email.style.border = "";
+				} else {
+					email.style.border = "1px solid red";					
+				}
+		    }
 		}, false);
 		
 		// 이름 체크 이벤트
 		name.addEventListener("keyup", function(e) {
 			// 30자 이내
-			if(name.value.length >= 1 && name.value.length <= 30) {
-				// 영문 + 숫자 + 특수문자
-				if(name_check.test(name.value)) {
-					
-				}
-				if((combi_check(pwd.value, engChars) > 0 || combi_check(pwd.value, EngChars) > 0) 
-						&& combi_check(pwd.value, numChars) > 0 
-						&& combi_check(pwd.value, specialChars) > 0) {
-					pwd.style.border = "3px solid lightgreen";
-				} else {
-					pwd.style.border = "1px solid red";
-				}
-			} else if(pwd.value.length == 0) {
-				pwd.style.border = "";
+			if(name.value.length >= 2 && name.value.length <= 30) {
+				name.style.border = "3px solid lightgreen";
+			} else if(name.value.length == 0) {
+				name.style.border = "";
 			} else {
-				pwd.style.border = "1px solid red";
+				name.style.border = "1px solid red";
 			}
-			
 		}, false);
+		
+		// 닉네임 체크 이벤트
+		nickname.addEventListener("keyup", function(e) {
+			// 특수문자 입력 시 지워짐
+			if(combi_check(nickname.value, specialChars) > 0) {
+				nickname.value = nickname.value.substring(0, nickname.value.length - 1);
+			}else {
+				// 2~20자 이내 => input 배경색 변경
+				if(nickname.value.length >= 2 && nickname.value.length <= 20) {
+					// 영문 + 숫자
+					if((combi_check(nickname.value, engChars) > 0 || combi_check(nickname.value, EngChars) > 0) 
+							&& combi_check(nickname.value, numChars) > 0) {
+						nickname.style.border = "3px solid lightgreen";
+					} else {
+						nickname.style.border = "1px solid red";
+					}
+				} else if(nickname.value.length == 0) {
+					nickname.style.border = "";
+				} else {
+					nickname.style.border = "1px solid red";
+				}
+			}
+		}, false);
+		
 		
 		document.querySelector("#type_1").addEventListener("click", function(e) {
 			document.querySelector("#companyInput").style.display = "none";
