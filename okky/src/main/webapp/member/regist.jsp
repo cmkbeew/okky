@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +51,14 @@
 	
 	<div id="registMain" class="regist">
 		<h2>회원가입</h2>
-		<form name="frmRegist" id="frmRegist" action="" enctype="multipart/form-data">
+		<c:if test="${not empty registErrMsg}">
+			<span style="color: red; font-size: 20px; font-weight: bold;">${registErrMsg}</span>
+		</c:if>
+		<c:if test="${not empty uploadFileError}">
+			<span style="color: red; font-size: 20px; font-weight: bold;">${uploadFileError}</span>
+		</c:if>
+		
+		<form name="frmRegist" id="frmRegist" action="./regist.do" method="post">
 			<div id="memberIdLabel" class="label">아이디</div>
 			<div class="inputRegist">
 				<input type="text" name="memberId" id="memberId" value="" placeholder="아이디 4~15자 이내" />
@@ -87,7 +95,7 @@
 				</div>
 				<div id="companyFileLabel" class="label">사업자 등록증 파일</div>
 				<div class="inputRegist">
-					<input type="file" name="companyFile" id="companyFile" value="" />
+					<input type="file" name="file" id="companyFile" value="" />
 				</div>
 				<div id="managerNameLabel" class="label">담당자 이름</div>
 				<div class="inputRegist">
@@ -273,11 +281,13 @@
 		}, false);
 		
 		document.querySelector("#type_1").addEventListener("click", function(e) {
+			document.querySelector("#frmRegist").setAttribute("enctype", "");
 			document.querySelector("#companyInput").style.display = "none";
 			document.querySelector("#btn_regist").disabled = false;
 		}, false);
 		
 		document.querySelector("#type_2").addEventListener("click", function(e) {
+			document.querySelector("#frmRegist").setAttribute("enctype", "multipart/form-data");
 			document.querySelector("#companyInput").style.display = "";
 			document.querySelector("#btn_regist").disabled = true;
 		}, false);
@@ -319,8 +329,6 @@
 				}
 			}
 		}
-		
-		
 	</script>
 </body>
 </html>

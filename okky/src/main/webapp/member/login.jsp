@@ -77,7 +77,7 @@
 		
 		<div id="regist">
 			<span>아직 회원이 아니신가요?</span>
-			<a href="./regist.jsp">회원가입</a>		
+			<a href="./regist.do">회원가입</a>		
 		</div>
 	</div>
 	

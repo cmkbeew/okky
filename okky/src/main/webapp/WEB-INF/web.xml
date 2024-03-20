@@ -26,4 +26,14 @@
     <param-name>dbPwd</param-name>
     <param-value>cjswo2</param-value>
   </context-param>
+  
+  <servlet>
+    <servlet-name>MemberController</servlet-name>
+    <servlet-class>controller.member.MemberController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberController</servlet-name>
+    <url-pattern>/member/regist.do</url-pattern>
+  </servlet-mapping>
+
 </web-app>
