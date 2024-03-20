@@ -18,11 +18,19 @@
 		margin: 0 auto;
 		margin-bottom: 10px;
 	}
-	input[type="text"] {
+	input[type="text"], input[type="password"]{
 		width: 300px;
 		height: 30px;
 		box-sizing: border-box;
 		margin-bottom: 10px;
+	}
+	.warning {
+		width: 300px;
+		margin: 0 auto;
+		margin-bottom: 10px;
+		color: red;
+		text-align: left;
+		font-size: 20px;
 	}
 	#btn_login {
 		width: 300px;
@@ -37,7 +45,7 @@
 	<div id="loginHeader" class="login">
 		<div>
 			<div>
-				<img alt="로고" src="">
+				<a href="./login.jsp"><img alt="로고" src=""></a>
 			</div>
 			<div><h2>OKKY에 오신 것을 환영합니다.</h2></div>
 		</div>
@@ -46,17 +54,21 @@
 	
 	<div id="loginMain" class="login">
 		<h2>로그인</h2>
-		<form id="frmLogin" action="">
-			<div id="id" class="label">아이디</div>
+		<form name="frmLogin" id="frmLogin" action="">
+			<div id="memberIdLabel" class="label">아이디</div>
 			<div class="inputLogin">
-				<input type="text" name="memberId" id="memberId" value="" />
+				<input type="text" name="memberId" id="memberId" value="" placeholder="아이디 4~15자 이내"/>
 			</div>
-			<div id="pwd" class="label">비밀번호</div>
+			<div id="warn-memberId" class="warning"></div>
+			
+			<div id="pwdLabel" class="label">비밀번호</div>
 			<div class="inputLogin">
-				<input type="text" name="pwd" id="pwd" value="" />
+				<input type="password" name="pwd" id="pwd" value="" placeholder="영문+숫자+특수문자 포함 6~20자 이내"/>
 			</div>
+			<div id="warn-pwd" class="warning"></div>
+			
 			<div>
-				<input type="submit" name="btn_login" id="btn_login" value="로그인" />
+				<input type="submit" id="btn_login" value="로그인" />
 			</div>
 		</form>
 		
@@ -66,6 +78,45 @@
 		</div>
 	</div>
 	
-	
+	<script>
+		document.querySelector("#frmLogin").addEventListener("submit", function(e) {
+			e.preventDefault();
+			
+			const memberId = document.querySelector("#memberId");
+			const pwd = document.querySelector("#pwd");
+			
+			// 아이디, 비밀번호 미입력 시 오류 메세지
+			const warnMemberId = document.querySelector("#warn-memberId");
+			const warnPwd = document.querySelector("#warn-pwd");
+			
+			if(memberId.value.trim().length == 0 && pwd.value.length == 0) {
+				warnMemberId.style.display = "";
+				warnMemberId.innerText = "아이디를 입력하세요.";
+				warnPwd.style.display = "";
+				warnPwd.innerText = "비밀번호를 입력하세요.";
+				
+				memberId.focus();
+				e.preventDefault();
+				
+				return false;
+			} else if(memberId.value.trim().length == 0 && pwd.value.length != 0) { // 아이디 미입력
+				warnMemberId.style.display = "";
+				warnMemberId.innerText = "아이디를 입력하세요.";
+				warnPwd.style.display = "none";
+				
+				return false;
+			} else if(memberId.value.trim().length != 0 && pwd.value.trim().length == 0) { // 비밀번호 미입력
+				warnMemberId.style.display = "none";
+				warnPwd.style.display = "";
+				warnPwd.innerText = "비밀번호를 입력하세요.";
+				
+				return false;
+			} else {
+				const frm = document.querySelector("#frmLogin");
+				
+				frm.submit();
+			}			
+		}, false);
+	</script>
 </body>
 </html>
