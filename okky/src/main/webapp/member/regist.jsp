@@ -274,6 +274,7 @@
 		
 		document.querySelector("#type_1").addEventListener("click", function(e) {
 			document.querySelector("#companyInput").style.display = "none";
+			document.querySelector("#btn_regist").disabled = false;
 		}, false);
 		
 		document.querySelector("#type_2").addEventListener("click", function(e) {
@@ -317,7 +318,9 @@
 					document.querySelector("#btn_regist").disabled = true;
 				}
 			}
-		}		
+		}
+		
+		
 	</script>
 </body>
 </html>

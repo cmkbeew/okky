@@ -5,7 +5,7 @@
 <head>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <title>Document</title>
+    <title>Header</title>
     <style> 
     * {
         margin :0;
@@ -25,7 +25,7 @@
         width : 180px;
         height : 50px; 
         display : flex;
-        background-image: url(./okky-munchkin-logo.svg);
+        background-image: url("./okky-munchkin-logo.svg");
         background-size: contain;
         background-repeat: no-repeat;
     }
@@ -145,7 +145,8 @@
       border-radius: 50%;
     }
 
-  
+    
+    
     </style>
 </head>
 <body>
@@ -185,10 +186,12 @@
             if(toggleBtn.value != "on") {
                 toggleBtn.value = "on";
                 document.querySelector("body").setAttribute("style","background-color:rgb(31 41 55); color:white");
+                document.querySelector("#logo").style.backgroundImage = "url('https://okky.kr/darkmode/dark-logo.svg')";
                 
             }
             else {
                 toggleBtn.value = "off";
+                document.querySelector("#logo").style.backgroundImage = "url('./okky-munchkin-logo.svg')";
                 document.querySelector("body").setAttribute("style","background-color:white; color:black");
             }
             
