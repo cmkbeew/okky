@@ -8,9 +8,11 @@
 <style>
 	.regist {
 		width: 700px;
- 		margin: 0 auto;
+ 		margin: 30px auto;
  		text-align: center; 
-		
+	}
+	h2 {
+		margin-bottom: 20px;
 	}
 	.label {
 		width: 300px;
@@ -37,10 +39,11 @@
 </style>
 </head>
 <body>
+	<jsp:include page="/common/header.jsp" />
 	<div id="registHeader" class="regist">
 		<div>
 			<div>
-				<a href="./login.jsp"><img alt="로고" src=""></a>
+				<a href="./login.jsp"><img alt="로고" src="https://okky.kr/okky-munchkin-logo.svg" width="300"></a>
 			</div>
 			<div><h2>OKKY에 오신 것을 환영합니다.</h2></div>
 		</div>
@@ -120,6 +123,7 @@
 		const EngChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		const numChars = "0123456789";
 		const specialChars = "`~!@#$%^&*()-=_+,<.>/?;':\"\"'{}[]";
+		const name_check = new Regexp("/[가-힣]/");
 		
 		function combi_check(inputValue, chars) {
 			let cnt = 0;
@@ -172,9 +176,37 @@
 			} else {
 				pwd.style.border = "1px solid red";
 			}
+		}, false);
+		
+		// 이메일 체크 이벤트
+		pwd.addEventListener("keyup", function(e) {
+			// 이메일 형식(@, .) 확인
+			
 			
 		}, false);
 		
+		// 이름 체크 이벤트
+		name.addEventListener("keyup", function(e) {
+			// 30자 이내
+			if(name.value.length >= 1 && name.value.length <= 30) {
+				// 영문 + 숫자 + 특수문자
+				if(name_check.test(name.value)) {
+					
+				}
+				if((combi_check(pwd.value, engChars) > 0 || combi_check(pwd.value, EngChars) > 0) 
+						&& combi_check(pwd.value, numChars) > 0 
+						&& combi_check(pwd.value, specialChars) > 0) {
+					pwd.style.border = "3px solid lightgreen";
+				} else {
+					pwd.style.border = "1px solid red";
+				}
+			} else if(pwd.value.length == 0) {
+				pwd.style.border = "";
+			} else {
+				pwd.style.border = "1px solid red";
+			}
+			
+		}, false);
 		
 		document.querySelector("#type_1").addEventListener("click", function(e) {
 			document.querySelector("#companyInput").style.display = "none";

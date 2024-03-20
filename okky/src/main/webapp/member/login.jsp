@@ -8,9 +8,11 @@
 <style>
 	.login {
 		width: 700px;
- 		margin: 0 auto;
+ 		margin: 30px auto;
  		text-align: center; 
-		
+	}
+	h2 {
+		margin-bottom: 20px;
 	}
 	.label {
 		width: 300px;
@@ -42,10 +44,11 @@
 </style>
 </head>
 <body>
+	<jsp:include page="/common/header.jsp" />
 	<div id="loginHeader" class="login">
 		<div>
 			<div>
-				<a href="./login.jsp"><img alt="로고" src=""></a>
+				<a href="../main.jsp"><img alt="로고" src="https://okky.kr/okky-munchkin-logo.svg" width="300"></a>
 			</div>
 			<div><h2>OKKY에 오신 것을 환영합니다.</h2></div>
 		</div>
