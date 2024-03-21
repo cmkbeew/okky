@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%-- <%@ taglib prefix="c" uri="jakarta.tags.core" %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +77,21 @@
             background-color: #0090f9;
             color: #fff;
         }
+         #selectCon{
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-areas: 
+                "select" "select" "select";
+        }
+        #selectCon select {
+            width: 90%;
+            padding: 16px 20px;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            font-size:15px ;
+            margin: 10px;
+        }
     </style>
 </head>
 <body>
@@ -111,11 +126,34 @@
                             <input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="input_area" value="${params.title }">
                             <div id="titleCheck" style="color: red; font-size: x-small; display: none;">제목은 50자 이하로 입력해 주세요.</div>
                         </div>
-                        <div>
-                            <label for="tags">태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label><br>
-                            <input type="text" id="tags" name="tags" placeholder="태그를 입력해주세요." class="input_area">
-                            <div id="tagCheck" style="color: red; font-size: x-small; display: none;">태그는 3개 이상 입력할 수 없습니다.</div>
-                        </div>
+                        <br>
+                        <label for="tags">태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label>
+                        <div id="selectCon">
+                    <div>
+                        <select name="skill" id="skill_1st">
+                            <option value="">선택 1</option>
+                            <option value="skill1">스킬1</option>
+                            <option value="skill2">스킬2</option>
+                            <option value="skill3">스킬3</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select name="skill" id="skill_2nd">
+                            <option value="">선택 2</option>
+                            <option value="skill1">스킬1</option>
+                            <option value="skill2">스킬2</option>
+                            <option value="skill3">스킬3</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select name="skill" id="skill_3rd">
+                            <option value="">선택 3</option>
+                            <option value="skill1">스킬1</option>
+                            <option value="skill2">스킬2</option>
+                            <option value="skill3">스킬3</option>
+                        </select>
+                    </div>
+                </div>
                         <div>
                             <label for="contents">본문</label><br>
                             <textarea id="contents" name="contents" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요.">${params.content }</textarea>
@@ -211,10 +249,5 @@
 
 
     </script>
-</body>
-</html>
-</head>
-<body>
-
 </body>
 </html>

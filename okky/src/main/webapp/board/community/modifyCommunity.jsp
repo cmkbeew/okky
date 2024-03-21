@@ -212,8 +212,3 @@
     </script>
 </body>
 </html>
-</head>
-<body>
-
-</body>
-</html>
