@@ -214,7 +214,7 @@
                             <li>
                                 <hr>
                                 <div class="writer">
-                                    <div>작성자</div>
+                                    <div>닉네임</div>
                                     <div>·</div>
                                     <div>작성일</div>
                                 </div>

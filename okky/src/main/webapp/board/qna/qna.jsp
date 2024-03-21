@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="jakarta.tags.core" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -273,227 +274,67 @@
             <div><hr></div>
             <div class="list">
                 <ul>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button>    
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button> 
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button> 
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button> 
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button> 
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button> 
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button> 
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button> 
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-                    <li>
-                        <button onclick="location.href='#'">
-                            <div>
-                                답변
-                            </div>
-                            <div>
-                                2
-                            </div>
-                        </button> 
-                        <div class="writer">
-                            <div>작성자</div>
-                            <div>·</div>
-                            <div>작성일</div>
-                        </div>
-                        <div class="content_title">
-                            <a href="#">
-                                <strong>요새 자바는 opensdk로 많이 가나요?</strong>
-                                <p>
-                                    글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용글내용
-                                </p>
-                            </a>
-                        </div>
-                        <hr>
-                    </li>
-
-
+                    
+                       <c:choose>
+                        	<c:when test="${not empty qnaList}">
+                        		<c:forEach var="list" items="${qnaList}" varStatus="loop">
+                        			<li>
+				                        <button onclick="location.href='#'">
+				                            <div>
+				                                답변
+				                            </div>
+				                            <div>
+				                                ${list. answerIdx}
+				                            </div>
+				                        </button> 
+				                        <div class="writer">
+				                            <div>${list.memberId}</div>
+				                            <div>·</div>
+				                            <div>${list.regDate}</div>
+				                        </div>
+				                        <div class="content_title">
+				                            <a href="#">
+				                                <strong>${list.title}</strong>
+				                                <p>
+				                                    ${list.content}
+				                                </p>
+				                            </a>
+				                        </div>
+				                        <hr>
+				                    </li>
+                        		</c:forEach>
+                        	</c:when>
+                        	<c:otherwise>
+                        	<li>
+				                        <button onclick="location.href='#'">
+				                            <div>
+				                                답변
+				                            </div>
+				                            <div>
+				                                ${list. answerIdx}
+				                            </div>
+				                        </button> 
+				                        <div class="writer">
+				                            <div>${list.memberId}</div>
+				                            <div>·</div>
+				                            <div>${list.regDate}</div>
+				                        </div>
+				                        <div class="content_title">
+				                            <a href="#">
+				                                <strong>${list.title}</strong>
+				                                <p>
+				                                   등록된 게시물이 없습니다.
+				                                </p>
+				                            </a>
+				                        </div>
+				                        <hr>
+				                    </li>
+                        	</c:otherwise>
+                        </c:choose>
+                       
                 </ul>
                 <div style="text-align: center; margin: 50px;">
-                    &lt;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;130&nbsp;&nbsp;&gt;
+                    <div id="paging">${params.paging }</div>
                 </div>
             </div>
         </div>
