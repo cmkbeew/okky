@@ -136,7 +136,7 @@
     </style>
 </head>
 <body>
-<%@ include file="/common/header.jsp" %>
+<jsp:include page="/common/header.jsp"/>
         <div id="container">
             <div class="side" id="Lside">
                 <div id="top_title"><span><h2>Top writers</h2></span></div>

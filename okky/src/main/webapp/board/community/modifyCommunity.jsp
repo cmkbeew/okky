@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,7 +80,7 @@
     </style>
 </head>
 <body>
-<%@ include file="/common/header.jsp" %>
+<jsp:include page="/common/header.jsp"/>
     <div id="body">
         <div id="container">
             <div class="side">
