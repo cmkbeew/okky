@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,7 +58,13 @@
 	
 	<div id="loginMain" class="login">
 		<h2>로그인</h2>
-		<form name="frmLogin" id="frmLogin" action="">
+		<c:if test="${not empty loginErrMsg}">
+			<span style="color: red; font-size: 20px; font-weight: bold;">${loginErrMsg}</span>
+		</c:if>
+		<c:if test="${not empty nickname}">
+			<span style="color: black; font-size: 20px; font-weight: bold;">${nickname}님 환영합니다.</span>
+		</c:if>
+		<form name="frmLogin" id="frmLogin" action="./login.do" method="post">
 			<div id="memberIdLabel" class="label">아이디</div>
 			<div class="inputLogin">
 				<input type="text" name="memberId" id="memberId" value="" placeholder="아이디 4~15자 이내"/>

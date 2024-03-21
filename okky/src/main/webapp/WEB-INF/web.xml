@@ -9,7 +9,6 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  
   <context-param>
     <param-name>Driver</param-name>
     <param-value>org.mariadb.jdbc.Driver</param-value>
@@ -26,7 +25,6 @@
     <param-name>dbPwd</param-name>
     <param-value>cjswo2</param-value>
   </context-param>
-  
   <servlet>
     <servlet-name>MemberController</servlet-name>
     <servlet-class>controller.member.MemberController</servlet-class>
@@ -35,5 +33,12 @@
     <servlet-name>MemberController</servlet-name>
     <url-pattern>/member/regist.do</url-pattern>
   </servlet-mapping>
-
+  <servlet>
+    <servlet-name>LoginController</servlet-name>
+    <servlet-class>controller.member.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginController</servlet-name>
+    <url-pattern>/member/login.do</url-pattern>
+  </servlet-mapping>
 </web-app>

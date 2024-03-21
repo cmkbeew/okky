@@ -40,55 +40,59 @@ public class MemberController extends HttpServlet {
 		String managerName = req.getParameter("managerName");
 		String managerPhone = req.getParameter("managerPhone");
 		
-		// 파일 업로드 처리
-		String saveDir = "/okky/src/main/webapp/companyFiles";
-		String orgFileName = "";
-		
-		try {
-			orgFileName = FileUtil.uploadFile(req, saveDir);
-		} catch(Exception e) {
-			e.printStackTrace();
-			req.setAttribute("uploadFileError", "회원가입 중 파일 업로드 에러 발생");
-			req.getRequestDispatcher("./regist.jsp").forward(req, resp);
-		}
-		
+		// 중복 회원 검증
 		MemberDTO dto = new MemberDTO();
 		MemberDAO dao = new MemberDAO();
+		int id_check = dao.getMemberCount(memberId);
 		
-		dto.setMemberId(memberId);
-		dto.setPwd(pwd);
-		dto.setName(name);
-		dto.setEmail(email);
-		dto.setNickname(nickname);
-		dto.setType(type);
-		dto.setCompanyName(companyName);
-		dto.setCompanyNumber(companyNumber);
-		dto.setManagerName(managerName);
-		dto.setManagerPhone(managerPhone);
-		
-		if(orgFileName != "") {
-			String saveFileName = FileUtil.renameFile(saveDir, orgFileName);
-			
-			dto.setOrgCompanyFile(orgFileName);
-			dto.setSaveCompanyFile(saveFileName);			
-		}
-		
-		if(type.equals("1")) {
-			result = dao.registMember(dto);
-		} else {
-			result = dao.registMember2(dto);
-		}
-		dao.close();
-		
-		if(result > 0) {
-			resp.sendRedirect("./login.jsp");
-		} else {
-			req.setAttribute("registErrMsg", "회원가입 실패");
-			
+		if(id_check >= 1) {
+			req.setAttribute("registErrMsg", "아이디 중복 오류");
+			dao.close();
 			req.getRequestDispatcher("./regist.jsp").forward(req, resp);
+		} else {
+			dto.setMemberId(memberId);
+			dto.setPwd(pwd);
+			dto.setName(name);
+			dto.setEmail(email);
+			dto.setNickname(nickname);
+			dto.setType(type);
+			dto.setCompanyName(companyName);
+			dto.setCompanyNumber(companyNumber);
+			dto.setManagerName(managerName);
+			dto.setManagerPhone(managerPhone);
+			
+			if(type.equals("1")) {
+				result = dao.registMember(dto);
+			} else {
+				// 파일 업로드 처리
+				String saveDir = req.getServletContext().getRealPath("companyFiles");
+				String orgFileName = "";
+				
+				try {
+					orgFileName = FileUtil.uploadFile(req, saveDir);
+				} catch(Exception e) {
+					e.printStackTrace();
+					req.setAttribute("uploadFileError", "회원가입 중 파일 업로드 에러 발생");
+					req.getRequestDispatcher("./regist.jsp").forward(req, resp);
+				}
+				
+				if(orgFileName != "") {
+					String saveFileName = FileUtil.renameFile(saveDir, orgFileName);
+					
+					dto.setOrgCompanyFile(orgFileName);
+					dto.setSaveCompanyFile(saveFileName);			
+				}
+				result = dao.registMember2(dto);
+			}
+			dao.close();
+			
+			if(result > 0) {
+				resp.sendRedirect("./login.jsp");
+			} else {
+				req.setAttribute("registErrMsg", "회원가입 실패");
+				
+				req.getRequestDispatcher("./regist.jsp").forward(req, resp);
+			}
 		}
 	}
-	
-	
-
 }
