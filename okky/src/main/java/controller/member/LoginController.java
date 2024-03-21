@@ -35,7 +35,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("name", dto.getName());
 			session.setAttribute("nickname", dto.getNickname());
 			
-			resp.sendRedirect("./login.do");
+			resp.sendRedirect("./main.jsp");
 		} else {
 			req.setAttribute("loginErrMsg", "로그인 오류");
 			

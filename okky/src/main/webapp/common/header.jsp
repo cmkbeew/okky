@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>    
@@ -17,7 +18,6 @@
         padding: 0;
         list-style: none;
         text-decoration: none;
-
     } 
     header {
         width : 1200px;
@@ -82,14 +82,14 @@
         cursor: pointer;
     }
 
-    header #registBtn {
+    header #registBtn, header #myPageBtn{
         background-color: #39b6ff;
         color : #ffffff;
     }
     .buttons button:hover{
         background-color: #a9a9a9;
     }
-    header #registBtn:hover {
+    header #registBtn:hover, header #myPageBtn:hover {
         background-color: #1d8bca;
     }
     
@@ -160,6 +160,10 @@
     </style>
 </head>
 <body>
+<%
+String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
+
+%>
     <header>
         <nav class="navi"> 
             <a href="/okky/main.jsp"><div id="logo"></div></a>
@@ -173,21 +177,38 @@
                 <li style="display:flex; align-items: center; font-size: 13px;">다크모드&nbsp;<label class="switch"><input type="checkbox"><span class="slider round"></span></label></li>
             </ul>
             <div class="buttons">
-                <button id="loginBtn">로그인</button>
-                <button id="registBtn">회원가입</button>
+            	<c:choose>
+	            	<c:when test="${empty memberId }" >
+		                <button id="loginBtn">로그인</button>
+		                <button id="registBtn">회원가입</button>
+	                </c:when>
+	                <c:otherwise>
+	                	<button id="logoutBtn">로그아웃</button>
+		                <button id="myPageBtn">마이페이지</button>
+	                </c:otherwise>
+                </c:choose>
             </div>
         </nav>
     </header>
     <hr>
     <script>
-        document.querySelector("#loginBtn").addEventListener("click", function(e){
-            window.location.href = "/okky/member/login.do";
+    	<%if (FLAG == null || FLAG == "") {%>
+	        document.querySelector("#loginBtn").addEventListener("click", function(e){
+	            window.location.href = "/okky/member/login.do";
+	        });
+	        
+	        document.querySelector("#registBtn").addEventListener("click", function(e){
+	            window.location.href = "/okky/member/regist.do";
+	        });
+        <%} else{%>
+        document.querySelector("#logoutBtn").addEventListener("click", function(e){
+            window.location.href = "/okky/member/main.do";
         });
-        
-        document.querySelector("#registBtn").addEventListener("click", function(e){
-            window.location.href = "/okky/member/regist.do";
+        <%-- <% if(%> --%>
+        document.querySelector("#myPageBtn").addEventListener("click", function(e){
+            window.location.href = "/okky/member/mypage.do";
         });
-        
+        <%}%>
         const toggleBtn = document.querySelector("input[type='checkbox']");
         toggleBtn.value = "off";
         document.querySelector("input[type='checkbox']").addEventListener("click", function(e){
