@@ -7,21 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>Header</title>
     <style> 
+    * {
+        font-family: "Noto Sans KR", sans-serif;
+        font-optical-sizing: auto;
+        font-style: normal;
+        } 
     header * {
         margin :0;
         padding: 0;
         list-style: none;
         text-decoration: none;
 
-    }
+    } 
     header {
-        width : 1100px;
+        width : 1200px;
         height : 80px; 
         display : flex; 
         margin: 0 auto;
         justify-content: center;
     } 
-    #logo {
+    header #logo {
         width : 180px;
         height : 50px; 
         display : flex;
@@ -30,20 +35,20 @@
         background-repeat: no-repeat;
     }
     /* 네비게이션바 */
-    .navi {
+    header .navi {
         width : 100%; 
         display: flex;
         margin: 0 auto;
         align-items: center;
     }
-    .navi ul {
+    header .navi ul {
         display: flex;
         flex-direction: row;
         align-items: center;
     }
-    .navi li {
+    header .navi li {
         list-style : none ;
-        width:150px; 
+        width:180px; 
         height:80px; 
         line-height: 80px;
         text-align: center;
@@ -59,31 +64,37 @@
     }
     header ul a:hover {
         background-color: #39b6ff;
+        color : white;
+        opacity : 0.8;
+        transition : 0.5s;
     }
-    .button {
+    header .button {
         display:flex;
         width:80px;
         height: 50px;
         
     }
-    .buttons button {
+    header .buttons button {
         width:100px;
         height: 45px;
         border: none;
         border-radius: 20px;
         cursor: pointer;
     }
-    #registBtn {
+
+    header #registBtn {
         background-color: #39b6ff;
         color : #ffffff;
     }
-    .buttons button:active {
-        background-color: rgb(82, 82, 82);
+    .buttons button:hover{
+        background-color: #a9a9a9;
+    }
+    header #registBtn:hover {
+        background-color: #1d8bca;
     }
     
     /* 다크모드 스위치 */
-    
-    .switch {
+    header .switch {
       position: relative;
       display: inline-block;
       width: 55px;
@@ -91,13 +102,13 @@
       line-height: 25%;
     }
     
-    .switch input { 
+    header .switch input { 
       opacity: 0;
       width: 0;
       height: 0;
     }
     
-    .slider {
+    header .slider {
       position: absolute;
       cursor: pointer;
       top: 0;
@@ -109,7 +120,7 @@
       transition: .4s;
     }
     
-    .slider:before {
+    header .slider:before {
       position: absolute;
       content: "";
       height: 20px;
@@ -122,28 +133,30 @@
       transition: .4s;
     }
     
-    input:checked + .slider {
+    header input:checked + .slider {
       background-color: #39b6ff;
     }
     
-    input:focus + .slider {
+   	header input:focus + .slider {
       box-shadow: 0 0 1px #39b6ff;
     }
     
-    input:checked + .slider:before {
+    header input:checked + .slider:before {
       -webkit-transform: translateX(26px);
       -ms-transform: translateX(26px);
       transform: translateX(26px);
     }
     
     /* Rounded sliders */
-    .slider.round {
+    header .slider.round {
       border-radius: 34px;
     }
     
-    .slider.round:before {
+    header .slider.round:before {
       border-radius: 50%;
-    }   
+    }
+
+
     </style>
 </head>
 <body>
@@ -166,7 +179,6 @@
         </nav>
     </header>
     <hr>
-
     <script>
         document.querySelector("#loginBtn").addEventListener("click", function(e){
             window.location.href = "/okky/member/login.do";

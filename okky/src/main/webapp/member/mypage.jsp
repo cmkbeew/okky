@@ -43,10 +43,11 @@
             line-height: 60px;
             padding: 5px 10px;
         }
-        #sidebar a[href *= "profile"] > li  {
+        #sidebar a[href *= "my"] > li  {
             background-color: #d2d2d2;
             transition: 0.3s;
             opacity: 0.8;
+            border-radius : 20px;
         }
         #sidebar li img {
             transform: translateY(8px);
@@ -56,6 +57,7 @@
             background-color: #d2d2d2;
             transition: 0.3s;
             opacity: 0.8;
+           	border-radius : 20px;
         }
 
         /* 본문 영역 */
@@ -145,12 +147,12 @@
         }
         #innerContainer {
             position: absolute;
-            /* margin: 50px auto; */
             padding: 10px;
-            width: 600px;
-            height: 450px;
+            width: 700px;
+            height: 400px;
             top : 100px;
-            left : 60px;
+            left : 100px;
+            border-bottom: 1px solid #8e8e8e;
         }
 
     </style>
@@ -163,13 +165,13 @@
         <div>
             <ul>
                 <li><h3>내 계정</h3></li>
-                <a href="profile"><li class="detail"><img src="./img/user.png" alt="프로필아이콘">프로필</li></a>
-                <a href="account"><li class="detail"><img src="./img/cogwheel.png" alt="계정관리">계정 관리</li></a>
+                <a href="mypage.jsp"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
+                <a href="account.jsp"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
             </ul>
             <hr>
             <ul>
                 <li><h3>JOBS</h3></li>
-                <a href=""><li class="detail"><img src="./img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
+                <a href="jobdetail.jsp"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
             </ul>
 
         </div>
@@ -190,7 +192,7 @@
                 <div class="label"><label for="skill">스킬 태그를 1개 이상 선택해주세요</label></div>
                 <div id="selectCon">
                     <div>
-                        <select name="skill" id="skill1" required>
+                        <select name="skill" id="skill_1st">
                             <option value="">선택 1</option>
                             <option value="skill1">스킬1</option>
                             <option value="skill2">스킬2</option>
@@ -198,7 +200,7 @@
                         </select>
                     </div>
                     <div>
-                        <select name="skill" id="skill2">
+                        <select name="skill" id="skill_2nd">
                             <option value="">선택 2</option>
                             <option value="skill1">스킬1</option>
                             <option value="skill2">스킬2</option>
@@ -206,7 +208,7 @@
                         </select>
                     </div>
                     <div>
-                        <select name="skill" id="skill3">
+                        <select name="skill" id="skill_3rd">
                             <option value="">선택 3</option>
                             <option value="skill1">스킬1</option>
                             <option value="skill2">스킬2</option>
@@ -226,8 +228,10 @@
     let nickname = document.getElementById("nickname");
     let savebtn = document.getElementById("saveBtn");
     let compareBtn = document.getElementById("checkBtn");
+    let skill1 = document.getElementById("skill_1st"); 
+    let skill2 = document.getElementById("skill_2nd"); 
+    let skill3 = document.getElementById("skill_3rd"); 
     let skills = [];
-    let skill1 = document.getElementById("skill1"); 
 
     nickname.addEventListener("change", function(e){
         if (nickname.value.length > 0 ) {
@@ -235,26 +239,48 @@
         }
     });
     compareBtn.addEventListener("click", function(e){
-        if (nickname.value == "ㅋㅋ") {
-            //아이디 비교 후 
+        if (nickname.value.length <= 20) {
+            //닉네임 비교 후 
             alert("사용가능 한 닉네임 입니다.")
             document.querySelector("#checkBtn").disabled = true;
             skill1.addEventListener("change", function(e){
-                skills.push(document.querySelector("#skill1").value);
-                // if()
-                savebtn.disabled = false;
+                if(skill1.value != "" || skill2.value!= "" || skill3.value !=""){
+                	savebtn.disabled = false;
+                }
+                else {
+                    savebtn.disabled = false;
+                }
             });
             skill2.addEventListener("change", function(e){
-                skills.push(document.querySelector("#skill2").value);
+                if(skill1.value != "" || skill2.value!= "" || skill3.value !=""){
+            	savebtn.disabled = false;
+                }
+                else {
+                    savebtn.disabled = false;
+                }
             });
             skill3.addEventListener("change", function(e){
-                skills.push(document.querySelector("#skill3").value);
+                if(skill1.value != "" || skill2.value!= "" || skill3.value !=""){
+            	savebtn.disabled = false;
+                }
+                else {
+                    savebtn.disabled = false;
+                }
+            
             });
         }
         else {
             alert("현재 사용 중인 닉네임입니다.\n 다른 닉네임을 입력해주세요")
+            e.preventDefault();
+            return false;
         }
     });
+    savebtn.addEventListener("click", function(e){
+        skill1.value != ""?skills.push(skill1.value) : "";
+        skill2.value != ""?skills.push(skill2.value) : "";
+        skill3.value != ""?skills.push(skill3.value) : "";
+    });
+    
 </script>
 
     
