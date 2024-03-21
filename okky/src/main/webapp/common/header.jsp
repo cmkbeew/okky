@@ -73,7 +73,7 @@
         border-radius: 20px;
         cursor: pointer;
     }
-    #joinBtn {
+    #registBtn {
         background-color: #39b6ff;
         color : #ffffff;
     }
@@ -143,42 +143,39 @@
     
     .slider.round:before {
       border-radius: 50%;
-    }
-
-    
-    
+    }   
     </style>
 </head>
 <body>
     <header>
         <nav class="navi"> 
-            <a href=""><div id="logo"></div></a>
+            <a href="/okky/main.jsp"><div id="logo"></div></a>
             <ul>
-                <a href=""><li>Q&A</li></a>
+                <a href="/okky/board/qna.jsp"><li>Q&A</li></a>
                 <p> | </p>
-                <a href=""><li>커뮤니티</li></a>
+                <a href="/okky/board/community.jsp"><li>커뮤니티</li></a>
                 <p> | </p>
-                <a href=""><li>구인구직</li></a>
+                <a href="/okky/jobs/jobMain.jsp"><li>구인구직</li></a>
                 <p> | </p>
                 <li style="display:flex; align-items: center; font-size: 13px;">다크모드&nbsp;<label class="switch"><input type="checkbox"><span class="slider round"></span></label></li>
-               
             </ul>
             <div class="buttons">
                 <button id="loginBtn">로그인</button>
-                <button id="joinBtn">회원가입</button>
+                <button id="registBtn">회원가입</button>
             </div>
         </nav>
     </header>
     <hr>
 
     <script>
-      
-
-
         document.querySelector("#loginBtn").addEventListener("click", function(e){
-            window.location.href("header.html");
-
+            window.location.href = "/okky/member/login.do";
         });
+        
+        document.querySelector("#registBtn").addEventListener("click", function(e){
+            window.location.href = "/okky/member/regist.do";
+        });
+        
         const toggleBtn = document.querySelector("input[type='checkbox']");
         toggleBtn.value = "off";
         document.querySelector("input[type='checkbox']").addEventListener("click", function(e){
@@ -194,11 +191,6 @@
                 document.querySelector("#logo").style.backgroundImage = "url('https://okky.kr/okky-munchkin-logo.svg')";
                 document.querySelector("body").setAttribute("style","background-color:white; color:black");
             }
-            
-            console.log(toggleBtn.value);
-
-
-            
         });
     </script>
 </body>
