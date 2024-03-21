@@ -162,15 +162,15 @@
 <body>
 <%
 String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
-int type = session.get
+/* int type = session.get */
 %>
     <header>
         <nav class="navi"> 
             <a href="/okky/main.jsp"><div id="logo"></div></a>
             <ul>
-                <a href="/okky/board/qna.jsp"><li>Q&A</li></a>
+                <a href="/okky/board/qna/qna.jsp"><li>Q&A</li></a>
                 <p> | </p>
-                <a href="/okky/board/community.jsp"><li>커뮤니티</li></a>
+                <a href="/okky/board/community/community.jsp"><li>커뮤니티</li></a>
                 <p> | </p>
                 <a href="/okky/jobs/jobMain.jsp"><li>구인구직</li></a>
                 <p> | </p>
@@ -204,7 +204,7 @@ int type = session.get
         document.querySelector("#logoutBtn").addEventListener("click", function(e){
             window.location.href = "/okky/member/main.do";
         });
-        <% if(%>
+        <%-- <% if(%> --%>
         document.querySelector("#myPageBtn").addEventListener("click", function(e){
             window.location.href = "/okky/member/mypage.do";
         });
