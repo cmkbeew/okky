@@ -135,6 +135,7 @@
     </style>
 </head>
 <body>
+<%@ include file="/common/header.jsp" %>
         <div id="container">
             <div class="side" id="Lside">
                 <div id="top_title"><span><h2>Top writers</h2></span></div>
@@ -171,7 +172,7 @@
             <div id="main">
             <div class="article">
                 <div class="content">
-                    <a href="#">
+                    <a href="/okky/board/qna.jsp">
                         <div class="info">
                             <span>Q&A</span>
                             <img src="https://okky.kr/questions.svg"/>			
@@ -237,7 +238,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <a href="#">
+                    <a href="/okky/board/community.jsp">
                         <div class="info">
                             <span>커뮤니티</span>
                             <img src="https://okky.kr/community.svg">			
@@ -303,12 +304,12 @@
                     </div>
                 </div>
                 <div class="content">
-                    <a href="#">
+                    <div>
                         <div class="info">
                             <span>WEEKLY BEST</span>	
                             <img src="https://okky.kr/weekly-best.svg">		
                         </div>
-                    </a>
+                    </div>
                     <div>
                         <ul>
                             <li>
@@ -369,12 +370,12 @@
                     </div>
                 </div>
                 <div class="content">
-                    <a href="#">
+                    <div>
                         <div class="info">
                             <span>공지사항</span>	
                             <img src="https://okky.kr/notice.svg">		
                         </div>
-                    </a>
+                    </div>
                     <div>
                         <ul>
                             <li>
@@ -440,37 +441,30 @@
                 <div id="side_menu">
                     <div id="menu_bar">
                     <ul>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    Q&A
-                                </div>
-                            </a>
-                        </li>
+                    <li>
+                        <a href="qna.jsp">
+                            <div>
+                                Q&A
+                            </div>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href="#">
-                                <div>
-                                    커뮤니티
-                                </div>
-                            </a>
-                        </li>
+                    <li>
+                        <a href="community.jsp">
+                            <div>
+                                커뮤니티
+                            </div>
+                        </a>
+                    </li>
 
-                        <li>
-                            <a href="#">
-                                <div>
-                                    구인구직
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <div>
-                                    공지사항
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
+                    <li>
+                        <a href="/jobs/jobMain.jsp">
+                            <div>
+                                구인구직
+                            </div>
+                        </a>
+                    </li>
+                </ul>
                 </div>
                 </div>
             </div>

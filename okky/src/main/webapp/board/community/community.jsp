@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <style>
+<style>
         /* * {
             margin :0;
         padding: 0;
@@ -29,7 +29,7 @@
             flex-wrap: nowrap;
             flex-direction: row;
             justify-content: space-around;
-            margin-top: 200px;
+            margin-top: 80px;
         }
         #top_tag {
             height: 30px;
@@ -187,6 +187,7 @@
     </style>
 </head>
 <body>
+<%@ include file="/common/header.jsp" %>
     <main>
         <div class="flex">
             <!-- 왼쪽사이드 -->
@@ -221,28 +222,28 @@
         <!-- 몸통 -->
         
         <div id="contents">
-            <a id="relative">
+            <div id="relative">
                 <div class="info">
-                    <span>Q&A</span>
-                    <span class="small">좋은 질문과 답변으로 동료의 시간을 아껴주세요.</span>
+                    <span>Community</span>
+                    <span class="small">다양한 사람을 만나고 생각의 폭을 넓혀보세요.</span>
                     
                 </div>
-                <img src="https://okky.kr/questions.svg"/>	
-            </a>
+                <img src="https://okky.kr/community.svg"/>	
+            </div>
             <div class="nav">
                 <div>
-                    <a href="./write.html">
+                    <a href="writeCommunity.jsp">
                         <button style="width: 100px; background-color: #0090f9; border-radius: 5px; color: #fff; height: 36px;">
-                            <img src="img/pencil.png" style="height: 20px;"></a>
-                            질문하기
+                            <img src="/okky/img/pencil.png" style="height: 20px;">
+                            작성하기
                         </button>
                     </a>
                 </div>
                 
                     <nav>
-                        <button>기술</button>
-                        <button>커리어</button>
-                        <button>기타</button>
+                        <button>일상</button>
+                        <button>공부</button>
+                        <button>공지사항</button>
                     </nav>
                 <div style="visibility: hidden;"></div>
                 
@@ -503,7 +504,7 @@
                 <div id="menu_bar">
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="qna.jsp">
                             <div>
                                 Q&A
                             </div>
@@ -511,7 +512,7 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="community.jsp">
                             <div>
                                 커뮤니티
                             </div>
@@ -519,16 +520,9 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="/okky/jobs/jobMain.jsp">
                             <div>
                                 구인구직
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                공지사항
                             </div>
                         </a>
                     </li>
