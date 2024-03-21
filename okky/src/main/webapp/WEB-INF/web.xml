@@ -48,6 +48,8 @@
   <servlet-mapping>
     <servlet-name>QnaController</servlet-name>
     <url-pattern>/board/qna/qna.do</url-pattern>
+   </servlet-mapping>
+   <servlet>
     <servlet-name>MypageController</servlet-name>
     <servlet-class>controller.member.MypageController</servlet-class>
   </servlet>
