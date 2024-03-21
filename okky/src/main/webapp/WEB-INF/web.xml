@@ -65,4 +65,20 @@
     <servlet-name>CopageController</servlet-name>
     <url-pattern>/CopageController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewQnaController</servlet-name>
+    <servlet-class>controller.board.qna.ViewQnaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewQnaController</servlet-name>
+    <url-pattern>/board/qna/viewQnA.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyQnaController</servlet-name>
+    <servlet-class>controller.board.qna.ModifyQnaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyQnaController</servlet-name>
+    <url-pattern>/board/qna/modifyQnA.do</url-pattern>
+  </servlet-mapping>
 </web-app>

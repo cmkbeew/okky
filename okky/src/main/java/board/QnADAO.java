@@ -94,4 +94,105 @@ public class QnADAO extends ConnectPool {
 		
 		return list;
 	}
+	
+	public QnADTO qnaView (int qnaIdx) {
+		QnADTO dto = new QnADTO();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT q.title, q.content, q.regDate, m.memberId, q.qnaIdx, q.memberIdx");
+		sb.append(", q.modifyDate, q.tags, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt, m.nickName");
+		sb.append(" FROM qna q inner join member m");
+		sb.append(" ON q.memberIdx = m.memberIdx");
+		sb.append(" WHERE q.qnaIdx = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, qnaIdx);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				dto.setQnaIdx(rs.getInt("q.qnaIdx"));
+				dto.setTitle(rs.getString("q.title"));
+				dto.setContent(rs.getString("q.content"));
+				dto.setRegDate(rs.getDate("q.regDate"));
+				dto.setModifyDate(rs.getDate("q.modifyDate"));
+				dto.setTags(rs.getString("q.tags"));
+				dto.setPageLike(rs.getInt("q.pageLike"));
+				dto.setPageDislike(rs.getInt("q.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("q.answerIdx"));
+				dto.setCategory(rs.getString("q.category"));
+				dto.setReadCnt(rs.getInt("q.readCnt"));
+				dto.setMemberIdx(rs.getInt("q.memberIdx"));
+				dto.setMemberId(rs.getString("m.memberId"));
+				dto.setNickName(rs.getString("m.nickName"));
+			}
+		} catch (Exception e) {
+			System.out.println("QnA 게시판 데이터 조회 오류!");
+			e.printStackTrace();
+		}
+		
+		return dto;
+		
+		
+	}
+	public int qnaRegist(QnADTO dto) {
+		int result = 0;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT INTO qna (title, content, category) VALUES(?, ?, ?)");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setString(3, dto.getCategory());
+			
+			result = psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시글 등록 오류!" + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	public int qnaDelete(int qnaIdx) {
+		int result = 0;
+		
+		//StringBuilder sb = new StringBuilder();
+		//sb.append("DELETE FROM tbl_bbs WHERE idx = ?");
+		
+		String sql = "DELETE FROM qna WHERE qnaIdx = ?"; //단문이니까 이거 하자
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, qnaIdx);
+			
+			result = psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시글 삭제 오류!" + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return result;
+	
+	}
+	
+	public int qnaModify (QnADTO dto) {
+		int result = 0;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE qna SET title = ?, content = ?, modify_date = now()");
+		sb.append(" WHERE idx = ?");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setInt(3, dto.getQnaIdx());
+			
+			result = psmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("게시글 수정 중 오류 발생!" + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }

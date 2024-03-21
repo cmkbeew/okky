@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Q&A 게시판</title>
  <style>
         /* * {
             margin :0;
@@ -267,7 +267,7 @@
                     &nbsp; <input type="button" name="btn_search" id="btn_search" value="검색"/>
                 </div>
                
-                    <div style=" display:inline-block; height: 30px; line-height: 30px; margin-top: 26px;">1/120</div>
+                    <div style=" display:inline-block; height: 30px; line-height: 30px; margin-top: 26px;">${params.page_no }/${params.page_block_end }</div>
                 
             </div>
             </form>
@@ -279,7 +279,7 @@
                         	<c:when test="${not empty qnaList}">
                         		<c:forEach var="list" items="${qnaList}" varStatus="loop">
                         			<li>
-				                        <button onclick="location.href='#'">
+				                        <button onclick="location.href='viewQnA.do?qnaIdx=${list.qnaIdx}'">
 				                            <div>
 				                                답변
 				                            </div>
@@ -293,14 +293,16 @@
 				                            <div>${list.regDate}</div>
 				                        </div>
 				                        <div class="content_title">
-				                            <a href="#">
+				                            <a href="viewQnA.do?qnaIdx=${list.qnaIdx}">
 				                                <strong>${list.title}</strong>
 				                                <p>
 				                                    ${list.content}
 				                                </p>
+				                                ${list.tags }
 				                            </a>
-				                        </div>
+				                        </div><br>
 				                        <hr>
+				                        <br>
 				                    </li>
                         		</c:forEach>
                         	</c:when>
