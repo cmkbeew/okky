@@ -25,7 +25,7 @@
         width : 180px;
         height : 50px; 
         display : flex;
-        background-image: url("./okky-munchkin-logo.svg");
+        background-image: url("https://okky.kr/okky-munchkin-logo.svg");
         background-size: contain;
         background-repeat: no-repeat;
     }
@@ -191,7 +191,7 @@
             }
             else {
                 toggleBtn.value = "off";
-                document.querySelector("#logo").style.backgroundImage = "url('./okky-munchkin-logo.svg')";
+                document.querySelector("#logo").style.backgroundImage = "url('https://okky.kr/okky-munchkin-logo.svg')";
                 document.querySelector("body").setAttribute("style","background-color:white; color:black");
             }
             
