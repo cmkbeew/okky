@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">    
     <title>Header</title>
     <style> 
-    * {
+    header * {
         margin :0;
         padding: 0;
         list-style: none;
@@ -49,15 +49,15 @@
         text-align: center;
         margin: 0 10px;
     }
-    li a {
+    header li a {
         /* padding: 150px; */
         width: 150px;
         color: black;
     } 
-    ul a:link, ul a:visited {
+    header ul a:link, ul a:visited {
         color: black;
     }
-    ul a:hover {
+    header ul a:hover {
         background-color: #39b6ff;
     }
     .button {
