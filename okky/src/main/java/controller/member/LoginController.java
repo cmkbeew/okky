@@ -32,11 +32,12 @@ public class LoginController extends HttpServlet {
 		if(dto.getMemberId() != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("memberId", dto.getMemberId());
+			session.setAttribute("pwd", dto.getPwd());
 			session.setAttribute("name", dto.getName());
 			session.setAttribute("nickname", dto.getNickname());
 			session.setAttribute("type", dto.getType());
 			
-			resp.sendRedirect("./main.jsp");
+			resp.sendRedirect("../main.jsp");
 		} else {
 			req.setAttribute("loginErrMsg", "로그인 오류");
 			

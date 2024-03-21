@@ -221,7 +221,7 @@
                         <span>괜찮은 직장이 모여있는 곳</span>
                     </div>
                     <div class="bot-menu">
-                        <a href="/okky/jobs/jobList.jsp">
+                        <a href="/okky/jobs/contract.do">
                             <div class="bot-content">
                                 <div class="b-content">
                                     <div>Contract</div>
@@ -229,7 +229,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/fulltime.do">
+                        <a href="/okky/jobs/fulltime.do">
                             <div class="bot-content">
                                 <div class="b-content">
                                     <div>Fulltime</div>
@@ -262,5 +262,9 @@
     </div>
     
     <jsp:include page="../common/footer.jsp"/>
+    
+    <script>
+    	
+    </script>
 </body>
 </html>

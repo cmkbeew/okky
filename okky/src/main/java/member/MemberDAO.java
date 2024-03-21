@@ -97,8 +97,10 @@ public class MemberDAO extends ConnectPool {
 			if(rs.next()) {
 				if(rs.getString("pwd").equals(pwd)) {
 					dto.setMemberId(rs.getString("memberId"));
+					dto.setPwd(rs.getString("pwd"));
 					dto.setName(rs.getString("name"));
 					dto.setNickname(rs.getString("nickname"));
+					dto.setType(rs.getString("type"));
 				}
 			}
 		} catch (Exception e) {

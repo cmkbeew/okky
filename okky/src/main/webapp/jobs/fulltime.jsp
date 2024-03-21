@@ -153,7 +153,7 @@
     <div class="container">
     	<div class="top-ment">
 	        <h2 class="title">OKKY Jobs는 국내 최대·최고의 개발자 전문 Job Platform입니다</h2>
-	        <h3 class="title">Yes! 클린일자리 체크리스트, 스마트필터, 바로지원, 무료 법률상담 서비스</h3>
+	        <h3 class="title">Yes! 클린일자리 체크리스트, 스마트필터, 바로지원</h3>
 	        <h3 class="title">No! 허위 구인게시물</h3>
         </div>
         <hr>
@@ -219,15 +219,15 @@
 	                </ul>
 	            </div>
 	        </div>
-			<c:if test="${empty loginType}">
-	        <div class="regist">
-	        	<button class="btn-regist" id="btn_regist">공고등록</button>
-	        </div>
+			<c:if test="${not empty list}">
+		        <div class="regist">
+		        	<button class="btn-regist" id="btn_regist">공고등록</button>
+		        </div>
 	        </c:if>
         </div>
         
         <div class="count">
-            <div style="font-size: 16px;">total_count의 포지션</div>
+            <div style="font-size: 16px;"><span style="font-size:20px; font-weight:bold">정규직</span> 총 ${total_count}개의 포지션</div>
 
             <div class="filter"  style="margin: 0px;">
                 <button class="filter-toggle">정렬</button>
@@ -239,60 +239,17 @@
         </div>
         
         <div class="company-group">
-            <a href="/okky/jobs/jobDetail.jsp" class="company">
-                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
-                <div class="company-info">
-                    <span class="company-name"><strong>천재교육</strong></span>
-                    <span class="position-name"><strong>백엔드</strong></span>
-                    <span class="career">1~2년 이상</span>
-                    <span class="addr">서울 금천구 가산동</span>
-                </div>
-            </a>
-            <a href="/okky/jobs/jobDetail.jsp" class="company">
-                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
-                <div class="company-info">
-                    <span class="company-name"><strong>천재교육</strong></span>
-                    <span class="position-name"><strong>백엔드</strong></span>
-                    <span class="career">1~2년 이상</span>
-                    <span class="addr">서울 금천구 가산동</span>
-                </div>
-            </a>
-            <a href="/okky/jobs/jobDetail.jsp" class="company">
-                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
-                <div class="company-info">
-                    <span class="company-name"><strong>천재교육</strong></span>
-                    <span class="position-name"><strong>백엔드</strong></span>
-                    <span class="career">1~2년 이상</span>
-                    <span class="addr">서울 금천구 가산동</span>
-                </div>
-            </a>
-            <a href="/okky/jobs/jobDetail.jsp" class="company">
-                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
-                <div class="company-info">
-                    <span class="company-name"><strong>천재교육</strong></span>
-                    <span class="position-name"><strong>백엔드</strong></span>
-                    <span class="career">1~2년 이상</span>
-                    <span class="addr">서울 금천구 가산동</span>
-                </div>
-            </a>
-            <a href="/jobs/jobDetail.jsp" class="company">
-                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
-                <div class="company-info">
-                    <span class="company-name"><strong>천재교육</strong></span>
-                    <span class="position-name"><strong>백엔드</strong></span>
-                    <span class="career">1~2년 이상</span>
-                    <span class="addr">서울 금천구 가산동</span>
-                </div>
-            </a>
-            <a href="/jobs/jobDetail.jsp" class="company">
-                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
-                <div class="company-info">
-                    <span class="company-name"><strong>천재교육</strong></span>
-                    <span class="position-name"><strong>백엔드</strong></span>
-                    <span class="career">1~2년 이상</span>
-                    <span class="addr">서울 금천구 가산동</span>
-                </div>
-            </a>
+        	<c:forEach var="list" items="${list}">
+        		<a href="/okky/jobs/jobDetail.jsp" class="company">
+	                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
+	                <div class="company-info">
+	                    <span class="company-name"><strong>${list.companyName}</strong></span>
+	                    <span class="position-name"><strong>${list.position}</strong></span>
+	                    <span class="career">${list.career}</span>
+	                    <span class="addr">${list.companyAddr}</span>
+	                </div>
+	            </a>
+        	</c:forEach>
         </div>
         
         <hr>
@@ -330,7 +287,7 @@
 		});
 		
 		document.querySelector("#btn_regist").addEventListener("click", function(e){
-            location.href = "/recruitRegist.jsp";
+            location.href = "/okky/jobs/jobRecruit.jsp";
         });
     </script>
 </body>

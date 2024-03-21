@@ -19,7 +19,7 @@ public class JDBConnect {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
 			
-			String url = "jdbc:mariadb://localhost:3306/okky";
+			String url = "jdbc:mariadb://10.41.0.70:3306/okky";
 			String dbId = "okky";
 			String dbPwd = "cjswo2";
 			
