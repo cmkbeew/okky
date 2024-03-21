@@ -72,7 +72,7 @@ public class FileUtil {
 	
 	// 파일 다운로드
 	public static void download(HttpServletRequest req, HttpServletResponse resp, String orgFileName, String saveFileName) {
-		String saveDirectory = "okkk\\src\\main\\webapp\\Upload";
+		String saveDirectory = "okky\\src\\main\\webapp\\Upload";
 		
 		try {
 			// 파일을 찾아 입력 스트림 생성
