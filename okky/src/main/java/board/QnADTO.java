@@ -17,6 +17,7 @@ public class QnADTO {
 	private int readCnt;
 	private int memberIdx;
 	private String memberId;
+	private String nickName;
 	
 	
 	public QnADTO() {}
@@ -149,6 +150,16 @@ public class QnADTO {
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+
+	public String getNickName() {
+		return nickName;
+	}
+
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 	
 }

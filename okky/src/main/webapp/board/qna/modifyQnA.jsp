@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,12 +86,12 @@
             <div class="side">
 
             </div>
-            <form id="frm" method="post">
+            <form id="frm" method="post" action="modify.do">
             <div id="main">
                 <div>
                     <h3>기술 궁금증 해결하기</h3>
                     <p>
-                        <strong>[사용자아이디]</strong>님 지식공유 플랫폼 OKKY에서 최고의 개발자들과 함께 궁금증을 해결하세요
+                        <strong>${params.memberId }</strong>님 지식공유 플랫폼 OKKY에서 최고의 개발자들과 함께 궁금증을 해결하세요
                     </p>
                 </div>
                
@@ -99,15 +100,15 @@
                             <label for="category" class="" >토픽</label><br>
                             <select id="category" name="category" class="input_area">
                                 <option value="">토픽을 선택해주세요.</option>
-                                <option value="tech">기술</option>
-                                <option value="carees">커리어</option>
-                                <option value="qna-etc">기타</option>
+                                <option value="기술 == ${params.category } ? checked : '' }">기술</option>
+                                <option value="커리어== ${params.category } ? checked : '' }">커리어</option>
+                                <option value="기타== ${params.category } ? checked : '' }">기타</option>
                             </select>
                             <div id="optionCheck" style="color: red; font-size: x-small; display: none;">토픽을 하나 이상 선택해 주세요.</div>
                         </div>
                         <div>
                             <label for="title">제목</label><br>
-                            <input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="input_area">
+                            <input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="input_area" value="${params.title }">
                             <div id="titleCheck" style="color: red; font-size: x-small; display: none;">제목은 50자 이하로 입력해 주세요.</div>
                         </div>
                         <div>
@@ -117,7 +118,7 @@
                         </div>
                         <div>
                             <label for="contents">본문</label><br>
-                            <textarea id="contents" name="contents" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요."></textarea>
+                            <textarea id="contents" name="contents" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요.">${params.content }</textarea>
                             <div id="contentsCheck" style="color: red; font-size: x-small; display: none;">본문을 10자 이 입력하세요.</div>
                         </div>
                         <div >
