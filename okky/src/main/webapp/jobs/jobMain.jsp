@@ -7,7 +7,7 @@
 <title>구인구직 페이지</title>
 <style>
     #container {
-        width: 1280px;
+        width: 1200px;
         margin: 0 auto;
         text-align: center;
     }
