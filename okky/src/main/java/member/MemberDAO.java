@@ -125,9 +125,9 @@ public class MemberDAO extends ConnectPool {
 					dto.setCompanyName(rs.getString("companyName"));
 					dto.setCompanyNumber(rs.getString("companyNo"));
 					dto.setManagerPhone(rs.getString("managerPhone"));
+					dto.setType(rs.getString("type"));
 				}
 			}
-			
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("기업 회원 조회 시 에러 발생");

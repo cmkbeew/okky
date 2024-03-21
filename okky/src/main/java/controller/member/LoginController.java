@@ -34,6 +34,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("memberId", dto.getMemberId());
 			session.setAttribute("name", dto.getName());
 			session.setAttribute("nickname", dto.getNickname());
+			session.setAttribute("type", dto.getType());
 			
 			resp.sendRedirect("./main.jsp");
 		} else {

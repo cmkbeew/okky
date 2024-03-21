@@ -19,6 +19,7 @@ public class CopageController extends HttpServlet {
 		String companyName = req.getParameter("companyName");
 		String companyNo = req.getParameter("companyNo");
 		String managerPhone = req.getParameter("managerPhone");
+		String type = req.getParameter("type");
 		
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getMemberInfo(companyNo, managerPhone);
@@ -30,12 +31,14 @@ public class CopageController extends HttpServlet {
 		companyName = dto.getCompanyName();
 		companyNo = dto.getCompanyNumber();
 		managerPhone = dto.getManagerPhone();
+		type = dto.getType();
 		
 		req.setAttribute("memberId", memberId);
 		req.setAttribute("managerName", managerName);
 		req.setAttribute("companyName", companyName);
 		req.setAttribute("companyNo", companyNo);
 		req.setAttribute("managerPhone", managerPhone);
+		req.setAttribute("type", type);
 		
 		req.getRequestDispatcher("./mypage.jsp").forward(req, resp);
 	}

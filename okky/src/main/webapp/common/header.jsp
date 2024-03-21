@@ -162,7 +162,7 @@
 <body>
 <%
 String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
-
+int type = session.get
 %>
     <header>
         <nav class="navi"> 
@@ -204,7 +204,7 @@ String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribu
         document.querySelector("#logoutBtn").addEventListener("click", function(e){
             window.location.href = "/okky/member/main.do";
         });
-        <%-- <% if(%> --%>
+        <% if(%>
         document.querySelector("#myPageBtn").addEventListener("click", function(e){
             window.location.href = "/okky/member/mypage.do";
         });
