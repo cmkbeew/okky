@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,6 +45,20 @@
         width: 70px;
         height: 30px;
     }
+    /* 가운데 버튼 정렬 */
+    .mid-group {
+    	display: flex;
+    	align-items: center;
+    }
+    
+    .btn-regist {
+    	width: 100px;
+    	padding: 5px 0px;
+        background-color: #d8d8d8;
+        border-radius: 10px;
+        border: none;
+        font-size: 16px;
+    }
 
     /* 필터링 */
     .filter-group {
@@ -60,7 +75,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 5px 30px;
+        width: 100px;
+        padding: 5px 0px;
         background-color: #d8d8d8;
         border-radius: 10px;
         border: none;
@@ -160,48 +176,54 @@
                 </div>
             </form>
         </div>
-
-        <div class="filter-group">
-            <div class="filter">
-                <button class="filter-toggle">포지션</button>
-                <ul class="filter-menu">
-                    <button class="filter-btn"><li class="filter-option">프론트</li></button>
-                    <button class="filter-btn"><li class="filter-option">백엔드</li></button>
-                    <button class="filter-btn"><li class="filter-option">DBA</li></button>
-                    <button class="filter-btn"><li class="filter-option">풀스택</li></button>
-                    <button class="filter-btn"><li class="filter-option">PM</li></button>
-                    <button class="filter-btn"><li class="filter-option">기타</li></button>
-                </ul>
-            </div>
-            
-            <div class="filter">
-                <button class="filter-toggle">지역</button>
-                <ul class="filter-menu">
-                    <button class="filter-btn"><li class="filter-option">서울</li></button>
-                    <button class="filter-btn"><li class="filter-option">경기</li></button>
-                    <button class="filter-btn"><li class="filter-option">인천</li></button>
-                    <button class="filter-btn"><li class="filter-option">강원</li></button>
-                    <button class="filter-btn"><li class="filter-option">충북</li></button>
-                    <button class="filter-btn"><li class="filter-option">충남</li></button>
-                    <button class="filter-btn"><li class="filter-option">전북</li></button>
-                    <button class="filter-btn"><li class="filter-option">전남</li></button>
-                    <button class="filter-btn"><li class="filter-option">경북</li></button>
-                    <button class="filter-btn"><li class="filter-option">경남</li></button>
-                    <button class="filter-btn"><li class="filter-option">제주</li></button>
-                </ul>
-            </div>
-            
-            <div class="filter">
-                <button class="filter-toggle">경력</button>
-                <ul class="filter-menu">
-                    <button class="filter-btn"><li class="filter-option">무관</li></button>
-                    <button class="filter-btn"><li class="filter-option">신입</li></button>
-                    <button class="filter-btn"><li class="filter-option">1~2년</li></button>
-                    <button class="filter-btn"><li class="filter-option">3~4년</li></button>
-                    <button class="filter-btn"><li class="filter-option">5~6년</li></button>
-                    <button class="filter-btn"><li class="filter-option">7년 이상</li></button>
-                </ul>
-            </div>
+		<div class="mid-group">
+	        <div class="filter-group">
+	            <div class="filter">
+	                <button class="filter-toggle">포지션</button>
+	                <ul class="filter-menu">
+	                    <button class="filter-btn"><li class="filter-option">프론트</li></button>
+	                    <button class="filter-btn"><li class="filter-option">백엔드</li></button>
+	                    <button class="filter-btn"><li class="filter-option">DBA</li></button>
+	                    <button class="filter-btn"><li class="filter-option">풀스택</li></button>
+	                    <button class="filter-btn"><li class="filter-option">PM</li></button>
+	                    <button class="filter-btn"><li class="filter-option">기타</li></button>
+	                </ul>
+	            </div>
+	            
+	            <div class="filter">
+	                <button class="filter-toggle">지역</button>
+	                <ul class="filter-menu">
+	                    <button class="filter-btn"><li class="filter-option">서울</li></button>
+	                    <button class="filter-btn"><li class="filter-option">경기</li></button>
+	                    <button class="filter-btn"><li class="filter-option">인천</li></button>
+	                    <button class="filter-btn"><li class="filter-option">강원</li></button>
+	                    <button class="filter-btn"><li class="filter-option">충북</li></button>
+	                    <button class="filter-btn"><li class="filter-option">충남</li></button>
+	                    <button class="filter-btn"><li class="filter-option">전북</li></button>
+	                    <button class="filter-btn"><li class="filter-option">전남</li></button>
+	                    <button class="filter-btn"><li class="filter-option">경북</li></button>
+	                    <button class="filter-btn"><li class="filter-option">경남</li></button>
+	                    <button class="filter-btn"><li class="filter-option">제주</li></button>
+	                </ul>
+	            </div>
+	            
+	            <div class="filter">
+	                <button class="filter-toggle">경력</button>
+	                <ul class="filter-menu">
+	                    <button class="filter-btn"><li class="filter-option">무관</li></button>
+	                    <button class="filter-btn"><li class="filter-option">신입</li></button>
+	                    <button class="filter-btn"><li class="filter-option">1~2년</li></button>
+	                    <button class="filter-btn"><li class="filter-option">3~4년</li></button>
+	                    <button class="filter-btn"><li class="filter-option">5~6년</li></button>
+	                    <button class="filter-btn"><li class="filter-option">7년 이상</li></button>
+	                </ul>
+	            </div>
+	        </div>
+			<c:if test="${empty loginType}">
+	        <div class="regist">
+	        	<button class="btn-regist" id="btn_regist">공고등록</button>
+	        </div>
+	        </c:if>
         </div>
         
         <div class="count">
@@ -217,7 +239,7 @@
         </div>
         
         <div class="company-group">
-            <a href="/jobs/jobDetail.jsp" class="company">
+            <a href="/okky/jobs/jobDetail.jsp" class="company">
                 <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
                 <div class="company-info">
                     <span class="company-name"><strong>천재교육</strong></span>
@@ -226,7 +248,7 @@
                     <span class="addr">서울 금천구 가산동</span>
                 </div>
             </a>
-            <a href="/jobs/jobDetail.jsp" class="company">
+            <a href="/okky/jobs/jobDetail.jsp" class="company">
                 <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
                 <div class="company-info">
                     <span class="company-name"><strong>천재교육</strong></span>
@@ -235,7 +257,7 @@
                     <span class="addr">서울 금천구 가산동</span>
                 </div>
             </a>
-            <a href="/jobs/jobDetail.jsp" class="company">
+            <a href="/okky/jobs/jobDetail.jsp" class="company">
                 <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
                 <div class="company-info">
                     <span class="company-name"><strong>천재교육</strong></span>
@@ -244,7 +266,7 @@
                     <span class="addr">서울 금천구 가산동</span>
                 </div>
             </a>
-            <a href="/jobs/jobDetail.jsp" class="company">
+            <a href="/okky/jobs/jobDetail.jsp" class="company">
                 <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
                 <div class="company-info">
                     <span class="company-name"><strong>천재교육</strong></span>
@@ -306,6 +328,10 @@
 		filterButtonList.forEach(function (button) {
 		  button.addEventListener("click", toggleFilterMenu);
 		});
+		
+		document.querySelector("#btn_regist").addEventListener("click", function(e){
+            location.href = "/recruitRegist.jsp";
+        });
     </script>
 </body>
 </html>

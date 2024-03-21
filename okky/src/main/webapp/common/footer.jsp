@@ -8,9 +8,10 @@
 <style>
     footer {
         width: 1200px;
-        margin: 20px auto 0px;
-        display: flex;
-        justify-content: space-between;
+	    margin: 20px auto;
+	    display: flex;
+	    justify-content: space-between;
+	    align-items: center;
     }
     footer p {
         width: 300px;
@@ -33,7 +34,7 @@
 </head>
 <body>
     <hr>
-    <div class="container">
+    <div>
         <footer>
             <p>&copy; 2024 Chunjae 2조</p>
 

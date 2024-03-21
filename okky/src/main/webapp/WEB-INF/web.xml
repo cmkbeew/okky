@@ -15,7 +15,7 @@
   </context-param>
   <context-param>
     <param-name>URL</param-name>
-    <param-value>jdbc:mariadb://10.41.0.145:3306/okky</param-value>
+    <param-value>jdbc:mariadb://localhost:3306/okky</param-value>
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
