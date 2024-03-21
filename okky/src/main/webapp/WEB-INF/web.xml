@@ -15,7 +15,7 @@
   </context-param>
   <context-param>
     <param-name>URL</param-name>
-    <param-value>jdbc:mariadb://10.41.0.145:3306/okky</param-value>
+    <param-value>jdbc:mariadb://10.41.0.78:3306/okky</param-value>
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
@@ -40,5 +40,13 @@
   <servlet-mapping>
     <servlet-name>LoginController</servlet-name>
     <url-pattern>/member/login.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>QnaController</servlet-name>
+    <servlet-class>controller.board.qna.QnaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>QnaController</servlet-name>
+    <url-pattern>/board/qna/qna.do</url-pattern>
   </servlet-mapping>
 </web-app>
