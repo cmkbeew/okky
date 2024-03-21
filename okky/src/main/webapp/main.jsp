@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/common/header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>main</title>
 <style>
-       #container {
+       
+        #container {
             width:100%;
             margin: 100px auto;
             height: 100%;
@@ -34,8 +35,8 @@
             padding: 0;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(2, 300px);
-            grid-gap: 60px 150px;
+            grid-template-columns: repeat(2, 400px);
+            grid-gap: 60px 60px;
         
         }
         .content {
@@ -76,8 +77,10 @@
             color: #0090f9;
         }
         .info {
-            height: 50px;
-            line-height: 50px;
+            height: 64px;
+            font-weight: 500;
+            font-size: larger;
+            line-height: 64px;
             border: 0;
             border-radius: 10px;
             display: flex;
@@ -86,7 +89,6 @@
             padding-right: 20px;
             background-color: rgb(227, 227, 232);
         }
-       
 
         .info span {
             display: inline-block;
@@ -103,11 +105,11 @@
             margin-top: 30px;
             margin-left: 50px;
             visibility: hidden;
+            position: fixed;
             
         }
         #menu_bar {
-/*             
-            position:sticky; */
+            
         }
         #side_menu li{
             height: 100px;
@@ -135,35 +137,36 @@
 <body>
         <div id="container">
             <div class="side" id="Lside">
-                <div id="side_menu">
-                    <div id="menu_bar">
+                <div id="top_title"><span><h2>Top writers</h2></span></div>
+                    
+                <div><hr></div>
+                <div>
                     <ul>
                         <li>
-                            <a href="#">
-                                <div>
-                                    Q&A
-                                </div>
-                            </a>
+                            <div class="top_writer">
+                                <div>작성자</div>
+                                <div>추천수</div>
+                            </div>
                         </li>
-
-                        <li>
-                            <a href="#">
-                                <div>
-                                    커뮤니티
-                                </div>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
-                                <div>
-                                    구인구
-                                </div>
-                            </a>
-                        </li>
+                        <li> <div class="top_writer">
+                            <div>작성자</div>
+                            <div>추천수</div>
+                        </div></li>
+                        <li> <div class="top_writer">
+                            <div>작성자</div>
+                            <div>추천수</div>
+                        </div></li>
+                        <li> <div class="top_writer">
+                            <div>작성자</div>
+                            <div>추천수</div>
+                        </div></li>
+                        <li> <div class="top_writer">
+                            <div>작성자</div>
+                            <div>추천수</div>
+                        </div></li>
                     </ul>
                 </div>
-                </div>
+                
             </div>
             <div id="main">
             <div class="article">
@@ -171,7 +174,7 @@
                     <a href="#">
                         <div class="info">
                             <span>Q&A</span>
-                            <img src="img/question.png"/>			
+                            <img src="https://okky.kr/questions.svg"/>			
                         </div>
                     </a>
                     <div>
@@ -237,7 +240,7 @@
                     <a href="#">
                         <div class="info">
                             <span>커뮤니티</span>
-                            <img src="img/community.png">			
+                            <img src="https://okky.kr/community.svg">			
                         </div>
                     </a>
                     <div>
@@ -303,7 +306,7 @@
                     <a href="#">
                         <div class="info">
                             <span>WEEKLY BEST</span>	
-                            <img src="img/best.png">		
+                            <img src="https://okky.kr/weekly-best.svg">		
                         </div>
                     </a>
                     <div>
@@ -369,7 +372,7 @@
                     <a href="#">
                         <div class="info">
                             <span>공지사항</span>	
-                            <img src="img/notice.png">		
+                            <img src="https://okky.kr/notice.svg">		
                         </div>
                     </a>
                     <div>
@@ -434,34 +437,41 @@
             </div>
         </div>
             <div class="side" id="Rside">
-                <div id="top_title"><span><h2>Top writers</h2></span></div>
-                    
-                <div><hr></div>
-                <div>
+                <div id="side_menu">
+                    <div id="menu_bar">
                     <ul>
                         <li>
-                            <div class="top_writer">
-                                <div>작성자</div>
-                                <div>추천수</div>
-                            </div>
+                            <a href="#">
+                                <div>
+                                    Q&A
+                                </div>
+                            </a>
                         </li>
-                        <li> <div class="top_writer">
-                            <div>작성자</div>
-                            <div>추천수</div>
-                        </div></li>
-                        <li> <div class="top_writer">
-                            <div>작성자</div>
-                            <div>추천수</div>
-                        </div></li>
-                        <li> <div class="top_writer">
-                            <div>작성자</div>
-                            <div>추천수</div>
-                        </div></li>
-                        <li> <div class="top_writer">
-                            <div>작성자</div>
-                            <div>추천수</div>
-                        </div></li>
+
+                        <li>
+                            <a href="#">
+                                <div>
+                                    커뮤니티
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <div>
+                                    구인구직
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <div>
+                                    공지사항
+                                </div>
+                            </a>
+                        </li>
                     </ul>
+                </div>
                 </div>
             </div>
             <div id="up">

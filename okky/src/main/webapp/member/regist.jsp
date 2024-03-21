@@ -42,7 +42,7 @@
 	<div id="registHeader" class="regist">
 		<div>
 			<div>
-				<a href="./login.jsp"><img alt="로고" src="https://okky.kr/okky-munchkin-logo.svg" width="300"></a>
+				<a href="./login.do"><img alt="로고" src="https://okky.kr/okky-munchkin-logo.svg" width="300"></a>
 			</div>
 			<div><h2>OKKY에 오신 것을 환영합니다.</h2></div>
 		</div>

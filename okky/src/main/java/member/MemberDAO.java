@@ -1,13 +1,27 @@
 package member;
 
-import common.JDBConnect;
-import jakarta.servlet.ServletContext;
+import common.ConnectPool;
 
-public class MemberDAO extends JDBConnect {
-	public MemberDAO() {}
-	
-	public MemberDAO(ServletContext application) {
-		super(application);
+public class MemberDAO extends ConnectPool {
+	// 중복 회원 조회
+	public int getMemberCount(String memberId) {
+		int result = 0;
+		String sql = "SELECT COUNT(memberId) FROM member WHERE memberId=?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, memberId);
+			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("회원 조회 시 에러 발생");
+		}
+		
+		return result;
 	}
 
 	// 일반 회원 가입
@@ -67,5 +81,31 @@ public class MemberDAO extends JDBConnect {
 		}
 		
 		return result;
+	}
+	
+	// 로그인 - 회원 조회
+	public MemberDTO getMemberInfo(String id, String pwd) {
+		MemberDTO dto = new MemberDTO();
+		
+		String sql = "SELECT * FROM member WHERE memberId=?"; 
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString("pwd").equals(pwd)) {
+					dto.setMemberId(rs.getString("memberId"));
+					dto.setName(rs.getString("name"));
+					dto.setNickname(rs.getString("nickname"));
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("로그인 시 에러 발생");
+		}
+		
+		return dto;
 	}
 }
