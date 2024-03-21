@@ -108,4 +108,32 @@ public class MemberDAO extends ConnectPool {
 		
 		return dto;
 	}
+	
+	public MemberDTO getCompanyInfo(String id, String pwd) {
+		MemberDTO dto = new MemberDTO();
+		String sql = "SELECT * FROM member WHERE memberId=?" ;
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, id);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString("pwd").equals(pwd)) {
+					dto.setMemberId(rs.getString("memberId"));
+					dto.setManagerName(rs.getString("managerName"));
+					dto.setCompanyName(rs.getString("companyName"));
+					dto.setCompanyNumber(rs.getString("companyNo"));
+					dto.setManagerPhone(rs.getString("managerPhone"));
+				}
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("기업 회원 조회 시 에러 발생");
+		}
+		
+		
+		return dto;
+	}
 }

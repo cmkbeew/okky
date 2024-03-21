@@ -61,9 +61,6 @@
 		<c:if test="${not empty loginErrMsg}">
 			<span style="color: red; font-size: 20px; font-weight: bold;">${loginErrMsg}</span>
 		</c:if>
-		<c:if test="${not empty nickname}">
-			<span style="color: black; font-size: 20px; font-weight: bold;">${nickname}님 환영합니다.</span>
-		</c:if>
 		<form name="frmLogin" id="frmLogin" action="./login.do" method="post">
 			<div id="memberIdLabel" class="label">아이디</div>
 			<div class="inputLogin">

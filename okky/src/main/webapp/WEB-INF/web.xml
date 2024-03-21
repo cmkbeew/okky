@@ -41,4 +41,22 @@
     <servlet-name>LoginController</servlet-name>
     <url-pattern>/member/login.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>MypageController</servlet-name>
+    <servlet-class>controller.member.MypageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MypageController</servlet-name>
+    <url-pattern>/member/mypage.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CopageController</display-name>
+    <servlet-name>CopageController</servlet-name>
+    <servlet-class>controller.member.CopageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CopageController</servlet-name>
+    <url-pattern>/CopageController</url-pattern>
+  </servlet-mapping>
 </web-app>

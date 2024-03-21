@@ -182,11 +182,11 @@
 
             <form action="" name="infoForm" id="infoForm">
                 <div class="label"><label for="name">이름</label></div>
-                <div><input type="text" name="name" id="name" value="ww" readonly></div>
+                <div><input type="text" name="name" id="name" value="${name} " readonly></div>
                 <div class="notice"><p></p></div>
                 <div class="label"><label for="nickname">닉네임</label></div>
                 <div id="nickNameBox">
-                    <input type="text" name="nickname" id="nickname"> 
+                    <input type="text" name="nickname" id="nickname" value="${nickname }"> 
                     <button id="checkBtn" disabled>중복 확인</button>
                 </div>
                 <div class="label"><label for="skill">스킬 태그를 1개 이상 선택해주세요</label></div>
