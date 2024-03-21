@@ -88,6 +88,7 @@
 		</div>
 	</div>
 	
+	<jsp:include page="/common/footer.jsp" />
 	<script>
 		document.querySelector("#frmLogin").addEventListener("submit", function(e) {
 			e.preventDefault();
