@@ -110,8 +110,9 @@
         }
         
         #saveBtn {
-            width: 70px;
-            height: 40px;
+        	font-size: 18px;
+            width: 100px;
+            height: 50px;
             border-radius: 8px;
             border: 2px solid #71c1ff;
             float: right;
@@ -183,16 +184,16 @@
     <div id="outer">
         <div id="innerContainer">
             <h3>회원 정보</h3>
-
             <form action="" name="infoForm" id="infoForm">
-                <div class="label"><label for="name">담당자명</label></div>
-                <div><input type="text" name="name" id="name" value=""></div>
+                <div class="label"><label for="managerName">담당자명</label></div>
+                <div><input type="text" name="managerName" id="managerName" value=""></div>
                 <div class="label"><label for="companyName">회사명</label></div>
                 <div><input type="text" name="companyName" id="companyName" value="" readonly></div>
                 <div class="label"><label for="companyNo">사업자 등록번호</label></div>
                 <div><input type="text" name="companyNo" id="companyNo" value="" readonly></div>
-                <div class="label"><label for="adminPNum">담당자 연락처</label></div>
-                <div><input type="text" name="adminPNum" id="adminPNum" value="" placeholder="-제외 번호만 입력해주세요"></div>
+                <div class="label"><label for="managerPhone">담당자 연락처</label></div>
+                <div><input type="text" name="managerPhone" id="managerPhone" value="" placeholder="-제외 번호만 입력해주세요"></div>
+                <div id="errPno" style="display: none;"></div>
                 <div class="saveBtnArea">
                     <input type="submit" id="saveBtn" name="saveBtn" value="저장" disabled>
                 </div>
@@ -201,31 +202,125 @@
     </div>
 </div>
 <script>
-    let adminPNo = document.getElementById("adminPNum");
+    let managerPhone = document.getElementById("managerPhone");
+    let managerName = document.getElementById("managerName");
+    const engChars = "abcdefghijklmnopqrstuvwxyz";
+	const EngChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const numChars = "0123456789";
+	const specialChars = "`~!@#$%^&*()-=_+,<.>/?;':\"\"'{}[]";
+	const emailCheck = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+	const korCheck = /[^-0-9]/g;
     
-    adminPNo.addEventListener("change", function(e){
-        if(adminPNo.value.length > 11 || (adminPNo.value.length <11 && adminPNo.value.length > 0) ) {
-            alert("전화번호 자리 수를 맞춰 입력해주세요.");
+	managerPhone.addEventListener("change", function(e){
+        if(managerPhone.value.length > 11 || (managerPhone.value.length <11 && managerPhone.value.length > 0) ) {
+        	document.getElementById("errPno").style.display = "block";
+        	document.getElementById("errPno").style.color = "red";
+        	document.getElementById("managerPhone").style.border="1px solid red"
+        	document.getElementById("errPno").innerHTML = `<strong> 전화번호 자리 수(11)를 맞춰주세요 </strong>`;
         }
-        else if(adminPNo.value.length == 11) {
-             if (/[0-9]/.test(adminPNo.value)) {
+        else if(managerPhone.value.length == 11) {
+             if (/[0-9]/.test(managerPhone.value)) {
+            	 document.getElementById("errPno").style.display = "none";
+            	 document.getElementById("managerPhone").style.border=""
                 document.querySelector("#saveBtn").disabled = false;
             }
             else {
-                document.querySelector("#saveBtn").disabled = true;
-                alert("숫자만 입력해주세요.")
+            	document.querySelector("#saveBtn").disabled = true;
             }
         }
     })
+    
+    
+    function combi_check(inputValue, chars) {
+		let cnt = 0;
+		for(let i=0; i<inputValue.length; i++) {
+			if(chars.indexOf(inputValue.charAt(i)) != -1) {
+				cnt += 1;
+			}
+		}
+		return cnt;
+	}
+
+    function validate_check(inputValue, min, max, type) {
+		if(type == 1) { // 영문 + 숫자 + 특수문자 
+			if(inputValue.value.length >= min && inputValue.value.length <= max) {
+				// 영문 + 숫자 + 특수문자
+				if((combi_check(inputValue.value, engChars) > 0 || combi_check(inputValue.value, EngChars) > 0) 
+						&& combi_check(inputValue.value, numChars) > 0 
+						&& combi_check(inputValue.value, specialChars) > 0) {
+					inputValue.style.border = "3px solid lightgreen";
+				} else {
+					inputValue.style.border = "1px solid red";
+				}
+			} else if(inputValue.value.length == 0) {
+				inputValue.style.border = "";
+			} else {
+				inputValue.style.border = "1px solid red";
+			}
+		} else if(type == 2) { // 특수문자 x, 영문 + 숫자
+			if(combi_check(inputValue.value, specialChars) > 0) {
+				inputValue.value = inputValue.value.substring(0, inputValue.value.length - 1);
+			}else {
+				// 4~15자 이내 => input 배경색 변경
+				if(inputValue.value.length >= min && inputValue.value.length <= max) {
+					// 영문 + 숫자
+					if((combi_check(inputValue.value, engChars) > 0 || combi_check(inputValue.value, EngChars) > 0) 
+							&& combi_check(inputValue.value, numChars) > 0) {
+						inputValue.style.border = "3px solid lightgreen";
+					} else {
+						inputValue.style.border = "1px solid red";
+					}
+				} else if(inputValue.value.length == 0) {
+					inputValue.style.border = "";
+				} else {
+					inputValue.style.border = "1px solid red";
+				}
+			}
+		} else if(type == 3) { // 특수문자 x, 글자 수 제한
+			// 특수문자 입력 시 지워짐
+			if(combi_check(inputValue.value, specialChars) > 0) {
+				inputValue.value = inputValue.value.substring(0, inputValue.value.length - 1);
+			}else {
+				// 2~20자 이내 => input 배경색 변경
+				if(inputValue.value.length >= min && inputValue.value.length <= max) {
+					inputValue.style.border = "3px solid lightgreen";
+				} else if(inputValue.value.length == 0) {
+					inputValue.style.border = "";
+				} else {
+					inputValue.style.border = "1px solid red";
+				}
+			}
+		} else if(type == 4) { // 숫자만
+			if(combi_check(inputValue.value, specialChars) > 0 
+					|| combi_check(inputValue.value, engChars) > 0 
+					|| combi_check(inputValue.value, EngChars) > 0
+					|| korCheck.test(inputValue.value)
+					) {
+				inputValue.value = inputValue.value.replace(korCheck, "");
+				for(let i=0; i<inputValue.value.length; i++) {
+					inputValue.value = inputValue.value.charAt(i).replace(korCheck, "");
+				}
+				
+			}else {
+				if(inputValue.value.length >= min && inputValue.value.length <= max) {
+					inputValue.style.border = "3px solid lightgreen";
+				} else if(inputValue.value.length == 0) {
+					inputValue.style.border = "";
+				} else {
+					inputValue.style.border = "1px solid red";
+				}
+			}
+		}
+	}
+
+    managerName.addEventListener("keyup", function(e) {
+		validate_check(managerName, 2, 30, 3);
+	}, false);
+    
 
     // adminPNo.addEventListener("change", function(e){
     //     document.querySelector("#saveBtn").disabled = false;
     // });
-
-
-
-    
-
 
 
 </script>

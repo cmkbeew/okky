@@ -248,8 +248,8 @@
     <div id="outer">
         <div id="innerContainer1">
             <form action="" name="pwdForm" id="pwdForm">
-                <div class="label"><label for="nowPwd">현재 비밀번호</label></div>
-                <div><input type="password" name="nowPwd" id="nowPwd" value=""></div>
+                <div class="label"><label for="pwd">현재 비밀번호</label></div>
+                <div><input type="password" name="pwd" id="pwd" value=""></div>
                 <div class="label"><label for="newPwd">신규 비밀번호</label></div>
                 <div><input type="password" name="newPwd" id="newPwd" value=""></div>
                 <div class="label"><label for="newPwdCk">비밀번호 확인</label></div>
@@ -263,7 +263,7 @@
         <div id="innerContainer2">
             <form action="" name="pwdForm" id="pwdForm">
                 <div class="label"><label for="emailInfo">이메일 정보</label></div>
-                <div id="emailCkBox"><input type="text" name="emailInfo" id="emailInfo" value="">
+                <div id="emailCkBox"><input type="text" name="email" id="email" value="">
                 <button id="checkBtn" disabled>중복 확인</button></div>
                 <div class="saveBtnArea">
                     <input type="submit" id="saveBtn" name="saveBtn" value="저장" disabled>
@@ -295,11 +295,9 @@ check.addEventListener("click", function(e){
     if(check.value == 'true'){
         document.querySelector("#outBtn").disabled = true;
         check.value = false;
-        console.log(check.value);
     }else {
         document.querySelector("#outBtn").disabled = false;
         check.value = true;
-        console.log(check.value);
     }
 });
 </script>
