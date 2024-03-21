@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%--  <%@ taglib prefix="c" uri="jakarta.tags.core" %>    --%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,8 +188,9 @@
     </style>
 </head>
 <body>
+<jsp:include page="/common/header.jsp"/>
     <main>
-    <%@ include file="/common/header.jsp" %>
+   
         <div class="flex">
             <!-- 왼쪽사이드 -->
             <div class="side" id="Lside">
