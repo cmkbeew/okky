@@ -19,8 +19,13 @@ public class DeleteQnaController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int qnaIdx = request.getParameter("qnaIdx") != null ? Integer.parseInt(request.getParameter("qnaIdx")) : 0;
 		
+//		String memberId = request.getParameter("memberId") != null ? String.valueOf(request.getParameter("memberId")) : null;
+//		
+//		
 		QnADAO dao = new QnADAO();
 		int result = dao.qnaDelete(qnaIdx);
+		
+		
 		System.out.println("delete 결과" + result);
 		dao.close();
 		

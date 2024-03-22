@@ -24,8 +24,8 @@ public class QnADAO extends ConnectPool {
 		StringBuilder sb = new StringBuilder(); //동적으로 생성되거나 문자열을 계속 추가해야 할 때
 		sb.append("SELECT COUNT(*) FROM qna");
 		if (map.get("search_category") != null && map.get("search_word") != null) {
-			sb.append(" WHERE " + map.get("search_category")); //컬럼명
-			sb.append(" LIKE '%" + map.get("search_word") + "%'"); //컬럼명 서치하는 키워드
+			sb.append(" WHERE title");
+			sb.append(" LIKE '%" + map.get("search_word") + "%'");
 		}
 		
 		try {
@@ -98,14 +98,35 @@ public class QnADAO extends ConnectPool {
 		sb.append(" FROM qna q inner join member m");
 		sb.append(" ON q.memberIdx = m.memberIdx");
 		
-		if (map.get("search_category") != null && map.get("search_word") != null) {
-			sb.append(" WHERE " + map.get("search_category"));
-			sb.append(" LIKE '%" + map.get("search_word") + "%'");
+//		if (map.get("search_category") != null && map.get("search_word") != null) {
+//			sb.append(" WHERE " + map.get("search_category"));
+//			sb.append(" LIKE '%" + map.get("search_word") + "%'");
+//		}
+		if (map.get("category_1") != null) {
+			sb.append(" WHERE category LIKE '기술'");
 		}
-		sb.append(" ORDER BY qnaIdx DESC");
+		if (map.get("category_2") != null) {
+			sb.append(" WHERE category LIKE '커리어'");
+		}
+		if (map.get("category_3") != null) {
+			sb.append(" WHERE category LIKE '기타'");
+		}
+		if (map.get("search_category") != null && map.get("search_word") != null) {
+			sb.append(" WHERE q.title");
+			sb.append(" LIKE '%" + map.get("search_word") + "%'");
+			sb.append(" ORDER BY " + map.get("search_category") + " DESC");
+		}
+		if (map.get("search_category") == null && map.get("search_word") == null) {
+			sb.append(" ORDER BY qnaIdx DESC");
+		}	
+		
+//		sb.append(" ORDER BY qnaIdx DESC");
 		if (map.get("page_skip_cnt") != null && map.get("page_size") != null) {
 			sb.append(" LIMIT " + map.get("page_skip_cnt") + ", " + map.get("page_size")); // ?로 쓰는게 더 좋아
 		}
+		
+		
+		
 		
 		try {
 			psmt = conn.prepareStatement(sb.toString());
@@ -243,4 +264,64 @@ public class QnADAO extends ConnectPool {
 		
 		return result;
 	}
+	
+	public void updateReadCnt(int qnaIdx) {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("UPDATE qna SET");
+		sb.append(" readCnt = readCnt + 1");
+		sb.append(" WHERE qnaIdx = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, qnaIdx);
+			psmt.executeQuery();
+			
+		} catch (Exception e) {
+			System.out.println("조회 갯수 증가 오류!");
+			e.printStackTrace();
+		}
+	}
+	
+	public void updatePageLike(int qnaIdx) {
+	
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("UPDATE qna SET");
+		sb.append(" pageLike = pageLike + 1");
+		sb.append(" WHERE qnaIdx = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, qnaIdx);
+			psmt.executeQuery();
+			
+		} catch (Exception e) {
+			System.out.println("좋아요 갯수 증가 오류!");
+			e.printStackTrace();
+		}
+	}
+	
+public void updatePageDislike(int qnaIdx) {
+	
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("UPDATE qna SET");
+		sb.append(" pageDislike = pageDislike + 1");
+		sb.append(" WHERE qnaIdx = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, qnaIdx);
+			psmt.executeQuery();
+			
+		} catch (Exception e) {
+			System.out.println("싫어요 갯수 증가 오류!");
+			e.printStackTrace();
+		}
+	}
+	
+	
 }

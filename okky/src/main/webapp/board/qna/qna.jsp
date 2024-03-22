@@ -243,35 +243,35 @@
                 </div>
                 
                     <nav>
-                        <button>기술</button>
-                        <button>커리어</button>
-                        <button>기타</button>
+                        <button id="category_1" name="category_1" value="기술" >기술</button>
+                        <button  id="category_2" name="category_2" value="커리어" >커리어</button>
+                        <button id="category_3" name="category_3" value="기타">기타</button>
                     </nav>
                 <div style="visibility: hidden;"></div>
                 
 
             </div>
             <div style="margin-top: 20px;"><hr></div>
-            <form>
+            <form name="frmSearch" id="frmSearch" method="get"> 
             <div class="search">
                 <div>
                     <div class="orderBy">
                         <select name="search_category" id="search_category" style="margin-left: 60px; margin-top: 22px; height: 30px; width: 100px;">
-                            <option value="" selected>전체</option>
-                            <option value="view" >조회순</option>
-                            <option value="recent" >최신순</option>
+                            <option value="" selected>선택</option>
+                            <option value="readCnt" <c:if test="${params.search_category eq 'readCnt'}"> selected </c:if> >조회순</option>
+                            <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> >최신순</option>
                         </select>
                     </div>
                 </div>
                 <div style="margin: 20px 0;">
-                    <input type="text" name="search_word" id="search_word" value="" maxlength="20"  style="height: 30px; width: 500px;"/>
+                    <input type="text" name="search_word" id="search_word" value="<c:if test="${not empty params.search_word}"> ${params.search_word } </c:if>" maxlength="20"  style="height: 30px; width: 500px;"/>
                     &nbsp; <input type="button" name="btn_search" id="btn_search" value="검색"/>
                 </div>
-               
+               </form>
                     <div style=" display:inline-block; height: 30px; line-height: 30px; margin-top: 26px;">${params.page_no }/${params.page_block_end }</div>
                 
             </div>
-            </form>
+            
             <div><hr></div>
             <div class="list">
                 <ul>
@@ -292,6 +292,8 @@
 				                            <div>${list.memberId}</div>
 				                            <div>·</div>
 				                            <div>${list.regDate}</div>
+				                            <div>·</div>
+				                            <div>${list.readCnt} read</div>
 				                        </div>
 				                        <div class="content_title">
 				                            <a href="viewQnA.do?qnaIdx=${list.qnaIdx}">
@@ -382,8 +384,60 @@
     <script>
     
     document.querySelector("#btn_regist").addEventListener("click", function(e) {
-    	location.href = "writeQna.do";
+    	let id_ck = "${(sessionScope.memberId != null)? sessionScope.memberId : 0}";
+    	
+		 if (id_ck == "0") { 
+				alert("로그인 후 접근이 가능합니다.");
+				window.location.href = "/okky/member/login.do";
+		 } else {
+			 window.location.href = "writeQna.do";
+		 }
+				
     }, false);
+    
+    document.querySelector("#btn_search").addEventListener("click", function(e) {
+
+    	e.preventDefault();
+    	e.stopPropagation();
+    	
+    	const search_category = document.querySelector("#search_category");
+    	if (search_category.value.length < 1 || search_category.value == "" || search_category.value == null) {
+    		alert("검색 구분을 선택하세요");
+    		search_category.focus();
+    		return false;
+    	}
+    	
+    	const search_word = document.querySelector("#search_word");
+    	if (search_word.value.length < 1 || search_word.value == "" || search_word.value == null) {
+    		alert("검색어 입력하세요");
+    		search_word.focus();
+    		return false;
+    	}
+    	
+    	const frm = document.querySelector("#frmSearch");
+    	frm.submit();
+    	
+    	return;
+
+    }, false);
+    
+    
+    document.querySelector("#category_1").addEventListener("click", function(e) {
+    	window.location.href = "qna.do?category_1=category_1";
+				
+    }, false);
+    
+    document.querySelector("#category_2").addEventListener("click", function(e) {
+    	window.location.href = "qna.do?category_2=category_2";
+				
+    }, false);
+    
+    document.querySelector("#category_3").addEventListener("click", function(e) {
+    	window.location.href = "qna.do?category_3=category_3";
+				
+    }, false);
+    
+    
 
         const sideMenu = document.querySelector("#side_menu");
         let scrollPosition = document.documentElement.scrollTop || 0;

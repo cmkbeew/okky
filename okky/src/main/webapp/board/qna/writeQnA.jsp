@@ -114,7 +114,7 @@ if (session.getAttribute("memberId") == null) {
                 <div>
                     <h3>기술 궁금증 해결하기</h3>
                     <p>
-                        <strong>[사용자아이디]</strong>님 지식공유 플랫폼 OKKY에서 최고의 개발자들과 함께 궁금증을 해결하세요.
+                        <strong>${sessionScope.memberId }</strong>님 지식공유 플랫폼 OKKY에서 최고의 개발자들과 함께 궁금증을 해결하세요.
                     </p>
                 </div>
                
@@ -141,7 +141,7 @@ if (session.getAttribute("memberId") == null) {
                             <div id="tagCheck" style="color: red; font-size: x-small; display: none;">태그는 3개 이상 입력할 수 없습니다.</div>
                         </div> -->
                         <br>
-                        <label for="tags">태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label>
+                        <label>태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label>
                         <div id="selectCon">
                     <div>
                         <select name="skill" id="skill_1st">

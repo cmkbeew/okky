@@ -35,6 +35,11 @@ public class QnaController extends HttpServlet {
 		Map<String, Object> params = new HashMap<String, Object>();
 		String search_category = request.getParameter("search_category");
 		String search_word = request.getParameter("search_word");
+		
+		String category_1 = request.getParameter("category_1");
+		String category_2 = request.getParameter("category_2");
+		String category_3 = request.getParameter("category_3");
+		
 		page_no = (request.getParameter("page_no") != null ? Integer.parseInt(request.getParameter("page_no")) : 1);
 		page_skip_cnt = (page_no-1)*page_size;
 		
@@ -52,6 +57,9 @@ public class QnaController extends HttpServlet {
 		params.put("page_no", page_no);
 		params.put("page_size", page_size);
 		params.put("page_skip_cnt", page_skip_cnt);
+		params.put("category_1", category_1);
+		params.put("category_2", category_2);
+		params.put("category_3", category_3);
 		
 		//게시판 테이블 조회
 		QnADAO dao = new QnADAO();
