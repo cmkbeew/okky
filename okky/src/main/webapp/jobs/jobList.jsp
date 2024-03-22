@@ -219,7 +219,7 @@
 	                </ul>
 	            </div>
 	        </div>
-			<c:if test="${sessionScope.type eq '2'}">
+			<c:if test='${sessionScope.type eq "2"}'>
 		        <div class="regist">
 		        	<button class="btn-regist" id="btn_regist">공고등록</button>
 		        </div>
@@ -227,7 +227,7 @@
         </div>
         
         <div class="count">
-            <div style="font-size: 16px;"><span style="font-size:20px; font-weight:bold">계약직</span> 총 ${total_count}개의 포지션</div>
+            <div style="font-size: 16px;"><span style="font-size:20px; font-weight:bold">${contractType}</span> 총 ${total_count}개의 포지션</div>
 
             <div class="filter"  style="margin: 0px;">
                 <button class="filter-toggle">정렬</button>
@@ -240,7 +240,7 @@
         
         <div class="company-group">
         	<c:forEach var="list" items="${list}">
-        		<a href="/okky/jobs/jobDetail.do" class="company">
+        		<a href="/okky/jobs/jobDetail.do?recruitIdx=${list.recruitIdx}" class="company">
 	                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
 	                <div class="company-info">
 	                    <span class="company-name"><strong>${list.companyName}</strong></span>

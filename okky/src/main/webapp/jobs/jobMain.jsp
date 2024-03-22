@@ -188,16 +188,16 @@
                     <h4>지금 이 순간에도 수많은 개발자와 일자리가 OKKY Jobs를 통해 활발히 만나고 있습니다.</h4>
                 </li>
                 <li class="content-count">
-                    <div>161,922명</div>
+                    <div>${total_member} 명</div>
                     <span>가입 개인회원 수</span>
                 </li>
                 <li class="content-count">
-                    <div>3,274사</div>
+                    <div>${total_company} 사</div>
                     <span>가입 기업회원 수</span>
                 </li>
                 <li class="content-count">
-                    <div>14,033사</div>
-                    <span>최근 1년간 누적 포지션 수</span>
+                    <div>${total_position} 개</div>
+                    <span>오늘 하루 등록된 포지션 수</span>
                 </li>
             </ul>
         </div>
@@ -219,7 +219,7 @@
                         <span>괜찮은 직장이 모여있는 곳</span>
                     </div>
                     <div class="bot-menu">
-                        <a href="/okky/jobs/contract.do">
+                        <a href="/okky/jobs/jobList.do?contractType=계약직">
                             <div class="bot-content">
                                 <div class="b-content">
                                     <div>Contract</div>
@@ -227,7 +227,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/okky/jobs/fulltime.do">
+                        <a href="/okky/jobs/jobList.do?contractType=정규직">
                             <div class="bot-content">
                                 <div class="b-content">
                                     <div>Fulltime</div>

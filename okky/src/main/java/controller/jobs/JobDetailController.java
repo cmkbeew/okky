@@ -18,11 +18,9 @@ public class JobDetailController extends HttpServlet {
 		HttpSession session = req.getSession();
 		int recruitIdx = req.getParameter("recruitIdx") != null ? Integer.parseInt(req.getParameter("recruitIdx")) : 0;
 		
-		int memberIdx = 0;
-		
 		if (session.getAttribute("memberIdx") != null) {
 			String strMemberIdx = session.getAttribute("memberIdx").toString();
-			memberIdx = strMemberIdx != null ? Integer.parseInt(strMemberIdx) : 0;
+			int memberIdx = strMemberIdx != null ? Integer.parseInt(strMemberIdx) : 0;
 			
 			if(recruitIdx > 0) {
 				JobDAO dao = new JobDAO();
@@ -34,7 +32,7 @@ public class JobDetailController extends HttpServlet {
 				
 				req.setAttribute("jobView", jobView);
 				
-				req.getRequestDispatcher("./jobs/fulltime.jsp");
+				req.getRequestDispatcher("/jobs/jobDetail.jsp").forward(req, resp);
 			} else {
 				resp.sendRedirect("../jobs/jobMain.jsp");
 			}

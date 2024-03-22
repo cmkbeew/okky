@@ -35,10 +35,12 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("memberId", dto.getMemberId());
 			session.setAttribute("pwd", dto.getPwd());
 			session.setAttribute("name", dto.getName());
+			session.setAttribute("email", dto.getEmail());
 			session.setAttribute("nickname", dto.getNickname());
 			session.setAttribute("type", dto.getType());
 			session.setAttribute("companyName", dto.getCompanyName());
 			session.setAttribute("companyNumber", dto.getCompanyNumber());
+			session.setAttribute("companyAddr", dto.getCompanyAddr());
 			session.setAttribute("managerName", dto.getManagerName());
 			session.setAttribute("managerPhone", dto.getManagerPhone());
 			

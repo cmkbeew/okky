@@ -172,7 +172,7 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
                 <p> | </p>
                 <a href="/okky/board/community/community.do"><li>커뮤니티</li></a>
                 <p> | </p>
-                <a href="/okky/jobs/jobMain.jsp"><li>구인구직</li></a>
+                <a href="/okky/jobs/jobMain.do"><li>구인구직</li></a>
                 <p> | </p>
                 <li style="display:flex; align-items: center; font-size: 13px;">다크모드&nbsp;<label class="switch"><input type="checkbox"><span class="slider round"></span></label></li>
             </ul>

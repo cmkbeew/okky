@@ -15,7 +15,7 @@ import member.MemberDTO;
 		maxFileSize = 1024 * 1024 * 1,
 		maxRequestSize = 1024 * 1024 * 10
 )
-public class MemberController extends HttpServlet {
+public class RegistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
@@ -31,11 +31,14 @@ public class MemberController extends HttpServlet {
 		
 		String memberId = req.getParameter("memberId");
 		String pwd = req.getParameter("pwd");
-		String name = req.getParameter("name");
 		String email = req.getParameter("email");
+		String name = req.getParameter("name");
 		String nickname = req.getParameter("nickname");
 		String type = req.getParameter("type");
 		String companyName = req.getParameter("companyName");
+		String addr1 = req.getParameter("addr1");
+		String addr2 = req.getParameter("addr2");
+		String companyAddr = addr1 + " " + addr2;
 		String companyNumber = req.getParameter("companyNumber");
 		String managerName = req.getParameter("managerName");
 		String managerPhone = req.getParameter("managerPhone");
@@ -57,6 +60,7 @@ public class MemberController extends HttpServlet {
 			dto.setNickname(nickname);
 			dto.setType(type);
 			dto.setCompanyName(companyName);
+			dto.setCompanyAddr(companyAddr);
 			dto.setCompanyNumber(companyNumber);
 			dto.setManagerName(managerName);
 			dto.setManagerPhone(managerPhone);
@@ -82,7 +86,7 @@ public class MemberController extends HttpServlet {
 					dto.setOrgCompanyFile(orgFileName);
 					dto.setSaveCompanyFile(saveFileName);			
 				}
-				result = dao.registMember2(dto);
+				result = dao.registMember(dto);
 			}
 			dao.close();
 			
