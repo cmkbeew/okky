@@ -15,7 +15,7 @@
   </context-param>
   <context-param>
     <param-name>URL</param-name>
-    <param-value>jdbc:mariadb://10.41.0.78:3306/okky</param-value>
+    <param-value>jdbc:mariadb://10.0.41.70:3306/okky</param-value>
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
@@ -48,8 +48,8 @@
   <servlet-mapping>
     <servlet-name>QnaController</servlet-name>
     <url-pattern>/board/qna/qna.do</url-pattern>
-   </servlet-mapping>
-   <servlet>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>MypageController</servlet-name>
     <servlet-class>controller.member.MypageController</servlet-class>
   </servlet>
@@ -65,7 +65,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>CopageController</servlet-name>
-    <url-pattern>/CopageController</url-pattern>
+    <url-pattern>/member/mypage_co.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>ViewQnaController</servlet-name>
@@ -82,5 +82,53 @@
   <servlet-mapping>
     <servlet-name>ModifyQnaController</servlet-name>
     <url-pattern>/board/qna/modifyQnA.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutControlloer</servlet-name>
+    <servlet-class>controller.member.LogoutControlloer</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutControlloer</servlet-name>
+    <url-pattern>/main.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>PwdController</servlet-name>
+    <servlet-class>controller.member.PwdController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PwdController</servlet-name>
+    <url-pattern>/member/changepwd.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>JobdetailController</servlet-name>
+    <servlet-class>controller.member.JobdetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobdetailController</servlet-name>
+    <url-pattern>/JobdetailController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MailController</servlet-name>
+    <servlet-class>controller.member.MailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MailController</servlet-name>
+    <url-pattern>/member/changeEmail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AccountController</servlet-name>
+    <servlet-class>controller.member.AccountController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountController</servlet-name>
+    <url-pattern>/member/account.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteAccountController</servlet-name>
+    <servlet-class>controller.member.DeleteAccountController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAccountController</servlet-name>
+    <url-pattern>/member/delete.do</url-pattern>
   </servlet-mapping>
 </web-app>

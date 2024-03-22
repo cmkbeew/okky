@@ -209,7 +209,7 @@
 	                <table id="listTbl">
 	                    <thead>
 	                        <tr>
-	                            <th>공고 번호</th>
+	                            <th>지원자</th>
 	                            <th>지원 공고 제목</th>
 	                            <th>아이디</th>
 	                            <th>마감일</th>
@@ -221,7 +221,7 @@
 	                            <td colspan="5" style="text-align: center;">지원한 사람 목록이 없습니다</td>
 	                        </tr>
 	                        <tr>
-	                            <td>공고 번호</td>
+	                            <td>이름</td>
 	                            <td>지원 공고 제목</td>
 	                            <td>id</td>
 	                            <td>마감일</td>

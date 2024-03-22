@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -211,6 +212,7 @@
 	                        <div id="filebox">이력서 파일 업로드</div>
 	                    </label>
 	                    <input type="file" id="fileUpload" name="fileUpload" accept=".pdf">
+	                    <p></p>
 	                </div>
 	            </div>
 	            <div class="saveBtnArea">
@@ -230,15 +232,27 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                        <tr>
-	                            <td colspan="4" style="text-align: center;">지원한 공고 목록이 없습니다.</td>
-	                        </tr>
-	                        <tr>
-	                            <td>공고 번호</td>
-	                            <td>지원 공고 제목</td>
-	                            <td>마감일</td>
-	                            <td class="lastCol"><button class="linkBtn" name="linkBtn">조회</button></td>
-	                        </tr>
+	                    	<c:choose>
+								<c:when test="${not empty bbsList }">
+									<c:set var="row_num" value="${params.total_count - (params.page_no -1) * params.page_size}"/>
+									<c:forEach var="list" items="${bbsList }" varStatus="loop">
+									<tr>
+										<td>공고 번호${ row_num }</td>
+										<td><a href="view.do?idx=${list.idx}">${list.title}</a></td>
+										<td>지원 공고 제목${list.user_id}</td>
+										<td>마감일${list.read_cnt}</td>
+										<td>${list.reg_date}</td>
+										<td class="lastCol"><button class="linkBtn" name="linkBtn">조회</button>다운로드</td>
+									</tr>
+									<c:set var="row_num" value="${row_num = row_num -1 }" />
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+								<tr>
+									<td colspan="4" style="text-align: center;">지원한 공고 목록이 없습니다.</td>
+								</tr>
+								</c:otherwise>
+							</c:choose>
 	                    </tbody>
 	                </table>
 	

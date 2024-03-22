@@ -86,45 +86,41 @@ public class MemberDAO extends ConnectPool {
 	// 로그인 - 회원 조회
 	public MemberDTO getMemberInfo(String id, String pwd) {
 		MemberDTO dto = new MemberDTO();
-		
 		String sql = "SELECT * FROM member WHERE memberId=?"; 
-		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			rs = psmt.executeQuery();
-			
 			if(rs.next()) {
 				if(rs.getString("pwd").equals(pwd)) {
 					dto.setMemberId(rs.getString("memberId"));
 					dto.setName(rs.getString("name"));
 					dto.setNickname(rs.getString("nickname"));
+					dto.setType(rs.getString("type"));
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("로그인 시 에러 발생");
 		}
-		
 		return dto;
 	}
-	
-	public MemberDTO getCompanyInfo(String id, String pwd) {
+//	회사 정보 가져오기
+	public MemberDTO getCompanyInfo(String id, String name) {
 		MemberDTO dto = new MemberDTO();
 		String sql = "SELECT * FROM member WHERE memberId=?" ;
-		
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			rs = psmt.executeQuery();
-			
 			if(rs.next()) {
-				if(rs.getString("pwd").equals(pwd)) {
+				if(rs.getString("name").equals(name)) {
 					dto.setMemberId(rs.getString("memberId"));
 					dto.setManagerName(rs.getString("managerName"));
 					dto.setCompanyName(rs.getString("companyName"));
-					dto.setCompanyNumber(rs.getString("companyNo"));
+					dto.setCompanyNumber(rs.getString("companyNumber"));
 					dto.setManagerPhone(rs.getString("managerPhone"));
+					dto.setEmail(rs.getString("email"));
 					dto.setType(rs.getString("type"));
 				}
 			}
@@ -132,8 +128,75 @@ public class MemberDAO extends ConnectPool {
 			e.printStackTrace();
 			System.out.println("기업 회원 조회 시 에러 발생");
 		}
-		
-		
 		return dto;
 	}
+// 회사 정보 수정하기
+	public int modifyCompany(MemberDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();	
+		sb.append("UPDATE member SET managerName=?, managerPhone=?");
+		sb.append(" WHERE memberId=?");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getManagerName());
+			psmt.setString(2, dto.getManagerPhone());
+			psmt.setString(3, dto.getMemberId());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("정보 수정 중 에러 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+// 비밀번호 변경	
+	public int changePwd(MemberDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();	
+		sb.append("UPDATE member SET pwd=?");
+		sb.append(" WHERE memberId=?");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getPwd());
+			psmt.setString(2, dto.getMemberId());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("비밀번호 수정 중 에러 발생");
+			e.printStackTrace();
+		}
+		return result;
+	}
+// 이메일 변경
+	public int changeMail(MemberDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE member SET email=?");
+		sb.append(" WHERE memberId=?");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getEmail());
+			psmt.setString(2, dto.getMemberId());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("이메일 변경 중 에러 발생");
+		}
+		return result;
+	}
+//	계정 삭제
+	public int deleteAccount(MemberDTO dto) {
+		int result = 0;
+		String sql = "DELETE FROM member WHERE memberId=?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, dto.getMemberId());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("계정 삭제 중 에러 발생");
+		}
+		return result;
+	}
+	
+	
 }
