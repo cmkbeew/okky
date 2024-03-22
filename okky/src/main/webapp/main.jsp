@@ -173,7 +173,7 @@
             <div id="main">
             <div class="article">
                 <div class="content">
-                    <a href="/okky/board/qna.jsp">
+                    <a href="/okky/board/qna/qna.do">
                         <div class="info">
                             <span>Q&A</span>
                             <img src="https://okky.kr/questions.svg"/>			
@@ -190,14 +190,15 @@
 	                    		<c:forEach var="list" items="${qnaList}" varStatus="loop">
 	                        		<li>
                                 	<div class="writer">
-                                    <div>${list.memberId }</div>
-                                    <div>·</div>
-                                    <div>${list.regDate }</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">${list.content }</a>
-                                </div>
-                            </li>
+                                    	<div>${list.memberId }</div>
+                                    	<div>·</div>
+                                    	<div>${list.regDate }</div>
+	                                </div>
+	                                <div class="content_title">
+	                                    <a href="/okky/board/qna/viewQnA.do?qnaIdx=${list.qnaIdx}">${list.content }</a>
+	                                </div>
+	                            	</li>
+	                            	<li><hr></li>
                             </c:forEach>
                             </c:when>
                             <c:otherwise>
@@ -206,66 +207,11 @@
 				                 </p>
                             </c:otherwise>
 	                    	</c:choose>
-	                    
-                            <!-- <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                            <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
                 <div class="content">
-                    <a href="/okky/board/community.jsp">
+                    <a href="/okky/board/community/community.do">
                         <div class="info">
                             <span>커뮤니티</span>
                             <img src="https://okky.kr/community.svg">			
@@ -277,15 +223,16 @@
 	                    	<c:when test="${not empty communityList}">
 	                    		<c:forEach var="list" items="${communityList}" varStatus="loop">
 	                        		<li>
-                                	<div class="writer">
-                                    <div>${list.memberId }</div>
-                                    <div>·</div>
-                                    <div>${list.regDate }</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">${list.content }</a>
-                                </div>
-                            </li>
+	                                	<div class="writer">
+	                                    	<div>${list.memberId }</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.regDate }</div>
+	                                	</div>
+		                                <div class="content_title">
+		                                    <a href="/okky/board/community/viewCommunity.do?communityIdx=${list.communityIdx}">${list.content }</a>
+		                                </div>
+	                           		</li>
+	                           		<li><hr></li>
                             </c:forEach>
                             </c:when>
                             <c:otherwise>
@@ -294,61 +241,6 @@
 				                 </p>
                             </c:otherwise>
 	                    	</c:choose>
-                        
-                            <!-- <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li> -->
                         </ul>
                     </div>
                 </div>

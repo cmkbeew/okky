@@ -42,7 +42,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("managerName", dto.getManagerName());
 			session.setAttribute("managerPhone", dto.getManagerPhone());
 			
-			resp.sendRedirect("../main.jsp");
+			resp.sendRedirect("../main.do");
 		} else {
 			req.setAttribute("loginErrMsg", "로그인 오류");
 			

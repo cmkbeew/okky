@@ -40,6 +40,7 @@ public class ViewQnaController extends HttpServlet {
 		}
 		
 		int readCnt = 0;
+		int memberIdx = 0;
 		String nickName = "";
 		String regDate = "";
 		String title = "";
@@ -48,6 +49,7 @@ public class ViewQnaController extends HttpServlet {
 		int pageDislike = 0;
 		
 		if (qnaView != null) {
+			memberIdx = qnaView.getMemberIdx();
 			readCnt = qnaView.getReadCnt();
 			nickName = qnaView.getNickName();
 			regDate = (qnaView.getRegDate() != null ? qnaView.getRegDate().toString() : "");
@@ -61,6 +63,7 @@ public class ViewQnaController extends HttpServlet {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		
+		params.put("memberIdx", memberIdx);
 		params.put("qnaIdx", qnaIdx);
 		params.put("readCnt", readCnt);
 		params.put("nickName", nickName);
@@ -69,6 +72,7 @@ public class ViewQnaController extends HttpServlet {
 		params.put("content", content);
 		params.put("pageLike", pageLike);
 		params.put("pageDislike", pageDislike);
+		params.put("qnaIdx", qnaIdx);
 		
 		
 		request.setAttribute("params", params);

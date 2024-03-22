@@ -45,6 +45,50 @@ public class QnADAO extends ConnectPool {
 		return total_count;
 	}
 	
+	public List<QnADTO> mainList(Map<String, Object> map) {
+		List<QnADTO> list = new Vector<QnADTO>();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT q.title, q.content, q.regDate, m.memberId, q.qnaIdx, q.memberIdx");
+		sb.append(", q.modifyDate, q.tags, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt");
+		sb.append(" FROM qna q inner join member m");
+		sb.append(" ON q.memberIdx = m.memberIdx");
+		sb.append(" ORDER BY qnaIdx DESC");
+		sb.append(" LIMIT 5");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				QnADTO dto = new QnADTO();
+				dto.setQnaIdx(rs.getInt("q.qnaIdx"));
+				dto.setTitle(rs.getString("q.title"));
+				dto.setContent(rs.getString("q.content").substring(0, 1).concat(" ..."));
+				dto.setRegDate(rs.getDate("q.regDate"));
+				dto.setModifyDate(rs.getDate("q.modifyDate"));
+				dto.setTags(rs.getString("q.tags"));
+				dto.setPageLike(rs.getInt("q.pageLike"));
+				dto.setPageDislike(rs.getInt("q.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("q.answerIdx"));
+				dto.setCategory(rs.getString("q.category"));
+				dto.setReadCnt(rs.getInt("q.readCnt"));
+				dto.setMemberIdx(rs.getInt("q.memberIdx"));
+				dto.setMemberId(rs.getString("m.memberId"));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("메인 qna 게시글 조회 실패!");
+			
+		}
+		
+		
+		return list;
+	}
+	
+	
 	public List<QnADTO> qnaList(Map<String, Object> map) {
 		List<QnADTO> list = new Vector<QnADTO>();
 		
@@ -94,6 +138,8 @@ public class QnADAO extends ConnectPool {
 		
 		return list;
 	}
+	
+	
 	
 	public QnADTO qnaView (int qnaIdx) {
 		QnADTO dto = new QnADTO();

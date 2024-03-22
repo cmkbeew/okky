@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
@@ -251,18 +252,19 @@
         
         document.querySelector("#btn_delete").addEventListener("click", function(e) {
         	
-<%--         	<%if (session.getAttribute("UserId") == null) {%> --%>
-//         	alert("로그인 후 접근이 가능합니다.");
-//         	window.location.href = "../login/login_ok.do";
-<%--         	<%} else if (session.getAttribute("UserId").toString().equals(user_id)) {%> --%>
-// //         	alert("자신의 글만 삭제가 가능합니다.");
-<%--         	window.location.href = "view.jsp?idx=<%=idx %>"; --%>
-<%--         	<%}else {%> --%>
-        	let confirm_yn = confirm("현재 글을 삭제하시겠습니까?");
-        	if (confirm_yn) {
-        		window.location.href = "deleteQna.do?qnaIdx=${params.qnaIdx}";	
-        	}
-<%--         	<%}%> --%>
+			
+			if (session.getAttribute("memberId") == null) {
+				alert("로그인 후 접근이 가능합니다.");
+				window.location.href = "/okky/member/login.do";
+			} else if (String.valueOf(session.getAttribute("memberIdx")).equals(${params.memberIdx})) {
+				alert("자신의 글만 삭제가 가능합니다.");
+				window.location.href = "viewQnA.do?qnaIdx=${params.qnaIdx}";
+			}else {
+				let confirm_yn = confirm("현재 글을 삭제하시겠습니까?");
+				if (confirm_yn) {
+	    		window.location.href = "deleteQna.do?qnaIdx=${params.qnaIdx}";	
+			}
+
         }, false);
 
         document.querySelector("#btn_modify").addEventListener("click", function(e) {

@@ -45,6 +45,49 @@ public class CommunityDAO extends ConnectPool {
 		return total_count;
 	}
 	
+	public List<CommunityDTO> mainList(Map<String, Object> map) {
+		List<CommunityDTO> list = new Vector<CommunityDTO>();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
+		sb.append(", c.modifyDate, c.tags, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
+		sb.append(" FROM community c inner join member m");
+		sb.append(" ON c.memberIdx = m.memberIdx");
+		sb.append(" ORDER BY c.communityIdx DESC");
+		sb.append(" LIMIT 5");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				CommunityDTO dto = new CommunityDTO();
+				dto.setCommunityIdx(rs.getInt("c.communityIdx"));
+				dto.setTitle(rs.getString("c.title"));
+				dto.setContent(rs.getString("c.content").substring(0,1).concat(" ..."));
+				dto.setRegDate(rs.getDate("c.regDate"));
+				dto.setModifyDate(rs.getDate("c.modifyDate"));
+				dto.setTags(rs.getString("c.tags"));
+				dto.setPageLike(rs.getInt("c.pageLike"));
+				dto.setPageDislike(rs.getInt("c.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
+				dto.setCategory(rs.getString("c.category"));
+				dto.setReadCnt(rs.getInt("c.readCnt"));
+				dto.setMemberIdx(rs.getInt("c.memberIdx"));
+				dto.setMemberId(rs.getString("m.memberId"));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("메인 community 게시글 조회 실패!");
+			
+		}
+		
+		
+		return list;
+	}
+	
 	public List<CommunityDTO> communityList(Map<String, Object> map) {
 		List<CommunityDTO> list = new Vector<CommunityDTO>();
 		
