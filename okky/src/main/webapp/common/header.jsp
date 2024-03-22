@@ -166,11 +166,11 @@ String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribu
 %>
     <header>
         <nav class="navi"> 
-            <a href="/okky/main.jsp"><div id="logo"></div></a>
+            <a href="/okky/main.do"><div id="logo"></div></a>
             <ul>
-                <a href="/okky/board/qna/qna.jsp"><li>Q&A</li></a>
+                <a href="/okky/board/qna/qna.do"><li>Q&A</li></a>
                 <p> | </p>
-                <a href="/okky/board/community/community.jsp"><li>커뮤니티</li></a>
+                <a href="/okky/board/community/community.do"><li>커뮤니티</li></a>
                 <p> | </p>
                 <a href="/okky/jobs/jobMain.jsp"><li>구인구직</li></a>
                 <p> | </p>

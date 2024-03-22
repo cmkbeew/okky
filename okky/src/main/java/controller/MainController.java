@@ -25,18 +25,18 @@ public class MainController extends HttpServlet {
 		Map<String, Object> communityParams = new HashMap<String, Object>();
 		
 		QnADAO dao = new QnADAO();
-		List<QnADTO> qnaList = dao.qnaList(qnaParams);
+		List<QnADTO> qnaList = dao.mainList(qnaParams);
 		dao.close();
 		
 		request.setAttribute("qnaList", qnaList);
 		
 		CommunityDAO dao2 = new CommunityDAO();
-		List<CommunityDTO> communityList = dao2.communityList(communityParams);
+		List<CommunityDTO> communityList = dao2.mainList(communityParams);
 		dao2.close();
 		
 		request.setAttribute("communityList", communityList);
 		
-		request.getRequestDispatcher("/okky/main.jsp").forward(request, response);
+		request.getRequestDispatcher("./main.jsp").forward(request, response);
 	}
 
 	
