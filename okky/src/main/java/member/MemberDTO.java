@@ -1,7 +1,7 @@
 package member;
 
 public class MemberDTO {
-	private int idx;
+	private int memberIdx;
 	private String memberId;
 	private String pwd;
 	private String email;
@@ -16,11 +16,11 @@ public class MemberDTO {
 	private String managerName;
 	private String managerPhone;
 	
-	public int getIdx() {
-		return idx;
+	public int getMemberIdx() {
+		return memberIdx;
 	}
-	public void setIdx(int idx) {
-		this.idx = idx;
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
 	}
 	public String getMemberId() {
 		return memberId;

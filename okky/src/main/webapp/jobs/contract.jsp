@@ -219,7 +219,7 @@
 	                </ul>
 	            </div>
 	        </div>
-			<c:if test="${not empty list}">
+			<c:if test="${sessionScope.type eq '2'}">
 		        <div class="regist">
 		        	<button class="btn-regist" id="btn_regist">공고등록</button>
 		        </div>
@@ -240,7 +240,7 @@
         
         <div class="company-group">
         	<c:forEach var="list" items="${list}">
-        		<a href="/okky/jobs/jobDetail.jsp" class="company">
+        		<a href="/okky/jobs/jobDetail.do" class="company">
 	                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
 	                <div class="company-info">
 	                    <span class="company-name"><strong>${list.companyName}</strong></span>
@@ -287,7 +287,7 @@
 		});
 		
 		document.querySelector("#btn_regist").addEventListener("click", function(e){
-            location.href = "/okky/jobs/jobRecruit.jsp";
+            location.href = "/okky/jobs/jobRecruit.do";
         });
     </script>
 </body>

@@ -44,8 +44,6 @@
     #count-ment {
         width: 25%;
         line-height: 25px;
-        margin-top: 20px;
-        margin-left: 10px;
     }
     .content-count {
         width: 25%;

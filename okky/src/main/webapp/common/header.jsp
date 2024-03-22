@@ -202,7 +202,7 @@ String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribu
 	        });
         <%} else{%>
         document.querySelector("#logoutBtn").addEventListener("click", function(e){
-            window.location.href = "/okky/member/main.do";
+            window.location.href = "/okky/member/logout.do";
         });
         <%-- <% if(%> --%>
         document.querySelector("#myPageBtn").addEventListener("click", function(e){
