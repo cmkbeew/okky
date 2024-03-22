@@ -154,6 +154,9 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        #goods button {
+        	cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -257,7 +260,7 @@
 <%--         	<%}else {%> --%>
         	let confirm_yn = confirm("현재 글을 삭제하시겠습니까?");
         	if (confirm_yn) {
-        		window.location.href = "delete.do?idx=${params.qnaIdx}";	
+        		window.location.href = "deleteQna.do?qnaIdx=${params.qnaIdx}";	
         	}
 <%--         	<%}%> --%>
         }, false);
@@ -271,7 +274,7 @@
 <%--         		window.location.href = "view.jsp?idx=<%=idx %>"; --%>
 <%--         	<%} else {%> --%>
 //         	window.location.href = "modify.do?idx=${params.idx}";
-        	window.location.href = "modifyQnA.jsp";
+        	window.location.href = "modifyQnA.do?qnaIdx=${params.qnaIdx}";
 <%--         	<%}%> --%>
         	
         	

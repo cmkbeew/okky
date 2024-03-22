@@ -47,7 +47,7 @@
             color: #374751;
             font-size: 0.89em;
         }
-        #contents {
+        #content {
             width: 820px;
             resize: none;
             border: 1px solid lightgray;
@@ -95,13 +95,21 @@
     </style>
 </head>
 <body>
+<%-- <%
+if (session.getAttribute("memberId") == null) {
+	out.println("<script>");
+	out.println("alert('로그인 후 접근이 가능합니다.')");
+	out.println("window.location.replace('../login/login.jsp')");
+	out.println("</script>");
+}
+%> --%>
 <jsp:include page="/common/header.jsp"/>
     <div id="body">
         <div id="container">
             <div class="side">
 
             </div>
-            <form id="frm" method="post">
+            <form id="frm" method="post" action="writeQna.do">
             <div id="main">
                 <div>
                     <h3>기술 궁금증 해결하기</h3>
@@ -112,6 +120,7 @@
                
                     
                         <div>
+                        <input type="hidden" id="memberId" name="memberId" value="<%= session.getAttribute("memberId")%>">
                             <label for="category" class="" >토픽</label><br>
                             <select id="category" name="category" class="input_area">
                                 <option value="">토픽을 선택해주세요.</option>
@@ -160,8 +169,8 @@
                     </div>
                 </div>
                         <div>
-                            <label for="contents">본문</label><br>
-                            <textarea id="contents" name="contents" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요."></textarea>
+                            <label for="content">본문</label><br>
+                            <textarea id="content" name="content" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요."></textarea>
                             <div id="contentsCheck" style="color: red; font-size: x-small; display: none;">본문을 10자 이상 입력하세요.</div>
                         </div>
                         <div >

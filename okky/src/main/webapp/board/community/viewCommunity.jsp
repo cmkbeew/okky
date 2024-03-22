@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %> 
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,19 +166,19 @@
             
             <div id="main">
                 <div>
-                    <h3>커뮤니티</h3>
+                    <h3>Community</h3>
                     <p>
-                        <strong>[사용자 닉네임]</strong>
+                        <strong>${params.nickName }</strong>
                     </p>
                 </div>
                 <div class="contents">
-                    <h3>[제목]</h3>
+                    <h3>${params.title }</h3>
                     <div class="deleteAndmodify">
 		                <input  type="button" style="background-color: #0090f9; color: white;" name="btn_modify" id="btn_modify" value="수정하기">
 						<input type="button" style="background-color: #fff;" name="btn_delete" id="btn_delete" value="삭제하기"><br><br>
 					
 					</div>
-                    <textarea name="" id="" cols="30" rows="10" readonly disabled>[글내용]</textarea>
+                    <textarea name="" id="" cols="30" rows="10" readonly disabled>${params.content }</textarea>
                 </div>
                 <div id="tagAndGood">
                     <div id="tags">
@@ -192,9 +192,9 @@
                        
                             <ul>
                                 <li><button id="up" name="up"><img src="/okky/img/thumb_up.png" alt=""></button>  </li>
-                                <li>[추천갯수]</li>
+                                <li>${params.pageLike }</li>
                                 <li><button id="down" name="down"><img src="/okky/img/thumb_down.png" alt=""></button>  </li>
-                                <li>[비추천갯수]</li>
+                                <li>${params.pageDislike }</li>
                             </ul>
                         
                     </div>
@@ -215,9 +215,9 @@
                             <li>
                                 <hr>
                                 <div class="writer">
-                                    <div>작성자</div>
+                                    <div>댓닉네임</div>
                                     <div>·</div>
-                                    <div>작성일</div>
+                                    <div>댓작성일</div>
                                 </div>
                                 <div class="content_title">
                                     <p>[댓글내용]</p>
@@ -257,7 +257,7 @@
 <%--         	<%}else {%> --%>
         	let confirm_yn = confirm("현재 글을 삭제하시겠습니까?");
         	if (confirm_yn) {
-        		window.location.href = "delete.do?idx=${params.idx}";	
+        		window.location.href = "deleteCommunity.do?idx=${params.communityIdx}";	
         	}
 <%--         	<%}%> --%>
         }, false);
@@ -271,7 +271,7 @@
 <%--         		window.location.href = "view.jsp?idx=<%=idx %>"; --%>
 <%--         	<%} else {%> --%>
 //         	window.location.href = "modify.do?idx=${params.idx}";
-        	window.location.href = "modify.jsp";
+        	window.location.href = "modifyCommunity.do";
 <%--         	<%}%> --%>
         	
         	
