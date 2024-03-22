@@ -109,14 +109,15 @@
             width: 180px;
         }
         #side_menu li{
-            height: 100px;
+            height: 60px;
             width: 100px;
-            line-height: 100px;
+            line-height: 60px;
             text-align: center;
             border: 2px solid;
-            border-radius: 50%;
+            border-radius: 10%;
+            border-color: lightgray;
             margin: 6px auto;
-            background-color: bisque;
+            background-color: #0090f8;
             font-size: larger;
             font-weight: 800;
             opacity: 70%;
@@ -299,7 +300,7 @@
 				                            <a href="viewQnA.do?qnaIdx=${list.qnaIdx}">
 				                                <strong>${list.title}</strong>
 				                                <p>
-				                                    ${list.content}
+				                                    ${list.content.substring(0,10).concat(" ...")}
 				                                </p>
 				                                ${list.tags }
 				                            </a>

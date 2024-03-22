@@ -92,6 +92,9 @@
             font-size:15px ;
             margin: 10px;
         }
+       #frmBtn input {
+        	cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -124,9 +127,9 @@ if (session.getAttribute("memberId") == null) {
                             <label for="category" class="" >토픽</label><br>
                             <select id="category" name="category" class="input_area">
                                 <option value="">토픽을 선택해주세요.</option>
-                                <option value="tech">기술</option>
-                                <option value="carees">커리어</option>
-                                <option value="qna-etc">기타</option>
+                                <option value="기술">기술</option>
+                                <option value="커리어">커리어</option>
+                                <option value="기타">기타</option>
                             </select>
                             <div id="optionCheck" style="color: red; font-size: x-small; display: none;">토픽을 하나 이상 선택해 주세요.</div>
                         </div>
@@ -201,17 +204,19 @@ if (session.getAttribute("memberId") == null) {
 
             
         submit.addEventListener("click", (e) => {
+        	
+
           
             let select = document.querySelector("#category");
             const title = document.querySelector("#title");
             const content = document.querySelector("#contents");
-            let tags = document.querySelector("#tags").value;
+            /* let tags = document.querySelector("#tags").value; */
             const titleCheck = document.querySelector("#titleCheck");
-            const tagCheck = document.querySelector("#tagCheck");
+       /*      const tagCheck = document.querySelector("#tagCheck"); */
             const optionCheck = document.querySelector("#optionCheck");
-            const contents = document.querySelector("#contents");
+            const contents = document.querySelector("#content");
             const contentsCheck = document.querySelector("#contentsCheck");
-            let tagArr = tags.trim().split(" ");
+           /*  let tagArr = tags.trim().split(" ");
             console.log(tagArr);
 
             for (let i=0; i<tagArr.length; i++) {
@@ -220,7 +225,7 @@ if (session.getAttribute("memberId") == null) {
                 }
             }
 
-            console.log(tagArr);
+            console.log(tagArr); */
 
             if (select.value == "") {
                 optionCheck.style.display = "block";
@@ -243,12 +248,12 @@ if (session.getAttribute("memberId") == null) {
             } 
 
            
-            if (tagArr.length > 3) {
+           /*  if (tagArr.length > 3) {
                 tagCheck.style.display = "block";
                 tags.focus();
                 e.preventDefault();
                 return false;
-            } 
+            }  */
 			if (contents.value.length < 10) {
 				contentsCheck.style.display = "block";
 				contents.focus();
@@ -256,6 +261,8 @@ if (session.getAttribute("memberId") == null) {
                 return false;
 			}
         
+          
+            
             return true;
         });
 

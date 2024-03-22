@@ -99,30 +99,6 @@
     <servlet-name>ContractListController</servlet-name>
     <url-pattern>/jobs/contract.do</url-pattern>
    </servlet-mapping>
-   <servlet>
-    <servlet-name>communityController</servlet-name>
-    <servlet-class>controller.board.community.communityController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>communityController</servlet-name>
-    <url-pattern>/board/community/community.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>ViewCommunityController</servlet-name>
-    <servlet-class>controller.board.community.ViewCommunityController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ViewCommunityController</servlet-name>
-    <url-pattern>/board/community/viewCommunity.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>ModifyCommunityController</servlet-name>
-    <servlet-class>controller.board.qna.ModifyCommunityController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ModifyCommunityController</servlet-name>
-    <url-pattern>/board/community/modifyCommunity.do</url-pattern>
-  </servlet-mapping>
   <servlet>
     <servlet-name>MainController</servlet-name>
     <servlet-class>controller.MainController</servlet-class>
@@ -196,8 +172,6 @@
     <url-pattern>/member/logout.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>RecruitController</display-name>
     <servlet-name>RecruitController</servlet-name>
     <servlet-class>controller.jobs.RecruitController</servlet-class>
   </servlet>

@@ -22,12 +22,12 @@
             width: 15%;
         }
         #Lside {
-            margin-left: 100px;
+            margin-left: 60px;
             /* float:left; */
             
         }
         #Rside {
-            margin-right: 100px;
+            /* margin-right: 100px; */
             /* float: left; */
         }
         
@@ -113,14 +113,15 @@
             
         }
         #side_menu li{
-            height: 100px;
+            height: 60px;
             width: 100px;
-            line-height: 100px;
+            line-height: 60px;
             text-align: center;
             border: 2px solid;
-            border-radius: 50%;
-            margin: 6px;
-            background-color: bisque;
+            border-radius: 10%;
+            border-color: lightgray;
+            margin: 6px auto;
+            background-color: #0090f8;
             font-size: larger;
             font-weight: 800;
             opacity: 70%;
@@ -132,6 +133,9 @@
         }
         #up img {
             width: 30px;
+        }
+        .smallBlue {
+            color: #0090f9;
         }
     </style>
 </head>
@@ -147,24 +151,24 @@
                         <li>
                             <div class="top_writer">
                                 <div>작성자</div>
-                                <div>추천수</div>
+                                <div class="smallBlue">20</div>
                             </div>
                         </li>
                         <li> <div class="top_writer">
                             <div>작성자</div>
-                            <div>추천수</div>
+                            <div class="smallBlue">20</div>
                         </div></li>
                         <li> <div class="top_writer">
                             <div>작성자</div>
-                            <div>추천수</div>
+                            <div class="smallBlue">20</div>
                         </div></li>
                         <li> <div class="top_writer">
                             <div>작성자</div>
-                            <div>추천수</div>
+                            <div class="smallBlue">20</div>
                         </div></li>
                         <li> <div class="top_writer">
                             <div>작성자</div>
-                            <div>추천수</div>
+                            <div class="smallBlue">20</div>
                         </div></li>
                     </ul>
                 </div>

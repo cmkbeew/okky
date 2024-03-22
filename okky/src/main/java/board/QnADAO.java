@@ -64,7 +64,7 @@ public class QnADAO extends ConnectPool {
 				QnADTO dto = new QnADTO();
 				dto.setQnaIdx(rs.getInt("q.qnaIdx"));
 				dto.setTitle(rs.getString("q.title"));
-				dto.setContent(rs.getString("q.content").substring(0, 1).concat(" ..."));
+				dto.setContent(rs.getString("q.content").substring(0, 10).concat(" ..."));
 				dto.setRegDate(rs.getDate("q.regDate"));
 				dto.setModifyDate(rs.getDate("q.modifyDate"));
 				dto.setTags(rs.getString("q.tags"));

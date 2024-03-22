@@ -109,14 +109,15 @@
             width: 180px;
         }
         #side_menu li{
-            height: 100px;
+            height: 60px;
             width: 100px;
-            line-height: 100px;
+            line-height: 60px;
             text-align: center;
             border: 2px solid;
-            border-radius: 50%;
+            border-radius: 10%;
+            border-color: lightgray;
             margin: 6px auto;
-            background-color: bisque;
+            background-color: #0090f8;
             font-size: larger;
             font-weight: 800;
             opacity: 70%;
@@ -193,29 +194,29 @@
         <div class="flex">
             <!-- 왼쪽사이드 -->
             <div class="side" id="Lside">
-                <div id="top_tag"><span><h3>#인기태그</h3></span></div>
+                <div id="top_tag"><span><h3>추천글</h3></span></div>
                 <div><hr></div>
                 <ul>
                     <li>
                         <div class="top_tag">
-                            <div>#태그이름</div>
+                            <div>[추천글제목]</div>
                             <div class="smallBlue">20</div>
                         </div>
                     </li>
                     <li> <div class="top_tag">
-                        <div>#태그이름</div>
+                        <div>[추천글제목]</div>
                         <div class="smallBlue">20</div>
                     </div></li>
                     <li> <div class="top_tag">
-                        <div>#태그이름</div>
+                        <div>[추천글제목]</div>
                         <div class="smallBlue">20</div>
                     </div></li>
                     <li> <div class="top_tag">
-                        <div>#태그이름</div>
+                        <div>[추천글제목]</div>
                         <div class="smallBlue">20</div>
                     </div></li>
                     <li> <div class="top_tag">
-                        <div>#태그이름</div>
+                        <div>[추천글제목]</div>
                         <div class="smallBlue">20</div>
                     </div></li>
                 </ul>
