@@ -29,22 +29,51 @@ public class MemberDAO extends ConnectPool {
 		int result = 0;
 		
 		StringBuilder sb = new StringBuilder();	
-		sb.append("INSERT INTO member(memberId, pwd, name, email, nickname, type)");
-		sb.append(" VALUES (?, ?, ?, ?, ?, ?)");
-		
-		try {
-			psmt = conn.prepareStatement(sb.toString());
-			psmt.setString(1, dto.getMemberId());
-			psmt.setString(2, dto.getPwd());
-			psmt.setString(3, dto.getName());
-			psmt.setString(4, dto.getEmail());
-			psmt.setString(5, dto.getNickname());
-			psmt.setString(6, dto.getType());
+		if(dto.getType() == "1") {
+			sb.append("INSERT INTO member(memberId, pwd, name, email, nickname, type)");
+			sb.append(" VALUES (?, ?, ?, ?, ?, ?)");
 			
-			result = psmt.executeUpdate();
-		} catch(Exception e) {
-			System.out.println("회원가입 중 에러 발생");
-			e.printStackTrace();
+			try {
+				psmt = conn.prepareStatement(sb.toString());
+				psmt.setString(1, dto.getMemberId());
+				psmt.setString(2, dto.getPwd());
+				psmt.setString(3, dto.getName());
+				psmt.setString(4, dto.getEmail());
+				psmt.setString(5, dto.getNickname());
+				psmt.setString(6, dto.getType());
+				
+				result = psmt.executeUpdate();
+			} catch(Exception e) {
+				System.out.println("회원가입 중 에러 발생");
+				e.printStackTrace();
+			}
+		} else {
+			sb.append("INSERT INTO member(memberId, pwd, name, email, nickname, type, ");
+			sb.append("companyName, companyNumber, companyAddr, orgCompanyFile, saveCompanyFile, managerName, managerPhone) ");
+			sb.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			
+			try {
+				psmt = conn.prepareStatement(sb.toString());
+				
+				psmt.setString(1, dto.getMemberId());
+				psmt.setString(2, dto.getPwd());
+				psmt.setString(3, dto.getName());
+				psmt.setString(4, dto.getEmail());
+				psmt.setString(5, dto.getNickname());
+				psmt.setString(6, dto.getType());
+				psmt.setString(7, dto.getCompanyName());
+				psmt.setString(8, dto.getCompanyNumber());
+				psmt.setString(9, dto.getCompanyAddr());
+				psmt.setString(10, dto.getOrgCompanyFile());
+				psmt.setString(11, dto.getSaveCompanyFile());
+				psmt.setString(12, dto.getManagerName());
+				psmt.setString(13, dto.getManagerPhone());
+				
+				result = psmt.executeUpdate();
+			} catch(Exception e) {
+				System.out.println("회원가입 중 에러 발생");
+				e.printStackTrace();
+			}
 		}
 		
 		return result;
@@ -100,6 +129,7 @@ public class MemberDAO extends ConnectPool {
 					dto.setNickname(rs.getString("nickname"));
 					dto.setType(rs.getString("type"));
 					dto.setCompanyName(rs.getString("companyName"));
+					dto.setCompanyAddr(rs.getString("companyAddr"));
 					dto.setCompanyNumber(rs.getString("companyNumber"));
 					dto.setManagerName(rs.getString("managerName"));
 					dto.setManagerPhone(rs.getString("managerPhone"));

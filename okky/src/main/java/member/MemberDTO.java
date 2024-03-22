@@ -10,6 +10,7 @@ public class MemberDTO {
 	private String tags;
 	private String type;
 	private String companyName;
+	private String companyAddr;
 	private String companyNumber;
 	private String orgCompanyFile;
 	private String saveCompanyFile;	
@@ -69,6 +70,12 @@ public class MemberDTO {
 	}
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+	public String getCompanyAddr() {
+		return companyAddr;
+	}
+	public void setCompanyAddr(String companyAddr) {
+		this.companyAddr = companyAddr;
 	}
 	public String getCompanyNumber() {
 		return companyNumber;

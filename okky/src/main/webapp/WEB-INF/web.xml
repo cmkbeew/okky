@@ -26,11 +26,11 @@
     <param-value>cjswo2</param-value>
   </context-param>
   <servlet>
-    <servlet-name>MemberController</servlet-name>
-    <servlet-class>controller.member.MemberController</servlet-class>
+    <servlet-name>RegistController</servlet-name>
+    <servlet-class>controller.member.RegistController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>MemberController</servlet-name>
+    <servlet-name>RegistController</servlet-name>
     <url-pattern>/member/regist.do</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -84,12 +84,12 @@
     <url-pattern>/board/qna/modifyQnA.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>FulltimeListController</servlet-name>
-    <servlet-class>controller.jobs.FulltimeListController</servlet-class>
+    <servlet-name>JobListController</servlet-name>
+    <servlet-class>controller.jobs.JobListController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>FulltimeListController</servlet-name>
-    <url-pattern>/jobs/fulltime.do</url-pattern>
+    <servlet-name>JobListController</servlet-name>
+    <url-pattern>/jobs/jobList.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>ContractListController</servlet-name>
@@ -97,9 +97,9 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ContractListController</servlet-name>
-    <url-pattern>/jobs/contract.do</url-pattern>
-   </servlet-mapping>
-   <servlet>
+    <url-pattern>/jobs/fulltime.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>communityController</servlet-name>
     <servlet-class>controller.board.community.communityController</servlet-class>
   </servlet>
@@ -156,14 +156,6 @@
     <url-pattern>/member/changepwd.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>JobdetailController</servlet-name>
-    <servlet-class>controller.member.JobdetailController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>JobdetailController</servlet-name>
-    <url-pattern>/JobdetailController</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>MailController</servlet-name>
     <servlet-class>controller.member.MailController</servlet-class>
   </servlet>
@@ -196,14 +188,12 @@
     <url-pattern>/member/logout.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>RecruitController</display-name>
-    <servlet-name>RecruitController</servlet-name>
-    <servlet-class>controller.jobs.RecruitController</servlet-class>
+    <servlet-name>JobRecruitController</servlet-name>
+    <servlet-class>controller.jobs.JobRecruitController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RecruitController</servlet-name>
-    <url-pattern>/jobs/recruit.do</url-pattern>
+    <servlet-name>JobRecruitController</servlet-name>
+    <url-pattern>/jobs/jobRecruit.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>JobDetailController</servlet-name>
@@ -212,5 +202,13 @@
   <servlet-mapping>
     <servlet-name>JobDetailController</servlet-name>
     <url-pattern>/jobs/jobDetail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>JobMainController</servlet-name>
+    <servlet-class>controller.jobs.JobMainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobMainController</servlet-name>
+    <url-pattern>/jobs/jobMain.do</url-pattern>
   </servlet-mapping>
 </web-app>

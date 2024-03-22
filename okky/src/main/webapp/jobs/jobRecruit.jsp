@@ -76,12 +76,19 @@
             background-color: #0090f9;
             color: #fff;
         }
-        #selectCon{
+        #selectSal {
             display: grid;
             width: 100%;
             grid-template-columns: repeat(3, 1fr);
             grid-template-areas: 
                 "select" "select" "select";
+        }
+        #selectCon{
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-areas: 
+                "select" "select" "select" "select";
         }
         #selectCon select {
             width: 90%;
@@ -89,6 +96,9 @@
             border: 1px solid lightgray;
             border-radius: 4px;
             font-size:15px ;
+        }
+        #frmBtn input {
+        	cursor: pointer;
         }
     </style>
 </head>
@@ -99,7 +109,7 @@
             <div class="side">
 
             </div>
-            <form id="frm" method="post" action="./recruit.do">
+            <form id="frm" method="post" action="./jobRecruit.do">
                 <div id="main">
                     <div>
                         <h3>회사 공고 등록</h3>
@@ -118,32 +128,48 @@
                         	
                     </div>
                     <div>
+                        <label for="recruitTitleLabel">공고 제목</label><br>
+                        <input type="text" id="recruitTitle" name="recruitTitle" placeholder="공고 제목을 입력해주세요." class="input_area" />
+                        <div id="recruitTitleCheck" style="color: red; font-size: x-small; display: none;">공고 제목을 입력해주세요.</div>
+                    </div>
+                    <div>
                         <label for="companyName">회사명</label><br>
-                        <input type="text" id="companyName" name="companyName" value="${companyName}" class="input_area">
+                        <input type="text" id="companyName" name="companyName" value="${sessionScope.companyName}" class="input_area" readonly />
                         <div id="companyNameCheck" style="color: red; font-size: x-small; display: none;">회사명을 입력해주세요.</div>
                     </div>
                     <div>
                         <label for="managerName">담당자 이름</label><br>
-                        <input type="text" id="managerName" name="managerName" value="${managerName}" class="input_area">
+                        <input type="text" id="managerName" name="managerName" value="${sessionScope.managerName}" class="input_area" readonly />
                         <div id="managerNameCheck" style="color: red; font-size: x-small; display: none;">담당자 이름을 입력해주세요.</div>
                     </div>
                     <div>
                         <label for="managerPhone">담당자 연락처</label><br>
-                        <input type="text" id="managerPhone" name="managerPhone" value="${managerPhone}" class="input_area">
+                        <input type="text" id="managerPhone" name="managerPhone" value="${sessionScope.managerPhone}" class="input_area" readonly />
                         <div id="managerPhoneCheck" style="color: red; font-size: x-small; display: none;">담당자 연락처를 입력해주세요.</div>
                     </div>
                     <div>
                         <label for="companyAddr">회사 주소</label><br>
-                        <input type="text" id="companyAddr" name="companyAddr" placeholder="주소를 입력해주세요." class="input_area">
+                        <input type="text" id="companyAddr" name="companyAddr" value="${sessionScope.companyAddr}" class="input_area" readonly />
                         <div id="companyAddrCheck" style="color: red; font-size: x-small; display: none;">회사 주소를 입력해주세요.</div>
                     </div>
                     <div>
-                        <label for="salary">연봉</label><br>
-                        <input type="text" id="salary" name="salary" placeholder="연봉을 입력해주세요.(만 원 단위)" class="input_area">
-                        <div id="salaryCheck" style="color: red; font-size: x-small; display: none;">연봉을 입력해주세요.(예시: 3000)</div>
+                        <label for="dueDateLabel">마감 기한</label><br>
+                        <input type="date" id="dueDate" name="dueDate" class="input_area" />
+                        <div id="dueDateCheck" style="color: red; font-size: x-small; display: none;">마감 기한을 입력해주세요.</div>
                     </div>
-                    
                     <div id="selectCon">
+                    	<div>
+                            <select name="salary" id="salary">
+                                <option value="">연봉</option>
+                                <option value="2000만원 미만">2000만원 미만</option>
+                                <option value="2000~2999만원">2000~2999만원</option>
+                                <option value="3000~3999만원">3000~3999만원</option>
+                                <option value="4000~4999만원">4000~4999만원</option>
+                                <option value="5000만원 이상">5000만원 이상</option>
+                                <option value="면접 시 협의">면접 시 협의</option>
+                            </select>
+                            <div id="salaryCheck" style="color: red; font-size: x-small; display: none;">연봉을 선택해주세요.</div>
+                        </div>
                     	<div>
                             <select name="position" id="position">
                                 <option value="">포지션</option>
@@ -206,16 +232,24 @@
        
         submit.addEventListener("click", (e) => {
           
+            const recruitTitle = document.querySelector("#recruitTitle");
             const companyName = document.querySelector("#companyName");
             const managerName = document.querySelector("#managerName");
             const managerPhone = document.querySelector("#managerPhone");
             const companyAddr = document.querySelector("#companyAddr");
+            const dueDate = document.querySelector("#dueDate");
             const salary = document.querySelector("#salary");
             const position = document.querySelector("#position");
             const contractType = document.querySelector("#contractType");
             const career = document.querySelector("#career");
             const recruitContent = document.querySelector("#recruitContent");
             
+            if (recruitTitle.value == "") {
+                document.querySelector("#recruitTitleCheck").style.display = "block";
+                recruitTitle.focus();
+                e.preventDefault();
+                return false;
+            }
             if (companyName.value == "") {
                 document.querySelector("#companyNameCheck").style.display = "block";
                 companyName.focus();
@@ -237,6 +271,12 @@
             if (companyAddr.value == "") {
                 document.querySelector("#companyAddrCheck").style.display = "block";
                 companyAddr.focus();
+                e.preventDefault();
+                return false;
+            }
+            if (dueDate.value == "") {
+                document.querySelector("#dueDateCheck").style.display = "block";
+                dueDate.focus();
                 e.preventDefault();
                 return false;
             }

@@ -2,7 +2,7 @@ package jobs;
 
 public class JobDTO {
 	private int recruitIdx;
-	private String companyAddr;
+	private String recruitTitle;
 	private String salary;
 	private String position;
 	private String contractType;
@@ -10,10 +10,12 @@ public class JobDTO {
 	private int readCnt;
 	private String recruitContent;
 	private String regDate;
+	private String dueDate;
 	
 	private int memberIdx;
 	private String memberId;
 	private String companyName;
+	private String companyAddr;
 	private String type;
 	
 	public int getRecruitIdx() {
@@ -22,11 +24,11 @@ public class JobDTO {
 	public void setRecruitIdx(int recruitIdx) {
 		this.recruitIdx = recruitIdx;
 	}
-	public String getCompanyAddr() {
-		return companyAddr;
+	public String getRecruitTitle() {
+		return recruitTitle;
 	}
-	public void setCompanyAddr(String companyAddr) {
-		this.companyAddr = companyAddr;
+	public void setRecruitTitle(String recruitTitle) {
+		this.recruitTitle = recruitTitle;
 	}
 	public String getSalary() {
 		return salary;
@@ -70,6 +72,12 @@ public class JobDTO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	public String getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(String dueDate) {
+		this.dueDate = dueDate;
+	}
 	public int getMemberIdx() {
 		return memberIdx;
 	}
@@ -87,6 +95,12 @@ public class JobDTO {
 	}
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+	public String getCompanyAddr() {
+		return companyAddr;
+	}
+	public void setCompanyAddr(String companyAddr) {
+		this.companyAddr = companyAddr;
 	}
 	public String getType() {
 		return type;

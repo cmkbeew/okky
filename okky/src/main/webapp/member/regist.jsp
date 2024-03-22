@@ -35,6 +35,20 @@
 		font-weight: bold;
 		margin: 30px 0px;
 	}
+    #addrInput {
+        display: flex;
+        width: 300px;
+        justify-content: space-evenly;
+        align-items: baseline;
+        margin: 0 auto;
+    }
+    .selectAddr {
+        width: 70px;
+        height: 30px;
+    }
+    #companyAddr {
+        width: 250px;
+    }
 </style>
 </head>
 <body>
@@ -80,14 +94,37 @@
 				<input type="text" name="nickname" id="nickname" value="" placeholder="닉네임 2~20자 이내"/>
 			</div>
 			<div>
-				<input type="radio" name="type" id="type_1" value="1" checked /> 일반 회원
-				<input type="radio" name="type" id="type_2" value="2"/> 기업 회원
+				<input type="radio" name="type" id="type_1" value="1" checked/> 일반 회원
+				<input type="radio" name="type" id="type_2" value="2" /> 기업 회원
 			</div>
 			
-			<div id="companyInput" style="display: none">
+			<div id="companyInput" style="display:none">
 				<div id="companyNameLabel" class="label">회사명</div>
 				<div class="inputRegist">
 					<input type="text" name="companyName" id="companyName" value="" placeholder="회사명 2~30자 이내"/>
+				</div>
+                <div id="companyAddrLabel" class="label">회사 주소</div>
+                <div id="addrInput">
+                    <select name="addr1" id="addr1" class="selectAddr">
+                        <option value="">선택</option>
+                        <option value="서울">서울</option>
+                        <option value="경기">경기</option>
+                        <option value="인천">인천</option>
+                        <option value="대구">대구</option>
+                        <option value="부산">부산</option>
+                        <option value="광주">광주</option>
+                        <option value="대전">대전</option>
+                        <option value="울산">울산</option>
+                        <option value="세종">세종</option>
+                        <option value="강원">강원</option>
+                        <option value="충남">충남</option>
+                        <option value="충북">충북</option>
+                        <option value="경남">경남</option>
+                        <option value="경북">경북</option>
+                        <option value="전남">전남</option>
+                        <option value="전북">전북</option>
+                    </select>
+					<input type="text" name="addr2" id="addr2" value="" placeholder="회사주소 2~30자 이내"/>
 				</div>
 				<div id="compayNumberLabel" class="label">사업자등록번호</div>
 				<div class="inputRegist">
@@ -120,6 +157,8 @@
 		const name = document.querySelector("#name");
 		const nickname = document.querySelector("#nickname");
 		const companyName = document.querySelector("#companyName");
+		const addr1 = document.querySelector("#addr1");
+		const addr2 = document.querySelector("#addr2");
 		const companyNumber = document.querySelector("#companyNumber");
 		const companyFile = document.querySelector("#companyFile");
 		const managerName = document.querySelector("#managerName");
@@ -261,6 +300,11 @@
 			validate_check(companyName, 2, 30, 3);
 			activeBtn();
 		}, false);
+		
+		// 회사주소 체크 이벤트
+// 		if(addr1.value == "") {
+			
+// 		}
 		
 		// 사업자등록번호 체크 이벤트
 		companyNumber.addEventListener("keyup", function(e) {
