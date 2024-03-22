@@ -1,9 +1,13 @@
 package member;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
 import common.ConnectPool;
 
 public class MemberDAO extends ConnectPool {
-	// 중복 회원 조회
+// 중복 회원 조회
 	public int getMemberCount(String memberId) {
 		int result = 0;
 		String sql = "SELECT COUNT(memberId) FROM member WHERE memberId=?";
@@ -78,8 +82,7 @@ public class MemberDAO extends ConnectPool {
 		
 		return result;
 	}
-	
-	// 기업 회원 가입
+// 기업 회원 가입
 	public int registMember2(MemberDTO dto) {
 		int result = 0;
 		
@@ -112,7 +115,7 @@ public class MemberDAO extends ConnectPool {
 		return result;
 	}
 	
-	// 로그인 - 회원 조회
+// 로그인 - 회원 조회
 	public MemberDTO getMemberInfo(String id, String pwd) {
 		MemberDTO dto = new MemberDTO();
 		String sql = "SELECT * FROM member WHERE memberId=?"; 
@@ -185,6 +188,24 @@ public class MemberDAO extends ConnectPool {
 		
 		return result;
 	}
+// 개인 정보 수정하기
+	public int modifyMyInfo(MemberDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();	
+		sb.append("UPDATE member SET nickname=?");
+		sb.append(" WHERE memberId=?");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getNickname());
+			psmt.setString(2, dto.getMemberId());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("정보 수정 중 에러 발생");
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 // 비밀번호 변경	
 	public int changePwd(MemberDTO dto) {
 		int result = 0;
@@ -233,6 +254,105 @@ public class MemberDAO extends ConnectPool {
 		}
 		return result;
 	}
+//스킬 태그 입력
+	public int inputSkill (MemberDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE member SET skill1=?, skill2=?, skill3=?");
+		sb.append(" WHERE memberId =?");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getSkill1());
+			psmt.setString(2, dto.getSkill2());
+			psmt.setString(3, dto.getSkill3());
+			psmt.setString(4, dto.getMemberId());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("스킬 태그 업로드 중 에러 발생");
+		}
+		return result;
+	}
+//일반회원 지원테이블 구성
+//	public MemberDTO applyTable (String memberId, String pwd) {
+//		MemberDTO dto = new MemberDTO();
+//		StringBuilder sb = new StringBuilder();
+//		sb.append("SELECT RS.recruitIdx, RS.recruitTitle, RS.dueDate");
+//		sb.append(" FROM recruit AS RS");
+//		sb.append(" INNER JOIN member AS MB ON RS.memberIdx = MB.memberIdx" );
+//		sb.append(" WHERE MB.memberIdx = ?;" );
+//		
+//		try {
+//			psmt = conn.prepareStatement(sb.toString());
+//			System.out.println(psmt);
+//			
+//			rs = psmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				if(rs.getString("").equals(name)) {
+//					
+//				 } 
+//			}
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			System.out.println("기업 회원 조회 시 에러 발생");
+//		}
+	//	return dto;
+	//}
 	
+	public List<ApplyTableDTO> applyList(Map<String, Object> map) {
+		List<ApplyTableDTO> list = new Vector<ApplyTableDTO>();
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT RS.recruitIdx, RS.recruitTitle, RS.dueDate, RS.memberIdx, MB.memberId");
+		sb.append(" FROM recruit AS RS");
+		sb.append(" INNER JOIN member AS MB ON RS.memberIdx = MB.memberIdx" );
+		sb.append(" WHERE MB.memberId = ?" );
+		sb.append(" ORDER BY RS.recruitIdx");
+	
+		try {			
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, map.get("memberId").toString());
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ApplyTableDTO dto = new ApplyTableDTO();
+				dto.setMemberIdx(rs.getInt("RS.memberIdx"));
+				dto.setRecruitIdx(rs.getInt("RS.recruitIdx"));
+				dto.setRecruitTitle(rs.getString("RS.recruitTitle"));
+				dto.setDueDate(rs.getString("RS.dueDate"));
+		
+				list.add(dto);
+			}
+		} catch(Exception e) {
+			System.out.println("게시물 리스트 조회 에러");
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public List<ApplyTableDTO> applicantList(Map<String, Object> map) {
+		List<ApplyTableDTO> list = new Vector<ApplyTableDTO>();
+		StringBuilder sb = new StringBuilder();
+		
+	
+		try {			
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, map.get("memberId").toString());
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ApplyTableDTO dto = new ApplyTableDTO();
+				dto.setMemberIdx(rs.getInt("RS.memberIdx"));
+				dto.setRecruitIdx(rs.getInt("RS.recruitIdx"));
+				dto.setRecruitTitle(rs.getString("RS.recruitTitle"));
+				dto.setDueDate(rs.getString("RS.dueDate"));
+		
+				list.add(dto);
+			}
+		} catch(Exception e) {
+			System.out.println("게시물 리스트 조회 에러");
+			e.printStackTrace();
+		}
+		return list;
+	}
 	
 }

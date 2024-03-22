@@ -4,10 +4,12 @@ public class MemberDTO {
 	private int memberIdx;
 	private String memberId;
 	private String pwd;
-	private String email;
 	private String name;
+	private String email;
 	private String nickname;
-	private String tags;
+	private String skill1;
+	private String skill2;
+	private String skill3;
 	private String type;
 	private String companyName;
 	private String companyAddr;
@@ -22,6 +24,7 @@ public class MemberDTO {
 	}
 	public void setMemberIdx(int memberIdx) {
 		this.memberIdx = memberIdx;
+
 	}
 	public String getMemberId() {
 		return memberId;
@@ -35,17 +38,17 @@ public class MemberDTO {
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getNickname() {
 		return nickname;
@@ -53,11 +56,23 @@ public class MemberDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getTags() {
-		return tags;
+	public String getSkill1() {
+		return skill1;
 	}
-	public void setTags(String tags) {
-		this.tags = tags;
+	public void setSkill1(String skill1) {
+		this.skill1 = skill1;
+	}
+	public String getSkill2() {
+		return skill2;
+	}
+	public void setSkill2(String skill2) {
+		this.skill2 = skill2;
+	}
+	public String getSkill3() {
+		return skill3;
+	}
+	public void setSkill3(String skill3) {
+		this.skill3 = skill3;
 	}
 	public String getType() {
 		return type;
@@ -107,4 +122,6 @@ public class MemberDTO {
 	public void setManagerPhone(String managerPhone) {
 		this.managerPhone = managerPhone;
 	}
+	
+	
 }

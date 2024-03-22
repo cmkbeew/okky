@@ -22,7 +22,7 @@
         /* 사이드바 영역 */
         #sidebar {
             border-right: 1px solid rgb(158, 158, 158);
-            box-shadow: 5px 0px 5px rgb(162, 162, 162);
+            box-shadow: 3px 0px 3px rgb(162, 162, 162);
             width: 15%;
             height: 100%;
             display: block;
@@ -193,13 +193,13 @@
 	        <div>
 	            <ul>
 	                <li><h3>내 계정</h3></li>
-	                <a href="mypage.jsp"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
-	                <a href="account.jsp"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
+	                <a href="./mypage.do"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
+	                <a href="./account.do"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
 	            </ul>
 	            <hr>
 	            <ul>
 	                <li><h3>JOBS</h3></li>
-	                <a href="jobdetail_co.jsp"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
+	                <a href="./applicant.do"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
 	            </ul>
 	        </div>
 	    </aside>
@@ -234,6 +234,7 @@
 	        </div>
 	    </div>
 	</div>
+	<jsp:include page="/common/footer.jsp" />
 	<script>
 	</script>
 </body>

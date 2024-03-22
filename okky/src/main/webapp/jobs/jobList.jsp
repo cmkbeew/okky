@@ -110,13 +110,13 @@
     }
     .filter-btn {
         width: 100%;
+        height: 35px;
         border: none;
         font-size: 18px;
     }
     .filter-btn:hover {
         background-color: #d8d8d8;
     }
-
     /* 카운트 + 정렬버튼 */
     .count {
         display: flex;
@@ -181,41 +181,41 @@
 	            <div class="filter">
 	                <button class="filter-toggle">포지션</button>
 	                <ul class="filter-menu">
-	                    <button class="filter-btn"><li class="filter-option">프론트</li></button>
-	                    <button class="filter-btn"><li class="filter-option">백엔드</li></button>
-	                    <button class="filter-btn"><li class="filter-option">DBA</li></button>
-	                    <button class="filter-btn"><li class="filter-option">풀스택</li></button>
-	                    <button class="filter-btn"><li class="filter-option">PM</li></button>
-	                    <button class="filter-btn"><li class="filter-option">기타</li></button>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">프론트</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">백엔드</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">DBA</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">풀스택</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">PM</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">기타</li>
 	                </ul>
 	            </div>
 	            
 	            <div class="filter">
 	                <button class="filter-toggle">지역</button>
 	                <ul class="filter-menu">
-	                    <button class="filter-btn"><li class="filter-option">서울</li></button>
-	                    <button class="filter-btn"><li class="filter-option">경기</li></button>
-	                    <button class="filter-btn"><li class="filter-option">인천</li></button>
-	                    <button class="filter-btn"><li class="filter-option">강원</li></button>
-	                    <button class="filter-btn"><li class="filter-option">충북</li></button>
-	                    <button class="filter-btn"><li class="filter-option">충남</li></button>
-	                    <button class="filter-btn"><li class="filter-option">전북</li></button>
-	                    <button class="filter-btn"><li class="filter-option">전남</li></button>
-	                    <button class="filter-btn"><li class="filter-option">경북</li></button>
-	                    <button class="filter-btn"><li class="filter-option">경남</li></button>
-	                    <button class="filter-btn"><li class="filter-option">제주</li></button>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">서울</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">경기</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">인천</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">강원</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">충북</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">충남</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">전북</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">전남</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">경북</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">경남</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">제주</li>
 	                </ul>
 	            </div>
 	            
 	            <div class="filter">
 	                <button class="filter-toggle">경력</button>
 	                <ul class="filter-menu">
-	                    <button class="filter-btn"><li class="filter-option">무관</li></button>
-	                    <button class="filter-btn"><li class="filter-option">신입</li></button>
-	                    <button class="filter-btn"><li class="filter-option">1~2년</li></button>
-	                    <button class="filter-btn"><li class="filter-option">3~4년</li></button>
-	                    <button class="filter-btn"><li class="filter-option">5~6년</li></button>
-	                    <button class="filter-btn"><li class="filter-option">7년 이상</li></button>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">무관</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">신입</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">1~2년</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">3~4년</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">5~6년</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option">7년 이상</li>
 	                </ul>
 	            </div>
 	        </div>
