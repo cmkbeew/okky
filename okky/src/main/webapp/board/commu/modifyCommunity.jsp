@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Modify Community</title>
+<title>커뮤니티 게시판 수정</title>
 <style>
         #body {
             display: flex;
@@ -47,7 +47,7 @@
             color: #374751;
             font-size: 0.89em;
         }
-        #contents {
+        #content {
             width: 820px;
             resize: none;
             border: 1px solid lightgray;
@@ -72,10 +72,29 @@
             background-color: #fff;
             height: 40px;
             width: 80px;
+            cursor: pointer;
         }
         #submitBtn {
             background-color: #0090f9;
             color: #fff;
+        }
+         #selectCon{
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-areas: 
+                "select" "select" "select";
+        }
+        #selectCon select {
+            width: 90%;
+            padding: 16px 20px;
+            border: 1px solid lightgray;
+            border-radius: 4px;
+            font-size:15px ;
+            margin: 10px;
+        }
+        #frmBtn input {
+        	cursor: pointer;
         }
     </style>
 </head>
@@ -86,12 +105,12 @@
             <div class="side">
 
             </div>
-            <form id="frm" method="post">
+            <form id="frm" method="post" action="modifyCommu.do?communityIdx=${params.communityIdx }">
             <div id="main">
                 <div>
                     <h3>함께 할 때 더 즐거운 순간</h3>
                     <p>
-                        <strong>[사용자아이디]</strong>님 지식공유 플랫폼 OKKY에서 다양한 사람을 만나고 생각의 폭을 넓혀보세요.
+                        <strong>${params.memberId }</strong>님 지식공유 플랫폼 OKKY에서 다양한 사람을 만나고 생각의 폭을 넓혀보세요.
                     </p>
                 </div>
                
@@ -100,25 +119,48 @@
                             <label for="category" class="" >토픽</label><br>
                             <select id="category" name="category" class="input_area">
                                 <option value="">토픽을 선택해주세요.</option>
-                                <option value="tech">기술</option>
-                                <option value="carees">커리어</option>
-                                <option value="qna-etc">기타</option>
+                                <option value="일상" <c:if test="${params.category eq '일상'}"> selected </c:if>>일상</option>
+                                <option value="공부" <c:if test="${params.category eq '공부'}"> selected </c:if>>공부</option>
+                                <option value="공지사항" <c:if test="${params.category eq '공지사항'}"> selected </c:if>>공지사항</option> 
+                            
                             </select>
                             <div id="optionCheck" style="color: red; font-size: x-small; display: none;">토픽을 하나 이상 선택해 주세요.</div>
                         </div>
                         <div>
                             <label for="title">제목</label><br>
-                            <input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="input_area">
+                            <input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="input_area" value="${params.title }">
                             <div id="titleCheck" style="color: red; font-size: x-small; display: none;">제목은 50자 이하로 입력해 주세요.</div>
                         </div>
+                        <br>
+                        <div id="selectCon">
+	                    <div>
+	                        <select name="skill" id="skill_1st">
+	                            <option value="">선택 1</option>
+	                            <option value="skill1">스킬1</option>
+	                            <option value="skill2">스킬2</option>
+	                            <option value="skill3">스킬3</option>
+	                        </select>
+	                    </div>
+	                    <div>
+	                        <select name="skill" id="skill_2nd">
+	                            <option value="">선택 2</option>
+	                            <option value="skill1">스킬1</option>
+	                            <option value="skill2">스킬2</option>
+	                            <option value="skill3">스킬3</option>
+	                        </select>
+	                    </div>
+	                    <div>
+	                        <select name="skill" id="skill_3rd">
+	                            <option value="">선택 3</option>
+	                            <option value="skill1">스킬1</option>
+	                            <option value="skill2">스킬2</option>
+	                            <option value="skill3">스킬3</option>
+	                        </select>
+	                    </div>
+	                </div>
                         <div>
-                            <label for="tags">태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label><br>
-                            <input type="text" id="tags" name="tags" placeholder="태그를 입력해주세요." class="input_area">
-                            <div id="tagCheck" style="color: red; font-size: x-small; display: none;">태그는 3개 이상 입력할 수 없습니다.</div>
-                        </div>
-                        <div>
-                            <label for="contents">본문</label><br>
-                            <textarea id="contents" name="contents" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요."></textarea>
+                            <label for="content">본문</label><br>
+                            <textarea id="content" name="content" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요.">${params.content }</textarea>
                             <div id="contentsCheck" style="color: red; font-size: x-small; display: none;">본문을 10자 이 입력하세요.</div>
                         </div>
                         <div >
@@ -149,17 +191,19 @@
 
             
         submit.addEventListener("click", (e) => {
+        	
+
           
             let select = document.querySelector("#category");
             const title = document.querySelector("#title");
             const content = document.querySelector("#contents");
-            let tags = document.querySelector("#tags").value;
+            /* let tags = document.querySelector("#tags").value; */
             const titleCheck = document.querySelector("#titleCheck");
-            const tagCheck = document.querySelector("#tagCheck");
+       /*      const tagCheck = document.querySelector("#tagCheck"); */
             const optionCheck = document.querySelector("#optionCheck");
-            const contents = document.querySelector("#contents");
+            const contents = document.querySelector("#content");
             const contentsCheck = document.querySelector("#contentsCheck");
-            let tagArr = tags.trim().split(" ");
+           /*  let tagArr = tags.trim().split(" ");
             console.log(tagArr);
 
             for (let i=0; i<tagArr.length; i++) {
@@ -168,7 +212,7 @@
                 }
             }
 
-            console.log(tagArr);
+            console.log(tagArr); */
 
             if (select.value == "") {
                 optionCheck.style.display = "block";
@@ -191,12 +235,12 @@
             } 
 
            
-            if (tagArr.length > 3) {
+           /*  if (tagArr.length > 3) {
                 tagCheck.style.display = "block";
                 tags.focus();
                 e.preventDefault();
                 return false;
-            } 
+            }  */
 			if (contents.value.length < 10) {
 				contentsCheck.style.display = "block";
 				contents.focus();
@@ -204,6 +248,8 @@
                 return false;
 			}
         
+          
+            
             return true;
         });
 

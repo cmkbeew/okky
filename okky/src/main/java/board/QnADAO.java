@@ -304,7 +304,7 @@ public class QnADAO extends ConnectPool {
 		}
 	}
 	
-public void updatePageDislike(int qnaIdx) {
+	public void updatePageDislike(int qnaIdx) {
 	
 		StringBuilder sb = new StringBuilder();
 		

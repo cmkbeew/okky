@@ -154,6 +154,9 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        #goods button {
+        	cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -168,11 +171,18 @@
                 <div>
                     <h3>Community</h3>
                     <p>
-                        <strong>${params.nickName }</strong>
+                        작성자 : <strong>${params.nickName }</strong>
                     </p>
                 </div>
                 <div class="contents">
                     <h3>${params.title }</h3>
+                    <div>작성자 ID : ${params.memberId }</div>
+                    <br>
+                    <div>조회수 : ${params.readCnt }</div>
+                    <br>
+                    <div>작성일 : ${params.regDate }</div>
+                    <br>
+                    <div>카테고리 : ${params.category }</div>
                     <div class="deleteAndmodify">
 		                <input  type="button" style="background-color: #0090f9; color: white;" name="btn_modify" id="btn_modify" value="수정하기">
 						<input type="button" style="background-color: #fff;" name="btn_delete" id="btn_delete" value="삭제하기"><br><br>
@@ -246,41 +256,54 @@
             }
         });
         
-        document.querySelector("#btn_delete").addEventListener("click", function(e) {
+ document.querySelector("#btn_delete").addEventListener("click", function(e) {
         	
-<%--         	<%if (session.getAttribute("UserId") == null) {%> --%>
-//         	alert("로그인 후 접근이 가능합니다.");
-//         	window.location.href = "../login/login_ok.do";
-<%--         	<%} else if (session.getAttribute("UserId").toString().equals(user_id)) {%> --%>
-// //         	alert("자신의 글만 삭제가 가능합니다.");
-<%--         	window.location.href = "view.jsp?idx=<%=idx %>"; --%>
-<%--         	<%}else {%> --%>
-        	let confirm_yn = confirm("현재 글을 삭제하시겠습니까?");
-        	if (confirm_yn) {
-        		window.location.href = "deleteCommunity.do?idx=${params.communityIdx}";	
-        	}
-<%--         	<%}%> --%>
+        	
+        	
+        	
+        	let id_ck = "${(sessionScope.memberId != null)? sessionScope.memberId : 0}";
+        	
+			 if (id_ck == "0") { 
+					alert("로그인 후 접근이 가능합니다.");
+					window.location.href = "/okky/member/login.do";
+			 } else if ("${sessionScope.memberIdx}" != "${params.memberIdx}") { 
+					alert("자신의 글만 삭제가 가능합니다.");
+					window.location.href = "viewCommu.do?communityIdx=${params.communityIdx}";
+			}else { 
+				let confirm_yn = confirm("현재 글을 삭제하시겠습니까?");
+				if (confirm_yn) { 
+					window.location.href = "deleteCommu.do?communityIdx=${params.communityIdx}&memberId=${sessionScope.memberId}";	
+			 	}
+			} 
+
         }, false);
 
-        document.querySelector("#btn_modify").addEventListener("click", function(e) {
-<%--         	<%if (session.getAttribute("UserId") == null) {%> --%>
-//         	alert("로그인 후 접근이 가능합니다.");
-//         	window.location.href = "../login/login_ok.do";
-<%--         	<%} else if (session.getAttribute("UserId").toString().equals(user_id)) {%> --%>
-// //         		alert("자신의 글만 수정이 가능합니다.");
-<%--         		window.location.href = "view.jsp?idx=<%=idx %>"; --%>
-<%--         	<%} else {%> --%>
-//         	window.location.href = "modify.do?idx=${params.idx}";
-        	window.location.href = "modifyCommunity.do";
-<%--         	<%}%> --%>
-        	
-        	
+      document.querySelector("#btn_modify").addEventListener("click", function(e) {
+
+    	  let id_ck = "${(sessionScope.memberId != null)? sessionScope.memberId : 0}";
+      	
+			 if (id_ck == "0") { 
+					alert("로그인 후 접근이 가능합니다.");
+					window.location.href = "/okky/member/login.do";
+			 } else if ("${sessionScope.memberIdx}" != "${params.memberIdx}") { 
+					alert("자신의 글만 수정이 가능합니다.");
+					window.location.href = "viewCommu.do?communityIdx=${params.communityIdx}";
+			}else { 
+				let confirm_yn = confirm("현재 글을 수정 하시겠습니까?");
+				if (confirm_yn) { 
+        			window.location.href = "modifyCommu.do?communityIdx=${params.communityIdx}";
+				}
+			}
         }, false);
+     
         
+      document.querySelector("#up").addEventListener("click", function(e) {
+          window.location.href = "viewCommu.do?communityIdx=${params.communityIdx}";
+      }, false);
         
-        
-
-
+      document.querySelector("#down").addEventListener("click", function(e) {
+          window.location.href = "viewCommu.do?communityIdx=${params.communityIdx}";
+      }, false);
     </script>
 </body>
 </html>

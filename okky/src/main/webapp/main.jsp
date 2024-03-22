@@ -215,7 +215,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    <a href="/okky/board/community/community.do">
+                    <a href="/okky/board/commu/commu.do">
                         <div class="info">
                             <span>커뮤니티</span>
                             <img src="https://okky.kr/community.svg">			
@@ -233,7 +233,7 @@
 	                                    	<div>${list.regDate }</div>
 	                                	</div>
 		                                <div class="content_title">
-		                                    <a href="/okky/board/community/viewCommunity.do?communityIdx=${list.communityIdx}">${list.content }</a>
+		                                    <a href="/okky/board/commu/viewCommu.do?communityIdx=${list.communityIdx}">${list.content }</a>
 		                                </div>
 	                           		</li>
 	                           		<li><hr></li>
@@ -395,7 +395,7 @@
                     </li>
 
                     <li>
-                        <a href="/okky/board/community/community.do">
+                        <a href="/okky/board/commu/commu.do">
                             <div>
                                 커뮤니티
                             </div>

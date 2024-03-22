@@ -47,7 +47,7 @@
             color: #374751;
             font-size: 0.89em;
         }
-        #contents {
+        #content {
             width: 820px;
             resize: none;
             border: 1px solid lightgray;
@@ -77,7 +77,7 @@
             background-color: #0090f9;
             color: #fff;
         }
-        #selectCon{
+         #selectCon{
             display: grid;
             width: 100%;
             grid-template-columns: repeat(3, 1fr);
@@ -92,32 +92,44 @@
             font-size:15px ;
             margin: 10px;
         }
+       #frmBtn input {
+        	cursor: pointer;
+        }
     </style>
 </head>
 <body>
+<%
+if (session.getAttribute("memberId") == null) {
+	out.println("<script>");
+	out.println("alert('로그인 후 접근이 가능합니다.')");
+	out.println("window.location.replace('/okky/member/login.do')");
+	out.println("</script>");
+}
+%>
 <jsp:include page="/common/header.jsp"/>
     <div id="body">
         <div id="container">
             <div class="side">
 
             </div>
-            <form id="frm" method="post">
+            <form id="frm" method="post" action="writeCommu.do">
             <div id="main">
                 <div>
                     <h3>함께 할 때 더 즐거운 순간</h3>
                     <p>
-                        <strong>[사용자아이디]</strong>님 지식공유 플랫폼 OKKY에서 다양한 사람을 만나고 생각의 폭을 넓혀보세요.
+                        <strong>${sessionScope.memberId }</strong>님 지식공유 플랫폼 OKKY에서 다양한 사람을 만나고 생각의 폭을 넓혀보세요.
                     </p>
                 </div>
                
                     
                         <div>
+                         <input type="hidden" id="memberIdx" name="memberIdx" value="<%= session.getAttribute("memberIdx")%>">
                             <label for="category" class="" >토픽</label><br>
                             <select id="category" name="category" class="input_area">
                                 <option value="">토픽을 선택해주세요.</option>
-                                <option value="tech">일상</option>
-                                <option value="carees">공부</option>
-                                <option value="qna-etc">공지사항</option>
+                                <option value="일상">일상</option>
+                                <option value="공부">공부</option>
+                                <option value="공지사항">공지사항</option>
                             </select>
                             <div id="optionCheck" style="color: red; font-size: x-small; display: none;">토픽을 하나 이상 선택해 주세요.</div>
                         </div>
@@ -127,7 +139,7 @@
                             <div id="titleCheck" style="color: red; font-size: x-small; display: none;">제목은 50자 이하로 입력해 주세요.</div>
                         </div>
                         <br>
-                        <label for="tags">태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label>
+                        <label>태그 - <span class="small_blue">내용을 대표하는 태그를 선택해 주세요.</span></label>
                         <div id="selectCon">
                     <div>
                         <select name="skill" id="skill_1st">
@@ -155,8 +167,8 @@
                     </div>
                 </div>
                         <div>
-                            <label for="contents">본문</label><br>
-                            <textarea id="contents" name="contents" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요."></textarea>
+                            <label for="content">본문</label><br>
+                            <textarea id="content" name="content" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요."></textarea>
                             <div id="contentsCheck" style="color: red; font-size: x-small; display: none;">본문을 10자 이상 입력하세요.</div>
                         </div>
                         <div >
@@ -187,17 +199,19 @@
 
             
         submit.addEventListener("click", (e) => {
+        	
+
           
             let select = document.querySelector("#category");
             const title = document.querySelector("#title");
             const content = document.querySelector("#contents");
-            let tags = document.querySelector("#tags").value;
+            /* let tags = document.querySelector("#tags").value; */
             const titleCheck = document.querySelector("#titleCheck");
-            const tagCheck = document.querySelector("#tagCheck");
+       /*      const tagCheck = document.querySelector("#tagCheck"); */
             const optionCheck = document.querySelector("#optionCheck");
-            const contents = document.querySelector("#contents");
+            const contents = document.querySelector("#content");
             const contentsCheck = document.querySelector("#contentsCheck");
-            let tagArr = tags.trim().split(" ");
+           /*  let tagArr = tags.trim().split(" ");
             console.log(tagArr);
 
             for (let i=0; i<tagArr.length; i++) {
@@ -206,7 +220,7 @@
                 }
             }
 
-            console.log(tagArr);
+            console.log(tagArr); */
 
             if (select.value == "") {
                 optionCheck.style.display = "block";
@@ -229,12 +243,12 @@
             } 
 
            
-            if (tagArr.length > 3) {
+           /*  if (tagArr.length > 3) {
                 tagCheck.style.display = "block";
                 tags.focus();
                 e.preventDefault();
                 return false;
-            } 
+            }  */
 			if (contents.value.length < 10) {
 				contentsCheck.style.display = "block";
 				contents.focus();
@@ -242,8 +256,13 @@
                 return false;
 			}
         
+          
+            
             return true;
         });
+
+        
+
 
         
 

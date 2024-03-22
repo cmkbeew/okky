@@ -244,9 +244,9 @@
                 </div>
                 
                     <nav>
-                        <button id="category_1" name="category_1" value="기술" >기술</button>
-                        <button  id="category_2" name="category_2" value="커리어" >커리어</button>
-                        <button id="category_3" name="category_3" value="기타">기타</button>
+                        <button id="category_1" name="category_1" value="기술" <c:if test="${params.category_1 eq 'category_1'}"> style="color:#0090f8;" </c:if>  >기술</button>
+                        <button  id="category_2" name="category_2" value="커리어" <c:if test="${params.category_2 eq 'category_2'}"> style="color:#0090f8;" </c:if>>커리어</button>
+                        <button id="category_3" name="category_3" value="기타" <c:if test="${params.category_3 eq 'category_3'}"> style="color:#0090f8;" </c:if>>기타</button>
                     </nav>
                 <div style="visibility: hidden;"></div>
                 
@@ -359,7 +359,7 @@
                     </li>
 
                     <li>
-                        <a href="/okky/board/community/community.do">
+                        <a href="/okky/board/commu/commu.do">
                             <div>
                                 커뮤니티
                             </div>

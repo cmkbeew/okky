@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QnA 게시판 수정</title>
 <style>
         #body {
             display: flex;
@@ -92,6 +92,9 @@
             border-radius: 4px;
             font-size:15px ;
             margin: 10px;
+        }
+        #frmBtn input {
+        	cursor: pointer;
         }
     </style>
 </head>
@@ -197,17 +200,19 @@ if (session.getAttribute("memberId") == null) {
 
             
         submit.addEventListener("click", (e) => {
+        	
+
           
             let select = document.querySelector("#category");
             const title = document.querySelector("#title");
             const content = document.querySelector("#contents");
-            let tags = document.querySelector("#tags").value;
+            /* let tags = document.querySelector("#tags").value; */
             const titleCheck = document.querySelector("#titleCheck");
-            const tagCheck = document.querySelector("#tagCheck");
+       /*      const tagCheck = document.querySelector("#tagCheck"); */
             const optionCheck = document.querySelector("#optionCheck");
-            const contents = document.querySelector("#contents");
+            const contents = document.querySelector("#content");
             const contentsCheck = document.querySelector("#contentsCheck");
-            let tagArr = tags.trim().split(" ");
+           /*  let tagArr = tags.trim().split(" ");
             console.log(tagArr);
 
             for (let i=0; i<tagArr.length; i++) {
@@ -216,7 +221,7 @@ if (session.getAttribute("memberId") == null) {
                 }
             }
 
-            console.log(tagArr);
+            console.log(tagArr); */
 
             if (select.value == "") {
                 optionCheck.style.display = "block";
@@ -239,12 +244,12 @@ if (session.getAttribute("memberId") == null) {
             } 
 
            
-            if (tagArr.length > 3) {
+           /*  if (tagArr.length > 3) {
                 tagCheck.style.display = "block";
                 tags.focus();
                 e.preventDefault();
                 return false;
-            } 
+            }  */
 			if (contents.value.length < 10) {
 				contentsCheck.style.display = "block";
 				contents.focus();
@@ -252,6 +257,8 @@ if (session.getAttribute("memberId") == null) {
                 return false;
 			}
         
+          
+            
             return true;
         });
 
