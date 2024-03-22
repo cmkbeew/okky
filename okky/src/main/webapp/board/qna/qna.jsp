@@ -234,12 +234,12 @@
             </div>
             <div class="nav">
                 <div>
-                    <a href="writeQnA.jsp">
-                        <button style="width: 100px; background-color: #0090f9; border-radius: 5px; color: #fff; height: 36px;">
+                    
+                        <button id="btn_regist" name="btn_regist" style="width: 100px; background-color: #0090f9; border-radius: 5px; color: #fff; height: 36px;" >
                             <img src="/okky/img/pencil.png" style="height: 20px;">
                             질문하기
                         </button>
-                    </a>
+                    
                 </div>
                 
                     <nav>
@@ -348,7 +348,7 @@
                 <div id="menu_bar">
                 <ul>
                     <li>
-                        <a href="qna.jsp">
+                        <a href="/okky/board/qna/qna.do">
                             <div>
                                 Q&A
                             </div>
@@ -356,7 +356,7 @@
                     </li>
 
                     <li>
-                        <a href="community.jsp">
+                        <a href="/okky/board/community/community.do">
                             <div>
                                 커뮤니티
                             </div>
@@ -377,9 +377,13 @@
        
     </div>
     <div id="up">
-        <a href="#"><img src="img/up-arrow.png"></a> 
+        <a href="#"><img src="/okky/img/up-arrow.png"></a> 
     </div>
     <script>
+    
+    document.querySelector("#btn_regist").addEventListener("click", function(e) {
+    	location.href = "writeQna.do";
+    }, false);
 
         const sideMenu = document.querySelector("#side_menu");
         let scrollPosition = document.documentElement.scrollTop || 0;

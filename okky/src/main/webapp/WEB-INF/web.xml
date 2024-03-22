@@ -15,15 +15,15 @@
   </context-param>
   <context-param>
     <param-name>URL</param-name>
-    <param-value>jdbc:mariadb://10.41.0.78:3306/okky</param-value>
+    <param-value>jdbc:mariadb://10.41.0.70:3306/okky</param-value>
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
-    <param-value>okky</param-value>
+    <param-value>root</param-value>
   </context-param>
   <context-param>
     <param-name>dbPwd</param-name>
-    <param-value>cjswo2</param-value>
+    <param-value>1234</param-value>
   </context-param>
   <servlet>
     <servlet-name>MemberController</servlet-name>
@@ -48,8 +48,8 @@
   <servlet-mapping>
     <servlet-name>QnaController</servlet-name>
     <url-pattern>/board/qna/qna.do</url-pattern>
-   </servlet-mapping>
-   <servlet>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>MypageController</servlet-name>
     <servlet-class>controller.member.MypageController</servlet-class>
   </servlet>
@@ -82,5 +82,53 @@
   <servlet-mapping>
     <servlet-name>ModifyQnaController</servlet-name>
     <url-pattern>/board/qna/modifyQnA.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>communityController</servlet-name>
+    <servlet-class>controller.board.community.communityController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>communityController</servlet-name>
+    <url-pattern>/board/community/community.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewCommunityController</servlet-name>
+    <servlet-class>controller.board.community.ViewCommunityController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewCommunityController</servlet-name>
+    <url-pattern>/board/community/viewCommunity.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyCommunityController</servlet-name>
+    <servlet-class>controller.board.qna.ModifyCommunityController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyCommunityController</servlet-name>
+    <url-pattern>/board/community/modifyCommunity.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MainController</servlet-name>
+    <servlet-class>controller.MainController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MainController</servlet-name>
+    <url-pattern>/main.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteQnaController</servlet-name>
+    <servlet-class>controller.board.qna.DeleteQnaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteQnaController</servlet-name>
+    <url-pattern>/board/qna/deleteQna.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WriteQnaController</servlet-name>
+    <servlet-class>controller.board.qna.WriteQnaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteQnaController</servlet-name>
+    <url-pattern>/board/qna/writeQna.do</url-pattern>
   </servlet-mapping>
 </web-app>

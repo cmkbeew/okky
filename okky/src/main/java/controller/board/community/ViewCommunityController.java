@@ -1,4 +1,4 @@
-package controller.board.qna;
+package controller.board.community;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,25 +11,25 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import board.QnADAO;
-import board.QnADTO;
+import board.CommunityDAO;
+import board.CommunityDTO;
 
 /**
  * Servlet implementation class ViewQnaController
  */
-public class ViewQnaController extends HttpServlet {
+public class ViewCommunityController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int qnaIdx = Integer.parseInt(request.getParameter("qnaIdx"));
-		System.out.println(qnaIdx);
-		QnADTO qnaView = new QnADTO();
+		int communityIdx = Integer.parseInt(request.getParameter("communityIdx"));
+		System.out.println(communityIdx);
+		CommunityDTO qnaView = new CommunityDTO();
 
 
-		if (qnaIdx > 0) {
-			QnADAO dao = new QnADAO();
-			qnaView = dao.qnaView(qnaIdx);
+		if (communityIdx > 0) {
+			CommunityDAO dao = new CommunityDAO();
+			qnaView = dao.communityView(communityIdx);
 			dao.close(); //여기서 안닫으면 BbsDAO에서 커넥션 맺은 후 거기에 일일히 다 쳐서 닫아야해. if(rs != null) rs.close() 이런거
 		}  else {
 			PrintWriter writer = response.getWriter();
@@ -53,15 +53,13 @@ public class ViewQnaController extends HttpServlet {
 			regDate = (qnaView.getRegDate() != null ? qnaView.getRegDate().toString() : "");
 			title = qnaView.getTitle();
 			content = qnaView.getContent();
-			pageLike = qnaView.getPageLike();
-			pageDislike = qnaView.getPageDislike();
 			content = (content != null ? content.replace("\r\n", "<br>") : "");
 			content = (content != null ? content.replace(" ", "&nbsp;") : "");
 		}
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		
-		params.put("qnaIdx", qnaIdx);
+		params.put("communityIdx", communityIdx);
 		params.put("readCnt", readCnt);
 		params.put("nickName", nickName);
 		params.put("regDate", regDate);
@@ -73,7 +71,7 @@ public class ViewQnaController extends HttpServlet {
 		
 		request.setAttribute("params", params);
 		
-		request.getRequestDispatcher("/board/qna/viewQnA.jsp").forward(request,  response);
+		request.getRequestDispatcher("/board/community/viewCommunity.jsp").forward(request,  response);
 	}
 
 	

@@ -47,7 +47,7 @@
             color: #374751;
             font-size: 0.89em;
         }
-        #contents {
+        #content {
             width: 820px;
             resize: none;
             border: 1px solid lightgray;
@@ -72,6 +72,7 @@
             background-color: #fff;
             height: 40px;
             width: 80px;
+            cursor: pointer;
         }
         #submitBtn {
             background-color: #0090f9;
@@ -101,7 +102,7 @@
             <div class="side">
 
             </div>
-            <form id="frm" method="post" action="modify.do">
+            <form id="frm" method="post" action="modifyQnA.do?qnaIdx=${params.qnaIdx }">
             <div id="main">
                 <div>
                     <h3>기술 궁금증 해결하기</h3>
@@ -115,9 +116,9 @@
                             <label for="category" class="" >토픽</label><br>
                             <select id="category" name="category" class="input_area">
                                 <option value="">토픽을 선택해주세요.</option>
-                                <option value="기술 == ${params.category } ? checked : '' }">기술</option>
-                                <option value="커리어== ${params.category } ? checked : '' }">커리어</option>
-                                <option value="기타== ${params.category } ? checked : '' }">기타</option>
+                                <option value="기술" <c:if test="${params.category eq '기술'}"> selected </c:if>>기술</option>
+                                <option value="커리어" <c:if test="${params.category eq '커리어'}"> selected </c:if>>커리어</option>
+                                <option value="기타" <c:if test="${params.category eq '기타'}"> selected </c:if>>기타</option> 
                             </select>
                             <div id="optionCheck" style="color: red; font-size: x-small; display: none;">토픽을 하나 이상 선택해 주세요.</div>
                         </div>
@@ -127,7 +128,7 @@
                             <div id="titleCheck" style="color: red; font-size: x-small; display: none;">제목은 50자 이하로 입력해 주세요.</div>
                         </div>
                         <br>
-                        <label for="tags">태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label>
+                        <label>태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label>
                         <div id="selectCon">
                     <div>
                         <select name="skill" id="skill_1st">
@@ -155,8 +156,8 @@
                     </div>
                 </div>
                         <div>
-                            <label for="contents">본문</label><br>
-                            <textarea id="contents" name="contents" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요.">${params.content }</textarea>
+                            <label for="content">본문</label><br>
+                            <textarea id="content" name="content" cols="100" rows="20"placeholder="본문을 10자 이상 입력해 주세요.">${params.content }</textarea>
                             <div id="contentsCheck" style="color: red; font-size: x-small; display: none;">본문을 10자 이 입력하세요.</div>
                         </div>
                         <div >
@@ -245,6 +246,8 @@
             return true;
         });
 
+        
+        
         
 
 

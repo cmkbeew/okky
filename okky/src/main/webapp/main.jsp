@@ -179,9 +179,35 @@
                             <img src="https://okky.kr/questions.svg"/>			
                         </div>
                     </a>
+                    
+                    
+                    
                     <div>
                         <ul>
-                            <li>
+                      
+	                        <c:choose>
+	                    	<c:when test="${not empty qnaList}">
+	                    		<c:forEach var="list" items="${qnaList}" varStatus="loop">
+	                        		<li>
+                                	<div class="writer">
+                                    <div>${list.memberId }</div>
+                                    <div>·</div>
+                                    <div>${list.regDate }</div>
+                                </div>
+                                <div class="content_title">
+                                    <a href="#">${list.content }</a>
+                                </div>
+                            </li>
+                            </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                            	 <p>
+				                       등록된 게시물이 없습니다.
+				                 </p>
+                            </c:otherwise>
+	                    	</c:choose>
+	                    
+                            <!-- <li>
                                 <div class="writer">
                                     <div>작성자</div>
                                     <div>·</div>
@@ -234,7 +260,7 @@
                                 <div class="content_title">
                                     <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -247,7 +273,29 @@
                     </a>
                     <div>
                         <ul>
-                            <li>
+                        <c:choose>
+	                    	<c:when test="${not empty communityList}">
+	                    		<c:forEach var="list" items="${communityList}" varStatus="loop">
+	                        		<li>
+                                	<div class="writer">
+                                    <div>${list.memberId }</div>
+                                    <div>·</div>
+                                    <div>${list.regDate }</div>
+                                </div>
+                                <div class="content_title">
+                                    <a href="#">${list.content }</a>
+                                </div>
+                            </li>
+                            </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                            	 <p>
+				                       등록된 게시물이 없습니다.
+				                 </p>
+                            </c:otherwise>
+	                    	</c:choose>
+                        
+                            <!-- <li>
                                 <div class="writer">
                                     <div>작성자</div>
                                     <div>·</div>
@@ -300,7 +348,7 @@
                                 <div class="content_title">
                                     <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -443,7 +491,7 @@
                     <div id="menu_bar">
                     <ul>
                     <li>
-                        <a href="qna.jsp">
+                        <a href="/okky/board/qna/qna.do">
                             <div>
                                 Q&A
                             </div>
@@ -451,7 +499,7 @@
                     </li>
 
                     <li>
-                        <a href="community.jsp">
+                        <a href="/okky/board/community/community.do">
                             <div>
                                 커뮤니티
                             </div>
@@ -459,7 +507,7 @@
                     </li>
 
                     <li>
-                        <a href="/jobs/jobMain.jsp">
+                        <a href="/okky//jobs/jobMain.jsp">
                             <div>
                                 구인구직
                             </div>
