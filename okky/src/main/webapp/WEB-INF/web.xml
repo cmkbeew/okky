@@ -98,7 +98,7 @@
   <servlet-mapping>
     <servlet-name>ContractListController</servlet-name>
     <url-pattern>/jobs/contract.do</url-pattern>
-   </servlet-mapping>
+  </servlet-mapping>
   <servlet>
     <servlet-name>MainController</servlet-name>
     <servlet-class>controller.MainController</servlet-class>
@@ -186,5 +186,45 @@
   <servlet-mapping>
     <servlet-name>JobDetailController</servlet-name>
     <url-pattern>/jobs/jobDetail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CommunityController</servlet-name>
+    <servlet-class>controller.board.commu.CommunityController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommunityController</servlet-name>
+    <url-pattern>/board/commu/commu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteCommController</servlet-name>
+    <servlet-class>controller.board.commu.DeleteCommController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCommController</servlet-name>
+    <url-pattern>/board/commu/deleteCommu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyCommuController</servlet-name>
+    <servlet-class>controller.board.commu.ModifyCommuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyCommuController</servlet-name>
+    <url-pattern>/board/commu/modifyCommu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewCommuController</servlet-name>
+    <servlet-class>controller.board.commu.ViewCommuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewCommuController</servlet-name>
+    <url-pattern>/board/commu/viewCommu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WriteCommuController</servlet-name>
+    <servlet-class>controller.board.commu.WriteCommuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteCommuController</servlet-name>
+    <url-pattern>/board/commu/writeCommu.do</url-pattern>
   </servlet-mapping>
 </web-app>

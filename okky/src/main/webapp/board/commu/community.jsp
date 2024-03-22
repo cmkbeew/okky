@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Community 게시판</title>
 <style>
         /* * {
             margin :0;
@@ -234,32 +234,32 @@
             </div>
             <div class="nav">
                 <div>
-                    <a href="writeCommunity.jsp">
-                        <button style="width: 100px; background-color: #0090f9; border-radius: 5px; color: #fff; height: 36px;">
+                   
+                        <button id="btn_regist" name="btn_regist" style="width: 100px; background-color: #0090f9; border-radius: 5px; color: #fff; height: 36px;">
                             <img src="/okky/img/pencil.png" style="height: 20px;">
                             작성하기
                         </button>
-                    </a>
+                   
                 </div>
                 
                     <nav>
-                        <button>일상</button>
-                        <button>공부</button>
-                        <button>공지사항</button>
+                    	<button id="category_1" name="category_1" value="일상" <c:if test="${params.category_1 eq 'category_1'}"> style="color:#0090f8;" </c:if>  >일상</button>
+                        <button  id="category_2" name="category_2" value="공부" <c:if test="${params.category_2 eq 'category_2'}"> style="color:#0090f8;" </c:if> >공부</button>
+                        <button id="category_3" name="category_3" value="공지사항" <c:if test="${params.category_3 eq 'category_3'}"> style="color:#0090f8;" </c:if>>공지사항</button>
                     </nav>
                 <div style="visibility: hidden;"></div>
                 
 
             </div>
             <div style="margin-top: 20px;"><hr></div>
-            <form>
+           <form name="frmSearch" id="frmSearch" method="get"> 
             <div class="search">
                 <div>
                     <div class="orderBy">
                         <select name="search_category" id="search_category" style="margin-left: 60px; margin-top: 22px; height: 30px; width: 100px;">
-                            <option value="" selected>전체</option>
-                            <option value="view" >조회순</option>
-                            <option value="recent" >최신순</option>
+                            <option value="" selected>선택</option>
+                            <option value="readCnt" <c:if test="${params.search_category eq 'readCnt'}"> selected </c:if> >조회순</option>
+                            <option value="communityIdx"<c:if test="${params.search_category eq 'communityIdx'}"> selected </c:if> >최신순</option>
                         </select>
                     </div>
                 </div>
@@ -292,12 +292,14 @@
 				                            <div>${list.memberId}</div>
 				                            <div>·</div>
 				                            <div>${list.regDate}</div>
+				                            <div>·</div>
+				                            <div>${list.readCnt} read</div>
 				                        </div>
 				                        <div class="content_title">
-				                            <a href="viewCommunity.do?communityIdx=${list.communityIdx}">
+				                            <a href="viewCommu.do?communityIdx=${list.communityIdx}">
 				                                <strong>${list.title}</strong>
 				                                <p>
-				                                    ${list.content}
+				                                    ${list.content.substring(0,10).concat(" ...")}
 				                                </p>
 				                                ${list.tags }
 				                            </a>
@@ -356,7 +358,7 @@
                     </li>
 
                     <li>
-                        <a href="/okky/board/community/community.do">
+                        <a href="/okky/board/commu/commu.do">
                             <div>
                                 커뮤니티
                             </div>
@@ -380,6 +382,62 @@
         <a href="#"><img src="/okky/img/up-arrow.png"></a> 
     </div>
     <script>
+
+    document.querySelector("#btn_regist").addEventListener("click", function(e) {
+    	let id_ck = "${(sessionScope.memberId != null)? sessionScope.memberId : 0}";
+    	
+		 if (id_ck == "0") { 
+				alert("로그인 후 접근이 가능합니다.");
+				window.location.href = "/okky/member/login.do";
+		 } else {
+			 window.location.href = "writeCommu.do";
+		 }
+				
+    }, false);
+    
+    document.querySelector("#btn_search").addEventListener("click", function(e) {
+
+    	e.preventDefault();
+    	e.stopPropagation();
+    	
+    	const search_category = document.querySelector("#search_category");
+    	if (search_category.value.length < 1 || search_category.value == "" || search_category.value == null) {
+    		alert("검색 구분을 선택하세요");
+    		search_category.focus();
+    		return false;
+    	}
+    	
+    	const search_word = document.querySelector("#search_word");
+    	if (search_word.value.length < 1 || search_word.value == "" || search_word.value == null) {
+    		alert("검색어 입력하세요");
+    		search_word.focus();
+    		return false;
+    	}
+    	
+    	const frm = document.querySelector("#frmSearch");
+    	frm.submit();
+    	
+    	return;
+
+    }, false);
+    
+    
+    document.querySelector("#category_1").addEventListener("click", function(e) {
+    	window.location.href = "commu.do?category_1=category_1";
+				
+    }, false);
+    
+    document.querySelector("#category_2").addEventListener("click", function(e) {
+    	window.location.href = "commu.do?category_2=category_2";
+				
+    }, false);
+    
+    document.querySelector("#category_3").addEventListener("click", function(e) {
+    	window.location.href = "commu.do?category_3=category_3";
+				
+    }, false);
+    
+    
 
         const sideMenu = document.querySelector("#side_menu");
         let scrollPosition = document.documentElement.scrollTop || 0;

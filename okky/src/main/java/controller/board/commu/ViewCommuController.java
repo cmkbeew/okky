@@ -1,42 +1,42 @@
-package controller.board.qna;
+package controller.board.commu;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import board.QnADAO;
-import board.QnADTO;
+import board.CommunityDAO;
+import board.CommunityDTO;
+
 
 /**
- * Servlet implementation class ViewQnaController
+ * Servlet implementation class ViewCommuController
  */
-public class ViewQnaController extends HttpServlet {
+public class ViewCommuController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int qnaIdx = Integer.parseInt(request.getParameter("qnaIdx"));
+		int communityIdx = Integer.parseInt(request.getParameter("communityIdx"));
 //		
 //		int pageLikeCnt = request.getParameter("pageLikeCnt") != null ? Integer.parseInt(request.getParameter("pageLikeCnt")) : 0;
 //		int pageDislikeCnt = request.getParameter("pageDislikeCnt") != null ? Integer.parseInt(request.getParameter("pageDislikeCnt")) : 0;
 		
 		
-		QnADTO qnaView = new QnADTO();
+		CommunityDTO communityView = new CommunityDTO();
 
 
 		
-		if (qnaIdx > 0) {
-			QnADAO dao = new QnADAO();
-			qnaView = dao.qnaView(qnaIdx);
+		if (communityIdx > 0) {
+			CommunityDAO dao = new CommunityDAO();
+			communityView = dao.communityView(communityIdx);
 //			dao.updatePageLike(qnaIdx);
-			dao.updateReadCnt(qnaIdx);
+			dao.updateReadCnt(communityIdx); 
 			dao.close(); //여기서 안닫으면 BbsDAO에서 커넥션 맺은 후 거기에 일일히 다 쳐서 닫아야해. if(rs != null) rs.close() 이런거
 			
 		}  else {
@@ -58,25 +58,25 @@ public class ViewQnaController extends HttpServlet {
 		String category = "";
 		String memberId = "";
 		
-		if (qnaView != null) {
-			memberId = qnaView.getMemberId();
-			memberIdx = qnaView.getMemberIdx();
-			readCnt = qnaView.getReadCnt();
-			nickName = qnaView.getNickName();
-			regDate = (qnaView.getRegDate() != null ? qnaView.getRegDate().toString() : "");
-			title = qnaView.getTitle();
-			content = qnaView.getContent();
-			pageLike = qnaView.getPageLike();
-			pageDislike = qnaView.getPageDislike();
+		if (communityView != null) {
+			memberId = communityView.getMemberId();
+			memberIdx = communityView.getMemberIdx();
+			readCnt = communityView.getReadCnt();
+			nickName = communityView.getNickName();
+			regDate = (communityView.getRegDate() != null ? communityView.getRegDate().toString() : "");
+			title = communityView.getTitle();
+			content = communityView.getContent();
+			pageLike = communityView.getPageLike();
+			pageDislike = communityView.getPageDislike();
 			content = (content != null ? content.replace("<br>", "\r\n") : "");
 			content = (content != null ? content.replace("&nbsp;", " ") : "");
-			category = qnaView.getCategory();
+			category = communityView.getCategory();
 		}
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("memberId", memberId);
 		params.put("memberIdx", memberIdx);
-		params.put("qnaIdx", qnaIdx);
+		params.put("communityIdx", communityIdx);
 		params.put("readCnt", readCnt);
 		params.put("nickName", nickName);
 		params.put("regDate", regDate);
@@ -90,9 +90,8 @@ public class ViewQnaController extends HttpServlet {
 		
 		request.setAttribute("params", params);
 		
-		request.getRequestDispatcher("/board/qna/viewQnA.jsp").forward(request,  response);
+		request.getRequestDispatcher("/board/commu/viewCommunity.jsp").forward(request,  response);
 	}
-	
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

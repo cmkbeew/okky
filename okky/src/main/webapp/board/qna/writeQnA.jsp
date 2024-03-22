@@ -144,7 +144,7 @@ if (session.getAttribute("memberId") == null) {
                             <div id="tagCheck" style="color: red; font-size: x-small; display: none;">태그는 3개 이상 입력할 수 없습니다.</div>
                         </div> -->
                         <br>
-                        <label>태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label>
+                        <label>태그 - <span class="small_blue">내용을 대표하는 태그를 선택해 주세요.</span></label>
                         <div id="selectCon">
                     <div>
                         <select name="skill" id="skill_1st">

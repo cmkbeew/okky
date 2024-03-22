@@ -64,7 +64,7 @@ public class CommunityDAO extends ConnectPool {
 				CommunityDTO dto = new CommunityDTO();
 				dto.setCommunityIdx(rs.getInt("c.communityIdx"));
 				dto.setTitle(rs.getString("c.title"));
-				dto.setContent(rs.getString("c.content").substring(0,1).concat(" ..."));
+				dto.setContent(rs.getString("c.content").substring(0,10).concat(" ..."));
 				dto.setRegDate(rs.getDate("c.regDate"));
 				dto.setModifyDate(rs.getDate("c.modifyDate"));
 				dto.setTags(rs.getString("c.tags"));
@@ -97,11 +97,25 @@ public class CommunityDAO extends ConnectPool {
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
 		
-		if (map.get("search_category") != null && map.get("search_word") != null) {
-			sb.append(" WHERE " + map.get("search_category"));
-			sb.append(" LIKE '%" + map.get("search_word") + "%'");
+		if (map.get("category_1") != null) {
+			sb.append(" WHERE category LIKE '일상'");
 		}
-		sb.append(" ORDER BY c.communityIdx DESC");
+		if (map.get("category_2") != null) {
+			sb.append(" WHERE category LIKE '공부'");
+		}
+		if (map.get("category_3") != null) {
+			sb.append(" WHERE category LIKE '공지사항'");
+		}
+		if (map.get("search_category") != null && map.get("search_word") != null) {
+			sb.append(" WHERE c.title");
+			sb.append(" LIKE '%" + map.get("search_word") + "%'");
+			sb.append(" ORDER BY " + map.get("search_category") + " DESC");
+		}
+		if (map.get("search_category") == null && map.get("search_word") == null) {
+			sb.append(" ORDER BY communityIdx DESC");
+		}	
+		
+//		sb.append(" ORDER BY communityIdx DESC");
 		if (map.get("page_skip_cnt") != null && map.get("page_size") != null) {
 			sb.append(" LIMIT " + map.get("page_skip_cnt") + ", " + map.get("page_size")); // ?로 쓰는게 더 좋아
 		}
@@ -142,7 +156,7 @@ public class CommunityDAO extends ConnectPool {
 		CommunityDTO dto = new CommunityDTO();
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, m.memberIdx");
+		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
 		sb.append(", c.modifyDate, c.tags, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt, m.nickName");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
@@ -164,12 +178,12 @@ public class CommunityDAO extends ConnectPool {
 				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
 				dto.setCategory(rs.getString("c.category"));
 				dto.setReadCnt(rs.getInt("c.readCnt"));
-				dto.setMemberIdx(rs.getInt("m.memberIdx"));
+				dto.setMemberIdx(rs.getInt("c.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
 				dto.setNickName(rs.getString("m.nickName"));
 			}
 		} catch (Exception e) {
-			System.out.println("QnA 게시판 데이터 조회 오류!");
+			System.out.println("Community 게시판 데이터 조회 오류!");
 			e.printStackTrace();
 		}
 		
@@ -181,12 +195,13 @@ public class CommunityDAO extends ConnectPool {
 		int result = 0;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("INSERT INTO community (title, content, category) VALUES(?, ?, ?)");
+		sb.append("INSERT INTO community (title, content, category, memberIdx) VALUES(?, ?, ?, ?)");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getCategory());
+			psmt.setInt(4, dto.getMemberIdx());
 			
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
@@ -222,13 +237,14 @@ public class CommunityDAO extends ConnectPool {
 		int result = 0;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE community SET title = ?, content = ?, modify_date = now()");
-		sb.append(" WHERE idx = ?");
+		sb.append("UPDATE community SET title = ?, content = ?, category = ?, modifyDate = now()");
+		sb.append(" WHERE communityIdx = ?");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
-			psmt.setInt(3, dto.getCommunityIdx());
+			psmt.setString(3, dto.getCategory());
+			psmt.setInt(4, dto.getCommunityIdx());
 			
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
@@ -238,4 +254,65 @@ public class CommunityDAO extends ConnectPool {
 		
 		return result;
 	}
+	
+	
+	public void updateReadCnt(int communityIdx) {
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("UPDATE community SET");
+		sb.append(" readCnt = readCnt + 1");
+		sb.append(" WHERE communityIdx = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, communityIdx);
+			psmt.executeQuery();
+			
+		} catch (Exception e) {
+			System.out.println("조회 갯수 증가 오류!");
+			e.printStackTrace();
+		}
+	}
+	
+	public void updatePageLike(int communityIdx) {
+	
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("UPDATE community SET");
+		sb.append(" pageLike = pageLike + 1");
+		sb.append(" WHERE communityIdx = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, communityIdx);
+			psmt.executeQuery();
+			
+		} catch (Exception e) {
+			System.out.println("좋아요 갯수 증가 오류!");
+			e.printStackTrace();
+		}
+	}
+	
+	public void updatePageDislike(int communityIdx) {
+	
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("UPDATE community SET");
+		sb.append(" pageDislike = pageDislike + 1");
+		sb.append(" WHERE communityIdx = ?");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, communityIdx);
+			psmt.executeQuery();
+			
+		} catch (Exception e) {
+			System.out.println("싫어요 갯수 증가 오류!");
+			e.printStackTrace();
+		}
+	}
+	
+	
 }
