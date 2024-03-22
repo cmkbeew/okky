@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import member.MemberDAO;
 import member.MemberDTO;
 
@@ -14,7 +15,9 @@ public class CopageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String memberId = req.getParameter("memberId");
+		HttpSession session = req.getSession();
+		String memberId = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
+		String name = session.getAttribute("name") == null ? "" : session.getAttribute("name").toString();
 		String managerName = req.getParameter("managerName");
 		String companyName = req.getParameter("companyName");
 		String companyNo = req.getParameter("companyNo");
@@ -22,7 +25,7 @@ public class CopageController extends HttpServlet {
 		String type = req.getParameter("type");
 		
 		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = dao.getMemberInfo(companyNo, managerPhone);
+		MemberDTO dto = dao.getCompanyInfo(memberId, name);
 		
 		dao.close();
 		
@@ -40,11 +43,26 @@ public class CopageController extends HttpServlet {
 		req.setAttribute("managerPhone", managerPhone);
 		req.setAttribute("type", type);
 		
-		req.getRequestDispatcher("./mypage.jsp").forward(req, resp);
+		req.getRequestDispatcher("./mypage_co.jsp").forward(req, resp);
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+		HttpSession session = req.getSession();
+		String managerName = req.getParameter("managerName");
+		String managerPhone = req.getParameter("managerPhone");
+		String memberId = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
+		MemberDTO dto = new MemberDTO();
+		dto.setManagerName(managerName);
+		dto.setManagerPhone(managerPhone);
+		dto.setMemberId(memberId);
+		MemberDAO dao = new MemberDAO();
+		int result = dao.modifyCompany(dto);
+		if(result > 0) {
+			resp.sendRedirect("./mypage_co.do");
+		} else {
+			req.getRequestDispatcher("./mypage_co.jsp").forward(req, resp);
+		}
+		
 	}
 
 }

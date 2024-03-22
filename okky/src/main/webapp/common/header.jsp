@@ -162,7 +162,7 @@
 <body>
 <%
 String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
-/* int type = session.get */
+int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.getAttribute("type").toString());
 %>
     <header>
         <nav class="navi"> 
@@ -192,7 +192,8 @@ String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribu
     </header>
     <hr>
     <script>
-    	<%if (FLAG == null || FLAG == "") {%>
+    	<%System.out.println(type);
+    	if (FLAG == null || FLAG == "") {%>
 	        document.querySelector("#loginBtn").addEventListener("click", function(e){
 	            window.location.href = "/okky/member/login.do";
 	        });
@@ -203,12 +204,18 @@ String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribu
         <%} else{%>
         document.querySelector("#logoutBtn").addEventListener("click", function(e){
             window.location.href = "/okky/member/main.do";
-        });
-        <%-- <% if(%> --%>
-        document.querySelector("#myPageBtn").addEventListener("click", function(e){
-            window.location.href = "/okky/member/mypage.do";
-        });
-        <%}%>
+        	});
+	        <% if( type == 1 ){%>
+	        document.querySelector("#myPageBtn").addEventListener("click", function(e){
+	            window.location.href = "/okky/member/mypage.do";
+	        });
+	        <%} else if( type == 2 ){%>
+	        document.querySelector("#myPageBtn").addEventListener("click", function(e){
+	            window.location.href = "/okky/member/mypage_co.do";
+	        });
+        
+        <%} 
+        }%>
         const toggleBtn = document.querySelector("input[type='checkbox']");
         toggleBtn.value = "off";
         document.querySelector("input[type='checkbox']").addEventListener("click", function(e){

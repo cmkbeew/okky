@@ -16,14 +16,18 @@ public class MypageController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String memberId = req.getParameter("memberId");
+		String pwd = req.getParameter("pwd");
 		String name = req.getParameter("name");
 		String nickname = req.getParameter("nickname");
 		
 		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = dao.getMemberInfo(name, nickname);
+		MemberDTO dto = dao.getMemberInfo(memberId, pwd);
 		
 		dao.close();
 		
+		memberId = dto.getMemberId();
+		pwd = dto.getPwd();
 		name = dto.getName();
 		nickname = dto.getNickname();
 			
@@ -33,7 +37,8 @@ public class MypageController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+		//doGet(req, resp);
+		
 		
 		
 	}

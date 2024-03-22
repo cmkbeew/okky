@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -69,6 +70,15 @@
             float: left;
         }
         #pwdForm input[type=text], #pwdForm input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            float: left;
+            border: 1px solid #8e8e8e;
+            border-radius: 4px;
+        }
+        #emailForm input[type=text], #pwdForm input[type=password] {
             width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
@@ -229,49 +239,77 @@
     
 </head>
 <body>
+<%
+int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.getAttribute("type").toString());
+%>
     <jsp:include page="/common/header.jsp" />
     <div id="container">
     <aside id="sidebar">
         <div>
             <ul>
                 <li><h3>내 계정</h3></li>
-                <a href="mypage.jsp"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
-                <a href="account.jsp"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
+                <c:choose>
+	            	<c:when test="${type == 1 }" >
+                		<a href="mypage.jsp"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
+                	</c:when>
+                <c:otherwise>
+                	<a href="mypage_co.do"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
+            		</c:otherwise>
+                </c:choose>
+                <c:choose>
+	            	<c:when test="${type == 1 }" >
+                		<a href="account.jsp"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
+                	</c:when>
+                <c:otherwise>
+                	<a href="account.jsp"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
+            		</c:otherwise>
+                </c:choose>
+                
             </ul>
             <hr>
             <ul>
-                <li><h3>JOBS</h3></li>
-                <a href="jobdetail.jsp"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
+            	<c:choose>
+	            	<c:when test="${type == 1 }" >
+		                <li><h3>JOBS</h3></li>
+                		<a href="jobdetail.jsp"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
+	                </c:when>
+	                <c:otherwise>
+	                	<li><h3>JOBS</h3></li>
+                		<a href="jobdetail_co.jsp"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
+	                </c:otherwise>
+                </c:choose>
+                
             </ul>
         </div>
     </aside>
     <div id="outer">
         <div id="innerContainer1">
-            <form action="" name="pwdForm" id="pwdForm">
-                <div class="label"><label for="pwd">현재 비밀번호</label></div>
-                <div><input type="password" name="pwd" id="pwd" value=""></div>
+        <h3>비밀번호 변경</h3>
+            <form name="pwdForm" id="pwdForm" action="changepwd.do" method="post">
+                <div class="label"><label for="pwd" >현재 비밀번호</label></div>
+                <div><input type="password" name="pwd" id="pwd" value="" placeholder="현재 사용중인 비밀번호를 입력해주세요"></div>
                 <div class="label"><label for="newPwd">신규 비밀번호</label></div>
-                <div><input type="password" name="newPwd" id="newPwd" value=""></div>
+                <div><input type="password" name="newPwd" id="newPwd" value="" placeholder="영문+숫자+특수문자 포함 6~20자 이내로 입력해주세요"></div>
                 <div class="label"><label for="newPwdCk">비밀번호 확인</label></div>
-                <div><input type="password" name="newPwdCk" id="newPwdCk" value=""></div>
+                <div><input type="password" name="newPwdCk" id="newPwdCk" value="" placeholder="새로운 비밀번호를 다시 한번 입력해주세요"></div>
                 <div id="errPwd" style="display: none;"></div>
                 <div class="saveBtnArea">
-                    <input type="submit" id="changeBtn" name="changeBtn" value="비밀번호 변경" disabled>
+                    <input type="submit" id="changeBtn" name="changeBtn" value="비밀번호 변경">
                 </div>
             </form>
         </div>
         <div id="innerContainer2">
-            <form action="" name="pwdForm" id="pwdForm">
+            <form name="emailForm" id="emailForm" action="changeEmail.do" method="post">
                 <div class="label"><label for="emailInfo">이메일 정보</label></div>
-                <div id="emailCkBox"><input type="text" name="email" id="email" value="">
+                <div id="emailCkBox"><input type="text" name="email" id="email" value="${email}">
                 <button id="checkBtn" disabled>중복 확인</button></div>
                 <div class="saveBtnArea">
-                    <input type="submit" id="saveBtn" name="saveBtn" value="저장" disabled>
+                    <input type="submit" id="saveBtn" name="saveBtn" value="저장" >
                 </div>
             </form>
         </div>
         <div id="innerContainer3">
-            <form action="" name="pwdForm" id="pwdForm">
+            <form name="deleteForm" id="deleteForm" action="delete.do" method="post">
                 <div class="label"><label for="accountDel">계정 삭제</label></div>
                 <div id="delText">
                     <p>회원 탈퇴일로부터 계정과 닉네임을 포함한 계정 정보(아이디/이메일/닉네임)는
@@ -280,25 +318,44 @@
                                                
                         작성된 게시물은 삭제되지 않으며, 익명처리 후 OKKY 로 소유권이 귀속됩니다.</p>
                 </div>
-                <div><input type="checkbox" id="accountDel" value=false>계정 삭제에 관한 정책을 읽고 이에 동의합니다.</div>
+                <div><input type="checkbox" id="accountCkbox" name="accountCkbox" value="Y">계정 삭제에 관한 정책을 읽고 이에 동의합니다.</div>
                 <div class="saveBtnArea">
-                    <input type="submit" id="outBtn" name="outBtn" value="탈퇴" disabled>
+                    <input type="submit" id="outBtn" name="outBtn" value="탈퇴" >
                 </div>
             </form>
         </div>
     </div>
 </div>
 <script>
-let check = document.getElementById("accountDel"); 
-console.log(check.value);
+let check = document.getElementById("accountCkbox");
 check.addEventListener("click", function(e){
-    if(check.value == 'true'){
+    if(check.value == null){
         document.querySelector("#outBtn").disabled = true;
-        check.value = false;
+        check.value = "N";
+        console.log(check.value);
     }else {
         document.querySelector("#outBtn").disabled = false;
-        check.value = true;
+        check.value = "Y";
+        console.log(check.value);
     }
+});
+let pwd1 = document.getElementById("pwd");
+let pwd2 = document.getElementById("newPwd");
+let pwd2Ck = document.getElementById("newPwdCk");
+
+pwd2Ck.addEventListener("change",function(e){
+	if (pwd1.value.length > 0 && pwd2.value.length > 0 && pwd2Ck.value.length >0){
+		document.getElementById("changeBtn").disabled = false;
+	}
+});
+document.getElementById("changeBtn").addEventListener("click",function(e){ 
+	alert("비밀변호 변경이 완료되었습니다.");
+});
+	
+document.getElementById("email").addEventListener("change",function(e){
+	if(document.getElementById("email").value.length > 0){
+		document.getElementById("saveBtn").disabled = false;
+	}
 });
 </script>
 </body>

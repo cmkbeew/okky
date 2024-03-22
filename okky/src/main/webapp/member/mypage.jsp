@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -166,7 +167,7 @@
             <ul>
                 <li><h3>내 계정</h3></li>
                 <a href="mypage.jsp"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
-                <a href="account.jsp"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
+                <a href="account.do"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
             </ul>
             <hr>
             <ul>
@@ -194,6 +195,9 @@
                     <div>
                         <select name="skill" id="skill_1st">
                             <option value="">선택 1</option>
+                           <%--  <c:forEach>
+                            
+                            </c:forEach> --%>
                             <option value="skill1">스킬1</option>
                             <option value="skill2">스킬2</option>
                             <option value="skill3">스킬3</option>

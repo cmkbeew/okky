@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>회사 마이페이지</title>
+    <title>회사 페이지</title>
     <style>
         * {
             margin :0;
@@ -44,7 +44,7 @@
             line-height: 60px;
             padding: 5px 10px;
         }
-        #sidebar a[href *= "profile"] > li  {
+        #sidebar a[href *= "mypage"] > li  {
             background-color: #d2d2d2;
             transition: 0.3s;
             opacity: 0.8;
@@ -164,14 +164,18 @@
     
 </head>
 <body>
+<%
+String name = request.getAttribute("managerName") == null ? "": request.getAttribute("managerName").toString();
+int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.getAttribute("type").toString());
+%>
     <jsp:include page="/common/header.jsp" />
     <div id="container">
     <aside id="sidebar">
         <div>
             <ul>
                 <li><h3>내 계정</h3></li>
-                <a href="profile.jsp"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
-                <a href="account.jsp"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
+                <a href="mypage_co.do"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
+                <a href="account.do"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
             </ul>
             <hr>
             <ul>
@@ -184,15 +188,15 @@
     <div id="outer">
         <div id="innerContainer">
             <h3>회원 정보</h3>
-            <form action="" name="infoForm" id="infoForm">
+            <form action="mypage_co.do" name="infoForm" id="infoForm" method="post">
                 <div class="label"><label for="managerName">담당자명</label></div>
-                <div><input type="text" name="managerName" id="managerName" value=""></div>
+                <div><input type="text" name="managerName" id="managerName" value="${managerName }"></div>
                 <div class="label"><label for="companyName">회사명</label></div>
-                <div><input type="text" name="companyName" id="companyName" value="" readonly></div>
+                <div><input type="text" name="companyName" id="companyName" value="${companyName }" readonly></div>
                 <div class="label"><label for="companyNo">사업자 등록번호</label></div>
-                <div><input type="text" name="companyNo" id="companyNo" value="" readonly></div>
+                <div><input type="text" name="companyNo" id="companyNo" value="${companyNo}" readonly></div>
                 <div class="label"><label for="managerPhone">담당자 연락처</label></div>
-                <div><input type="text" name="managerPhone" id="managerPhone" value="" placeholder="-제외 번호만 입력해주세요"></div>
+                <div><input type="text" name="managerPhone" id="managerPhone" value="${managerPhone }" placeholder="-제외 번호만 입력해주세요"></div>
                 <div id="errPno" style="display: none;"></div>
                 <div class="saveBtnArea">
                     <input type="submit" id="saveBtn" name="saveBtn" value="저장" disabled>
