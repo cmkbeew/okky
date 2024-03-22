@@ -93,11 +93,16 @@ public class MemberDAO extends ConnectPool {
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				if(rs.getString("pwd").equals(pwd)) {
+					dto.setMemberIdx(rs.getInt("memberIdx"));
 					dto.setMemberId(rs.getString("memberId"));
 					dto.setPwd(rs.getString("pwd"));
 					dto.setName(rs.getString("name"));
 					dto.setNickname(rs.getString("nickname"));
 					dto.setType(rs.getString("type"));
+					dto.setCompanyName(rs.getString("companyName"));
+					dto.setCompanyNumber(rs.getString("companyNumber"));
+					dto.setManagerName(rs.getString("managerName"));
+					dto.setManagerPhone(rs.getString("managerPhone"));
 				}
 			}
 		} catch (Exception e) {

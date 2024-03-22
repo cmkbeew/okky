@@ -187,4 +187,30 @@
     <servlet-name>DeleteAccountController</servlet-name>
     <url-pattern>/member/delete.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>LogoutController</servlet-name>
+    <servlet-class>controller.member.LogoutController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutController</servlet-name>
+    <url-pattern>/member/logout.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RecruitController</display-name>
+    <servlet-name>RecruitController</servlet-name>
+    <servlet-class>controller.jobs.RecruitController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecruitController</servlet-name>
+    <url-pattern>/jobs/recruit.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>JobDetailController</servlet-name>
+    <servlet-class>controller.jobs.JobDetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobDetailController</servlet-name>
+    <url-pattern>/jobs/jobDetail.do</url-pattern>
+  </servlet-mapping>
 </web-app>

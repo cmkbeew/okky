@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +47,7 @@
             color: #374751;
             font-size: 0.89em;
         }
-        #contents {
+        #recruitContent {
             width: 820px;
             resize: none;
             border: 1px solid lightgray;
@@ -102,9 +103,19 @@
                 <div id="main">
                     <div>
                         <h3>회사 공고 등록</h3>
-                        <p>
-                            <strong>[회사 이름]</strong>의 정보를 입력하고 공고를 등록하세요.
-                        </p>
+	                        <p>
+	                            <c:if test="${ not empty sessionScope.companyName}">
+	                            	<strong>${sessionScope.companyName}의</strong>
+	                            </c:if>
+	                             정보를 입력하고 공고를 등록하세요.
+	                        </p>
+                        	
+                       		<c:if test="${not empty recruitErrMsg}">
+                       			<p style="color: red; font-size: 18px; display: none;">
+                       				${recruitErrMsg}
+                       			</p>
+                       		</c:if>
+                        	
                     </div>
                     <div>
                         <label for="companyName">회사명</label><br>
@@ -148,8 +159,8 @@
                         <div>
                             <select name="contractType" id="contractType">
                                 <option value="">계약 형태</option>
-                                <option value="fulltime">정규직</option>
-                                <option value="contract">계약직</option>
+                                <option value="정규직">정규직</option>
+                                <option value="계약직">계약직</option>
                             </select>
                             <div id="contractTypeCheck" style="color: red; font-size: x-small; display: none;">계약 형태를 선택해주세요.</div>
                         </div>

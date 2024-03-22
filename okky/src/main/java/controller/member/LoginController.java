@@ -31,11 +31,16 @@ public class LoginController extends HttpServlet {
 		
 		if(dto.getMemberId() != null) {
 			HttpSession session = req.getSession();
+			session.setAttribute("memberIdx", dto.getMemberIdx());
 			session.setAttribute("memberId", dto.getMemberId());
 			session.setAttribute("pwd", dto.getPwd());
 			session.setAttribute("name", dto.getName());
 			session.setAttribute("nickname", dto.getNickname());
 			session.setAttribute("type", dto.getType());
+			session.setAttribute("companyName", dto.getCompanyName());
+			session.setAttribute("companyNumber", dto.getCompanyNumber());
+			session.setAttribute("managerName", dto.getManagerName());
+			session.setAttribute("managerPhone", dto.getManagerPhone());
 			
 			resp.sendRedirect("../main.jsp");
 		} else {

@@ -7,8 +7,12 @@ public class JobDTO {
 	private String position;
 	private String contractType;
 	private String career;
-	private String resultContent;
-	private int memberId;
+	private int readCnt;
+	private String recruitContent;
+	private String regDate;
+	
+	private int memberIdx;
+	private String memberId;
 	private String companyName;
 	private String type;
 	
@@ -48,16 +52,34 @@ public class JobDTO {
 	public void setCareer(String career) {
 		this.career = career;
 	}
-	public String getResultContent() {
-		return resultContent;
+	public int getReadCnt() {
+		return readCnt;
 	}
-	public void setResultContent(String resultContent) {
-		this.resultContent = resultContent;
+	public void setReadCnt(int readCnt) {
+		this.readCnt = readCnt;
 	}
-	public int getMemberId() {
+	public String getRecruitContent() {
+		return recruitContent;
+	}
+	public void setRecruitContent(String recruitContent) {
+		this.recruitContent = recruitContent;
+	}
+	public String getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+	public int getMemberIdx() {
+		return memberIdx;
+	}
+	public void setMemberIdx(int memberIdx) {
+		this.memberIdx = memberIdx;
+	}
+	public String getMemberId() {
 		return memberId;
 	}
-	public void setMemberId(int memberId) {
+	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
 	public String getCompanyName() {
