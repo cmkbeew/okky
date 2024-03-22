@@ -19,11 +19,11 @@
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
-    <param-value>root</param-value>
+    <param-value>okky</param-value>
   </context-param>
   <context-param>
     <param-name>dbPwd</param-name>
-    <param-value>1234</param-value>
+    <param-value>cjswo2</param-value>
   </context-param>
   <servlet>
     <servlet-name>MemberController</servlet-name>
