@@ -147,4 +147,44 @@
     <servlet-name>WriteQnaController</servlet-name>
     <url-pattern>/board/qna/writeQna.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>PwdController</servlet-name>
+    <servlet-class>controller.member.PwdController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PwdController</servlet-name>
+    <url-pattern>/member/changepwd.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>JobdetailController</servlet-name>
+    <servlet-class>controller.member.JobdetailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobdetailController</servlet-name>
+    <url-pattern>/JobdetailController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MailController</servlet-name>
+    <servlet-class>controller.member.MailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MailController</servlet-name>
+    <url-pattern>/member/changeEmail.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AccountController</servlet-name>
+    <servlet-class>controller.member.AccountController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountController</servlet-name>
+    <url-pattern>/member/account.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteAccountController</servlet-name>
+    <servlet-class>controller.member.DeleteAccountController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteAccountController</servlet-name>
+    <url-pattern>/member/delete.do</url-pattern>
+  </servlet-mapping>
 </web-app>
