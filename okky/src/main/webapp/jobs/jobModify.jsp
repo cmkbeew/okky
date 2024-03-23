@@ -112,15 +112,16 @@
             <div class="side">
 
             </div>
-            <form id="frm" method="post" action="./jobRecruit.do">
+            <form id="frm" method="post" action="./jobModify.do">
+            	<input type="hidden" id="recruitIdx" name="recruitIdx" value="${jobView.recruitIdx}" />
                 <div id="main">
                     <div>
-                        <h3>회사 공고 등록</h3>
+                        <h3>회사 공고 수정</h3>
 	                        <p>
-	                            <c:if test="${ not empty sessionScope.companyName}">
-	                            	<strong>${sessionScope.companyName}의</strong>
+	                            <c:if test="${ not empty jobView.recruitTitle}">
+	                            	<strong>${jobView.recruitTitle}</strong>
 	                            </c:if>
-	                             정보를 입력하고 공고를 등록하세요.
+	                             의 제목을 가진 공고를 수정하세요.
 	                        </p>
                         	
                        		<c:if test="${not empty recruitErrMsg}">
@@ -132,83 +133,83 @@
                     </div>
                     <div>
                         <label for="recruitTitleLabel">공고 제목</label><br>
-                        <input type="text" id="recruitTitle" name="recruitTitle" placeholder="공고 제목을 입력해주세요." class="input_area" />
+                        <input type="text" id="recruitTitle" name="recruitTitle" placeholder="공고 제목을 입력해주세요." value="${jobView.recruitTitle}" class="input_area"  />
                         <div id="recruitTitleCheck" style="color: red; font-size: x-small; display: none;">공고 제목을 입력해주세요.</div>
                     </div>
                     <div>
                         <label for="companyName">회사명</label><br>
-                        <input type="text" id="companyName" name="companyName" value="${sessionScope.companyName}" class="input_area" readonly />
+                        <input type="text" id="companyName" name="companyName" value="${jobView.companyName}" class="input_area" readonly />
                         <div id="companyNameCheck" style="color: red; font-size: x-small; display: none;">회사명을 입력해주세요.</div>
                     </div>
                     <div>
                         <label for="managerName">담당자 이름</label><br>
-                        <input type="text" id="managerName" name="managerName" value="${sessionScope.managerName}" class="input_area" readonly />
+                        <input type="text" id="managerName" name="managerName" value="${jobView.managerName}" class="input_area" readonly />
                         <div id="managerNameCheck" style="color: red; font-size: x-small; display: none;">담당자 이름을 입력해주세요.</div>
                     </div>
                     <div>
                         <label for="managerPhone">담당자 연락처</label><br>
-                        <input type="text" id="managerPhone" name="managerPhone" value="${sessionScope.managerPhone}" class="input_area" readonly />
+                        <input type="text" id="managerPhone" name="managerPhone" value="${jobView.managerPhone}" class="input_area" readonly />
                         <div id="managerPhoneCheck" style="color: red; font-size: x-small; display: none;">담당자 연락처를 입력해주세요.</div>
                     </div>
                     <div>
                         <label for="companyAddr">회사 주소</label><br>
-                        <input type="text" id="companyAddr" name="companyAddr" value="${sessionScope.companyAddr}" class="input_area" readonly />
+                        <input type="text" id="companyAddr" name="companyAddr" value="${jobView.companyAddr}" class="input_area" readonly />
                         <div id="companyAddrCheck" style="color: red; font-size: x-small; display: none;">회사 주소를 입력해주세요.</div>
                     </div>
                     <div>
                         <label for="dueDateLabel">마감 기한</label><br>
-                        <input type="date" id="dueDate" name="dueDate" class="input_area" />
+                        <input type="date" id="dueDate" name="dueDate" class="input_area" value="${jobView.dueDate}"/>
                         <div id="dueDateCheck" style="color: red; font-size: x-small; display: none;">마감 기한을 입력해주세요.</div>
                     </div>
                     <div id="selectCon">
                     	<div>
                             <select name="salary" id="salary">
                                 <option value="">연봉</option>
-                                <option value="2000만원 미만">2000만원 미만</option>
-                                <option value="2000~2999만원">2000~2999만원</option>
-                                <option value="3000~3999만원">3000~3999만원</option>
-                                <option value="4000~4999만원">4000~4999만원</option>
-                                <option value="5000만원 이상">5000만원 이상</option>
-                                <option value="면접 시 협의">면접 시 협의</option>
+                                <option value="2000만원 미만" <c:if test="${jobView.salary eq '2000만원 미만'}">selected</c:if>>2000만원 미만</option>
+                                <option value="2000~2999만원" <c:if test="${jobView.salary eq '2000~2999만원'}">selected</c:if>>2000~2999만원</option>
+                                <option value="3000~3999만원" <c:if test="${jobView.salary eq '3000~3999만원'}">selected</c:if>>3000~3999만원</option>
+                                <option value="4000~4999만원" <c:if test="${jobView.salary eq '4000~4999만원'}">selected</c:if>>4000~4999만원</option>
+                                <option value="5000만원 이상" <c:if test="${jobView.salary eq '5000만원 이상'}">selected</c:if>>5000만원 이상</option>
+                                <option value="면접 시 협의" <c:if test="${jobView.salary eq '면접 시 협의'}">selected</c:if>>면접 시 협의</option>
                             </select>
                             <div id="salaryCheck" style="color: red; font-size: x-small; display: none;">연봉을 선택해주세요.</div>
                         </div>
                     	<div>
                             <select name="position" id="position">
                                 <option value="">포지션</option>
-                                <option value="백엔드">백엔드</option>
-                                <option value="프론트">프론트</option>
-                                <option value="DBA">DBA</option>
-                                <option value="풀스택">풀스택</option>
-                                <option value="PM">PM</option>
-                                <option value="기타">기타</option>
+                                <option value="백엔드" <c:if test="${jobView.position eq '백엔드'}">selected</c:if>>백엔드</option>
+                                <option value="프론트" <c:if test="${jobView.position eq '프론트'}">selected</c:if>>프론트</option>
+                                <option value="DBA" <c:if test="${jobView.position eq 'DBA'}">selected</c:if>>DBA</option>
+                                <option value="풀스택" <c:if test="${jobView.position eq '풀스택'}">selected</c:if>>풀스택</option>
+                                <option value="PM" <c:if test="${jobView.position eq 'PM'}">selected</c:if>>PM</option>
+                                <option value="기타" <c:if test="${jobView.position eq '기타'}">selected</c:if>>기타</option>
                             </select>
                             <div id="positionCheck" style="color: red; font-size: x-small; display: none;">포지션을 선택해주세요.</div>
                         </div>
                         <div>
                             <select name="contractType" id="contractType">
                                 <option value="">계약 형태</option>
-                                <option value="정규직">정규직</option>
-                                <option value="계약직">계약직</option>
+                                <option value="정규직" <c:if test="${jobView.contractType eq '정규직'}">selected</c:if>>정규직</option>
+                                <option value="계약직" <c:if test="${jobView.contractType eq '계약직'}">selected</c:if>>계약직</option>
                             </select>
                             <div id="contractTypeCheck" style="color: red; font-size: x-small; display: none;">계약 형태를 선택해주세요.</div>
                         </div>
                         <div>
                             <select name="career" id="career">
                                 <option value="">경력</option>
-                                <option value="무관">무관</option>
-                                <option value="신입">신입</option>
-                                <option value="1~2년">1~2년</option>
-                                <option value="3~4년">3~4년</option>
-                                <option value="5~6년">5~6년</option>
-                                <option value="7년 이상">7년 이상</option>
+                                <option value="무관" <c:if test="${jobView.career eq '무관'}">selected</c:if>>무관</option>
+                                <option value="신입" <c:if test="${jobView.career eq '신입'}">selected</c:if>>신입</option>
+                                <option value="1~2년" <c:if test="${jobView.career eq '1~2년'}">selected</c:if>>1~2년</option>
+                                <option value="3~4년" <c:if test="${jobView.career eq '3~4년'}">selected</c:if>>3~4년</option>
+                                <option value="5~6년" <c:if test="${jobView.career eq '5~6년'}">selected</c:if>>5~6년</option>
+                                <option value="7년 이상" <c:if test="${jobView.career eq '7년 이상'}">selected</c:if>>7년 이상</option>
                             </select>
                             <div id="careerCheck" style="color: red; font-size: x-small; display: none;">경력을 선택해주세요.</div>
                         </div>
                     </div>
                     <div>
                         <label for="recruitContent">공고 본문</label><br>
-                        <textarea id="recruitContent" name="recruitContent" cols="100" rows="20" placeholder="공고 글을 10자 이상 입력해 주세요."></textarea>
+                        <textarea id="recruitContent" name="recruitContent" cols="100" rows="20" placeholder="공고 글을 10자 이상 입력해 주세요.">${jobView.recruitContent}</textarea>
                         <div id="recruitContentCheck" style="color: red; font-size: x-small; display: none;">공고 글을 10자 이상 입력하세요.</div>
                     </div>
                     <div>

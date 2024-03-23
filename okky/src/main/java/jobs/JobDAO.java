@@ -164,7 +164,8 @@ public class JobDAO extends ConnectPool {
 		JobDTO dto = new JobDTO();
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT m.companyName, m.companyAddr, r.recruitTitle, r.dueDate, r.readCnt, r.position, r.contractType, r.career, r.recruitContent ");
+		sb.append("SELECT m.memberIdx, m.companyName, m.companyAddr, m.managerName, m.managerPhone, ");
+		sb.append("r.recruitIdx, r.recruitTitle, r.dueDate, r.readCnt, r.salary, r.position, r.contractType, r.career, r.recruitContent ");
 		sb.append("FROM recruit AS r INNER JOIN member AS m ON m.memberIdx = r.memberIdx ");
 		sb.append("WHERE r.recruitIdx=?");
 		
@@ -174,11 +175,16 @@ public class JobDAO extends ConnectPool {
 			rs = psmt.executeQuery();
 			
 			if(rs.next()) {
+				dto.setMemberIdx(rs.getInt("memberIdx"));
 				dto.setCompanyName(rs.getString("companyName"));
 				dto.setCompanyAddr(rs.getString("companyAddr"));
+				dto.setManagerName(rs.getString("managerName"));
+				dto.setManagerPhone(rs.getString("managerPhone"));
+				dto.setRecruitIdx(rs.getInt("recruitIdx"));
 				dto.setRecruitTitle(rs.getString("recruitTitle"));
 				dto.setDueDate(rs.getString("dueDate"));
 				dto.setReadCnt(rs.getInt("readCnt"));
+				dto.setSalary(rs.getString("salary"));
 				dto.setPosition(rs.getString("position"));
 				dto.setContractType(rs.getString("contractType"));
 				dto.setCareer(rs.getString("career"));
@@ -225,4 +231,33 @@ public class JobDAO extends ConnectPool {
 		return result;
 	}
 	
+	// 공고 글 수정
+	public JobDTO modifyRecruit(JobDTO dto) {
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE recruit SET recruitTitle=?, salary=?, position=?, contractType=?, career=?, ");
+		sb.append("recruitContent=?, dueDate=?, memberIdx=? ");
+		sb.append("WHERE recruitIdx=?");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			
+			psmt.setString(1, dto.getRecruitTitle());
+			psmt.setString(2, dto.getSalary());
+			psmt.setString(3, dto.getPosition());
+			psmt.setString(4, dto.getContractType());
+			psmt.setString(5, dto.getCareer());
+			psmt.setString(6, dto.getRecruitContent());
+			psmt.setString(7, dto.getDueDate());
+			psmt.setInt(8, dto.getMemberIdx());
+			psmt.setInt(9, dto.getRecruitIdx());
+			
+			psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("공고 글 작성 시 에러 발생");
+		}
+		
+		return dto;
+	}
 }

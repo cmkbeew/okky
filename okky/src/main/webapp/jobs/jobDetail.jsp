@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,22 @@
         margin: 40px auto;
         display: flex;
         justify-content: space-between;
+    }
+    .btns {
+    	display: flex;
+		justify-content: flex-end;
+		height: 30px;
+    }
+    .btn-update {
+    	background-color: rgba(57, 182, 255, 0.5);
+        color: black;
+        border-radius: 20px;
+        margin-right: 10px;
+    }
+    .btn-delete {
+    	background-color: rgba(57, 182, 255, 0.5);
+        color: black;
+        border-radius: 20px;
     }
     #title {
     	font-size: 30px;
@@ -86,10 +103,12 @@
 	<jsp:include page="../common/header.jsp" />
     <div class="container">
         <div class="company-info">
-        	<div>
-		        <button>수정하기</button>
-		    	<button>삭제하기</button>
-	    	</div>
+        	<c:if test="${sessionScope.memberIdx eq jobView.memberIdx}">
+	        	<div class="btns">
+			        <button class="btn-update" id="btn_update">수정하기</button>
+			    	<button class="btn-delete" id="btn_delete">삭제하기</button>
+		    	</div>
+		    </c:if>
         	<div class="info-top">
 	            <div id="title" class="info">${jobView.recruitTitle}</div>
 	            <div id="companyName" class="info">${jobView.companyName}</div>
@@ -110,6 +129,10 @@
                     <div>
                         <li>근무지역</li>
                         <span>${jobView.companyAddr}</span>
+                    </div>
+                    <div>
+                        <li>연봉</li>
+                        <span>${jobView.salary}</span>
                     </div>
                 </ul>
             </div>
@@ -149,7 +172,15 @@
         });
 
         document.querySelector("#btn_resume").addEventListener("click", function(e){
-            location.href = "/mypage.do";
+            location.href = "/okky/member/mypage.do";
+        });
+        
+        document.querySelector("#btn_update").addEventListener("click", function(e){
+            location.href = "/okky/jobs/jobModify.do?recruitIdx=${jobView.recruitIdx}";
+        });
+        
+        document.querySelector("#btn_delete").addEventListener("click", function(e){
+            location.href = "/okky/jobs/jobDelete.do?recruitIdx=${jobView.recruitIdx}";
         });
     </script>
 </body>

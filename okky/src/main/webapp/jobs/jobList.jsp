@@ -60,6 +60,10 @@
         font-size: 16px;
     }
 
+ 	.btn-regist:hover {
+    	background-color: lightblue;
+    }
+    
     /* 필터링 */
     .filter-group {
         display: flex;

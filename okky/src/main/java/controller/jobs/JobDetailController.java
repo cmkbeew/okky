@@ -32,13 +32,12 @@ public class JobDetailController extends HttpServlet {
 				
 				req.setAttribute("jobView", jobView);
 				
-				req.getRequestDispatcher("/jobs/jobDetail.jsp").forward(req, resp);
+				req.getRequestDispatcher("/jobs/jobDetail.jsp?recruitIdx=" + recruitIdx).forward(req, resp);
 			} else {
-				resp.sendRedirect("../jobs/jobMain.jsp");
+				resp.sendRedirect("../jobs/jobMain.do");
 			}
 		} else {
-			resp.sendRedirect("../jobs/jobMain.jsp");
+			resp.sendRedirect("../jobs/jobMain.do");
 		}
-		
 	}
 }
