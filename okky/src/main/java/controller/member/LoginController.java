@@ -43,6 +43,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("companyAddr", dto.getCompanyAddr());
 			session.setAttribute("managerName", dto.getManagerName());
 			session.setAttribute("managerPhone", dto.getManagerPhone());
+
 			
 			resp.sendRedirect("../main.do");
 		} else {

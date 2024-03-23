@@ -58,14 +58,12 @@
     <url-pattern>/member/mypage.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>CopageController</display-name>
     <servlet-name>CopageController</servlet-name>
     <servlet-class>controller.member.CopageController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>CopageController</servlet-name>
-    <url-pattern>/CopageController</url-pattern>
+    <url-pattern>/member/mypage_co.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>ViewQnaController</servlet-name>
@@ -90,6 +88,14 @@
   <servlet-mapping>
     <servlet-name>JobListController</servlet-name>
     <url-pattern>/jobs/jobList.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ContractListController</servlet-name>
+    <servlet-class>controller.jobs.ContractListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ContractListController</servlet-name>
+    <url-pattern>/jobs/contract.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>communityController</servlet-name>
@@ -202,6 +208,62 @@
   <servlet-mapping>
     <servlet-name>JobMainController</servlet-name>
     <url-pattern>/jobs/jobMain.do</url-pattern>
+    </servlet-mapping>
+   <servlet>
+    <servlet-name>ApplicantList</servlet-name>
+    <servlet-class>controller.member.ApplicantList</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApplicantList</servlet-name>
+    <url-pattern>/member/applicantList.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ApplyListController</servlet-name>
+    <servlet-class>controller.member.ApplyListController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApplyListController</servlet-name>
+    <url-pattern>/member/applyList.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CommunityController</servlet-name>
+    <servlet-class>controller.board.commu.CommunityController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CommunityController</servlet-name>
+    <url-pattern>/board/commu/commu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteCommController</servlet-name>
+    <servlet-class>controller.board.commu.DeleteCommController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCommController</servlet-name>
+    <url-pattern>/board/commu/deleteCommu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ModifyCommuController</servlet-name>
+    <servlet-class>controller.board.commu.ModifyCommuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ModifyCommuController</servlet-name>
+    <url-pattern>/board/commu/modifyCommu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ViewCommuController</servlet-name>
+    <servlet-class>controller.board.commu.ViewCommuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewCommuController</servlet-name>
+    <url-pattern>/board/commu/viewCommu.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WriteCommuController</servlet-name>
+    <servlet-class>controller.board.commu.WriteCommuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteCommuController</servlet-name>
+    <url-pattern>/board/commu/writeCommu.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>JobModifyController</servlet-name>

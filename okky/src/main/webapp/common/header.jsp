@@ -170,7 +170,7 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
             <ul>
                 <a href="/okky/board/qna/qna.do"><li>Q&A</li></a>
                 <p> | </p>
-                <a href="/okky/board/community/community.do"><li>커뮤니티</li></a>
+                <a href="/okky/board/commu/commu.do"><li>커뮤니티</li></a>
                 <p> | </p>
                 <a href="/okky/jobs/jobMain.do"><li>구인구직</li></a>
                 <p> | </p>
@@ -192,20 +192,18 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
     </header>
     <hr>
     <script>
-    	<%System.out.println(type);
-    	if (FLAG == null || FLAG == "") {%>
-	        document.querySelector("#loginBtn").addEventListener("click", function(e){
-	            window.location.href = "/okky/member/login.do";
-	        });
-	        
-	        document.querySelector("#registBtn").addEventListener("click", function(e){
-	            window.location.href = "/okky/member/regist.do";
-	        });
+    <%if (FLAG == null || FLAG == "") {%>
+        document.querySelector("#loginBtn").addEventListener("click", function(e){
+            window.location.href = "/okky/member/login.do";
+        });
+        
+        document.querySelector("#registBtn").addEventListener("click", function(e){
+            window.location.href = "/okky/member/regist.do";
+        });
         <%} else{%>
 	        document.querySelector("#logoutBtn").addEventListener("click", function(e){
 				window.location.href = "/okky/member/logout.do";
 	        });
-        
 	        <% if( type == 1 ){%>
 	        document.querySelector("#myPageBtn").addEventListener("click", function(e){
 	            window.location.href = "/okky/member/mypage.do";
@@ -216,6 +214,7 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
 	        });
 	        <%} 
 	    }%>
+
         const toggleBtn = document.querySelector("input[type='checkbox']");
         toggleBtn.value = "off";
         document.querySelector("input[type='checkbox']").addEventListener("click", function(e){

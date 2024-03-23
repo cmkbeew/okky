@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,7 +22,7 @@
         /* 사이드바 영역 */
         #sidebar {
             border-right: 1px solid rgb(158, 158, 158);
-            box-shadow: 5px 0px 5px rgb(162, 162, 162);
+            box-shadow: 3px 0px 3px rgb(162, 162, 162);
             width: 15%;
             height: 100%;
             display: block;
@@ -146,10 +145,10 @@
         }
         /* 지원영역 */
         #container2{
-            grid-row: 3/4;
             display: flex;
         }
         #jobList {
+            grid-row: 3 /4;
             margin: 30px 0;
             width: 800px;
             display: flex;
@@ -194,65 +193,40 @@
 	        <div>
 	            <ul>
 	                <li><h3>내 계정</h3></li>
-	                <a href="./mypage.jsp"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
-	                <a href="./account.jsp"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
+	                <a href="./mypage.do"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
+	                <a href="./account.do"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
 	            </ul>
 	            <hr>
 	            <ul>
 	                <li><h3>JOBS</h3></li>
-	                <a href="./jobdetail.jsp"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
+	                <a href="./applicant.do"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
 	            </ul>
 	        </div>
 	    </aside>
 	    <div id="outer">
 	        <div id="container1">
-	            <div id="innnerContainer">
-	                <div id="resumeBox">
-	                    <label for="fileUpload">
-	                        <div id="filebox">이력서 파일 업로드</div>
-	                    </label>
-	                    <input type="file" id="fileUpload" name="fileUpload" accept=".pdf">
-	                    <p></p>
-	                </div>
-	            </div>
-	            <div class="saveBtnArea">
-	                <input type="submit" id="saveBtn" name="saveBtn" value="저장" disabled>
-	            </div>
-	        </div>
-	        <div class="divLine"></div>
-	        <div id="container2">
 	            <div id="jobList">
 	                <table id="listTbl">
 	                    <thead>
 	                        <tr>
 	                            <th>지원자</th>
 	                            <th>지원 공고 제목</th>
+	                            <th>아이디</th>
 	                            <th>마감일</th>
-	                            <th>공고조회</th>
+	                            <th>이력서 조회</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                    	<c:choose>
-								<c:when test="${not empty bbsList }">
-									<c:set var="row_num" value="${params.total_count - (params.page_no -1) * params.page_size}"/>
-									<c:forEach var="list" items="${bbsList }" varStatus="loop">
-									<tr>
-										<td>공고 번호${ row_num }</td>
-										<td><a href="view.do?idx=${list.idx}">${list.title}</a></td>
-										<td>지원 공고 제목${list.user_id}</td>
-										<td>마감일${list.read_cnt}</td>
-										<td>${list.reg_date}</td>
-										<td class="lastCol"><button class="linkBtn" name="linkBtn">조회</button>다운로드</td>
-									</tr>
-									<c:set var="row_num" value="${row_num = row_num -1 }" />
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-								<tr>
-									<td colspan="4" style="text-align: center;">지원한 공고 목록이 없습니다.</td>
-								</tr>
-								</c:otherwise>
-							</c:choose>
+	                        <tr>
+	                            <td colspan="5" style="text-align: center;">지원한 사람 목록이 없습니다</td>
+	                        </tr>
+	                        <tr>
+	                            <td>이름</td>
+	                            <td>지원 공고 제목</td>
+	                            <td>id</td>
+	                            <td>마감일</td>
+	                            <td class="lastCol"><button class="linkBtn" name="linkBtn">조회</button></td>
+	                        </tr>
 	                    </tbody>
 	                </table>
 	
@@ -260,10 +234,8 @@
 	        </div>
 	    </div>
 	</div>
+	<jsp:include page="/common/footer.jsp" />
 	<script>
-	    document.getElementById("fileUpload").addEventLister("change",function(e){
-	        alert("확인");
-	    });
 	</script>
 </body>
 </html>
