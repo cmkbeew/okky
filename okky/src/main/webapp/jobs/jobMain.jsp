@@ -219,7 +219,7 @@
                         <span>괜찮은 직장이 모여있는 곳</span>
                     </div>
                     <div class="bot-menu">
-                        <a href="/okky/jobs/jobList.do?contractType=계약직">
+                        <a href="/okky/jobs/jobList.do?contractType=contract&sort=recent">
                             <div class="bot-content">
                                 <div class="b-content">
                                     <div>Contract</div>
@@ -227,7 +227,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="/okky/jobs/jobList.do?contractType=정규직">
+                        <a href="/okky/jobs/jobList.do?contractType=fulltime&sort=recent">
                             <div class="bot-content">
                                 <div class="b-content">
                                     <div>Fulltime</div>

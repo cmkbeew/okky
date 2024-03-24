@@ -1,6 +1,7 @@
 package jobs;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import common.ConnectPool;
@@ -71,14 +72,27 @@ public class JobDAO extends ConnectPool {
 	}
 	
 	// 계약별 전체 공고 갯수
-	public int getRecruitCount(String contractType) {
+	public int getRecruitCount(Map<String, Object> maps) {
 		int result = 0;
 		
-		String sql = "SELECT COUNT(r.recruitIdx) FROM recruit AS r INNER JOIN member AS m ON m.memberIdx = r.memberIdx WHERE companyName IS NOT NULL AND contractType=?";
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT COUNT(r.recruitIdx) FROM recruit AS r INNER JOIN member AS m ON m.memberIdx = r.memberIdx ");
+		sb.append("WHERE companyName IS NOT NULL AND contractType='" + maps.get("contractType") + "' ");
+		if(maps.get("search_word") != null) {
+			sb.append("AND m.companyName LIKE '%" + maps.get("search_word") + "%'");
+		}
+		if(maps.get("position_category") != "") {
+			sb.append("AND r.position IN (" + maps.get("position_category") + ") ");
+		}
+		if(maps.get("addr_category") != "") {
+			sb.append("AND m.companyAddr LIKE '" + maps.get("addr_category") + "%' ");
+		}
+		if(maps.get("career_category") != "") {
+			sb.append("AND r.career IN (" + maps.get("career_category") + ") ");
+		}
 		
 		try {
-			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, contractType);
+			psmt = conn.prepareStatement(sb.toString());
 			rs = psmt.executeQuery();
 			
 			rs.next();
@@ -93,17 +107,40 @@ public class JobDAO extends ConnectPool {
 	}
 	
 	// (정규직, 계약직) 공고 리스트 조회
-	public List<JobDTO> getJobList(String contractType){
+	public List<JobDTO> getJobList(Map<String, Object> maps){
 		List<JobDTO> list = new Vector<JobDTO>();
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT m.companyName, m.type, m.companyAddr, r.recruitIdx, r.position, r.career, r.contractType ");
 		sb.append("FROM recruit AS r INNER JOIN member AS m ON m.memberIdx=r.memberIdx ");
-		sb.append("WHERE companyName IS NOT NULL AND contractType = ?");
+		sb.append("WHERE companyName IS NOT NULL AND contractType = '" + maps.get("contractType") + "' ");
+		// 검색어
+		if(maps.get("search_word") != null) {
+			sb.append("AND m.companyName LIKE '%" + maps.get("search_word") + "%' ");
+		}
+		// 필터 검색
+		if(maps.get("position_category") != "") {
+			sb.append("AND r.position IN (" + maps.get("position_category") + ") ");
+		}
+		if(maps.get("addr_category") != "") {
+			sb.append("AND m.companyAddr LIKE '" + maps.get("addr_category") + "%' ");
+		}
+		if(maps.get("career_category") != "") {
+			sb.append("AND r.career IN (" + maps.get("career_category") + ") ");
+		}
+		// 정렬 방법(최신순 기본)
+		if(maps.get("sort").equals("old")) {
+			sb.append(" ORDER BY regDate ");
+		} else {
+			sb.append(" ORDER BY regDate DESC ");
+		}
+		// 페이징
+		if(maps.get("page_size") != null && maps.get("page_skip_cnt") != null) {
+			sb.append(" LIMIT " + maps.get("page_skip_cnt") + ", " + maps.get("page_size"));
+		}
 		
 		try {
 			psmt = conn.prepareStatement(sb.toString());
-			psmt.setString(1, contractType);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -126,38 +163,7 @@ public class JobDAO extends ConnectPool {
 		
 		return list;
 	} 
-	
-	// 계약직 공고 리스트 조회
-	public List<JobDTO> getContractList(){
-		List<JobDTO> list = new Vector<JobDTO>();
-		
-		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT m.companyName, m.type, r.position, r.career, r.companyAddr, r.contractType ");
-		sb.append("FROM recruit AS r INNER JOIN member AS m ON m.memberIdx = r.memberIdx ");
-		sb.append("WHERE companyName IS NOT NULL AND contractType = '계약직'");
-		
-		try {
-			psmt = conn.prepareStatement(sb.toString());
-			rs = psmt.executeQuery();
-			
-			while(rs.next()) {
-				JobDTO dto = new JobDTO();
-				
-				dto.setCompanyName(rs.getString("companyName"));
-				dto.setType(rs.getString("type"));
-				dto.setPosition(rs.getString("position"));
-				dto.setCareer(rs.getString("career"));
-				dto.setCompanyAddr(rs.getString("companyAddr"));
-				
-				list.add(dto);
-			}
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("공고 리스트 조회 시 에러 발생");
-		}
-		
-		return list;
-	} 
+
 	
 	// 공고 글 조회
 	public JobDTO getJobDetail(int recruitIdx){
@@ -260,4 +266,45 @@ public class JobDAO extends ConnectPool {
 		
 		return dto;
 	}
+
+	public int getJobDelete(int recruitIdx) {
+		int result = 0;
+		
+		String sql = "DELETE FROM recruit WHERE recruitIdx = ?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			
+			psmt.setInt(1, recruitIdx);
+			
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("공고 글 작성 시 에러 발생");
+		}
+		
+		return result;
+	}
+
+//	public void sortJob(String contractType, String sort) {
+//		StringBuilder sb = new StringBuilder();
+//		
+//		sb.append("SELECT m.companyName, m.type, m.companyAddr, r.recruitIdx, r.position, r.career, r.contractType ");
+//		sb.append("FROM recruit AS r INNER JOIN member AS m ON m.memberIdx=r.memberIdx ");
+//		sb.append("WHERE companyName IS NOT NULL AND contractType = ?");
+//		if(sort.equals("recent")) {
+//			sb.append(" ORDER BY regDate DESC");
+//		} else {
+//			sb.append(" ORDER BY regDate");
+//		}
+//		
+//		try {
+//			psmt = conn.prepareStatement(sb.toString());
+//			psmt.setString(1, contractType);
+//			psmt.executeQuery();
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			System.out.println("공고 글 작성 시 에러 발생");
+//		}
+//	}
 }
