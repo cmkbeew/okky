@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>QnA 게시글 작성</title>
 <style>
         #body {
             display: flex;
@@ -147,27 +147,33 @@ if (session.getAttribute("memberId") == null) {
                         <label>태그 - <span class="small_blue">내용을 대표하는 태그를 선택해 주세요.</span></label>
                         <div id="selectCon">
                     <div>
-                        <select name="skill" id="skill_1st">
+                        <select name="skill1" id="skill_1st">
                             <option value="">선택 1</option>
-                            <option value="skill1">스킬1</option>
-                            <option value="skill2">스킬2</option>
-                            <option value="skill3">스킬3</option>
+                            <option value="백엔드">백엔드</option>
+                            <option value="프론트엔드">프론트엔드</option>
+                            <option value="풀스택">풀스택</option>
                         </select>
                     </div>
                     <div>
-                        <select name="skill" id="skill_2nd">
+                        <select name="skill2" id="skill_2nd">
                             <option value="">선택 2</option>
-                            <option value="skill1">스킬1</option>
-                            <option value="skill2">스킬2</option>
-                            <option value="skill3">스킬3</option>
+                            <option value="java">java</option>
+                            <option value="c">c</option>
+                            <option value="c++">c++</option>
+                            <option value="c#">c#</option>
+                            <option value="db">db</option>
+                            <option value="python">python</option>
+                            <option value="html">html</option>
+                            <option value="css">css</option>
+                            <option value="javaScript">javaScript</option>
+                            <option value="spring">spring</option>
                         </select>
                     </div>
                     <div>
-                        <select name="skill" id="skill_3rd">
+                        <select name="skill3" id="skill_3rd">
                             <option value="">선택 3</option>
-                            <option value="skill1">스킬1</option>
-                            <option value="skill2">스킬2</option>
-                            <option value="skill3">스킬3</option>
+                            <option value="git">git</option>
+                            <option value="github">github</option>
                         </select>
                     </div>
                 </div>
@@ -266,7 +272,22 @@ if (session.getAttribute("memberId") == null) {
             return true;
         });
 
-        
+        document.querySelector("#resetBtn").addEventListener("click", function(e) {
+        	
+            
+			let confirm_yn = confirm("초기화 시키시겠습니까?");
+			if (confirm_yn) { 
+				
+				return true;	
+		 	}
+			else {
+				e.preventDefault();
+				return false;
+			}
+		
+   
+
+    });
 
 
     </script>

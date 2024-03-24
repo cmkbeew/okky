@@ -18,7 +18,7 @@ public class DeleteCommController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int communityIdx = request.getParameter("qnaIdx") != null ? Integer.parseInt(request.getParameter("qnaIdx")) : 0;
+		int communityIdx = request.getParameter("communityIdx") != null ? Integer.parseInt(request.getParameter("communityIdx")) : 0;
 		
 //		String memberId = request.getParameter("memberId") != null ? String.valueOf(request.getParameter("memberId")) : null;
 //		

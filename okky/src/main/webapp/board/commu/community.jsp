@@ -197,7 +197,34 @@
                 <div id="top_tag"><span><h3>추천글</h3></span></div>
                 <div><hr></div>
                 <ul>
-                    <li>
+                <c:choose>
+                    		<c:when test="${not empty likeList }">
+                    			<c:forEach var="list" items="${likeList }" varStatus="loop">
+                    				<li>
+			                            <div class="top_tag">
+			                                <div>
+			                                <%-- <c:if test="${list.title.length() >= 5 }">  ${list.title.substring(0,3).concat(" ...") }</c:if>  ${list.title } --%>
+			                                <c:choose>
+			                                	<c:when test="${list.title.length() >= 7 }">
+			                                		${list.title.substring(0,7).concat(" ...") }
+			                                	</c:when>
+			                                	<c:otherwise>
+			                                	 	${list.title }
+			                                	</c:otherwise>
+			                                </c:choose>
+			                                </div>
+			                                <div class="smallBlue">${list.pageLike } likes</div>
+			                            </div>
+			                        </li>
+                    			</c:forEach>
+                    		</c:when>
+                    		<c:otherwise>
+                    			등록된 게시글이 없습니다.
+                    		</c:otherwise>
+                    		
+                    	</c:choose>
+                    <!-- <li>
+                    .substring(0,3).concat(" ...")
                         <div class="top_tag">
                             <div>[추천글제목]</div>
                             <div class="smallBlue">20</div>
@@ -218,7 +245,7 @@
                     <li> <div class="top_tag">
                         <div>[추천글제목]</div>
                         <div class="smallBlue">20</div>
-                    </div></li>
+                    </div></li> -->
                 </ul>
             </div>  
         <!-- 몸통 -->
@@ -245,7 +272,7 @@
                     <nav>
                     	<button id="category_1" name="category_1" value="일상" <c:if test="${params.category_1 eq 'category_1'}"> style="color:#0090f8;" </c:if>  >일상</button>
                         <button  id="category_2" name="category_2" value="공부" <c:if test="${params.category_2 eq 'category_2'}"> style="color:#0090f8;" </c:if> >공부</button>
-                        <button id="category_3" name="category_3" value="공지사항" <c:if test="${params.category_3 eq 'category_3'}"> style="color:#0090f8;" </c:if>>공지사항</button>
+                        <button id="category_3" name="category_3" value="공지사항" <c:if test="${params.category_3 eq 'category_3'}"> style="color:#0090f8;" </c:if>>[공지사항]</button>
                     </nav>
                 <div style="visibility: hidden;"></div>
                 
@@ -301,7 +328,12 @@
 				                                <p>
 				                                    ${list.content.substring(0,10).concat(" ...")}
 				                                </p>
-				                                ${list.tags }
+				                                <div class="writer">
+				                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                                <div>#${list.skill1 } </div>
+					                                <div>#${list.skill2 } </div>
+					                                <div>#${list.skill3 } </div>
+				                                </div>
 				                            </a>
 				                        </div><br>
 				                        <hr>

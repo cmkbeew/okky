@@ -50,7 +50,7 @@ public class QnADAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT q.title, q.content, q.regDate, m.memberId, q.qnaIdx, q.memberIdx");
-		sb.append(", q.modifyDate, q.tags, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt");
+		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt");
 		sb.append(" FROM qna q inner join member m");
 		sb.append(" ON q.memberIdx = m.memberIdx");
 		sb.append(" ORDER BY qnaIdx DESC");
@@ -67,7 +67,6 @@ public class QnADAO extends ConnectPool {
 				dto.setContent(rs.getString("q.content").substring(0, 10).concat(" ..."));
 				dto.setRegDate(rs.getDate("q.regDate"));
 				dto.setModifyDate(rs.getDate("q.modifyDate"));
-				dto.setTags(rs.getString("q.tags"));
 				dto.setPageLike(rs.getInt("q.pageLike"));
 				dto.setPageDislike(rs.getInt("q.pageDislike"));
 				dto.setAnswerIdx(rs.getInt("q.answerIdx"));
@@ -75,6 +74,9 @@ public class QnADAO extends ConnectPool {
 				dto.setReadCnt(rs.getInt("q.readCnt"));
 				dto.setMemberIdx(rs.getInt("q.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
+				dto.setSkill1(rs.getString("q.skill1"));
+				dto.setSkill2(rs.getString("q.skill2"));
+				dto.setSkill3(rs.getString("q.skill3"));
 				
 				list.add(dto);
 			}
@@ -94,7 +96,7 @@ public class QnADAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT q.title, q.content, q.regDate, m.memberId, q.qnaIdx, q.memberIdx");
-		sb.append(", q.modifyDate, q.tags, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt");
+		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt");
 		sb.append(" FROM qna q inner join member m");
 		sb.append(" ON q.memberIdx = m.memberIdx");
 		
@@ -139,7 +141,6 @@ public class QnADAO extends ConnectPool {
 				dto.setContent(rs.getString("q.content"));
 				dto.setRegDate(rs.getDate("q.regDate"));
 				dto.setModifyDate(rs.getDate("q.modifyDate"));
-				dto.setTags(rs.getString("q.tags"));
 				dto.setPageLike(rs.getInt("q.pageLike"));
 				dto.setPageDislike(rs.getInt("q.pageDislike"));
 				dto.setAnswerIdx(rs.getInt("q.answerIdx"));
@@ -147,6 +148,9 @@ public class QnADAO extends ConnectPool {
 				dto.setReadCnt(rs.getInt("q.readCnt"));
 				dto.setMemberIdx(rs.getInt("q.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
+				dto.setSkill1(rs.getString("q.skill1"));
+				dto.setSkill2(rs.getString("q.skill2"));
+				dto.setSkill3(rs.getString("q.skill3"));
 				
 				list.add(dto);
 			}
@@ -167,7 +171,7 @@ public class QnADAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT q.title, q.content, q.regDate, m.memberId, q.qnaIdx, q.memberIdx");
-		sb.append(", q.modifyDate, q.tags, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt, m.nickName");
+		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt, m.nickName");
 		sb.append(" FROM qna q inner join member m");
 		sb.append(" ON q.memberIdx = m.memberIdx");
 		sb.append(" WHERE q.qnaIdx = ?");
@@ -182,7 +186,6 @@ public class QnADAO extends ConnectPool {
 				dto.setContent(rs.getString("q.content"));
 				dto.setRegDate(rs.getDate("q.regDate"));
 				dto.setModifyDate(rs.getDate("q.modifyDate"));
-				dto.setTags(rs.getString("q.tags"));
 				dto.setPageLike(rs.getInt("q.pageLike"));
 				dto.setPageDislike(rs.getInt("q.pageDislike"));
 				dto.setAnswerIdx(rs.getInt("q.answerIdx"));
@@ -191,6 +194,10 @@ public class QnADAO extends ConnectPool {
 				dto.setMemberIdx(rs.getInt("q.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
 				dto.setNickName(rs.getString("m.nickName"));
+
+				dto.setSkill1(rs.getString("q.skill1"));
+				dto.setSkill2(rs.getString("q.skill2"));
+				dto.setSkill3(rs.getString("q.skill3"));
 			}
 		} catch (Exception e) {
 			System.out.println("QnA 게시판 데이터 조회 오류!");
@@ -205,13 +212,16 @@ public class QnADAO extends ConnectPool {
 		int result = 0;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("INSERT INTO qna (title, content, category, memberIdx) VALUES(?, ?, ?, ?)");
+		sb.append("INSERT INTO qna (title, content, category, skill1, skill2, skill3, memberIdx) VALUES(?, ?, ?, ?, ?, ?, ?)");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getCategory());
-			psmt.setInt(4, dto.getMemberIdx());
+			psmt.setString(4, dto.getSkill1());
+			psmt.setString(5, dto.getSkill2());
+			psmt.setString(6, dto.getSkill3());
+			psmt.setInt(7, dto.getMemberIdx());
 			
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
@@ -247,14 +257,17 @@ public class QnADAO extends ConnectPool {
 		int result = 0;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE qna SET title = ?, content = ?, category = ?, modifyDate = now()");
+		sb.append("UPDATE qna SET title = ?, content = ?, category = ?, skill1 = ?, skill2 = ?, skil3 = ?, modifyDate = now()");
 		sb.append(" WHERE qnaIdx = ?");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getCategory());
-			psmt.setInt(4, dto.getQnaIdx());
+			psmt.setString(4, dto.getSkill1());
+			psmt.setString(5, dto.getSkill2());
+			psmt.setString(6, dto.getSkill3());
+			psmt.setInt(7, dto.getQnaIdx());
 			
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
@@ -309,7 +322,7 @@ public class QnADAO extends ConnectPool {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("UPDATE qna SET");
-		sb.append(" pageDislike = pageDislike + 1");
+		sb.append(" pageDislike = pageDislike + 1, pageLike = pageLike - 1");
 		sb.append(" WHERE qnaIdx = ?");
 		
 		try {

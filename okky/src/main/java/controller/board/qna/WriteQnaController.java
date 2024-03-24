@@ -32,6 +32,10 @@ public class WriteQnaController extends HttpServlet {
 		String title = request.getParameter("title");
 		String category = request.getParameter("category");
 		String content = request.getParameter("content");
+		String skill1 = request.getParameter("skill1");
+		String skill2 = request.getParameter("skill2");
+		String skill3 = request.getParameter("skill3");
+		
 		
 		QnADTO dto = new QnADTO();
 		
@@ -40,6 +44,10 @@ public class WriteQnaController extends HttpServlet {
 		dto.setCategory(category);
 		dto.setContent(content);
 		dto.setMemberIdx(memberIdx);
+		dto.setSkill1(skill1);
+		dto.setSkill2(skill2);
+		dto.setSkill3(skill3);
+		
 		
 		QnADAO dao = new QnADAO();
 		int result = dao.qnaRegist(dto);
@@ -53,6 +61,9 @@ public class WriteQnaController extends HttpServlet {
 		params.put("category", category);
 		params.put("result", result);
 		params.put("memberIdx", memberIdx);
+		params.put("skill1", skill1);
+		params.put("skill2", skill2);
+		params.put("skill3", skill3);
 		
 		request.setAttribute("params", params);
 		response.sendRedirect("/okky/board/qna/qna.do");

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>QnA 게시판 수정</title>
+<title>QnA 게시글 수정</title>
 <style>
         #body {
             display: flex;
@@ -143,27 +143,33 @@ if (session.getAttribute("memberId") == null) {
                         <label>태그 - <span class="small_blue">내용을 대표하는 태그를 입력해주세요. 태그는 공백 하나로 구분됩니다.</span></label>
                         <div id="selectCon">
                     <div>
-                        <select name="skill" id="skill_1st">
+                        <select name="skill1" id="skill_1st">
                             <option value="">선택 1</option>
-                            <option value="skill1">스킬1</option>
-                            <option value="skill2">스킬2</option>
-                            <option value="skill3">스킬3</option>
+                            <option value="백엔드"<c:if test="${params.skill1 eq '백엔드'}"> selected </c:if>>백엔드</option>
+                            <option value="프론트엔드"<c:if test="${params.skill1 eq '프론트엔드'}"> selected </c:if>>프론트엔드</option>
+                            <option value="풀스택"<c:if test="${params.skill1 eq '풀스택'}"> selected </c:if>>풀스택</option>
                         </select>
                     </div>
                     <div>
-                        <select name="skill" id="skill_2nd">
+                        <select name="skill2" id="skill_2nd">
                             <option value="">선택 2</option>
-                            <option value="skill1">스킬1</option>
-                            <option value="skill2">스킬2</option>
-                            <option value="skill3">스킬3</option>
+                            <option value="java" <c:if test="${params.skill2 eq 'java'}"> selected </c:if>>java</option>
+                            <option value="c" <c:if test="${params.skill2 eq 'c'}"> selected </c:if>>c</option>
+                            <option value="c++" <c:if test="${params.skill2 eq 'c++'}"> selected </c:if>>c++</option>
+                            <option value="c#" <c:if test="${params.skill2 eq 'c#'}"> selected </c:if>>c#</option>
+                            <option value="db" <c:if test="${params.skill2 eq 'db'}"> selected </c:if>>db</option>
+                            <option value="python" <c:if test="${params.skill2 eq 'python'}"> selected </c:if>>python</option>
+                            <option value="html" <c:if test="${params.skill2 eq 'html'}"> selected </c:if>>html</option>
+                            <option value="css" <c:if test="${params.skill2 eq 'css'}"> selected </c:if>>css</option>
+                            <option value="javaScript" <c:if test="${params.skill2 eq 'javaScript'}"> selected </c:if>>javaScript</option>
+                            <option value="spring" <c:if test="${params.skill2 eq 'spring'}"> selected </c:if>>spring</option>
                         </select>
                     </div>
                     <div>
-                        <select name="skill" id="skill_3rd">
+                        <select name="skill3" id="skill_3rd">
                             <option value="">선택 3</option>
-                            <option value="skill1">스킬1</option>
-                            <option value="skill2">스킬2</option>
-                            <option value="skill3">스킬3</option>
+                            <option value="git" <c:if test="${params.skill3 eq 'git'}"> selected </c:if>>git</option>
+                            <option value="github" <c:if test="${params.skill3 eq 'github'}"> selected </c:if>>github</option>
                         </select>
                     </div>
                 </div>
@@ -264,7 +270,7 @@ if (session.getAttribute("memberId") == null) {
 
         
         
-        
+       
 
 
     </script>

@@ -13,6 +13,8 @@ import java.util.Map;
 
 import board.QnADAO;
 import board.QnADTO;
+import board.TagDAO;
+import board.TagDTO;
 import common.BbsPage;
 
 
@@ -86,6 +88,15 @@ public class QnaController extends HttpServlet {
 		
 		request.setAttribute("qnaList", qnaList);
 		request.setAttribute("params", params);
+		
+		
+		Map<String, Object> tagParams = new HashMap<String, Object>();
+		
+		TagDAO tag = new TagDAO();
+		List<TagDTO> tagList = tag.tagList(tagParams);
+		tag.close();
+		
+		request.setAttribute("tagList", tagList);
 		
 		request.getRequestDispatcher("/board/qna/qna.jsp").forward(request,  response);
 	}
