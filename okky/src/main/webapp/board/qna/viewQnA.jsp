@@ -215,25 +215,30 @@
                     <p>
                         1개의 댓글
                     </p>
-                    <form action="" method="post">
-                        <textarea name="comment" id="comment" cols="30" rows="10"></textarea><br><br>
+                    <form action="./writeQnaComment.do" method="post">
+                    	<input type="hidden" id="memberIdx" name="memberIdx" value="${sessionScope.memberIdx}" />
+                    	<input type="hidden" id="qnaIdx" name="qnaIdx" value="${params.qnaIdx}" />
+                    	
+                        <textarea name="commentContent" id="commentContent" cols="30" rows="10"></textarea><br><br>
                         <input type="submit" id="submit" name="submit" value="댓글작성">
                         <div id="commentCheck" style="color: red; font-size: x-small; display: none;">댓글을 입력해 주세요.</div>
                     </form>
                     <br><br>
                     <div class="commentList">
                         <ul>
-                            <li>
-                                <hr>
-                                <div class="writer">
-                                    <div>댓닉네임</div>
-                                    <div>·</div>
-                                    <div>댓작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <p>[댓글내용]</p>
-                                </div>
-                            </li>
+                        	<c:forEach var="list" items="${cList}">
+	                            <li>
+	                                <hr>
+	                                <div class="writer">
+	                                    <div>${list.nickname}</div>
+	                                    <div>·</div>
+	                                    <div>${list.regDate}</div>
+	                                </div>
+	                                <div class="content_title">
+	                                    <p>${list.commentContent}</p>
+	                                </div>
+	                            </li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
