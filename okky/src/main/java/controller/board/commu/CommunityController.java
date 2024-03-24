@@ -84,6 +84,13 @@ public class CommunityController extends HttpServlet {
 		request.setAttribute("communityList", communityList);
 		request.setAttribute("params", params);
 		
+		Map<String, Object> mainLikeParams = new HashMap<String, Object>();
+		CommunityDAO like = new CommunityDAO();
+		List<CommunityDTO> likeList = like.likeList(mainLikeParams);
+		like.close();
+		
+		request.setAttribute("likeList", likeList);
+		
 		request.getRequestDispatcher("/board/commu/community.jsp").forward(request,  response);
 	}
 

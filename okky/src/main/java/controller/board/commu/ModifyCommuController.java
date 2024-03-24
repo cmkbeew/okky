@@ -34,6 +34,10 @@ public class ModifyCommuController extends HttpServlet {
 		String title = "";
 		String content = "";
 		String category = "";
+
+		String skill1 = "";
+		String skill2 = "";
+		String skill3 = "";
 		int pageLike = 0;
 		int pageDislike = 0;
 		if (communityView != null) {
@@ -44,6 +48,9 @@ public class ModifyCommuController extends HttpServlet {
 			title = communityView.getTitle();
 			content = communityView.getContent();
 			category = communityView.getCategory();
+			skill1 = communityView.getSkill1();
+			skill2 = communityView.getSkill2();
+			skill3 = communityView.getSkill3();
 			content = (content != null ? content.replace("<br>", "\r\n") : "");
 			content = (content != null ? content.replace("&nbsp;", " ") : "");
 		}
@@ -58,6 +65,9 @@ public class ModifyCommuController extends HttpServlet {
 		params.put("pageLike", pageLike);
 		params.put("pageDislike", pageDislike);
 		params.put("category", category);
+		params.put("skill1", skill1);
+		params.put("skill2", skill2);
+		params.put("skill3", skill3);
 		
 		
 		
@@ -79,6 +89,9 @@ public class ModifyCommuController extends HttpServlet {
 		String content = request.getParameter("content");
 		String category = request.getParameter("category");
 
+		String skill1 = request.getParameter("skill1");
+		String skill2 = request.getParameter("skill2");
+		String skill3 = request.getParameter("skill3");
 		
 		
 		CommunityDTO dto = new CommunityDTO();
@@ -86,6 +99,9 @@ public class ModifyCommuController extends HttpServlet {
 		dto.setCategory(category);
 		dto.setTitle(title);
 		dto.setContent(content);
+		dto.setSkill1(skill1);
+		dto.setSkill2(skill2);
+		dto.setSkill3(skill3);
 
 		CommunityDAO dao = new CommunityDAO();
 		int result = dao.communityModify(dto);

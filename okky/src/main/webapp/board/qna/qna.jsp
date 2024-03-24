@@ -198,7 +198,23 @@
                 <div id="top_tag"><span><h3>#인기태그</h3></span></div>
                 <div><hr></div>
                 <ul>
-                    <li>
+                	<c:choose>
+                		<c:when test="${not empty tagList }">
+                			<c:forEach var="list" items="${tagList }">
+                				<li>
+			                        <div class="top_tag">
+			                            <div>#${list.tags }</div>
+			                            <div class="smallBlue">${list.count } </div>
+			                        </div>
+			                    </li>
+                			</c:forEach>
+                		</c:when>
+                		<c:otherwise>
+                			등록된 게시글이 없습니다.
+                		</c:otherwise>
+                	</c:choose>
+                		
+                    <!-- <li>
                         <div class="top_tag">
                             <div>#태그이름</div>
                             <div class="smallBlue">20</div>
@@ -219,7 +235,7 @@
                     <li> <div class="top_tag">
                         <div>#태그이름</div>
                         <div class="smallBlue">20</div>
-                    </div></li>
+                    </div></li> -->
                 </ul>
             </div>  
         <!-- 몸통 -->
@@ -302,7 +318,12 @@
 				                                <p>
 				                                    ${list.content.substring(0,10).concat(" ...")}
 				                                </p>
-				                                ${list.tags }
+				                                <div class="writer">
+				                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					                                <div>#${list.skill1 } </div>
+					                                <div>#${list.skill2 } </div>
+					                                <div>#${list.skill3 } </div>
+				                                </div>
 				                            </a>
 				                        </div><br>
 				                        <hr>

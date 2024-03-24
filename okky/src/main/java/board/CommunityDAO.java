@@ -50,7 +50,7 @@ public class CommunityDAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
-		sb.append(", c.modifyDate, c.tags, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
+		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
 		sb.append(" ORDER BY c.communityIdx DESC");
@@ -67,7 +67,6 @@ public class CommunityDAO extends ConnectPool {
 				dto.setContent(rs.getString("c.content").substring(0,10).concat(" ..."));
 				dto.setRegDate(rs.getDate("c.regDate"));
 				dto.setModifyDate(rs.getDate("c.modifyDate"));
-				dto.setTags(rs.getString("c.tags"));
 				dto.setPageLike(rs.getInt("c.pageLike"));
 				dto.setPageDislike(rs.getInt("c.pageDislike"));
 				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
@@ -75,6 +74,57 @@ public class CommunityDAO extends ConnectPool {
 				dto.setReadCnt(rs.getInt("c.readCnt"));
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
+
+				dto.setSkill1(rs.getString("c.skill1"));
+				dto.setSkill2(rs.getString("c.skill2"));
+				dto.setSkill3(rs.getString("c.skill3"));
+				
+				list.add(dto);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("메인 community 게시글 조회 실패!");
+			
+		}
+		
+		
+		return list;
+	}
+	
+	public List<CommunityDTO> mainNoticeList(Map<String, Object> map) {
+		List<CommunityDTO> list = new Vector<CommunityDTO>();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
+		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
+		sb.append(" FROM community c inner join member m");
+		sb.append(" ON c.memberIdx = m.memberIdx");
+		sb.append(" WHERE category = '공지사항'");
+		sb.append(" ORDER BY c.communityIdx DESC");
+		sb.append(" LIMIT 5");
+		
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				CommunityDTO dto = new CommunityDTO();
+				dto.setCommunityIdx(rs.getInt("c.communityIdx"));
+				dto.setTitle(rs.getString("c.title"));
+				dto.setContent(rs.getString("c.content").substring(0,10).concat(" ..."));
+				dto.setRegDate(rs.getDate("c.regDate"));
+				dto.setModifyDate(rs.getDate("c.modifyDate"));
+				dto.setPageLike(rs.getInt("c.pageLike"));
+				dto.setPageDislike(rs.getInt("c.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
+				dto.setCategory(rs.getString("c.category"));
+				dto.setReadCnt(rs.getInt("c.readCnt"));
+				dto.setMemberIdx(rs.getInt("c.memberIdx"));
+				dto.setMemberId(rs.getString("m.memberId"));
+
+				dto.setSkill1(rs.getString("c.skill1"));
+				dto.setSkill2(rs.getString("c.skill2"));
+				dto.setSkill3(rs.getString("c.skill3"));
 				
 				list.add(dto);
 			}
@@ -93,7 +143,7 @@ public class CommunityDAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
-		sb.append(", c.modifyDate, c.tags, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
+		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
 		
@@ -131,7 +181,6 @@ public class CommunityDAO extends ConnectPool {
 				dto.setContent(rs.getString("c.content"));
 				dto.setRegDate(rs.getDate("c.regDate"));
 				dto.setModifyDate(rs.getDate("c.modifyDate"));
-				dto.setTags(rs.getString("c.tags"));
 				dto.setPageLike(rs.getInt("c.pageLike"));
 				dto.setPageDislike(rs.getInt("c.pageDislike"));
 				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
@@ -139,6 +188,10 @@ public class CommunityDAO extends ConnectPool {
 				dto.setReadCnt(rs.getInt("c.readCnt"));
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
+				
+				dto.setSkill1(rs.getString("c.skill1"));
+				dto.setSkill2(rs.getString("c.skill2"));
+				dto.setSkill3(rs.getString("c.skill3"));
 				
 				list.add(dto);
 			}
@@ -151,13 +204,50 @@ public class CommunityDAO extends ConnectPool {
 		
 		return list;
 	}
+
+	
+	public List<CommunityDTO> likeList(Map<String, Object> map) {
+		List<CommunityDTO> list = new Vector<CommunityDTO>();
+		
+		String sql = "select title, pageLike from"
+				+ " ("
+				+ " select m.memberId, q.title, q.regDate, q.pageLike, q.readCnt"
+				+ " from qna q"
+				+ " inner join member m on m.memberIdx = q.memberIdx"
+				+ " union all"
+				+ " select m.memberId, c.title, c.regDate, c.pageLike, c.readCnt"
+				+ " from community c"
+				+ " inner join member m on m.memberIdx = c.memberIdx"
+				+ " ) as total"
+				+ " order by pageLike desc"
+				+ " limit 5";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			
+			while (rs.next()) {
+				CommunityDTO dto = new CommunityDTO();
+				dto.setTitle(rs.getString("title"));
+				dto.setPageLike(rs.getInt("pageLike"));
+				
+				list.add(dto);
+			}
+		
+			
+		} catch(Exception e) {
+			System.out.println("community 추천글 조회 실패!");
+		}
+		return list;
+	}
+	
 	
 	public CommunityDTO communityView (int communityIdx) {
 		CommunityDTO dto = new CommunityDTO();
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
-		sb.append(", c.modifyDate, c.tags, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt, m.nickName");
+		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt, m.nickName");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
 		sb.append(" WHERE c.communityIdx = ?");
@@ -172,7 +262,6 @@ public class CommunityDAO extends ConnectPool {
 				dto.setContent(rs.getString("c.content"));
 				dto.setRegDate(rs.getDate("c.regDate"));
 				dto.setModifyDate(rs.getDate("c.modifyDate"));
-				dto.setTags(rs.getString("c.tags"));
 				dto.setPageLike(rs.getInt("c.pageLike"));
 				dto.setPageDislike(rs.getInt("c.pageDislike"));
 				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
@@ -181,6 +270,10 @@ public class CommunityDAO extends ConnectPool {
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
 				dto.setNickName(rs.getString("m.nickName"));
+
+				dto.setSkill1(rs.getString("c.skill1"));
+				dto.setSkill2(rs.getString("c.skill2"));
+				dto.setSkill3(rs.getString("c.skill3"));
 			}
 		} catch (Exception e) {
 			System.out.println("Community 게시판 데이터 조회 오류!");
@@ -195,13 +288,16 @@ public class CommunityDAO extends ConnectPool {
 		int result = 0;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("INSERT INTO community (title, content, category, memberIdx) VALUES(?, ?, ?, ?)");
+		sb.append("INSERT INTO community (title, content, category, skill1, skill2, skill3, memberIdx) VALUES(?, ?, ?, ?, ?, ?, ?)");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getCategory());
-			psmt.setInt(4, dto.getMemberIdx());
+			psmt.setString(4, dto.getSkill1());
+			psmt.setString(5, dto.getSkill2());
+			psmt.setString(6, dto.getSkill3());
+			psmt.setInt(7, dto.getMemberIdx());
 			
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
@@ -237,13 +333,16 @@ public class CommunityDAO extends ConnectPool {
 		int result = 0;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE community SET title = ?, content = ?, category = ?, modifyDate = now()");
+		sb.append("UPDATE community SET title = ?, content = ?, category = ?, skill1 = ?, skill2 = ?, skill3 = ?, modifyDate = now()");
 		sb.append(" WHERE communityIdx = ?");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getCategory());
+			psmt.setString(4, dto.getSkill1());
+			psmt.setString(5, dto.getSkill2());
+			psmt.setString(6, dto.getSkill3());
 			psmt.setInt(4, dto.getCommunityIdx());
 			
 			result = psmt.executeUpdate();

@@ -148,6 +148,23 @@
                 <div><hr></div>
                 <div>
                     <ul>
+                    	<c:choose>
+                    		<c:when test="${not empty writeList }">
+                    			<c:forEach var="list" items="${writeList }" varStatus="loop">
+                    				<li>
+			                            <div class="top_writer">
+			                                <div>${list.memberId }</div>
+			                                <div class="smallBlue">${list.writeCnt } write</div>
+			                            </div>
+			                        </li>
+                    			</c:forEach>
+                    		</c:when>
+                    		<c:otherwise>
+                    			등록된 게시글이 없습니다.
+                    		</c:otherwise>
+                    		
+                    	</c:choose>
+                    <!-- 
                         <li>
                             <div class="top_writer">
                                 <div>작성자</div>
@@ -169,7 +186,7 @@
                         <li> <div class="top_writer">
                             <div>작성자</div>
                             <div class="smallBlue">20</div>
-                        </div></li>
+                        </div></li> -->
                     </ul>
                 </div>
                 
@@ -197,9 +214,13 @@
                                     	<div>${list.memberId }</div>
                                     	<div>·</div>
                                     	<div>${list.regDate }</div>
+                                    	<div>·</div>
+                                    	<div>${list.readCnt } read</div>
+                                    	<div>·</div>
+                                    	<div>${list.pageLike } likes</div>
 	                                </div>
 	                                <div class="content_title">
-	                                    <a href="/okky/board/qna/viewQnA.do?qnaIdx=${list.qnaIdx}">${list.content }</a>
+	                                    <a href="/okky/board/qna/viewQnA.do?qnaIdx=${list.qnaIdx}">${list.title }</a>
 	                                </div>
 	                            	</li>
 	                            	<li><hr></li>
@@ -231,9 +252,13 @@
 	                                    	<div>${list.memberId }</div>
 	                                    	<div>·</div>
 	                                    	<div>${list.regDate }</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.readCnt } read</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.pageLike } likes</div>
 	                                	</div>
 		                                <div class="content_title">
-		                                    <a href="/okky/board/commu/viewCommu.do?communityIdx=${list.communityIdx}">${list.content }</a>
+		                                    <a href="/okky/board/commu/viewCommu.do?communityIdx=${list.communityIdx}">${list.title }</a>
 		                                </div>
 	                           		</li>
 	                           		<li><hr></li>
@@ -257,6 +282,37 @@
                     </div>
                     <div>
                         <ul>
+                        <c:choose>
+	                    	<c:when test="${not empty likeList}">
+	                    		<c:forEach var="list" items="${likeList}" varStatus="loop">
+	                        		<li>
+	                                	<div class="writer">
+	                                    	<div>${list.memberId }</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.regDate }</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.readCnt } read</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.pageLike } likes</div>
+	                                	</div>
+		                                <div class="content_title">
+		                                    ${list.title }
+		                                </div>
+	                           		</li>
+	                           		<li><hr></li>
+                            </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                            	 <p>
+				                       등록된 게시물이 없습니다.
+				                 </p>
+                            </c:otherwise>
+	                    	</c:choose>
+                        
+                        
+                        
+                        
+                        <!-- 
                             <li>
                                 <div class="writer">
                                     <div>작성자</div>
@@ -310,73 +366,47 @@
                                 <div class="content_title">
                                     <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
                 <div class="content">
                     <div>
+                    <a href="/okky/board/commu/commu.do?category_3=category_3">
                         <div class="info">
                             <span>공지사항</span>	
                             <img src="https://okky.kr/notice.svg">		
                         </div>
+                        </a>
                     </div>
                     <div>
                         <ul>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
+                        	<c:choose>
+	                    	<c:when test="${not empty noticeList}">
+	                    		<c:forEach var="list" items="${noticeList}" varStatus="loop">
+	                        		<li>
+	                                	<div class="writer">
+	                                    	<div>${list.memberId }</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.regDate }</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.readCnt } read</div>
+	                                    	<div>·</div>
+	                                    	<div>${list.pageLike } likes</div>
+		                                	</div>
+		                                <div class="content_title">
+		                                    <a href="/okky/board/commu/viewCommu.do?communityIdx=${list.communityIdx}">${list.title }</a>
+		                                </div>
+	                           		</li>
+	                           		<li><hr></li>
+                            </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                            	 <p>
+				                       등록된 게시물이 없습니다.
+				                 </p>
+                            </c:otherwise>
+	                    	</c:choose>
                         </ul>
                     </div>
                 </div>

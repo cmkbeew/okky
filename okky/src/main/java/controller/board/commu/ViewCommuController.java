@@ -57,6 +57,9 @@ public class ViewCommuController extends HttpServlet {
 		int pageDislike = 0;
 		String category = "";
 		String memberId = "";
+		String skill1 = "";
+		String skill2 = "";
+		String skill3 = "";
 		
 		if (communityView != null) {
 			memberId = communityView.getMemberId();
@@ -68,6 +71,9 @@ public class ViewCommuController extends HttpServlet {
 			content = communityView.getContent();
 			pageLike = communityView.getPageLike();
 			pageDislike = communityView.getPageDislike();
+			skill1 = communityView.getSkill1();
+			skill2 = communityView.getSkill2();
+			skill3 = communityView.getSkill3();
 			content = (content != null ? content.replace("<br>", "\r\n") : "");
 			content = (content != null ? content.replace("&nbsp;", " ") : "");
 			category = communityView.getCategory();
@@ -85,6 +91,9 @@ public class ViewCommuController extends HttpServlet {
 		params.put("pageLike", pageLike);
 		params.put("pageDislike", pageDislike);
 		params.put("category", category);
+		params.put("skill1", skill1);
+		params.put("skill2", skill2);
+		params.put("skill3", skill3);
 		
 		
 		

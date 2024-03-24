@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Community 게시글 조회</title>
 <style>
         #body {
             display: flex;
@@ -193,9 +193,9 @@
                 <div id="tagAndGood">
                     <div id="tags">
                         <ul>
-                            <li>#태그1</li>
-                            <li>#태그2</li>
-                            <li>#태그3</li>
+                            <li>#${params.skill }</li>
+                            <li>#${params.skill2 }</li>
+                            <li>#${params.skill3 }</li>
                         </ul>
                     </div>
                     <div id="goods">
