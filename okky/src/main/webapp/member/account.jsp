@@ -326,6 +326,7 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
         </div>
     </div>
 </div>
+<jsp:include page="/common/footer.jsp" />
 <script>
 let check = document.getElementById("accountCkbox");
 check.addEventListener("click", function(e){

@@ -220,7 +220,6 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                    	<!-- <form id="resumeDownFrm" name="resumeDownFrm" method="get" enctype="multipart/form-data"> -->
 	                    	<c:choose>
 								<c:when test="${not empty applicantList }">
 									<c:forEach var="list" items="${applicantList }" varStatus="loop">
@@ -242,7 +241,6 @@
 								</tr>
 								</c:otherwise>
 							</c:choose>
-							<!-- </form> -->
 	                    </tbody>
 	                </table>
 	

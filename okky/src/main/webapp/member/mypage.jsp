@@ -251,6 +251,7 @@
         </div>
     </div>
 </div>
+<jsp:include page="/common/footer.jsp" />
 <script>
     
     let nickname = document.getElementById("nickname");

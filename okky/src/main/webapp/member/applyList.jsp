@@ -332,7 +332,6 @@
         let fileUpload = document.getElementById("fileUpload");
         let ment = document.getElementById("fileMent");
         let saveBtn = document.getElementById("saveBtn");
-        alert(${orgFileName});
         fileUpload.addEventListener("change", ()=>{
             if(fileUpload.value.length) {
                 ment.style.display = "block";
