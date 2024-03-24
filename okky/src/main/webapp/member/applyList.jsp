@@ -3,23 +3,26 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>계정관리</title>
     <style>
         * {
-            margin :0;
+            margin: 0;
             padding: 0;
             list-style: none;
             text-decoration: none;
             box-sizing: border-box;
         }
+
         #container {
             margin: 0 auto;
             width: 1200px;
             height: 1100px;
         }
+
         /* 사이드바 영역 */
         #sidebar {
             border-right: 1px solid rgb(158, 158, 158);
@@ -29,14 +32,17 @@
             display: block;
             float: left;
         }
+
         h3 {
             font-size: 25px;
             font-weight: bold;
             margin-bottom: 10px;
         }
-        #sidebar a{
+
+        #sidebar a {
             color: black;
         }
+
         #sidebar li {
             font-size: 16px;
             display: block;
@@ -44,21 +50,24 @@
             line-height: 60px;
             padding: 5px 10px;
         }
-        #sidebar a[href *= "job"] > li  {
+
+        #sidebar a[href *="apply"]>li {
             background-color: #d2d2d2;
             transition: 0.3s;
             opacity: 0.8;
-            border-radius : 20px;
+            border-radius: 20px;
         }
+
         #sidebar li img {
             transform: translateY(8px);
             margin: 0 3px;
         }
+
         .detail:hover {
             background-color: #d2d2d2;
             transition: 0.3s;
             opacity: 0.8;
-           	border-radius : 20px;
+            border-radius: 20px;
         }
 
         /* 본문 영역 */
@@ -67,33 +76,56 @@
             height: 100%;
             float: left;
             display: grid;
+            /*  place-items : center; */
             grid-template-rows: 400px 1px 700px;
         }
+
         .label {
             margin-top: 10px;
             clear: both;
             width: 100%;
         }
+
         /* 찐 본문 내용 */
-        #container1{
+        #container1 {
             grid-row: 1 /2;
             display: flex;
+            flex-direction: row;
         }
+
         #innnerContainer {
             display: flex;
             align-items: center;
         }
-        #resumeBox{
+		#resumeRegiFrm{
+			width : 800px;
+            display: flex;
+		}
+        #resumeBox {
             display: flex;
             border: 1px solid rgb(184, 184, 184);
             width: 500px;
             height: 300px;
             border-radius: 20px;
             background-color: #f1f1f1;
-            justify-content: space-around;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
+
             margin: 60px;
         }
+        #resumBoxBG {
+            background-color: white;
+            width: 300px;
+            height: 200px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+       
         .divLine {
             border: 1px solid lightgray;
             grid-row: 2 /3;
@@ -101,25 +133,31 @@
 
         /* 파일 */
         #filebox {
-        width: 200px;
-        height: 40px;
-        background: #fff;
-        border: 1px solid rgb(43, 43, 43);
-        color: rgb(43, 43, 43);
-        border-radius: 10px;
-        font-weight: 500;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &:hover {
-            background-color: rgb(43, 43, 43);
-            color: #fff;
+            width: 200px;
+            height: 40px;
+            background: #fff;
+            border: 1px solid rgb(43, 43, 43);
+            color: rgb(43, 43, 43);
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &:hover {
+                background-color: rgb(43, 43, 43);
+                color: #fff;
+            }
         }
-        }   
+
         #fileUpload {
-        display: none;
+            display: none;
         }
+        #fileMent {
+            display: none;
+        }
+
         #saveBtn {
             font-size: 15px;
             width: 100px;
@@ -131,10 +169,12 @@
             cursor: pointer;
             background-color: #71c1ff;
         }
+
         #saveBtn:hover {
             border: 2px solid #55a3de;
             background-color: #55a3de;
         }
+
         #saveBtn:disabled {
             border: 2px solid #b0b0b0;
             background-color: #b0b0b0;
@@ -142,131 +182,175 @@
         }
         .saveBtnArea {
             display: flex;
-            align-items: flex-end
+            align-items: flex-end;
+            width : 180px;
         }
+
         /* 지원영역 */
-        #container2{
+        #container2 {
             grid-row: 3/4;
             display: flex;
         }
+
         #jobList {
             margin: 30px 0;
             width: 800px;
             display: flex;
             justify-content: center;
         }
+
         #listTbl {
             width: 700px;
         }
-        #listTbl, th, td, tr {
-            border:1px solid grey;
+
+        #listTbl,
+        th,
+        td,
+        tr {
+            border: 1px solid grey;
             border-collapse: collapse;
-            padding :10px;
+            padding: 10px;
             font-size: 18px;
         }
+
         #listTbl th {
             background-color: #0090ff;
             border: none;
-            color:white ;
+            color: white;
         }
+
         .linkBtn {
             width: 80px;
             height: 35px;
-            background-color:#0090ff ;
+            background-color: #0090ff;
             border: none;
             box-shadow: 2px 2px 5px grey;
             cursor: pointer;
             border-radius: 3px;
         }
+
         .linkBtn:hover {
-            background-color:#0061ac ;
+            background-color: #0061ac;
         }
+
         .lastCol {
             text-align: center;
         }
     </style>
-    
+
 </head>
+
 <body>
     <jsp:include page="/common/header.jsp" />
-	<div id="container">
-	    <aside id="sidebar">
-	        <div>
-	            <ul>
-	                <li><h3>내 계정</h3></li>
-	                <a href="./mypage.do"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
-	                <a href="./account.do"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
-	            </ul>
-	            <hr>
-	            <ul>
-	                <li><h3>JOBS</h3></li>
-	                <a href="./applyList.do"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
-	            </ul>
-	        </div>
-	    </aside>
-	    <div id="outer">
-	        <div id="container1">
-	            <div id="innnerContainer">
-	                <div id="resumeBox">
-	                    <label for="fileUpload">
-	                        <div id="filebox">이력서 파일 업로드</div>
-	                    </label>
-	                    <input type="file" id="fileUpload" name="fileUpload" accept=".pdf">
-	                    <p></p>
-	                </div>
-	            </div>
-	            <div class="saveBtnArea">
-	                <input type="submit" id="saveBtn" name="saveBtn" value="저장" disabled>
-	            </div>
-	        </div>
-	        <div class="divLine"></div>
-	        <div id="container2">
-	            <div id="jobList">
-	                <table id="listTbl">
-	                    <thead>
-	                        <tr>
-	                            <th>공고번호</th>
-	                            <th>지원 공고 제목</th>
-	                            <th>마감일</th>
-	                            <th>공고조회</th>
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-	                    
-	                    	<c:choose>
-								<c:when test="${not empty applyList }">
-									<%-- <c:set var="row_num" value="${params.total_count - (params.page_no -1) * params.page_size}"/> --%>
-									<c:forEach var="list" items="${applyList }" varStatus="loop">
-									<tr>
-										<td>${ list.recruitIdx }</td>
-										<td>${list.recruitTitle}</td>
-										<%-- td><지원 공고 제목${list.user_id}</td> --%>
-										<td>${list.dueDate}</td>
-										<%-- <td>${list.reg_date}</td> --%>
-										<td class="lastCol"><button class="linkBtn" name="linkBtn">조회</button></td>
-									</tr>
-									<%-- <c:set var="row_num" value="${row_num = row_num -1 }" /> --%>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-								<tr>
-									<td colspan="4" style="text-align: center;">지원한 공고 목록이 없습니다.</td>
-								</tr>
-								</c:otherwise>
-							</c:choose>
-	                    </tbody>
-	                </table>
-	
-	            </div>
-	        </div>
-	    </div>
-	</div>
-	 <jsp:include page="/common/footer.jsp" />
-	<script>
-	    /* document.getElementById("fileUpload").addEventLister("change",function(e){
-	        alert("확인");
-	    }); */
-	</script>
-	
+    <div id="container">
+        <aside id="sidebar">
+            <div>
+                <ul>
+                    <li>
+                        <h3>내 계정</h3>
+                    </li>
+                    <a href="./mypage.do">
+                        <li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li>
+                    </a>
+                    <a href="./account.do">
+                        <li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li>
+                    </a>
+                </ul>
+                <hr>
+                <ul>
+                    <li>
+                        <h3>JOBS</h3>
+                    </li>
+                    <a href="./applyList.do">
+                        <li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li>
+                    </a>
+                </ul>
+            </div>
+        </aside>
+        <div id="outer">
+            <div id="container1">
+                <form id="resumeRegiFrm" name="resumeRegiFrm" action="regiResume.do" method="post"  enctype="multipart/form-data">
+                    <div id="innnerContainer">
+                        <div id="resumeBox">
+                            <div id="resumBoxBG">
+                                <p id="fileMent">${orgFileName}</p>
+                                    <label for="fileUpload">
+                                        <div id="filebox">이력서 파일 업로드</div>
+                                    </label>
+                                    <input type="file" id="fileUpload" name="file" accept=".pdf">
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="saveBtnArea">
+                        <input type="submit" id="saveBtn" name="saveBtn" value="저장" disabled>
+                    </div>
+                </form>
+            </div>
+            <div class="divLine"></div>
+            <div id="container2">
+                <div id="jobList">
+                    <table id="listTbl">
+                        <thead>
+                            <tr>
+                                <th>공고번호</th>
+                                <th>지원 공고 제목</th>
+                                <th>마감일</th>
+                                <th>공고조회</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <c:choose>
+                                <c:when test="${not empty applyList }">
+                                    <!-- <c:set var="row_num" value="${params.total_count - (params.page_no -1) * params.page_size}"/>  -->
+                                    <c:forEach var="list" items="${applyList }" varStatus="loop">
+                                        <tr>
+                                            <td>${list.recruitIdx }</td>
+                                            <td>${list.recruitTitle}</td>
+                                            <td>${list.dueDate}</td>
+                                            <td class="lastCol"><button class="linkBtn" name="linkBtn">조회</button></td>
+                                        </tr>
+                                        <!-- <%-- <c:set var="row_num" value="${row_num = row_num -1 }" /> --%> -->
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <tr>
+                                        <td colspan="4" style="text-align: center;">지원한 공고 목록이 없습니다.</td>
+                                    </tr>
+                                </c:otherwise>
+                            </c:choose>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <jsp:include page="/common/footer.jsp" />
+    <script>
+        let fileUpload = document.getElementById("fileUpload");
+        let ment = document.getElementById("fileMent");
+        let saveBtn = document.getElementById("saveBtn");
+        alert(${orgFileName});
+        fileUpload.addEventListener("change", ()=>{
+            if(fileUpload.value.length) {
+                ment.style.display = "block";
+                ment.style.color = "blue";
+                ment.innerHTML = `<strong>`+fileUpload.files[0].name+`</strong>`;
+                alert(ment.innerHTML);
+	        	saveBtn.disabled = false;
+            }
+            else {
+            	
+                /* ment.style.display = "none"; */
+            }
+        }); 
+        saveBtn.addEventListener("click", function(e){
+        	alert("이력서 파일이 업르드 되었습니다.");
+        });
+    </script>
+
 </body>
+
 </html>

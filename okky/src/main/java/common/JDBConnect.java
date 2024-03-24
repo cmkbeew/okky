@@ -18,11 +18,9 @@ public class JDBConnect {
 	public JDBConnect() {
 		try {
 			Class.forName("org.mariadb.jdbc.Driver");
-			
 			String url = "jdbc:mariadb://192.168.45.34:3306/okky";
 			String dbId = "okky";
 			String dbPwd = "cjswo2";
-			
 			conn = DriverManager.getConnection(url, dbId, dbPwd);
 			System.out.println("DB 연결 성공 - 기본 생성자");
 		} catch(Exception e) {

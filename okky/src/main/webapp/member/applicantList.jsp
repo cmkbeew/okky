@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -43,7 +44,7 @@
             line-height: 60px;
             padding: 5px 10px;
         }
-        #sidebar a[href *= "job"] > li  {
+        #sidebar a[href *= "applicant"] > li  {
             background-color: #d2d2d2;
             transition: 0.3s;
             opacity: 0.8;
@@ -66,6 +67,7 @@
             height: 100%;
             float: left;
             display: grid;
+            place-items: center;
             grid-template-rows: 400px 1px 700px;
         }
         .label {
@@ -199,7 +201,7 @@
 	            <hr>
 	            <ul>
 	                <li><h3>JOBS</h3></li>
-	                <a href="./applicant.do"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
+	                <a href="./applicantList.do"><li class="detail"><img src="../img/briefcase.png" alt="구직관리아이콘">구직 내역 관리</li></a>
 	            </ul>
 	        </div>
 	    </aside>
@@ -209,24 +211,38 @@
 	                <table id="listTbl">
 	                    <thead>
 	                        <tr>
-	                            <th>지원자</th>
+	                            <th>지원자 이름</th>
 	                            <th>지원 공고 제목</th>
-	                            <th>아이디</th>
-	                            <th>마감일</th>
+	                            <th>지원자 이메일</th>
+	                            <th>지원 일자</th>
+	                            <th>마감 일자</th>
 	                            <th>이력서 조회</th>
 	                        </tr>
 	                    </thead>
 	                    <tbody>
-	                        <tr>
-	                            <td colspan="5" style="text-align: center;">지원한 사람 목록이 없습니다</td>
-	                        </tr>
-	                        <tr>
-	                            <td>이름</td>
-	                            <td>지원 공고 제목</td>
-	                            <td>id</td>
-	                            <td>마감일</td>
-	                            <td class="lastCol"><button class="linkBtn" name="linkBtn">조회</button></td>
-	                        </tr>
+	                    	<!-- <form id="resumeDownFrm" name="resumeDownFrm" method="get" enctype="multipart/form-data"> -->
+	                    	<c:choose>
+								<c:when test="${not empty applicantList }">
+									<c:forEach var="list" items="${applicantList }" varStatus="loop">
+									<tr>
+										<td>${list.name}</td>
+										<td>${list.recruitTitle}</td>
+										<td>${list.email}</td>
+										<td>${list.regDate}</td>
+										<td>${list.dueDate}</td>
+										<td style="display:none;">${list.orgCompanyFile}</td>
+										<td style="display:none;">${list.saveCompanyFile}</td>
+										<td class="lastCol"><button class="linkBtn" name="linkBtn" onclick="location.href='resumeDown.do?orgCompanyFile=${list.orgCompanyFile}&saveCompanyFile=${list.saveCompanyFile}'">조회</button></td>
+									</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+								<tr>
+									<td colspan="6" style="text-align: center;">지원한 공고 목록이 없습니다.</td>
+								</tr>
+								</c:otherwise>
+							</c:choose>
+							<!-- </form> -->
 	                    </tbody>
 	                </table>
 	
@@ -236,6 +252,7 @@
 	</div>
 	<jsp:include page="/common/footer.jsp" />
 	<script>
+	
 	</script>
 </body>
 </html>

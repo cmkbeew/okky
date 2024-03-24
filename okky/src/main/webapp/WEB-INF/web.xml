@@ -19,11 +19,11 @@
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
-    <param-value>okky</param-value>
+    <param-value>root</param-value>
   </context-param>
   <context-param>
     <param-name>dbPwd</param-name>
-    <param-value>cjswo2</param-value>
+    <param-value>1234</param-value>
   </context-param>
   <servlet>
     <servlet-name>RegistController</servlet-name>
@@ -208,13 +208,13 @@
   <servlet-mapping>
     <servlet-name>JobMainController</servlet-name>
     <url-pattern>/jobs/jobMain.do</url-pattern>
-    </servlet-mapping>
-   <servlet>
-    <servlet-name>ApplicantList</servlet-name>
-    <servlet-class>controller.member.ApplicantList</servlet-class>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ApplicantListController</servlet-name>
+    <servlet-class>controller.member.ApplicantListController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ApplicantList</servlet-name>
+    <servlet-name>ApplicantListController</servlet-name>
     <url-pattern>/member/applicantList.do</url-pattern>
   </servlet-mapping>
   <servlet>
@@ -272,5 +272,13 @@
   <servlet-mapping>
     <servlet-name>JobModifyController</servlet-name>
     <url-pattern>/jobs/jobModify.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegiResumeController</servlet-name>
+    <servlet-class>controller.member.RegiResumeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegiResumeController</servlet-name>
+    <url-pattern>/member/regiResume.do</url-pattern>
   </servlet-mapping>
 </web-app>

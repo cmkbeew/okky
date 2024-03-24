@@ -273,41 +273,35 @@ public class MemberDAO extends ConnectPool {
 		}
 		return result;
 	}
-//일반회원 지원테이블 구성
-//	public MemberDTO applyTable (String memberId, String pwd) {
-//		MemberDTO dto = new MemberDTO();
-//		StringBuilder sb = new StringBuilder();
-//		sb.append("SELECT RS.recruitIdx, RS.recruitTitle, RS.dueDate");
-//		sb.append(" FROM recruit AS RS");
-//		sb.append(" INNER JOIN member AS MB ON RS.memberIdx = MB.memberIdx" );
-//		sb.append(" WHERE MB.memberIdx = ?;" );
-//		
-//		try {
-//			psmt = conn.prepareStatement(sb.toString());
-//			System.out.println(psmt);
-//			
-//			rs = psmt.executeQuery();
-//			
-//			if(rs.next()) {
-//				if(rs.getString("").equals(name)) {
-//					
-//				 } 
-//			}
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			System.out.println("기업 회원 조회 시 에러 발생");
-//		}
-	//	return dto;
-	//}
 	
+//	이력서 파일 입력
+	public int registerResume (MemberDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE member SET orgCompanyFIle=?, saveCompanyFile=?");
+		sb.append(" WHERE memberId =?");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getOrgCompanyFile());
+			psmt.setString(2, dto.getSaveCompanyFile());
+			psmt.setString(3, dto.getMemberId());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("이력서 파일 업로드 중 에러 발생");
+		}
+		return result;
+	}
+	
+//개인회원 구인지원 리스트 확인	
 	public List<ApplyTableDTO> applyList(Map<String, Object> map) {
 		List<ApplyTableDTO> list = new Vector<ApplyTableDTO>();
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT RS.recruitIdx, RS.recruitTitle, RS.dueDate, RS.memberIdx, MB.memberId");
-		sb.append(" FROM recruit AS RS");
-		sb.append(" INNER JOIN member AS MB ON RS.memberIdx = MB.memberIdx" );
+		sb.append("SELECT RC.recruitIdx, RC.recruitTitle, RC.dueDate, RC.memberIdx, MB.memberId");
+		sb.append(" FROM recruit AS RC");
+		sb.append(" INNER JOIN member AS MB ON RC.memberIdx = MB.memberIdx" );
 		sb.append(" WHERE MB.memberId = ?" );
-		sb.append(" ORDER BY RS.recruitIdx");
+		sb.append(" ORDER BY RC.recruitIdx");
 	
 		try {			
 			psmt = conn.prepareStatement(sb.toString());
@@ -316,43 +310,53 @@ public class MemberDAO extends ConnectPool {
 			
 			while(rs.next()) {
 				ApplyTableDTO dto = new ApplyTableDTO();
-				dto.setMemberIdx(rs.getInt("RS.memberIdx"));
-				dto.setRecruitIdx(rs.getInt("RS.recruitIdx"));
-				dto.setRecruitTitle(rs.getString("RS.recruitTitle"));
-				dto.setDueDate(rs.getString("RS.dueDate"));
+				dto.setMemberIdx(rs.getInt("RC.memberIdx"));
+				dto.setRecruitIdx(rs.getInt("RC.recruitIdx"));
+				dto.setRecruitTitle(rs.getString("RC.recruitTitle"));
+				dto.setDueDate(rs.getString("RC.dueDate"));
 		
 				list.add(dto);
 			}
 		} catch(Exception e) {
-			System.out.println("게시물 리스트 조회 에러");
+			System.out.println("지원 리스트 조회 에러");
 			e.printStackTrace();
 		}
 		return list;
 	}
+//	기업회원 지원자 리스트 확인
 	public List<ApplyTableDTO> applicantList(Map<String, Object> map) {
 		List<ApplyTableDTO> list = new Vector<ApplyTableDTO>();
 		StringBuilder sb = new StringBuilder();
-		
-	
+		sb.append("SELECT MB.name, MB.email,MB.memberId, RC.recruitTitle, RC.dueDate, AI.regDate"); 
+		sb.append(", RC.recruitIdx, RC.memberIdx, MB.orgCompanyFile, MB.saveCompanyFile"); 
+		sb.append(", (SELECT distinct MB.memberId FROM member AS MB");
+		sb.append(" INNER JOIN recruit AS RC ON RC.memberIdx = MB.memberIdx WHERE MB.memberId = ? )AS comId") ;
+		sb.append(" FROM member AS MB");
+		sb.append(" INNER JOIN applyinfo AS AI on MB.memberIdx = AI.memberIdx");
+		sb.append(" INNER JOIN recruit AS RC ON RC.recruitIdx = AI.recruitIdx");
+
 		try {			
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, map.get("memberId").toString());
 			rs = psmt.executeQuery();
-			
 			while(rs.next()) {
 				ApplyTableDTO dto = new ApplyTableDTO();
-				dto.setMemberIdx(rs.getInt("RS.memberIdx"));
-				dto.setRecruitIdx(rs.getInt("RS.recruitIdx"));
-				dto.setRecruitTitle(rs.getString("RS.recruitTitle"));
-				dto.setDueDate(rs.getString("RS.dueDate"));
+				dto.setName(rs.getString("MB.name"));
+				dto.setRecruitTitle(rs.getString("RC.recruitTitle"));
+				dto.setEmail(rs.getString("MB.email"));
+				dto.setDueDate(rs.getString("RC.dueDate"));
+				dto.setRegDate(rs.getString("AI.regDate"));
+				dto.setMemberId((rs.getString("MB.memberId")));
+				dto.setOrgCompanyFile(rs.getString("MB.orgCompanyFIle"));
+				dto.setSaveCompanyFile(rs.getString("MB.saveCompanyFile"));
 		
 				list.add(dto);
 			}
 		} catch(Exception e) {
-			System.out.println("게시물 리스트 조회 에러");
+			System.out.println("지원자 리스트 조회 에러");
 			e.printStackTrace();
 		}
 		return list;
 	}
-	
+
 }
