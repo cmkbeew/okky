@@ -8,8 +8,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
+import board.CommentDAO;
+import board.CommentDTO;
 import board.CommunityDAO;
 import board.CommunityDTO;
 
@@ -29,7 +33,7 @@ public class ViewCommuController extends HttpServlet {
 		
 		
 		CommunityDTO communityView = new CommunityDTO();
-
+		List<CommentDTO> cList = new Vector<CommentDTO>();
 
 		
 		if (communityIdx > 0) {
@@ -39,6 +43,14 @@ public class ViewCommuController extends HttpServlet {
 			dao.updateReadCnt(communityIdx); 
 			dao.close(); //여기서 안닫으면 BbsDAO에서 커넥션 맺은 후 거기에 일일히 다 쳐서 닫아야해. if(rs != null) rs.close() 이런거
 			
+			CommentDAO cDao = new CommentDAO();
+			cList = cDao.getCommunityCommentList(communityIdx);
+			for(CommentDTO comment : cList) {
+				comment.setCommentContent(comment.getCommentContent().replace("\r\n", "<br>"));
+				comment.setCommentContent(comment.getCommentContent().replace(" ", "&nbsp;"));
+			}
+			
+			cDao.close();
 		}  else {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
@@ -99,10 +111,12 @@ public class ViewCommuController extends HttpServlet {
 		
 		request.setAttribute("params", params);
 		
+		// 댓글
+		request.setAttribute("cList", cList);
+		
 		request.getRequestDispatcher("/board/commu/viewCommunity.jsp").forward(request,  response);
 	}
 
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

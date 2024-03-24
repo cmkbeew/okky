@@ -287,6 +287,22 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>JobDeleteController</servlet-name>
-    <url-pattern>/jobs/jobDelete.do</url-pattern>	
+    <url-pattern>/jobs/jobDelete.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WriteCommentQnaController</servlet-name>
+    <servlet-class>controller.board.qna.WriteCommentQnaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteCommentQnaController</servlet-name>
+    <url-pattern>/board/qna/writeQnaComment.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WriteCommentCommuController</servlet-name>
+    <servlet-class>controller.board.commu.WriteCommentCommuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteCommentCommuController</servlet-name>
+    <url-pattern>/board/commu/writeCommuComment.do</url-pattern>
   </servlet-mapping>
 </web-app>
