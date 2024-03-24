@@ -31,15 +31,10 @@ public class ApplyListController extends HttpServlet {
 
 		//게시판 테이블 조회
 		MemberDAO dao = new MemberDAO();
-		
 		List<ApplyTableDTO> applyList = dao.applyList(params);
 		dao.close();
-		
-		
 		req.setAttribute("applyList", applyList);
-
 		req.getRequestDispatcher("./applyList.jsp").forward(req,resp);
-		/* resp.sendRedirect("./jobdetail.jsp"); */
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
