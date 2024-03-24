@@ -31,6 +31,9 @@
         border-radius: 20px;
         margin: 0 auto;
     }
+    .reset-btn {
+        margin: 0 10px;
+    }
     .search-icon {
         margin: 0 20px;
     }
@@ -50,7 +53,6 @@
     	display: flex;
     	align-items: center;
     }
-    
     .btn-regist {
     	width: 100px;
     	padding: 5px 0px;
@@ -59,7 +61,6 @@
         border: none;
         font-size: 16px;
     }
-
  	.btn-regist:hover {
     	background-color: lightblue;
     }
@@ -94,8 +95,8 @@
         position: absolute;
         padding: 0;
         left: 0;
-        width: 240px;
-        max-height: 400px;
+        width: 100px;
+        max-height: 210px;
         border-radius: 8px;
         background-color: white;
         opacity: 0;  
@@ -107,33 +108,44 @@
     .filter.is-open .filter-menu {
         visibility: visible;  
         transform: translate3d(0, 0, 0); 
-        opacity: 1;  
+        opacity: 1;
+        text-align: left;
     }
     .filter-option {
         padding: 16px 24px;
+        margin: 0px 10px;
     }
     .filter-btn {
         width: 100%;
         height: 35px;
         border: none;
-        font-size: 18px;
+        font-size: 16px;
+        line-height: 35px;
     }
-    .filter-btn:hover {
-        background-color: #d8d8d8;
-    }
+
     /* 카운트 + 정렬버튼 */
     .count {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 30px;
+    }
+    .filter-sort {
+        width: 100px;
+        height: 35px;
+        border: none;
+        font-size: 16px;
+        background-color: white;
+    }
+    .filter-sort:hover {
+        background-color: black;
+        color: white;
     }
     /* 회사 리스트 */
     .company-group {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 40px 40px;
-        margin-bottom: 30px;
+        margin: 30px 0px;
     }
     .company {
         box-shadow: 3px 5px 5px gray;
@@ -163,7 +175,9 @@
         <hr>
 
         <div>
-            <form class="frmSearch">
+            <form id="frmSearch" class="frmSearch" action="./jobList.do" method="get">
+            	<input type="hidden" name="contractType" id="contractType" value="${maps.contractType}">
+            	<input type="hidden" name="sort" id="sort" value="${sort}">
                 <div class="search-bar">
                     <div class="search-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search-heart" viewBox="0 0 16 16">
@@ -172,56 +186,66 @@
                           </svg>
                     </div>
                     <div class="bar">
-                        <input class="search-word" type="text" name="search-word" id="search-word" placeholder="Search Keywords" />
+                        <input class="search-word" type="text" name="search_word" id="search_word" placeholder="Search Keywords" />
+                    </div>
+                    <div class="reset-btn">
+                        <button type="reset">X</button>
                     </div>
                     <div class="search-icon">
                         <button class="btn_search" type="submit">Search</button>
                     </div>
                 </div>
-            </form>
+<!--             </form> -->
         </div>
 		<div class="mid-group">
 	        <div class="filter-group">
 	            <div class="filter">
-	                <button class="filter-toggle">포지션</button>
+	                <button type="button" class="filter-toggle">포지션</button>
 	                <ul class="filter-menu">
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">프론트</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">백엔드</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">DBA</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">풀스택</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">PM</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">기타</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="position_category" value="프론트">프론트</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="position_category" value="백엔드">백엔드</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="position_category" value="DBA">DBA</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="position_category" value="풀스택">풀스택</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="position_category" value="PM">PM</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="position_category" value="기타">기타</li>
 	                </ul>
 	            </div>
 	            
 	            <div class="filter">
-	                <button class="filter-toggle">지역</button>
+	                <button type="button" class="filter-toggle">지역</button>
 	                <ul class="filter-menu">
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">서울</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">경기</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">인천</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">강원</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">충북</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">충남</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">전북</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">전남</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">경북</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">경남</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">제주</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="서울">서울</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="경기">경기</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="인천">인천</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="대구">대구</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="부산">부산</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="광주">광주</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="대전">대전</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="울산">울산</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="세종">세종</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="강원">강원</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="충남">충남</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="충북">충북</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="경남">경남</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="경북">경북</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="전남">전남</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="전북">전북</li>
+	                	<li class="filter-btn"><input type="radio" class="filter-option" name="addr_category" value="제주">제주</li>
 	                </ul>
 	            </div>
 	            
 	            <div class="filter">
-	                <button class="filter-toggle">경력</button>
+	                <button type="button" class="filter-toggle">경력</button>
 	                <ul class="filter-menu">
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">무관</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">신입</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">1~2년</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">3~4년</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">5~6년</li>
-	                	<li class="filter-btn"><input type="checkbox" class="filter-option">7년 이상</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="career_category" value="무관">무관</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="career_category" value="신입">신입</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="career_category" value="1~2년">1~2년</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="career_category" value="3~4년">3~4년</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="career_category" value="5~6년">5~6년</li>
+	                	<li class="filter-btn"><input type="checkbox" class="filter-option" name="career_category" value="7년 이상">7년 이상</li>
 	                </ul>
 	            </div>
+	        </form>
 	        </div>
 			<c:if test='${sessionScope.type eq "2"}'>
 		        <div class="regist">
@@ -231,13 +255,17 @@
         </div>
         
         <div class="count">
-            <div style="font-size: 16px;"><span style="font-size:20px; font-weight:bold">${contractType}</span> 총 ${total_count}개의 포지션</div>
+            <div style="font-size: 16px;"><span style="font-size:20px; font-weight:bold">
+            	<c:if test="${maps.contractType eq 'fulltime'}">정규직</c:if>
+            	<c:if test="${maps.contractType eq 'contract'}">계약직</c:if>
+            	</span> 총 ${maps.total_count}개의 포지션
+            </div>
 
             <div class="filter"  style="margin: 0px;">
                 <button class="filter-toggle">정렬</button>
-                <ul class="filter-menu">
-                    <button class="filter-btn"><li class="filter-option">최신순</li></button>
-                    <button class="filter-btn"><li class="filter-option">오래된순</li></button>
+                <ul class="filter-menu" style="margin: 0; width: 100px;">
+                    <button id="recent" class="filter-sort" onclick="jobOrder(this)"><li class="filter-by">최신순</li></button>
+                    <button id="old" class="filter-sort" onclick="jobOrder(this)"><li class="filter-by">오래된순</li></button>
                 </ul>
             </div>
         </div>
@@ -257,8 +285,8 @@
         </div>
         
         <hr>
-	    <div style="font-size:40px; text-align:center; margin-bottom: 50px;">
-	    	페이징처리
+	    <div style="font-size:20px; text-align:center; margin-bottom: 50px;">
+                <div id="paging">${maps.paging}</div>
 	    </div>
     </div>
     
@@ -290,9 +318,16 @@
 		  button.addEventListener("click", toggleFilterMenu);
 		});
 		
+		// 공고 등록
 		document.querySelector("#btn_regist").addEventListener("click", function(e){
             location.href = "/okky/jobs/jobRecruit.do";
         });
+		
+		// 공고 정렬
+		function jobOrder(btn) {
+			let contractType = "${contractType eq '정규직'}" ? "fulltime" : "contract";
+			window.location.href = "/okky/jobs/jobList.do?contractType=" + contractType + "&sort=" + btn.id;
+		}
     </script>
 </body>
 </html>

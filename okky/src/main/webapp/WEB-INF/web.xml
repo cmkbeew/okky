@@ -15,7 +15,7 @@
   </context-param>
   <context-param>
     <param-name>URL</param-name>
-    <param-value>jdbc:mariadb://192.168.45.34:3306/okky</param-value>
+    <param-value>jdbc:mariadb://localhost:3306/okky</param-value>
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
@@ -208,8 +208,8 @@
   <servlet-mapping>
     <servlet-name>JobMainController</servlet-name>
     <url-pattern>/jobs/jobMain.do</url-pattern>
-    </servlet-mapping>
-   <servlet>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>ApplicantList</servlet-name>
     <servlet-class>controller.member.ApplicantList</servlet-class>
   </servlet>
@@ -272,5 +272,13 @@
   <servlet-mapping>
     <servlet-name>JobModifyController</servlet-name>
     <url-pattern>/jobs/jobModify.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>JobDeleteController</servlet-name>
+    <servlet-class>controller.jobs.JobDeleteController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobDeleteController</servlet-name>
+    <url-pattern>/jobs/jobDelete.do</url-pattern>	
   </servlet-mapping>
 </web-app>

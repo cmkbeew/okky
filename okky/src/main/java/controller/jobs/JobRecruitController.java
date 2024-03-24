@@ -34,6 +34,7 @@ public class JobRecruitController extends HttpServlet {
 		String salary = req.getParameter("salary");
 		String position = req.getParameter("position");
 		String contractType = req.getParameter("contractType");
+		contractType = contractType.equals("정규직") ? "fulltime" : "contract";
 		String career = req.getParameter("career");
 		String recruitContent = req.getParameter("recruitContent");
 		

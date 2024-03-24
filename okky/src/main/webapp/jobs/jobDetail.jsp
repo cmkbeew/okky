@@ -168,19 +168,19 @@
 	<jsp:include page="../common/footer.jsp" />
     <script>
         document.querySelector("#btn_apply").addEventListener("click", function(e){
-            location.href = "/apply.do";
+            window.location.href = "/apply.do";
         });
 
         document.querySelector("#btn_resume").addEventListener("click", function(e){
-            location.href = "/okky/member/mypage.do";
+            window.location.href = "/okky/member/mypage.do";
         });
         
         document.querySelector("#btn_update").addEventListener("click", function(e){
-            location.href = "/okky/jobs/jobModify.do?recruitIdx=${jobView.recruitIdx}";
+            window.location.href = "/okky/jobs/jobModify.do?recruitIdx=${jobView.recruitIdx}";
         });
         
         document.querySelector("#btn_delete").addEventListener("click", function(e){
-            location.href = "/okky/jobs/jobDelete.do?recruitIdx=${jobView.recruitIdx}";
+            window.location.href = "/okky/jobs/jobDelete.do?recruitIdx=${jobView.recruitIdx}";
         });
     </script>
 </body>
