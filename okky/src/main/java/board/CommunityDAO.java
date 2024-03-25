@@ -340,7 +340,7 @@ public class CommunityDAO extends ConnectPool {
 			psmt.setString(4, dto.getSkill1());
 			psmt.setString(5, dto.getSkill2());
 			psmt.setString(6, dto.getSkill3());
-			psmt.setInt(4, dto.getCommunityIdx());
+			psmt.setInt(7, dto.getCommunityIdx());
 
 			result = psmt.executeUpdate();
 		} catch (Exception e) {
