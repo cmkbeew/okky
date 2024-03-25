@@ -319,65 +319,6 @@
 				                 </p>
                             </c:otherwise>
 	                    	</c:choose>
-                        
-                        
-                        
-                        
-                        <!-- 
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li>
-                                <li><hr></li>
-                            <li>
-                                <div class="writer">
-                                    <div>작성자</div>
-                                    <div>·</div>
-                                    <div>작성일</div>
-                                </div>
-                                <div class="content_title">
-                                    <a href="#">요새 자바는 opensdk로 많이 가나요?</a>
-                                </div>
-                            </li> -->
                         </ul>
                     </div>
                 </div>
@@ -458,15 +399,8 @@
                 <a href="#"><img src="img/up-arrow.png"></a> 
             </div>
         </div>
+        <jsp:include page="/common/footer.jsp"/>
         <script>
-
-            // const sideMenu = document.querySelector("#side_menu");
-            // window.addEventListener("scroll", (e)=> {
-            //     sideMenu.style.visibility = "visible";
-            // });
-            // window.addEventListener("scrolldown", (e)=> {
-            //     sideMenu.style.visibility = "hidden";
-            // });
 
             const sideMenu = document.querySelector("#side_menu");
             let scrollPosition = document.documentElement.scrollTop || 0;

@@ -474,6 +474,9 @@
     <div id="up">
         <a href="#"><img src="/okky/img/up-arrow.png"></a> 
     </div>
+    
+    <jsp:include page="/common/footer.jsp"/>
+    
     <script>
     
     document.querySelector("#btn_regist").addEventListener("click", function(e) {

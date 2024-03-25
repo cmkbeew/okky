@@ -151,6 +151,8 @@
 		</form>
 	</div>
 	
+	<jsp:include page="/common/footer.jsp"/>
+	
 	<script>
 		const memberId = document.querySelector("#memberId");
 		const pwd = document.querySelector("#pwd");

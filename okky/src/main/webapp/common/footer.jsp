@@ -43,9 +43,9 @@
             </a>
 
             <ul>
-                <li class="nav-item"><a href="/okky/board/qna.jsp" style="text-decoration: none; color: black;">Q&A</a></li>
-                <li class="nav-item"><a href="/okky/board/community.jsp">커뮤니티</a></li>
-                <li class="nav-item"><a href="/okky/jobs/jobMain.jsp">구인구직</a></li>
+                <li class="nav-item"><a href="/okky/board/qna/qna.do" style="text-decoration: none; color: black;">Q&A</a></li>
+                <li class="nav-item"><a href="/okky/board/commu/commu.do">커뮤니티</a></li>
+                <li class="nav-item"><a href="/okky/jobs/jobMain.do">구인구직</a></li>
             </ul>
         </footer>
     </div>

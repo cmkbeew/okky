@@ -202,6 +202,9 @@ if (session.getAttribute("memberId") == null) {
             </div>
         </div>
     </div>
+    
+    <jsp:include page="/common/footer.jsp"/>
+    
     <script>
         // let select = document.querySelectorAll("#category");
 

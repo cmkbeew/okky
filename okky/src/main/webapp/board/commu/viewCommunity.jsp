@@ -161,14 +161,7 @@
     </style>
 </head>
 <body>
-<%
-if (session.getAttribute("memberId") == null) {
-	out.println("<script>");
-	out.println("alert('로그인 후 접근이 가능합니다.')");
-	out.println("window.location.replace('/okky/member/login.do')");
-	out.println("</script>");
-}
-%>
+
 <jsp:include page="/common/header.jsp"/>
     <div id="body">
         <div id="container">
@@ -260,6 +253,9 @@ if (session.getAttribute("memberId") == null) {
             </div>
         </div>
     </div>
+    
+    <jsp:include page="/common/footer.jsp"/>
+    
     <script>
         document.querySelector("#submit").addEventListener("click", (e)=> {
             const comment = document.querySelector("#comment");
