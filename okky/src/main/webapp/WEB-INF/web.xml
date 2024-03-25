@@ -305,4 +305,45 @@
     <servlet-name>LikeQnaController</servlet-name>
     <url-pattern>/board/qna/likeQna.do</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>WriteCommentQnaController</servlet-name>
+    <servlet-class>controller.board.qna.WriteCommentQnaController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteCommentQnaController</servlet-name>
+    <url-pattern>/board/qna/writeQnaComment.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>WriteCommentCommuController</servlet-name>
+    <servlet-class>controller.board.commu.WriteCommentCommuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WriteCommentCommuController</servlet-name>
+    <url-pattern>/board/commu/writeCommuComment.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>JobApplyController</servlet-name>
+    <servlet-class>controller.jobs.JobApplyController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobApplyController</servlet-name>
+    <url-pattern>/jobs/jobApply.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CompareNnameController</servlet-name>
+    <servlet-class>controller.member.CompareNnameController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompareNnameController</servlet-name>
+    <url-pattern>/member/nicknameCompare.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CopareEmailController</servlet-name>
+    <servlet-class>controller.member.CopareEmailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CopareEmailController</servlet-name>
+    <url-pattern>/member/emailCompare.do</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
