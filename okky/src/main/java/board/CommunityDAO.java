@@ -218,7 +218,7 @@ public class CommunityDAO extends ConnectPool {
 	public List<CommunityDTO> likeList(Map<String, Object> map) {
 		List<CommunityDTO> list = new Vector<>();
 
-		String sql = "select communityIdx, title, pageLike from community order by pageLike desc limit 5";
+		String sql = "select communityIdx, title, pageLike from community where regDate between adddate(now(), interval -1  week) and now() order by pageLike desc limit 5";
 
 		try {
 			psmt = conn.prepareStatement(sql);
