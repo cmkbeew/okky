@@ -9,6 +9,8 @@ public class MainDTO {
 	private int pageLike;
 	private int readCnt;
 	private int writeCnt;
+	private String types;
+	private int idx;
 	
 	public MainDTO() {}
 
@@ -58,6 +60,22 @@ public class MainDTO {
 
 	public void setWriteCnt(int writeCnt) {
 		this.writeCnt = writeCnt;
+	}
+
+	public String getTypes() {
+		return types;
+	}
+
+	public void setTypes(String types) {
+		this.types = types;
+	}
+
+	public int getIdx() {
+		return idx;
+	}
+
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	
 	
