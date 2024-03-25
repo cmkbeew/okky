@@ -25,8 +25,8 @@ public class JobListController extends HttpServlet {
 		int total_count = 0;
 		int total_page = 1;
 		int page_no = 1;
-		int page_size = 4;
-		int page_skip_cnt = 4;
+		int page_size = 8;
+		int page_skip_cnt = 8;
 		int page_block_size = 5;
 		int page_block_start = 1;
 		int page_block_end = 1;

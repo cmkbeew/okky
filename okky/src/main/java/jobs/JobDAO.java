@@ -130,9 +130,9 @@ public class JobDAO extends ConnectPool {
 		}
 		// 정렬 방법(최신순 기본)
 		if(maps.get("sort").equals("old")) {
-			sb.append(" ORDER BY regDate ");
+			sb.append(" ORDER BY regDate, r.recruitIdx ");
 		} else {
-			sb.append(" ORDER BY regDate DESC ");
+			sb.append(" ORDER BY regDate DESC, r.recruitIdx DESC ");
 		}
 		// 페이징
 		if(maps.get("page_size") != null && maps.get("page_skip_cnt") != null) {
