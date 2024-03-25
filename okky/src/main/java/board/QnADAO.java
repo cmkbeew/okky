@@ -124,10 +124,6 @@ public class QnADAO extends ConnectPool {
 		sb.append(" FROM qna q inner join member m");
 		sb.append(" ON q.memberIdx = m.memberIdx");
 	
-		if (map.get("search_category") != null && map.get("search_word") != null) {
-			sb.append(" WHERE " + map.get("search_category"));
-			sb.append(" LIKE '%" + map.get("search_word") + "%'");
-		}
 		if (map.get("category_1") != null) {
 			sb.append(" WHERE category LIKE '기술'");
 		}

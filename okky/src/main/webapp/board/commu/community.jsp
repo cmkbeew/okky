@@ -306,7 +306,7 @@
                     <div class="orderBy">
                         <select name="search_category" id="search_category" style="margin-left: 60px; margin-top: 22px; height: 30px; width: 100px;">
                             <option value="" selected>선택</option>
-                            <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> >최신순</option>
+                            <option value="communityIdx"<c:if test="${params.search_category eq 'communityIdx'}"> selected </c:if> >최신순</option>
                             <option value="pageLike"<c:if test="${params.search_category eq 'pageLike'}"> selected </c:if> >추천순</option>
                            <%--  <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> 답변</option> --%>
                             <option value="readCnt" <c:if test="${params.search_category eq 'readCnt'}"> selected </c:if> >조회순</option>
