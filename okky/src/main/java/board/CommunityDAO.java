@@ -13,26 +13,26 @@ public class CommunityDAO extends ConnectPool {
 	public int communityTotalCount(Map<String, Object> map) {
 		int total_count = 0;
 		
-	
-		StringBuilder sb = new StringBuilder(); 
+		/* 이렇게 해줘두 돼
+		String sql = "SELECT COUNT(*) FROM tbl_bbs";
+		if (map != null) {
+			sql += "WHERE " + map.get("search_category");
+			sql += " LIKE '%" + map.get("search_word") + "%;";
+		}
+		*/
+
+		StringBuilder sb = new StringBuilder(); //동적으로 생성되거나 문자열을 계속 추가해야 할 때
 		sb.append("SELECT COUNT(*) FROM community");
 		if (map.get("search_category") != null && map.get("search_word") != null) {
 			sb.append(" WHERE " + map.get("search_category")); //컬럼명
 			sb.append(" LIKE '%" + map.get("search_word") + "%'"); //컬럼명 서치하는 키워드
 		}
-		if (map.get("category_1") != null) {
-			sb.append(" WHERE category LIKE '일상'");
-		}
-		if (map.get("category_2") != null) {
-			sb.append(" WHERE category LIKE '공부'");
-		}
-		if (map.get("category_3") != null) {
-			sb.append(" WHERE category LIKE '공지사항'");
-		}
 		
 		try {
-			String sql = sb.toString();
+			String sql = sb.toString();//StringBuilder 타입이라서 형변환
 			psmt = conn.prepareStatement(sql); 
+			//psmt.setString(1, map.get("search_category"));//위에서 ? 처리 했으면 여기서 넣어주면 돼
+			//psmt.setString(2, map.get("search_word"));
 			rs = psmt.executeQuery();  
 			rs.next(); 
 			total_count = rs.getInt(1); //count(*)한 결과
@@ -50,7 +50,7 @@ public class CommunityDAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
-		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.category, c.readCnt");
+		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
 		sb.append(" ORDER BY c.communityIdx DESC");
@@ -69,6 +69,7 @@ public class CommunityDAO extends ConnectPool {
 				dto.setModifyDate(rs.getDate("c.modifyDate"));
 				dto.setPageLike(rs.getInt("c.pageLike"));
 				dto.setPageDislike(rs.getInt("c.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
 				dto.setCategory(rs.getString("c.category"));
 				dto.setReadCnt(rs.getInt("c.readCnt"));
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
@@ -95,7 +96,7 @@ public class CommunityDAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
-		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.category, c.readCnt");
+		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
 		sb.append(" WHERE category = '공지사항'");
@@ -115,6 +116,7 @@ public class CommunityDAO extends ConnectPool {
 				dto.setModifyDate(rs.getDate("c.modifyDate"));
 				dto.setPageLike(rs.getInt("c.pageLike"));
 				dto.setPageDislike(rs.getInt("c.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
 				dto.setCategory(rs.getString("c.category"));
 				dto.setReadCnt(rs.getInt("c.readCnt"));
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
@@ -139,11 +141,9 @@ public class CommunityDAO extends ConnectPool {
 	public List<CommunityDTO> communityList(Map<String, Object> map) {
 		List<CommunityDTO> list = new Vector<CommunityDTO>();
 		
-		System.out.println(map.get("sort"));
-		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
-		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.category, c.readCnt");
+		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
 		
@@ -162,23 +162,13 @@ public class CommunityDAO extends ConnectPool {
 			sb.append(" ORDER BY " + map.get("search_category") + " DESC");
 		}
 		if (map.get("search_category") == null && map.get("search_word") == null) {
-			
-			if (map.get("sort") != "") {
-				sb.append(" ORDER BY ");
-				sb.append(map.get("sort"));
-				sb.append(" DESC");
-			}
-			else if (map.get("sort") == "") {
-				sb.append(" ORDER BY c.communityIdx DESC");
-			}
+			sb.append(" ORDER BY communityIdx DESC");
 		}	
 		
 //		sb.append(" ORDER BY communityIdx DESC");
 		if (map.get("page_skip_cnt") != null && map.get("page_size") != null) {
-			sb.append(" LIMIT " + map.get("page_skip_cnt") + ", " + map.get("page_size")); 
+			sb.append(" LIMIT " + map.get("page_skip_cnt") + ", " + map.get("page_size")); // ?로 쓰는게 더 좋아
 		}
-		
-		System.out.println(sb.toString());
 		
 		try {
 			psmt = conn.prepareStatement(sb.toString());
@@ -193,6 +183,7 @@ public class CommunityDAO extends ConnectPool {
 				dto.setModifyDate(rs.getDate("c.modifyDate"));
 				dto.setPageLike(rs.getInt("c.pageLike"));
 				dto.setPageDislike(rs.getInt("c.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
 				dto.setCategory(rs.getString("c.category"));
 				dto.setReadCnt(rs.getInt("c.readCnt"));
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
@@ -218,7 +209,18 @@ public class CommunityDAO extends ConnectPool {
 	public List<CommunityDTO> likeList(Map<String, Object> map) {
 		List<CommunityDTO> list = new Vector<CommunityDTO>();
 		
-		String sql = "select communityIdx, title, pageLike from community order by pageLike desc limit 5";
+		String sql = "select title, pageLike from"
+				+ " ("
+				+ " select m.memberId, q.title, q.regDate, q.pageLike, q.readCnt"
+				+ " from qna q"
+				+ " inner join member m on m.memberIdx = q.memberIdx"
+				+ " union all"
+				+ " select m.memberId, c.title, c.regDate, c.pageLike, c.readCnt"
+				+ " from community c"
+				+ " inner join member m on m.memberIdx = c.memberIdx"
+				+ " ) as total"
+				+ " order by pageLike desc"
+				+ " limit 5";
 		
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -226,7 +228,6 @@ public class CommunityDAO extends ConnectPool {
 			
 			while (rs.next()) {
 				CommunityDTO dto = new CommunityDTO();
-				dto.setCommunityIdx(rs.getInt("communityIdx"));
 				dto.setTitle(rs.getString("title"));
 				dto.setPageLike(rs.getInt("pageLike"));
 				
@@ -246,7 +247,7 @@ public class CommunityDAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
-		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.category, c.readCnt, m.nickName");
+		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.answerIdx, c.category, c.readCnt, m.nickName");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
 		sb.append(" WHERE c.communityIdx = ?");
@@ -263,6 +264,7 @@ public class CommunityDAO extends ConnectPool {
 				dto.setModifyDate(rs.getDate("c.modifyDate"));
 				dto.setPageLike(rs.getInt("c.pageLike"));
 				dto.setPageDislike(rs.getInt("c.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("c.answerIdx"));
 				dto.setCategory(rs.getString("c.category"));
 				dto.setReadCnt(rs.getInt("c.readCnt"));
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
@@ -309,9 +311,10 @@ public class CommunityDAO extends ConnectPool {
 	public int communityDelete(int communityIdx) {
 		int result = 0;
 		
-
+		//StringBuilder sb = new StringBuilder();
+		//sb.append("DELETE FROM tbl_bbs WHERE idx = ?");
 		
-		String sql = "DELETE FROM community WHERE communityIdx = ?"; 
+		String sql = "DELETE FROM community WHERE communityIdx = ?"; //단문이니까 이거 하자
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, communityIdx);
