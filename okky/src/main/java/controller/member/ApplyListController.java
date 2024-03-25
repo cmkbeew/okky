@@ -26,6 +26,7 @@ public class ApplyListController extends HttpServlet {
 		Map<String, Object> params = new HashMap<String, Object>();
 		HttpSession session = req.getSession();
 		String id = session.getAttribute("memberId")== null ? "" :  session.getAttribute("memberId").toString();
+		String orgCompanyFile = session.getAttribute("orgCompanyFile")== null ? "" :  session.getAttribute("orgCompanyFile").toString();
 		
 		params.put("memberId",id);
 

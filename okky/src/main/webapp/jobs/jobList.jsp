@@ -156,6 +156,7 @@
     .company img {
         border-top-left-radius : 10px;
         border-top-right-radius : 10px;
+        border-bottom: 1px solid black;
     }
     .company-info span {
         display: block;
@@ -273,7 +274,7 @@
         <div class="company-group">
         	<c:forEach var="list" items="${list}">
         		<a href="/okky/jobs/jobDetail.do?recruitIdx=${list.recruitIdx}" class="company">
-	                <img src="https://jobs.okky.kr/jobs/cover/images/corp-052.png" alt="회사이미지" width="270" height="150">
+	                <img src="https://jobs.okky.kr/okky-logo-jobs.svg" alt="회사이미지" width="270" height="150">
 	                <div class="company-info">
 	                    <span class="company-name"><strong>${list.companyName}</strong></span>
 	                    <span class="position-name"><strong>${list.position}</strong></span>
@@ -326,7 +327,7 @@
 		// 공고 정렬
 		function jobOrder(btn) {
 			let contractType = "${contractType eq '정규직'}" ? "fulltime" : "contract";
-			window.location.href = "/okky/jobs/jobList.do?contractType=" + contractType + "&sort=" + btn.id;
+			window.location.href = "/okky/jobs/jobList.do?contractType=${maps.contractType}&sort=" + btn.id;
 		}
     </script>
 </body>

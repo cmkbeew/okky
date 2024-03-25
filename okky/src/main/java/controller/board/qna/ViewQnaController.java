@@ -1,18 +1,20 @@
 package controller.board.qna;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
+import board.CommentDAO;
+import board.CommentDTO;
 import board.QnADAO;
 import board.QnADTO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 public class ViewQnaController extends HttpServlet {
@@ -24,7 +26,7 @@ public class ViewQnaController extends HttpServlet {
 		int qnaIdx = request.getParameter("qnaIdx") != null ? Integer.parseInt(request.getParameter("qnaIdx")) : 0;
 		
 		QnADTO qnaView = new QnADTO();
-
+		List<CommentDTO> cList = new Vector<CommentDTO>();
 
 		
 		if (qnaIdx > 0) {
@@ -35,6 +37,14 @@ public class ViewQnaController extends HttpServlet {
 //			dao.updatePageDislike(qnaIdx);
 			dao.close(); 
 			
+			CommentDAO cDao = new CommentDAO();
+			cList = cDao.getQnaCommentList(qnaIdx);
+			for(CommentDTO comment : cList) {
+				comment.setCommentContent(comment.getCommentContent().replace("\r\n", "<br>"));
+				comment.setCommentContent(comment.getCommentContent().replace(" ", "&nbsp;"));
+			}
+			
+			cDao.close();
 		}  else {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
@@ -92,8 +102,10 @@ public class ViewQnaController extends HttpServlet {
 		params.put("skill3", skill3);
 		
 		
-		
 		request.setAttribute("params", params);
+		
+		// 댓글
+		request.setAttribute("cList", cList);
 		
 		request.getRequestDispatcher("/board/qna/viewQnA.jsp").forward(request,  response);
 	}

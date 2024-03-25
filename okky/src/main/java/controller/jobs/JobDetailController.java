@@ -25,6 +25,7 @@ public class JobDetailController extends HttpServlet {
 			if(recruitIdx > 0) {
 				JobDAO dao = new JobDAO();
 				JobDTO jobView = dao.getJobDetail(recruitIdx);
+				dao.updateJobView(recruitIdx);
 				dao.close();
 				
 				jobView.setRecruitContent(jobView.getRecruitContent().replace("\r\n", "<br>"));

@@ -94,10 +94,11 @@
             height: 40px;
             border-radius: 8px;
             margin-left: 8px;
-            border: 2px solid #71c1ff;
+            border: 2px solid #0090ff;
+            color: white;
             float: left;
             cursor: pointer;
-            background-color: #71c1ff;
+            background-color: #0090ff;
         }
         #checkBtn:hover {
             border: 2px solid #55a3de;
@@ -114,12 +115,13 @@
             width: 100px;
             height: 50px;
             border-radius: 8px;
-            border: 2px solid #71c1ff;
+            border: 2px solid #0090ff;
+            color : white;
             float: right;
             margin: 20px 15px;
             padding: 10px 15px;
             cursor: pointer;
-            background-color: #71c1ff;
+            background-color: #0090ff;
         }
         #saveBtn:hover {
             border: 2px solid #55a3de;
@@ -158,8 +160,9 @@
             top : 100px;
             left : 60px;
         }
-
-
+        input:read-only {
+        	background-color:#e6e6e6;
+        }
     </style>
     
 </head>
@@ -167,6 +170,12 @@
 <%
 String name = request.getAttribute("managerName") == null ? "": request.getAttribute("managerName").toString();
 int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.getAttribute("type").toString());
+if (session.getAttribute("memberId") == null) {
+	out.println("<script>");
+	out.println("alert('로그인 후 접근이 가능합니다.')");
+	out.println("window.location.replace('/okky/member/login.do')");
+	out.println("</script>"); 
+}
 %>
     <jsp:include page="/common/header.jsp" />
     <div id="container">
@@ -214,26 +223,6 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
 	const specialChars = "`~!@#$%^&*()-=_+,<.>/?;':\"\"'{}[]";
 	const emailCheck = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
 	const korCheck = /[^-0-9]/g;
-    
-	managerPhone.addEventListener("change", function(e){
-        if(managerPhone.value.length > 11 || (managerPhone.value.length <11 && managerPhone.value.length > 0) ) {
-        	document.getElementById("errPno").style.display = "block";
-        	document.getElementById("errPno").style.color = "red";
-        	document.getElementById("managerPhone").style.border="1px solid red"
-        	document.getElementById("errPno").innerHTML = `<strong> 전화번호 자리 수(11)를 맞춰주세요 </strong>`;
-        }
-        else if(managerPhone.value.length == 11) {
-             if (/[0-9]/.test(managerPhone.value)) {
-            	 document.getElementById("errPno").style.display = "none";
-            	 document.getElementById("managerPhone").style.border=""
-                document.querySelector("#saveBtn").disabled = false;
-            }
-            else {
-            	document.querySelector("#saveBtn").disabled = true;
-            }
-        }
-    })
-    
     
     function combi_check(inputValue, chars) {
 		let cnt = 0;
@@ -321,10 +310,27 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
 		validate_check(managerName, 2, 30, 3);
 	}, false);
     
-
-    // adminPNo.addEventListener("change", function(e){
-    //     document.querySelector("#saveBtn").disabled = false;
-    // });
+    managerName.addEventListener("keyup", function(e) {
+    	if(managerName.value != "${managerName }") {
+			document.querySelector("#saveBtn").disabled = false;
+    	}
+    	else {
+    		document.querySelector("#saveBtn").disabled = true;
+    	}
+	}, false);
+    
+    managerPhone.addEventListener("keyup", function(e){
+   	 	validate_check(managerPhone,11,11,4);
+    }, false);
+    
+    managerPhone.addEventListener("keyup", function(e){
+    	if(managerPhone.value.length == 11) {
+    		document.querySelector("#saveBtn").disabled = false;
+    	}
+    	else {
+    		document.querySelector("#saveBtn").disabled = true;
+    	}
+    }, false);
 
 
 </script>

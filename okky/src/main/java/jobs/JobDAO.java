@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import common.ConnectPool;
+import member.MemberDTO;
 
 public class JobDAO extends ConnectPool {
 	public JobDAO() {}
@@ -130,9 +131,9 @@ public class JobDAO extends ConnectPool {
 		}
 		// 정렬 방법(최신순 기본)
 		if(maps.get("sort").equals("old")) {
-			sb.append(" ORDER BY regDate ");
+			sb.append(" ORDER BY regDate, r.recruitIdx ");
 		} else {
-			sb.append(" ORDER BY regDate DESC ");
+			sb.append(" ORDER BY regDate DESC, r.recruitIdx DESC ");
 		}
 		// 페이징
 		if(maps.get("page_size") != null && maps.get("page_skip_cnt") != null) {
@@ -267,6 +268,7 @@ public class JobDAO extends ConnectPool {
 		return dto;
 	}
 
+	// 공고 글 삭제
 	public int getJobDelete(int recruitIdx) {
 		int result = 0;
 		
@@ -286,25 +288,36 @@ public class JobDAO extends ConnectPool {
 		return result;
 	}
 
-//	public void sortJob(String contractType, String sort) {
-//		StringBuilder sb = new StringBuilder();
-//		
-//		sb.append("SELECT m.companyName, m.type, m.companyAddr, r.recruitIdx, r.position, r.career, r.contractType ");
-//		sb.append("FROM recruit AS r INNER JOIN member AS m ON m.memberIdx=r.memberIdx ");
-//		sb.append("WHERE companyName IS NOT NULL AND contractType = ?");
-//		if(sort.equals("recent")) {
-//			sb.append(" ORDER BY regDate DESC");
-//		} else {
-//			sb.append(" ORDER BY regDate");
-//		}
-//		
-//		try {
-//			psmt = conn.prepareStatement(sb.toString());
-//			psmt.setString(1, contractType);
-//			psmt.executeQuery();
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			System.out.println("공고 글 작성 시 에러 발생");
-//		}
-//	}
+	// 공고 조회 수 update
+	public void updateJobView(int recruitIdx) {
+		String sql = "UPDATE recruit SET readCnt = readCnt + 1 WHERE recruitIdx=?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, recruitIdx);
+			
+			psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("공고 글 조회 수 추가 시 에러 발생");
+		}
+	}
+
+	//공고 글 이력시 지원
+	public int applyJob (JobDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT INTO applyinfo(recruitIdx,regDate, memberIdx)");
+		sb.append(" VALUES (?, NOW(), ?)");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, dto.getRecruitIdx());
+			psmt.setInt(2, dto.getMemberIdx());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("이력서 지원 중 에러 발생");
+		}
+		return result;
+	}
 }

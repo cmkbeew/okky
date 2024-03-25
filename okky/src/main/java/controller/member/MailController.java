@@ -29,26 +29,20 @@ public class MailController extends HttpServlet {
 		String emailN = req.getParameter("email");
 		MemberDTO dto = new MemberDTO();
 		MemberDAO dao = new MemberDAO();
+		
 		if(!email.equals(emailN)) {
 			dto.setEmail(emailN);
 			dto.setMemberId(memberId);
 		}
 		int result = dao.changeMail(dto);
 		dao.close();
+		session.setAttribute("email", emailN);
 		if(result > 0) {
 			resp.sendRedirect("./account.do");
 		} else {
 			req.getRequestDispatcher("./account.jsp").forward(req, resp);
 		}
-//		
-		
-//		1.타입파라미터 받아
-//		2. 타입에 따라서 분기한다
-//		-> 타입 이메일 -> 
-//		패스워드 
-//		삭제 (if)
-//		각각 처리 됐어 그러면 리다이랙트, 포워드,,,,,,,,,설정,,,,,,,,,
-		
+	
 	}
 
 }

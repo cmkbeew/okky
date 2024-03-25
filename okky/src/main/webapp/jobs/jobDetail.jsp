@@ -150,29 +150,51 @@
 
         <div class="right">
             <div class="right-border">
-                <div class="right-content">
-                    회사에 지원하고싶다면?
-                </div>
-                <button class="btn-right" id="btn_apply">지원하기</button>
+            	<c:if test="${sessionScope.type eq '1'}">
+	                <div class="right-content">
+	                    회사에 지원하고싶다면?
+	                </div>
+	                <button class="btn-right" id="btn_apply">지원하기</button>
+                </c:if>
+            	<c:if test="${sessionScope.type eq '2'}">
+	                <div class="right-content">
+	                    지원자 리스트 확인하기
+	                </div>
+	                <button class="btn-right" id="btn_apply">리스트 확인</button>
+                </c:if>
             </div>
-
-            <div class="right-border">
-                <div class="right-content">
-                    이력서가 등록하고싶다면?
-                </div>
-                <button class="btn-right" id="btn_resume">이력서 등록하기</button>
-            </div>
+			<c:if test="${sessionScope.type eq '2'}">
+	            <div class="right-border" style="display:none;">
+	                <div class="right-content">
+	                    이력서가 등록하고싶다면?
+	                </div>
+	                <button class="btn-right" id="btn_resume">이력서 등록하기</button>
+	            </div>
+            </c:if>
         </div>
     </div>
     
 	<jsp:include page="../common/footer.jsp" />
     <script>
         document.querySelector("#btn_apply").addEventListener("click", function(e){
-            window.location.href = "/apply.do";
+        	if(${sessionScope.type eq '1'}) {
+        		if(${not empty sessionScope.orgCompanyFile}){
+    	        	alert("지원 완료되었습니다.\n지원리스트 창으로 이동하겠습니다.");
+    	        	location.href = "/okky/member/applyList.do";
+            	}
+            	else {
+            		alert("이력서가 없습니다.\n이력서 등록 창으로 이동합니다.");
+    	        	location.href = "/okky/member/applyList.do";
+            	}
+        	}else if (${sessionScope.type eq '2'}){
+    	        	alert("지원자 목록 확인창으로 가겠습니다.");
+    	        	location.href = "/okky/member/applicantList.do";
+        	}
+        	
         });
 
         document.querySelector("#btn_resume").addEventListener("click", function(e){
-            window.location.href = "/okky/member/mypage.do";
+            location.href = "/okky/member/applyList.do";
         });
         
         document.querySelector("#btn_update").addEventListener("click", function(e){
