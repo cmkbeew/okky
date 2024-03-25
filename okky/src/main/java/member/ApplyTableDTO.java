@@ -11,7 +11,7 @@ public class ApplyTableDTO {
 	private String email;
 	private String orgCompanyFile;
 	private String saveCompanyFile;
-	
+
 	public ApplyTableDTO() {}
 
 	public int getRecruitIdx() {
@@ -77,7 +77,7 @@ public class ApplyTableDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public String getOrgCompanyFile() {
 		return orgCompanyFile;
 	}

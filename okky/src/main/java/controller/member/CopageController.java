@@ -1,7 +1,8 @@
 package controller.member;
 
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,11 +10,10 @@ import jakarta.servlet.http.HttpSession;
 import member.MemberDAO;
 import member.MemberDTO;
 
-import java.io.IOException;
-
 public class CopageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String memberId = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
@@ -23,29 +23,30 @@ public class CopageController extends HttpServlet {
 		String companyNo = req.getParameter("companyNo");
 		String managerPhone = req.getParameter("managerPhone");
 		String type = req.getParameter("type");
-		
+
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getCompanyInfo(memberId, name);
-		
+
 		dao.close();
-		
+
 		memberId = dto.getMemberId();
 		managerName = dto.getManagerName();
 		companyName = dto.getCompanyName();
 		companyNo = dto.getCompanyNumber();
 		managerPhone = dto.getManagerPhone();
 		type = dto.getType();
-		
+
 		req.setAttribute("memberId", memberId);
 		req.setAttribute("managerName", managerName);
 		req.setAttribute("companyName", companyName);
 		req.setAttribute("companyNo", companyNo);
 		req.setAttribute("managerPhone", managerPhone);
 		req.setAttribute("type", type);
-		
+
 		req.getRequestDispatcher("./mypage_co.jsp").forward(req, resp);
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String managerName = req.getParameter("managerName");
@@ -63,7 +64,7 @@ public class CopageController extends HttpServlet {
 		} else {
 			req.getRequestDispatcher("./mypage_co.jsp").forward(req, resp);
 		}
-		
+
 	}
 
 }

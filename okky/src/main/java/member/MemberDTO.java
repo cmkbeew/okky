@@ -15,10 +15,10 @@ public class MemberDTO {
 	private String companyAddr;
 	private String companyNumber;
 	private String orgCompanyFile;
-	private String saveCompanyFile;	
+	private String saveCompanyFile;
 	private String managerName;
 	private String managerPhone;
-	
+
 	public int getMemberIdx() {
 		return memberIdx;
 	}
@@ -122,6 +122,6 @@ public class MemberDTO {
 	public void setManagerPhone(String managerPhone) {
 		this.managerPhone = managerPhone;
 	}
-	
-	
+
+
 }

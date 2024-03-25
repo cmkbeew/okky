@@ -9,13 +9,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.jsp.PageContext;
 
 
 @WebServlet("/member/resumeDown.do")
 public class ResumeDownController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String memberId = session.getAttribute("memberId")== null ? "" :  session.getAttribute("memberId").toString();
@@ -24,11 +24,12 @@ public class ResumeDownController extends HttpServlet {
 		FileUtil2.download(req, resp,orgCompanyFile,saveCompanyFile);
 
 	}
-	
 
 
+
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 	}
 
 }

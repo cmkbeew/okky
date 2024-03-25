@@ -1,7 +1,6 @@
 package board;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 public class QnADTO {
 	private int qnaIdx;
@@ -20,8 +19,8 @@ public class QnADTO {
 	private String skill1;
 	private String skill2;
 	private String skill3;
-	
-	
+
+
 	public QnADTO() {}
 
 
@@ -75,7 +74,7 @@ public class QnADTO {
 	}
 
 
-	
+
 
 
 	public int getPageLike() {
@@ -186,5 +185,5 @@ public class QnADTO {
 	public void setSkill3(String skill3) {
 		this.skill3 = skill3;
 	}
-	
+
 }

@@ -11,7 +11,7 @@ public class JobDTO {
 	private String recruitContent;
 	private String regDate;
 	private String dueDate;
-	
+
 	private int memberIdx;
 	private String memberId;
 	private String companyName;
@@ -19,7 +19,7 @@ public class JobDTO {
 	private String type;
 	private String managerName;
 	private String managerPhone;
-	
+
 	public int getRecruitIdx() {
 		return recruitIdx;
 	}
@@ -122,5 +122,5 @@ public class JobDTO {
 	public void setManagerPhone(String managerPhone) {
 		this.managerPhone = managerPhone;
 	}
-	
+
 }

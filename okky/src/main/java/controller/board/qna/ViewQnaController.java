@@ -1,11 +1,5 @@
 package controller.board.qna;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -13,36 +7,41 @@ import java.util.Map;
 
 import board.QnADAO;
 import board.QnADTO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 public class ViewQnaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//int qnaIdx = Integer.parseInt(request.getParameter("qnaIdx"));
 		int qnaIdx = request.getParameter("qnaIdx") != null ? Integer.parseInt(request.getParameter("qnaIdx")) : 0;
-		
+
 		QnADTO qnaView = new QnADTO();
 
 
-		
+
 		if (qnaIdx > 0) {
 			QnADAO dao = new QnADAO();
 			qnaView = dao.qnaView(qnaIdx);
 			dao.updateReadCnt(qnaIdx);
 //			dao.updatePageLike(qnaIdx);
 //			dao.updatePageDislike(qnaIdx);
-			dao.close(); 
-			
+			dao.close();
+
 		}  else {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
 			writer.println("alert('접근 정보가 올바르지 않습니다.')");
-			writer.println("window.location.replace('main.do')"); 
+			writer.println("window.location.replace('main.do')");
 			writer.println("</script>");
 		}
-		
+
 		int readCnt = 0;
 		int memberIdx = 0;
 		String nickName = "";
@@ -56,7 +55,7 @@ public class ViewQnaController extends HttpServlet {
 		String skill1 = "";
 		String skill2 = "";
 		String skill3 = "";
-		
+
 		if (qnaView != null) {
 			memberId = qnaView.getMemberId();
 			memberIdx = qnaView.getMemberIdx();
@@ -74,8 +73,8 @@ public class ViewQnaController extends HttpServlet {
 			content = (content != null ? content.replace("&nbsp;", " ") : "");
 			category = qnaView.getCategory();
 		}
-		
-		Map<String, Object> params = new HashMap<String, Object>();
+
+		Map<String, Object> params = new HashMap<>();
 		params.put("memberId", memberId);
 		params.put("memberIdx", memberIdx);
 		params.put("qnaIdx", qnaIdx);
@@ -90,16 +89,17 @@ public class ViewQnaController extends HttpServlet {
 		params.put("skill1", skill1);
 		params.put("skill2", skill2);
 		params.put("skill3", skill3);
-		
-		
-		
+
+
+
 		request.setAttribute("params", params);
-		
+
 		request.getRequestDispatcher("/board/qna/viewQnA.jsp").forward(request,  response);
 	}
-	
 
-	
+
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

@@ -1,10 +1,5 @@
 package controller.board.commu;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -12,6 +7,10 @@ import java.util.Map;
 
 import board.CommunityDAO;
 import board.CommunityDTO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 
 
@@ -19,14 +18,15 @@ public class ModifyCommuController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, Object> params = new HashMap<String, Object>();
-		
+		Map<String, Object> params = new HashMap<>();
+
 		CommunityDAO dao = new CommunityDAO();
 		int communityIdx = request.getParameter("communityIdx") != null ? Integer.parseInt(request.getParameter("communityIdx")) : 0;
 		CommunityDTO communityView = dao.communityView(communityIdx);
 		dao.close();
-		
+
 		int readCnt = 0;
 		String memberId = "";
 		String nickName = "";
@@ -54,7 +54,7 @@ public class ModifyCommuController extends HttpServlet {
 			content = (content != null ? content.replace("<br>", "\r\n") : "");
 			content = (content != null ? content.replace("&nbsp;", " ") : "");
 		}
-		
+
 		params.put("memberId", memberId);
 		params.put("communityIdx", communityIdx);
 		params.put("readCnt", readCnt);
@@ -68,20 +68,21 @@ public class ModifyCommuController extends HttpServlet {
 		params.put("skill1", skill1);
 		params.put("skill2", skill2);
 		params.put("skill3", skill3);
-		
-		
-		
+
+
+
 		request.setAttribute("params", params);
-		
+
 		request.getRequestDispatcher("/board/commu/modifyCommunity.jsp").forward(request, response);
 	}
 
-	
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int communityIdx = Integer.parseInt(request.getParameter("communityIdx").trim());
-	
-		
-		
+
+
+
 		//idx = Integer.parseInt(request.getParameter("idx"));
 
 		String memberId = request.getParameter("memberId");
@@ -92,8 +93,8 @@ public class ModifyCommuController extends HttpServlet {
 		String skill1 = request.getParameter("skill1");
 		String skill2 = request.getParameter("skill2");
 		String skill3 = request.getParameter("skill3");
-		
-		
+
+
 		CommunityDTO dto = new CommunityDTO();
 		dto.setCommunityIdx(communityIdx);
 		dto.setCategory(category);

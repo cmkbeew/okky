@@ -1,11 +1,5 @@
 package controller.board.qna;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -13,23 +7,28 @@ import java.util.Map;
 
 import board.QnADAO;
 import board.QnADTO;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * Servlet implementation class ModifyQnaController
  */
 public class ModifyQnaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-   
-	
+
+
+
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, Object> params = new HashMap<String, Object>();
-		
+		Map<String, Object> params = new HashMap<>();
+
 		QnADAO dao = new QnADAO();
 		int qnaIdx = request.getParameter("qnaIdx") != null ? Integer.parseInt(request.getParameter("qnaIdx")) : 0;
 		QnADTO qnaView = dao.qnaView(qnaIdx);
 		dao.close();
-		
+
 		int readCnt = 0;
 		String memberId = "";
 		String nickName = "";
@@ -56,7 +55,7 @@ public class ModifyQnaController extends HttpServlet {
 			content = (content != null ? content.replace("<br>", "\r\n") : "");
 			content = (content != null ? content.replace("&nbsp;", " ") : "");
 		}
-		
+
 		params.put("memberId", memberId);
 		params.put("qnaIdx", qnaIdx);
 		params.put("readCnt", readCnt);
@@ -70,21 +69,22 @@ public class ModifyQnaController extends HttpServlet {
 		params.put("skill1", skill1);
 		params.put("skill2", skill2);
 		params.put("skill3", skill3);
-		
-		
-		
+
+
+
 		request.setAttribute("params", params);
-		
+
 		request.getRequestDispatcher("/board/qna/modifyQnA.jsp").forward(request, response);
-		
+
 	}
 
-	
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int qnaIdx = Integer.parseInt(request.getParameter("qnaIdx").trim());
-	
-		
-		
+
+
+
 		//idx = Integer.parseInt(request.getParameter("idx"));
 
 		String memberId = request.getParameter("memberId");
@@ -94,10 +94,10 @@ public class ModifyQnaController extends HttpServlet {
 		String skill1 = request.getParameter("skill1");
 		String skill2 = request.getParameter("skill2");
 		String skill3 = request.getParameter("skill3");
-		
 
-		
-		
+
+
+
 		QnADTO dto = new QnADTO();
 		dto.setQnaIdx(qnaIdx);
 		dto.setCategory(category);

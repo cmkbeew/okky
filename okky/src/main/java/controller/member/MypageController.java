@@ -1,7 +1,8 @@
 package controller.member;
 
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -9,35 +10,35 @@ import jakarta.servlet.http.HttpSession;
 import member.MemberDAO;
 import member.MemberDTO;
 
-import java.io.IOException;
-
 
 public class MypageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
+
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String memberId = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
 		String name = session.getAttribute("name") == null ? "" : session.getAttribute("name").toString();
 		String pwd = session.getAttribute("pwd") == null ? "" : session.getAttribute("pwd").toString();
 		String nickname = req.getParameter("nickname");
-		
+
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getMemberInfo(memberId, pwd);
-		
+
 		dao.close();
-		
+
 		memberId = dto.getMemberId();
 		pwd = dto.getPwd();
 		name = dto.getName();
 		nickname = dto.getNickname();
-			
+
 		req.setAttribute("nickname", nickname);
 		req.setAttribute("name", name);
 		req.getRequestDispatcher("./mypage.jsp").forward(req, resp);
 	}
 
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int result1 = 0;
 		int result2 = 0;
@@ -53,10 +54,10 @@ public class MypageController extends HttpServlet {
 		System.out.println(skill1);
 		System.out.println(skill2);
 		System.out.println(skill3);
-		
+
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = new MemberDTO();
-		
+
 		if(!nicknameN.equals(nickname)) {
 			dto.setNickname(nicknameN);
 			dto.setMemberId(memberId);
@@ -75,8 +76,8 @@ public class MypageController extends HttpServlet {
 		} else {
 			req.getRequestDispatcher("./mypage.jsp").forward(req, resp);
 		}
-		
-		
+
+
 	}
 
 }

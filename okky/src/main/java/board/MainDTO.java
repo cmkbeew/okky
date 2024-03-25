@@ -11,7 +11,7 @@ public class MainDTO {
 	private int writeCnt;
 	private String types;
 	private int idx;
-	
+
 	public MainDTO() {}
 
 	public String getTitle() {
@@ -77,6 +77,6 @@ public class MainDTO {
 	public void setIdx(int idx) {
 		this.idx = idx;
 	}
-	
-	
+
+
 }

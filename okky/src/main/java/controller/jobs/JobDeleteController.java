@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jobs.JobDAO;
-import jobs.JobDTO;
 
 public class JobDeleteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -17,13 +16,13 @@ public class JobDeleteController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		int recruitIdx = req.getParameter("recruitIdx") != null ? Integer.parseInt(req.getParameter("recruitIdx")) : 0;
-		
+
 		if (session.getAttribute("memberIdx") != null) {
 			if(recruitIdx > 0) {
 				JobDAO dao = new JobDAO();
 				int result = dao.getJobDelete(recruitIdx);
 				dao.close();
-				
+
 				if(result > 0) {
 					resp.sendRedirect("./jobMain.do");
 				}
@@ -35,5 +34,5 @@ public class JobDeleteController extends HttpServlet {
 		}
 	}
 
-	
+
 }

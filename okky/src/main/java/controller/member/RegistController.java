@@ -18,8 +18,8 @@ import member.MemberDTO;
 public class RegistController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-	
+
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("./regist.jsp").forward(req, resp);
@@ -28,7 +28,7 @@ public class RegistController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		int result = 0;
-		
+
 		String memberId = req.getParameter("memberId");
 		String pwd = req.getParameter("pwd");
 		String email = req.getParameter("email");
@@ -42,12 +42,12 @@ public class RegistController extends HttpServlet {
 		String companyNumber = req.getParameter("companyNumber");
 		String managerName = req.getParameter("managerName");
 		String managerPhone = req.getParameter("managerPhone");
-		
+
 		// 중복 회원 검증
 		MemberDTO dto = new MemberDTO();
 		MemberDAO dao = new MemberDAO();
 		int id_check = dao.getMemberCount(memberId);
-		
+
 		if(id_check >= 1) {
 			req.setAttribute("registErrMsg", "아이디 중복 오류");
 			dao.close();
@@ -64,14 +64,14 @@ public class RegistController extends HttpServlet {
 			dto.setCompanyNumber(companyNumber);
 			dto.setManagerName(managerName);
 			dto.setManagerPhone(managerPhone);
-			
+
 			if(type.equals("1")) {
 				result = dao.registMember(dto);
 			} else {
 				// 파일 업로드 처리
 				String saveDir = req.getServletContext().getRealPath("companyFiles");
 				String orgFileName = "";
-				
+
 				try {
 					orgFileName = FileUtil.uploadFile(req, saveDir);
 				} catch(Exception e) {
@@ -79,22 +79,22 @@ public class RegistController extends HttpServlet {
 					req.setAttribute("uploadFileError", "회원가입 중 파일 업로드 에러 발생");
 					req.getRequestDispatcher("./regist.jsp").forward(req, resp);
 				}
-				
+
 				if(orgFileName != "") {
 					String saveFileName = FileUtil.renameFile(saveDir, orgFileName);
-					
+
 					dto.setOrgCompanyFile(orgFileName);
-					dto.setSaveCompanyFile(saveFileName);			
+					dto.setSaveCompanyFile(saveFileName);
 				}
 				result = dao.registMember(dto);
 			}
 			dao.close();
-			
+
 			if(result > 0) {
 				resp.sendRedirect("./login.jsp");
 			} else {
 				req.setAttribute("registErrMsg", "회원가입 실패");
-				
+
 				req.getRequestDispatcher("./regist.jsp").forward(req, resp);
 			}
 		}
