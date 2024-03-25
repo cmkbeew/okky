@@ -1,7 +1,6 @@
 package board;
 
 import java.sql.Date;
-import java.time.LocalDateTime;
 
 public class CommunityDTO {
 	private int communityIdx;
@@ -20,9 +19,9 @@ public class CommunityDTO {
 	private String skill1;
 	private String skill2;
 	private String skill3;
-	
-	
-	
+
+
+
 	public CommunityDTO() {}
 
 
@@ -186,5 +185,5 @@ public class CommunityDTO {
 	public void setSkill3(String skill3) {
 		this.skill3 = skill3;
 	}
-	
+
 }

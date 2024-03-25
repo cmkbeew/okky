@@ -23,12 +23,12 @@ public class LoginController extends HttpServlet {
 		String memberId = req.getParameter("memberId");
 		memberId = memberId != null ? memberId : "";
 		String pwd = req.getParameter("pwd");
-		
+
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getMemberInfo(memberId, pwd);
-		
+
 		dao.close();
-		
+
 		if(dto.getMemberId() != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("memberIdx", dto.getMemberIdx());
@@ -48,15 +48,15 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("skill3", dto.getSkill3());
 			session.setAttribute("orgCompanyFile", dto.getOrgCompanyFile());
 
-			
+
 			resp.sendRedirect("../main.do");
 		} else {
 			req.setAttribute("loginErrMsg", "로그인 오류");
-			
+
 			req.getRequestDispatcher("./login.jsp").forward(req, resp);
 		}
-		
-		
-		
+
+
+
 	}
 }

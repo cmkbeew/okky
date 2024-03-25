@@ -117,7 +117,8 @@
 
         }
         #tags ul li{
-            border: 1px solid lightgray;
+            /* border: 1px solid lightgray; */
+            border: 0;
             padding: 5px;
             width: max-content;
             border-radius: 10px;
@@ -161,6 +162,14 @@
     </style>
 </head>
 <body>
+<% 
+if (session.getAttribute("memberId") == null) {
+	out.println("<script>");
+	out.println("alert('로그인 후 접근이 가능합니다.')");
+	out.println("window.location.replace('/okky/member/login.do')");
+	out.println("</script>");
+}
+%>
 <jsp:include page="/common/header.jsp"/>
     <div id="body">
         <div id="container">
@@ -194,17 +203,20 @@
                 <div id="tagAndGood">
                     <div id="tags">
                         <ul>
-                            <li>#${params.skill1 }</li>
+                         	<li><c:if test="${not empty params.skill1 }" >  <div>#${params.skill1 } </div></c:if></li>
+				            <li><c:if test="${not empty params.skill2 }" >  <div>#${params.skill2 } </div></c:if></li>
+				            <li><c:if test="${not empty params.skill3 }" >  <div>#${params.skill3 } </div></c:if></li>
+                           <!--  <li>#${params.skill1 }</li>
                             <li>#${params.skill2 }</li>
-                            <li>#${params.skill3 }</li>
+                            <li>#${params.skill3 }</li> -->
                         </ul>
                     </div>
                     <div id="goods">
                        
                             <ul>
-                                <li><button id="up" name="up"><img src="/okky/img/thumb_up.png" alt=""></button>  </li>
+                                <li><button id="up" name="up"><img id="thumbUp" src="/okky/img/thumb_up.png" alt=""></button>  </li>
                                 <li>${params.pageLike }</li>
-                                <li><button id="down" name="down"><img src="/okky/img/thumb_down.png" alt=""></button>  </li>
+                                <li><button id="down" name="down"><img id="thumbDown" src="/okky/img/thumb_down.png" alt=""></button>  </li>
                                 <li>${params.pageDislike }</li>
                             </ul>
                         
@@ -304,11 +316,13 @@
      
         
       document.querySelector("#up").addEventListener("click", function(e) {
-          window.location.href = "viewQnA.do?qnaIdx=${params.qnaIdx}";
+    	/*   let img = document.querySelector("#thumbUp");
+    	  img.src = "/okky/img/thumb_up_black.png" */
+          window.location.href = "likeQna.do?qnaIdx=${params.qnaIdx}&likeParam=like";
       }, false);
         
       document.querySelector("#down").addEventListener("click", function(e) {
-          window.location.href = "viewQnA.do?qnaIdx=${params.qnaIdx}";
+          window.location.href = "likeQna.do?qnaIdx=${params.qnaIdx}&likeParam=disLike";
       }, false);
     </script>
 </body>

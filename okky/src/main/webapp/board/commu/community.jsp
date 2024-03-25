@@ -96,8 +96,8 @@
         .side {
             width: 180px;
         }
-        #Lside {
-            
+        #Lside a:hover {
+            color: #0090f9;
             
         }
         #Rside {
@@ -186,6 +186,16 @@
         #btn_search:hover {
             cursor:pointer;
         }
+        .content_title a:hover {
+        	color: #0090f9;
+        }
+        #sort {
+        	z-index: 100;
+        	display: flex;
+        	flex-direction: column;
+        	display: none;
+        	
+        }
     </style>
 </head>
 <body>
@@ -206,10 +216,10 @@
 			                                <%-- <c:if test="${list.title.length() >= 5 }">  ${list.title.substring(0,3).concat(" ...") }</c:if>  ${list.title } --%>
 			                                <c:choose>
 			                                	<c:when test="${list.title.length() >= 7 }">
-			                                		${list.title.substring(0,7).concat(" ...") }
+			                                		<a href="/okky/board/commu/viewCommu.do?communityIdx=${list.communityIdx}">${list.title.substring(0,7).concat(" ...") }</a>
 			                                	</c:when>
 			                                	<c:otherwise>
-			                                	 	${list.title }
+			                                	 	<a href="/okky/board/commu/viewCommu.do?communityIdx=${list.communityIdx}">${list.title }</a>
 			                                	</c:otherwise>
 			                                </c:choose>
 			                                </div>
@@ -274,7 +284,18 @@
                         <button  id="category_2" name="category_2" value="공부" <c:if test="${params.category_2 eq 'category_2'}"> style="color:#0090f8;" </c:if> >공부</button>
                         <button id="category_3" name="category_3" value="공지사항" <c:if test="${params.category_3 eq 'category_3'}"> style="color:#0090f8;" </c:if>>[공지사항]</button>
                     </nav>
-                <div style="visibility: hidden;"></div>
+                    
+                <div>
+                	<a href="http://localhost:8080/okky/board/qna/qna.do">전체</a>
+                	<button id="sortBtn">정렬</button>
+                	<ul id="sort" class="">
+                		<button id="order" name="order" value="c.communityIdx" onclick="order(this)"><li>최신순</li></button>
+                		<button id="order" name="order" value="c.pageLike" onclick="order(this)"><li>추천순</li></button>
+                		<!-- <button id="order" name="order"  ><li>답변순</li></button> -->
+                		<button id="order" name="order" value="c.readCnt" onclick="order(this)"><li>조회순</li></button>
+                	</ul>
+                </div>
+    
                 
 
             </div>
@@ -285,8 +306,10 @@
                     <div class="orderBy">
                         <select name="search_category" id="search_category" style="margin-left: 60px; margin-top: 22px; height: 30px; width: 100px;">
                             <option value="" selected>선택</option>
+                            <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> >최신순</option>
+                            <option value="pageLike"<c:if test="${params.search_category eq 'pageLike'}"> selected </c:if> >추천순</option>
+                           <%--  <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> 답변</option> --%>
                             <option value="readCnt" <c:if test="${params.search_category eq 'readCnt'}"> selected </c:if> >조회순</option>
-                            <option value="communityIdx"<c:if test="${params.search_category eq 'communityIdx'}"> selected </c:if> >최신순</option>
                         </select>
                     </div>
                 </div>
@@ -307,7 +330,7 @@
                         	<c:when test="${not empty communityList}">
                         		<c:forEach var="list" items="${communityList}" varStatus="loop">
                         			<li>
-				                        <button onclick="location.href='viewCommunity.do?communityIdx=${list.communityIdx}'">
+				                        <button onclick="location.href='viewCommu.do?communityIdx=${list.communityIdx}'">
 				                            <div>
 				                                답변
 				                            </div>
@@ -321,6 +344,8 @@
 				                            <div>${list.regDate}</div>
 				                            <div>·</div>
 				                            <div>${list.readCnt} read</div>
+				                            <div>·</div>
+				                            <div>${list.pageLike} likes</div>
 				                        </div>
 				                        <div class="content_title">
 				                            <a href="viewCommu.do?communityIdx=${list.communityIdx}">
@@ -330,9 +355,12 @@
 				                                </p>
 				                                <div class="writer">
 				                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					                                <div>#${list.skill1 } </div>
+					                                <c:if test="${not empty list.skill1 }" >  <div>#${list.skill1 } </div></c:if>
+				                                 <c:if test="${not empty list.skill2 }" >  <div>#${list.skill2 } </div></c:if>
+				                                 <c:if test="${not empty list.skill3 }" >  <div>#${list.skill3 } </div></c:if>
+					                                <!-- <div>#${list.skill1 } </div>
 					                                <div>#${list.skill2 } </div>
-					                                <div>#${list.skill3 } </div>
+					                                <div>#${list.skill3 } </div> -->
 				                                </div>
 				                            </a>
 				                        </div><br>
@@ -484,6 +512,22 @@
             }
             scrollPosition = scrollTop;
             });
+        
+        
+        document.querySelector("#sortBtn").addEventListener("click", (e) => {
+        	const sort = document.getElementById("sort");
+        	
+        	if (sort.style.display == "block") {
+        		sort.style.display = "none";
+        	} else {
+        		sort.style.display = "block";
+        	}
+        	
+        });    
+        
+        function order(btn) {
+        	window.location.href = "/okky/board/commu/commu.do?sort=" + btn.value;
+        }
     </script>
 
 

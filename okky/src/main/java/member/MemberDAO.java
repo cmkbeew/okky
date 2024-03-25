@@ -11,11 +11,11 @@ public class MemberDAO extends ConnectPool {
 	public int getMemberCount(String memberId) {
 		int result = 0;
 		String sql = "SELECT COUNT(memberId) FROM member WHERE memberId=?";
-		
+
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, memberId);
-			
+
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				result = rs.getInt(1);
@@ -24,19 +24,19 @@ public class MemberDAO extends ConnectPool {
 			e.printStackTrace();
 			System.out.println("회원 조회 시 에러 발생");
 		}
-		
+
 		return result;
 	}
 
 	// 일반 회원 가입
 	public int registMember(MemberDTO dto) {
 		int result = 0;
-		
-		StringBuilder sb = new StringBuilder();	
+
+		StringBuilder sb = new StringBuilder();
 		if(dto.getType() == "1") {
 			sb.append("INSERT INTO member(memberId, pwd, name, email, nickname, type)");
 			sb.append(" VALUES (?, ?, ?, ?, ?, ?)");
-			
+
 			try {
 				psmt = conn.prepareStatement(sb.toString());
 				psmt.setString(1, dto.getMemberId());
@@ -45,7 +45,7 @@ public class MemberDAO extends ConnectPool {
 				psmt.setString(4, dto.getEmail());
 				psmt.setString(5, dto.getNickname());
 				psmt.setString(6, dto.getType());
-				
+
 				result = psmt.executeUpdate();
 			} catch(Exception e) {
 				System.out.println("회원가입 중 에러 발생");
@@ -55,10 +55,10 @@ public class MemberDAO extends ConnectPool {
 			sb.append("INSERT INTO member(memberId, pwd, name, email, nickname, type, ");
 			sb.append("companyName, companyNumber, companyAddr, orgCompanyFile, saveCompanyFile, managerName, managerPhone) ");
 			sb.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			
+
 			try {
 				psmt = conn.prepareStatement(sb.toString());
-				
+
 				psmt.setString(1, dto.getMemberId());
 				psmt.setString(2, dto.getPwd());
 				psmt.setString(3, dto.getName());
@@ -72,25 +72,25 @@ public class MemberDAO extends ConnectPool {
 				psmt.setString(11, dto.getSaveCompanyFile());
 				psmt.setString(12, dto.getManagerName());
 				psmt.setString(13, dto.getManagerPhone());
-				
+
 				result = psmt.executeUpdate();
 			} catch(Exception e) {
 				System.out.println("회원가입 중 에러 발생");
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 // 기업 회원 가입
 	public int registMember2(MemberDTO dto) {
 		int result = 0;
-		
-		StringBuilder sb = new StringBuilder();	
+
+		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO member(memberId, pwd, name, email, nickname, type, ");
 		sb.append("companyName, companyNumber, orgCompanyFile, saveCompanyFile, managerName, managerPhone) ");
 		sb.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		
+
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, dto.getMemberId());
@@ -105,20 +105,20 @@ public class MemberDAO extends ConnectPool {
 			psmt.setString(10, dto.getSaveCompanyFile());
 			psmt.setString(11, dto.getManagerName());
 			psmt.setString(12, dto.getManagerPhone());
-			
+
 			result = psmt.executeUpdate();
 		} catch(Exception e) {
 			System.out.println("회원가입 중 에러 발생");
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 // 로그인 - 회원 조회
 	public MemberDTO getMemberInfo(String id, String pwd) {
 		MemberDTO dto = new MemberDTO();
-		String sql = "SELECT * FROM member WHERE memberId=?"; 
+		String sql = "SELECT * FROM member WHERE memberId=?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
@@ -177,7 +177,7 @@ public class MemberDAO extends ConnectPool {
 // 회사 정보 수정하기
 	public int modifyCompany(MemberDTO dto) {
 		int result = 0;
-		StringBuilder sb = new StringBuilder();	
+		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE member SET managerName=?, managerPhone=?");
 		sb.append(" WHERE memberId=?");
 		try {
@@ -190,14 +190,19 @@ public class MemberDAO extends ConnectPool {
 			System.out.println("정보 수정 중 에러 발생");
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
 // 개인 정보 수정하기
 	public int modifyMyInfo(MemberDTO dto) {
 		int result = 0;
+<<<<<<< HEAD
 		StringBuilder sb = new StringBuilder();	
 		sb.append("UPDATE member SET nickname=?,skill1=?, skill2=?, skill3=?");
+=======
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE member SET nickname=?");
+>>>>>>> rim
 		sb.append(" WHERE memberId=?");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
@@ -211,9 +216,10 @@ public class MemberDAO extends ConnectPool {
 			System.out.println("정보 수정 중 에러 발생");
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
+<<<<<<< HEAD
 
 	
 //닉네임 중복 확인
@@ -237,9 +243,12 @@ public class MemberDAO extends ConnectPool {
 		return result;
 	}
 // 비밀번호 변경	
+=======
+// 비밀번호 변경
+>>>>>>> rim
 	public int changePwd(MemberDTO dto) {
 		int result = 0;
-		StringBuilder sb = new StringBuilder();	
+		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE member SET pwd=?");
 		sb.append(" WHERE memberId=?");
 		try {
@@ -308,7 +317,30 @@ public class MemberDAO extends ConnectPool {
 		}
 		return result;
 	}
+<<<<<<< HEAD
 	
+=======
+//스킬 태그 입력
+	public int inputSkill (MemberDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE member SET skill1=?, skill2=?, skill3=?");
+		sb.append(" WHERE memberId =?");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, dto.getSkill1());
+			psmt.setString(2, dto.getSkill2());
+			psmt.setString(3, dto.getSkill3());
+			psmt.setString(4, dto.getMemberId());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("스킬 태그 업로드 중 에러 발생");
+		}
+		return result;
+	}
+
+>>>>>>> rim
 //	이력서 파일 입력
 	public int registerResume (MemberDTO dto) {
 		int result = 0;
@@ -327,11 +359,12 @@ public class MemberDAO extends ConnectPool {
 		}
 		return result;
 	}
-	
-//개인회원 구인지원 리스트 확인	
+
+//개인회원 구인지원 리스트 확인
 	public List<ApplyTableDTO> applyList(Map<String, Object> map) {
-		List<ApplyTableDTO> list = new Vector<ApplyTableDTO>();
+		List<ApplyTableDTO> list = new Vector<>();
 		StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
 //		sb.append("SELECT RC.recruitIdx, RC.recruitTitle, RC.dueDate, RC.memberIdx, MB.memberId");
 //		sb.append(" FROM recruit AS RC");
 //		sb.append(" INNER JOIN member AS MB ON RC.memberIdx = MB.memberIdx" );
@@ -347,14 +380,31 @@ public class MemberDAO extends ConnectPool {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, map.get("memberId").toString());
 			rs = psmt.executeQuery();
+=======
+		sb.append("SELECT RC.recruitIdx, RC.recruitTitle, RC.dueDate, RC.memberIdx, MB.memberId");
+		sb.append(" FROM recruit AS RC");
+		sb.append(" INNER JOIN member AS MB ON RC.memberIdx = MB.memberIdx" );
+		sb.append(" WHERE MB.memberId = ?" );
+		sb.append(" ORDER BY RC.recruitIdx");
+
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setString(1, map.get("memberId").toString());
+			rs = psmt.executeQuery();
+
+>>>>>>> rim
 			while(rs.next()) {
 				ApplyTableDTO dto = new ApplyTableDTO();
 				dto.setMemberIdx(rs.getInt("MB.memberIdx"));
 				dto.setRecruitIdx(rs.getInt("RC.recruitIdx"));
 				dto.setRecruitTitle(rs.getString("RC.recruitTitle"));
 				dto.setDueDate(rs.getString("RC.dueDate"));
+<<<<<<< HEAD
 				dto.setOrgCompanyFile(rs.getString("MB.orgCompanyFile"));
 		
+=======
+
+>>>>>>> rim
 				list.add(dto);
 			}
 		} catch(Exception e) {
@@ -365,17 +415,17 @@ public class MemberDAO extends ConnectPool {
 	}
 //	기업회원 지원자 리스트 확인
 	public List<ApplyTableDTO> applicantList(Map<String, Object> map) {
-		List<ApplyTableDTO> list = new Vector<ApplyTableDTO>();
+		List<ApplyTableDTO> list = new Vector<>();
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT MB.name, MB.email,MB.memberId, RC.recruitTitle, RC.dueDate, AI.regDate"); 
-		sb.append(", RC.recruitIdx, RC.memberIdx, MB.orgCompanyFile, MB.saveCompanyFile"); 
+		sb.append("SELECT MB.name, MB.email,MB.memberId, RC.recruitTitle, RC.dueDate, AI.regDate");
+		sb.append(", RC.recruitIdx, RC.memberIdx, MB.orgCompanyFile, MB.saveCompanyFile");
 		sb.append(", (SELECT distinct MB.memberId FROM member AS MB");
 		sb.append(" INNER JOIN recruit AS RC ON RC.memberIdx = MB.memberIdx WHERE MB.memberId = ? )AS comId") ;
 		sb.append(" FROM member AS MB");
 		sb.append(" INNER JOIN applyinfo AS AI on MB.memberIdx = AI.memberIdx");
 		sb.append(" INNER JOIN recruit AS RC ON RC.recruitIdx = AI.recruitIdx");
 
-		try {			
+		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, map.get("memberId").toString());
 			rs = psmt.executeQuery();
@@ -389,7 +439,7 @@ public class MemberDAO extends ConnectPool {
 				dto.setMemberId((rs.getString("MB.memberId")));
 				dto.setOrgCompanyFile(rs.getString("MB.orgCompanyFIle"));
 				dto.setSaveCompanyFile(rs.getString("MB.saveCompanyFile"));
-		
+
 				list.add(dto);
 			}
 		} catch(Exception e) {

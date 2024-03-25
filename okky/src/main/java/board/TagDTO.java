@@ -3,7 +3,7 @@ package board;
 public class TagDTO {
 	private String tags;
 	private int count;
-	
+
 	public TagDTO() {}
 
 	public String getTags() {
@@ -21,6 +21,6 @@ public class TagDTO {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
-	
+
+
 }
