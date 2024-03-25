@@ -116,8 +116,7 @@
 
         }
         #tags ul li{
-            /* border: 1px solid lightgray; */
-            border: 0;
+            border: 1px solid lightgray;
             padding: 5px;
             width: max-content;
             border-radius: 10px;
@@ -161,14 +160,6 @@
     </style>
 </head>
 <body>
-<%
-if (session.getAttribute("memberId") == null) {
-	out.println("<script>");
-	out.println("alert('로그인 후 접근이 가능합니다.')");
-	out.println("window.location.replace('/okky/member/login.do')");
-	out.println("</script>");
-}
-%>
 <jsp:include page="/common/header.jsp"/>
     <div id="body">
         <div id="container">
@@ -202,12 +193,9 @@ if (session.getAttribute("memberId") == null) {
                 <div id="tagAndGood">
                     <div id="tags">
                         <ul>
-                         	<li><c:if test="${not empty params.skill1 }" >  <div>#${params.skill1 } </div></c:if></li>
-				            <li><c:if test="${not empty params.skill2 }" >  <div>#${params.skill2 } </div></c:if></li>
-				            <li><c:if test="${not empty params.skill3 }" >  <div>#${params.skill3 } </div></c:if></li>
-                           <!--  <li>#${params.skill }</li>
+                            <li>#${params.skill }</li>
                             <li>#${params.skill2 }</li>
-                            <li>#${params.skill3 }</li> -->
+                            <li>#${params.skill3 }</li>
                         </ul>
                     </div>
                     <div id="goods">
@@ -310,11 +298,11 @@ if (session.getAttribute("memberId") == null) {
      
         
       document.querySelector("#up").addEventListener("click", function(e) {
-          window.location.href = "likeCommu.do?communityIdx=${params.communityIdx}&likeParam=like";
+          window.location.href = "viewCommu.do?communityIdx=${params.communityIdx}";
       }, false);
         
       document.querySelector("#down").addEventListener("click", function(e) {
-          window.location.href = "likeCommu.do?communityIdx=${params.communityIdx}&likeParam=disLike";
+          window.location.href = "viewCommu.do?communityIdx=${params.communityIdx}";
       }, false);
     </script>
 </body>

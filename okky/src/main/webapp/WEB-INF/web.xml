@@ -15,15 +15,15 @@
   </context-param>
   <context-param>
     <param-name>URL</param-name>
-    <param-value>jdbc:mariadb://10.41.2.121:3306/okky</param-value>
+    <param-value>jdbc:mariadb://localhost:3306/okky</param-value>
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
-    <param-value>okky</param-value>
+    <param-value>root</param-value>
   </context-param>
   <context-param>
     <param-name>dbPwd</param-name>
-    <param-value>cjswo2</param-value>
+    <param-value>1234</param-value>
   </context-param>
   <servlet>
     <servlet-name>RegistController</servlet-name>
@@ -287,22 +287,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>JobDeleteController</servlet-name>
-    <url-pattern>/jobs/jobDelete.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>LikeCommuController</servlet-name>
-    <servlet-class>controller.board.commu.LikeCommuController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LikeCommuController</servlet-name>
-    <url-pattern>/board/commu/likeCommu.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>LikeQnaController</servlet-name>
-    <servlet-class>controller.board.qna.LikeQnaController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>LikeQnaController</servlet-name>
-    <url-pattern>/board/qna/likeQna.do</url-pattern>
+    <url-pattern>/jobs/jobDelete.do</url-pattern>	
   </servlet-mapping>
 </web-app>

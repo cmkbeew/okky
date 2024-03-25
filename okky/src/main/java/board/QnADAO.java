@@ -13,49 +13,26 @@ public class QnADAO extends ConnectPool {
 	public int qnaTotalCount(Map<String, Object> map) {
 		int total_count = 0;
 		
-		
+		/* 이렇게 해줘두 돼
+		String sql = "SELECT COUNT(*) FROM tbl_bbs";
+		if (map != null) {
+			sql += "WHERE " + map.get("search_category");
+			sql += " LIKE '%" + map.get("search_word") + "%;";
+		}
+		*/
 
-		StringBuilder sb = new StringBuilder(); 
+		StringBuilder sb = new StringBuilder(); //동적으로 생성되거나 문자열을 계속 추가해야 할 때
 		sb.append("SELECT COUNT(*) FROM qna");
 		if (map.get("search_category") != null && map.get("search_word") != null) {
 			sb.append(" WHERE title");
 			sb.append(" LIKE '%" + map.get("search_word") + "%'");
 		}
 		
-		if (map.get("category_1") != null) {
-			sb.append(" WHERE category LIKE '기술'");
-		}
-		if (map.get("category_2") != null) {
-			sb.append(" WHERE category LIKE '커리어'");
-		}
-		if (map.get("category_3") != null) {
-			sb.append(" WHERE category LIKE '기타'");
-		}
-//		if (map.get("category") != null) {
-//			sb.append(" WHERE q.category LIKE ");
-//			sb.append(map.get("category"));
-//		}
-		
-//		if (map.get("search_category") != null && map.get("search_word") != null) {
-//			sb.append(" WHERE q.title");
-//			sb.append(" LIKE '%" + map.get("search_word") + "%'");
-//			sb.append(" ORDER BY " + map.get("search_category") + " DESC");
-//			
-//		}
-//		if (map.get("search_category") == null && map.get("search_word") == null) {
-//			if (map.get("sort") != "") {
-//				sb.append(" ORDER BY ");
-//				sb.append(map.get("sort"));
-//				sb.append(" DESC");
-//			}
-//			else if (map.get("sort") == "") {
-//				sb.append(" ORDER BY q.qnaIdx DESC");
-//			}
-//		}	
-		
 		try {
-			String sql = sb.toString();
+			String sql = sb.toString();//StringBuilder 타입이라서 형변환
 			psmt = conn.prepareStatement(sql); 
+			//psmt.setString(1, map.get("search_category"));//위에서 ? 처리 했으면 여기서 넣어주면 돼
+			//psmt.setString(2, map.get("search_word"));
 			rs = psmt.executeQuery();  
 			rs.next(); 
 			total_count = rs.getInt(1); //count(*)한 결과
@@ -73,7 +50,7 @@ public class QnADAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT q.title, q.content, q.regDate, m.memberId, q.qnaIdx, q.memberIdx");
-		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.category, q.readCnt");
+		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt");
 		sb.append(" FROM qna q inner join member m");
 		sb.append(" ON q.memberIdx = m.memberIdx");
 		sb.append(" ORDER BY qnaIdx DESC");
@@ -92,6 +69,7 @@ public class QnADAO extends ConnectPool {
 				dto.setModifyDate(rs.getDate("q.modifyDate"));
 				dto.setPageLike(rs.getInt("q.pageLike"));
 				dto.setPageDislike(rs.getInt("q.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("q.answerIdx"));
 				dto.setCategory(rs.getString("q.category"));
 				dto.setReadCnt(rs.getInt("q.readCnt"));
 				dto.setMemberIdx(rs.getInt("q.memberIdx"));
@@ -116,18 +94,16 @@ public class QnADAO extends ConnectPool {
 	public List<QnADTO> qnaList(Map<String, Object> map) {
 		List<QnADTO> list = new Vector<QnADTO>();
 		
-		
-		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT q.title, q.content, q.regDate, m.memberId, q.qnaIdx, q.memberIdx");
-		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.category, q.readCnt");
+		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt");
 		sb.append(" FROM qna q inner join member m");
 		sb.append(" ON q.memberIdx = m.memberIdx");
-	
-		if (map.get("search_category") != null && map.get("search_word") != null) {
-			sb.append(" WHERE " + map.get("search_category"));
-			sb.append(" LIKE '%" + map.get("search_word") + "%'");
-		}
+		
+//		if (map.get("search_category") != null && map.get("search_word") != null) {
+//			sb.append(" WHERE " + map.get("search_category"));
+//			sb.append(" LIKE '%" + map.get("search_word") + "%'");
+//		}
 		if (map.get("category_1") != null) {
 			sb.append(" WHERE category LIKE '기술'");
 		}
@@ -137,35 +113,22 @@ public class QnADAO extends ConnectPool {
 		if (map.get("category_3") != null) {
 			sb.append(" WHERE category LIKE '기타'");
 		}
-//		if (map.get("category") != null) {
-//			sb.append(" WHERE q.category LIKE ");
-//			sb.append(map.get("category"));
-//		}
-		
 		if (map.get("search_category") != null && map.get("search_word") != null) {
 			sb.append(" WHERE q.title");
 			sb.append(" LIKE '%" + map.get("search_word") + "%'");
 			sb.append(" ORDER BY " + map.get("search_category") + " DESC");
-			
 		}
 		if (map.get("search_category") == null && map.get("search_word") == null) {
-			if (map.get("sort") != "") {
-				sb.append(" ORDER BY ");
-				sb.append(map.get("sort"));
-				sb.append(" DESC");
-			}
-			else if (map.get("sort") == "") {
-				sb.append(" ORDER BY q.qnaIdx DESC");
-			}
+			sb.append(" ORDER BY qnaIdx DESC");
 		}	
 		
 //		sb.append(" ORDER BY qnaIdx DESC");
 		if (map.get("page_skip_cnt") != null && map.get("page_size") != null) {
-			sb.append(" LIMIT " + map.get("page_skip_cnt") + ", " + map.get("page_size")); 
+			sb.append(" LIMIT " + map.get("page_skip_cnt") + ", " + map.get("page_size")); // ?로 쓰는게 더 좋아
 		}
 		
 		
-		System.out.println(sb.toString());
+		
 		
 		try {
 			psmt = conn.prepareStatement(sb.toString());
@@ -180,6 +143,7 @@ public class QnADAO extends ConnectPool {
 				dto.setModifyDate(rs.getDate("q.modifyDate"));
 				dto.setPageLike(rs.getInt("q.pageLike"));
 				dto.setPageDislike(rs.getInt("q.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("q.answerIdx"));
 				dto.setCategory(rs.getString("q.category"));
 				dto.setReadCnt(rs.getInt("q.readCnt"));
 				dto.setMemberIdx(rs.getInt("q.memberIdx"));
@@ -207,7 +171,7 @@ public class QnADAO extends ConnectPool {
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT q.title, q.content, q.regDate, m.memberId, q.qnaIdx, q.memberIdx");
-		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.category, q.readCnt, m.nickName");
+		sb.append(", q.modifyDate, q.skill1, q.skill2, q.skill3, q.pageLike, q.pageDislike, q.answerIdx, q.category, q.readCnt, m.nickName");
 		sb.append(" FROM qna q inner join member m");
 		sb.append(" ON q.memberIdx = m.memberIdx");
 		sb.append(" WHERE q.qnaIdx = ?");
@@ -224,6 +188,7 @@ public class QnADAO extends ConnectPool {
 				dto.setModifyDate(rs.getDate("q.modifyDate"));
 				dto.setPageLike(rs.getInt("q.pageLike"));
 				dto.setPageDislike(rs.getInt("q.pageDislike"));
+				dto.setAnswerIdx(rs.getInt("q.answerIdx"));
 				dto.setCategory(rs.getString("q.category"));
 				dto.setReadCnt(rs.getInt("q.readCnt"));
 				dto.setMemberIdx(rs.getInt("q.memberIdx"));
@@ -270,9 +235,10 @@ public class QnADAO extends ConnectPool {
 	public int qnaDelete(int qnaIdx) {
 		int result = 0;
 		
-
+		//StringBuilder sb = new StringBuilder();
+		//sb.append("DELETE FROM tbl_bbs WHERE idx = ?");
 		
-		String sql = "DELETE FROM qna WHERE qnaIdx = ?"; 
+		String sql = "DELETE FROM qna WHERE qnaIdx = ?"; //단문이니까 이거 하자
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, qnaIdx);
@@ -291,7 +257,7 @@ public class QnADAO extends ConnectPool {
 		int result = 0;
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE qna SET title = ?, content = ?, category = ?, skill1 = ?, skill2 = ?, skill3 = ?, modifyDate = now()");
+		sb.append("UPDATE qna SET title = ?, content = ?, category = ?, skill1 = ?, skill2 = ?, skil3 = ?, modifyDate = now()");
 		sb.append(" WHERE qnaIdx = ?");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
@@ -356,7 +322,7 @@ public class QnADAO extends ConnectPool {
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("UPDATE qna SET");
-		sb.append(" pageDislike = pageDislike + 1");
+		sb.append(" pageDislike = pageDislike + 1, pageLike = pageLike - 1");
 		sb.append(" WHERE qnaIdx = ?");
 		
 		try {

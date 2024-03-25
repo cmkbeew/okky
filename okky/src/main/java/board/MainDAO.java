@@ -9,22 +9,21 @@ import common.ConnectPool;
 public class MainDAO extends ConnectPool {
 	public MainDAO() {}
 	
-	// weekly best
 	public List<MainDTO> likeList(Map<String, Object> map) {
 		List<MainDTO> list = new Vector<MainDTO>();
 		
-		String sql = "select title, regDate, memberId, pageLike, readCnt, types, idx"
+		String sql = "select title, regDate, memberId, pageLike, readCnt"
 				+ " from"
 				+ " ("
-				+ " select m.memberId, q.title, q.regDate, q.pageLike, q.readCnt, 'QnA' as types, qnaIdx as idx "
-				+ " from qna q" 
+				+ " select m.memberId, q.title, q.regDate, q.pageLike, q.readCnt"
+				+ " from qna q"
 				+ " inner join member m on m.memberIdx = q.memberIdx"
 				+ " union all"
-				+ " select m.memberId, c.title, c.regDate, c.pageLike, c.readCnt, 'Community' as types, communityIdx as idx"
+				+ " select m.memberId, c.title, c.regDate, c.pageLike, c.readCnt"
 				+ " from community c"
 				+ " inner join member m on m.memberIdx = c.memberIdx"
 				+ " ) as total "
-				+ " order by pageLike desc, readCnt desc"
+				+ " order by pageLike desc"
 				+ " LIMIT 5";
 		
 		try {
@@ -38,8 +37,6 @@ public class MainDAO extends ConnectPool {
 				dto.setMemberId(rs.getString("memberId"));
 				dto.setPageLike(rs.getInt("pageLike"));
 				dto.setReadCnt(rs.getInt("readCnt"));
-				dto.setTypes(rs.getString("types"));
-				dto.setIdx(rs.getInt("idx"));
 				
 				list.add(dto);
 			}

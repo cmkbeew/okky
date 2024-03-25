@@ -22,7 +22,7 @@ public class ViewCommuController extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int communityIdx = request.getParameter("communityIdx") != null ? Integer.parseInt(request.getParameter("communityIdx")) : 0;
+		int communityIdx = Integer.parseInt(request.getParameter("communityIdx"));
 //		
 //		int pageLikeCnt = request.getParameter("pageLikeCnt") != null ? Integer.parseInt(request.getParameter("pageLikeCnt")) : 0;
 //		int pageDislikeCnt = request.getParameter("pageDislikeCnt") != null ? Integer.parseInt(request.getParameter("pageDislikeCnt")) : 0;
@@ -35,16 +35,15 @@ public class ViewCommuController extends HttpServlet {
 		if (communityIdx > 0) {
 			CommunityDAO dao = new CommunityDAO();
 			communityView = dao.communityView(communityIdx);
-//			dao.updatePageLike(communityIdx);
-//			dao.updatePageDislike(communityIdx);
+//			dao.updatePageLike(qnaIdx);
 			dao.updateReadCnt(communityIdx); 
-			dao.close(); 
+			dao.close(); //여기서 안닫으면 BbsDAO에서 커넥션 맺은 후 거기에 일일히 다 쳐서 닫아야해. if(rs != null) rs.close() 이런거
 			
 		}  else {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
 			writer.println("alert('접근 정보가 올바르지 않습니다.')");
-			writer.println("window.location.replace('main.do')"); 
+			writer.println("window.location.replace('list.jsp')"); //히스토리가 남지 않게 하는 방법. null이 들어간게 보이지 않게 하는 방법임
 			writer.println("</script>");
 		}
 		
