@@ -314,7 +314,7 @@
                     </div>
                 </div>
                 <div style="margin: 20px 0;">
-                    <input type="text" name="search_word" id="search_word" value="" maxlength="20"  style="height: 30px; width: 500px;"/>
+                    <input type="text" name="search_word" id="search_word" value="<c:if test="${not empty params.search_word}"> ${params.search_word } </c:if>" maxlength="20"  style="height: 30px; width: 500px;"/>
                     &nbsp; <input type="button" name="btn_search" id="btn_search" value="검색"/>
                 </div>
                
