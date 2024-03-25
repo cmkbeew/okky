@@ -186,6 +186,51 @@
         #btn_search:hover {
             cursor:pointer;
         }
+        .content_title a:hover {
+        	color: #0090f9;
+        }
+        #sort {
+        	z-index: 100;
+        	display: flex;
+        	flex-direction: column;
+       		display: none;
+        }
+        /* .filter-toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        padding: 5px 0px;
+        background-color: #d8d8d8;
+        border-radius: 10px;
+        border: none;
+        font-size: 16px;
+    }
+    .filter-toggle:hover {
+        background-color: lightblue;
+    }
+    .filter-menu {
+        visibility: hidden;
+        position: absolute;
+        padding: 0;
+        left: 0;
+        width: 100px;
+        max-height: 210px;
+        border-radius: 8px;
+        background-color: white;
+        opacity: 0;  
+        overflow-y: auto;
+        transform: translate3d(0, -20px, 0);  
+        transition: all 200ms ease-in-out;  
+        list-style-type: none;
+    }
+    .filter-menu {
+        visibility: visible;  
+        transform: translate3d(0, 0, 0); 
+        opacity: 1;
+        text-align: left;
+    }
+     */
     </style>
 </head>
 <body>
@@ -258,25 +303,45 @@
                         </button>
                     
                 </div>
-                
+           <!--      <form name="frmSearch" id="frmSearch" method="get"> -->
                     <nav>
                         <button id="category_1" name="category_1" value="기술" <c:if test="${params.category_1 eq 'category_1'}"> style="color:#0090f8;" </c:if>  >기술</button>
                         <button  id="category_2" name="category_2" value="커리어" <c:if test="${params.category_2 eq 'category_2'}"> style="color:#0090f8;" </c:if>>커리어</button>
                         <button id="category_3" name="category_3" value="기타" <c:if test="${params.category_3 eq 'category_3'}"> style="color:#0090f8;" </c:if>>기타</button>
                     </nav>
-                <div style="visibility: hidden;"></div>
+                <!-- 변경 -->
+                <!-- <div style="visibility: hidden;"></div> -->
+                <div>
+                	<a href="http://localhost:8080/okky/board/qna/qna.do">전체</a>
+                	
+            
+                	<button id="sortBtn" class="filter-toggle">정렬</button>
+                	<ul id="sort" class="filter-menu">
+                		<button id="order" class="filter-sort" name="order" value="q.qnaIdx" onclick="order(this)"><li>최신순</li></button>
+                		<button id="order" class="filter-sort" name="order" value="q.pageLike" onclick="order(this)"><li>추천순</li></button>
+                		<!-- <button id="order" name="order"  ><li>답변순</li></button> -->
+                		<button id="order" class="filter-sort" name="order" value="q.readCnt" onclick="order(this)"><li>조회순</li></button>
+                	</ul>
+                	
+                	
+                </div>
+                
                 
 
             </div>
             <div style="margin-top: 20px;"><hr></div>
-            <form name="frmSearch" id="frmSearch" method="get"> 
+            <form name="frmSearch" id="frmSearch" method="get">
+            
             <div class="search">
                 <div>
                     <div class="orderBy">
                         <select name="search_category" id="search_category" style="margin-left: 60px; margin-top: 22px; height: 30px; width: 100px;">
                             <option value="" selected>선택</option>
-                            <option value="readCnt" <c:if test="${params.search_category eq 'readCnt'}"> selected </c:if> >조회순</option>
                             <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> >최신순</option>
+                            <option value="pageLike"<c:if test="${params.search_category eq 'pageLike'}"> selected </c:if> >추천순</option>
+                           <%--  <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> 답변</option> --%>
+                            <option value="readCnt" <c:if test="${params.search_category eq 'readCnt'}"> selected </c:if> >조회순</option>
+                           
                         </select>
                     </div>
                 </div>
@@ -311,6 +376,8 @@
 				                            <div>${list.regDate}</div>
 				                            <div>·</div>
 				                            <div>${list.readCnt} read</div>
+				                            <div>·</div>
+				                            <div>${list.pageLike} likes</div>
 				                        </div>
 				                        <div class="content_title">
 				                            <a href="viewQnA.do?qnaIdx=${list.qnaIdx}">
@@ -320,9 +387,13 @@
 				                                </p>
 				                                <div class="writer">
 				                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                                <c:if test="${not empty list.skill1 }" >  <div>#${list.skill1 } </div></c:if>
+				                                 <c:if test="${not empty list.skill2 }" >  <div>#${list.skill2 } </div></c:if>
+				                                 <c:if test="${not empty list.skill3 }" >  <div>#${list.skill3 } </div></c:if>
+				                                <!-- 
 					                                <div>#${list.skill1 } </div>
 					                                <div>#${list.skill2 } </div>
-					                                <div>#${list.skill3 } </div>
+					                                <div>#${list.skill3 } </div> -->
 				                                </div>
 				                            </a>
 				                        </div><br>
@@ -443,7 +514,7 @@
 
     }, false);
     
-    
+    //&search_category=${search_category}&search_word=${search_word}
     document.querySelector("#category_1").addEventListener("click", function(e) {
     	window.location.href = "qna.do?category_1=category_1";
 				
@@ -474,6 +545,22 @@
             }
             scrollPosition = scrollTop;
             });
+        
+    document.querySelector("#sortBtn").addEventListener("click", (e) => {
+    	const sort = document.getElementById("sort");
+    	
+    	if (sort.style.display == "block") {
+    		sort.style.display = "none";
+    	} else {
+    		sort.style.display = "block";
+    	}
+    });    
+    
+    function order(btn) {
+    	window.location.href = "/okky/board/qna/qna.do?sort=" + btn.value;
+    }
+    
+    
     </script>
 
 

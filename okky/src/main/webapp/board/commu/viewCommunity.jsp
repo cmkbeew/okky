@@ -116,7 +116,8 @@
 
         }
         #tags ul li{
-            border: 1px solid lightgray;
+            /* border: 1px solid lightgray; */
+            border: 0;
             padding: 5px;
             width: max-content;
             border-radius: 10px;
@@ -160,6 +161,14 @@
     </style>
 </head>
 <body>
+<%
+if (session.getAttribute("memberId") == null) {
+	out.println("<script>");
+	out.println("alert('로그인 후 접근이 가능합니다.')");
+	out.println("window.location.replace('/okky/member/login.do')");
+	out.println("</script>");
+}
+%>
 <jsp:include page="/common/header.jsp"/>
     <div id="body">
         <div id="container">
@@ -193,9 +202,12 @@
                 <div id="tagAndGood">
                     <div id="tags">
                         <ul>
-                            <li>#${params.skill }</li>
+                         	<li><c:if test="${not empty params.skill1 }" >  <div>#${params.skill1 } </div></c:if></li>
+				            <li><c:if test="${not empty params.skill2 }" >  <div>#${params.skill2 } </div></c:if></li>
+				            <li><c:if test="${not empty params.skill3 }" >  <div>#${params.skill3 } </div></c:if></li>
+                           <!--  <li>#${params.skill }</li>
                             <li>#${params.skill2 }</li>
-                            <li>#${params.skill3 }</li>
+                            <li>#${params.skill3 }</li> -->
                         </ul>
                     </div>
                     <div id="goods">
@@ -298,11 +310,11 @@
      
         
       document.querySelector("#up").addEventListener("click", function(e) {
-          window.location.href = "viewCommu.do?communityIdx=${params.communityIdx}";
+          window.location.href = "likeCommu.do?communityIdx=${params.communityIdx}&likeParam=like";
       }, false);
         
       document.querySelector("#down").addEventListener("click", function(e) {
-          window.location.href = "viewCommu.do?communityIdx=${params.communityIdx}";
+          window.location.href = "likeCommu.do?communityIdx=${params.communityIdx}&likeParam=disLike";
       }, false);
     </script>
 </body>

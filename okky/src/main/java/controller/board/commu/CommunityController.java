@@ -24,7 +24,7 @@ public class CommunityController extends HttpServlet {
 		int total_page = 1;
 		int page_no = 1;
 		int page_size = 10;
-		int page_skip_cnt = 10;
+		int page_skip_cnt = 5;
 		int page_block_size = 5;
 		int page_block_start = 1;
 		int page_block_end = 1;
@@ -32,6 +32,7 @@ public class CommunityController extends HttpServlet {
 		Map<String, Object> params = new HashMap<String, Object>();
 		String search_category = request.getParameter("search_category");
 		String search_word = request.getParameter("search_word");
+		String sort = request.getParameter("sort") != null ? request.getParameter("sort") : "";
 		
 		String category_1 = request.getParameter("category_1");
 		String category_2 = request.getParameter("category_2");
@@ -49,6 +50,8 @@ public class CommunityController extends HttpServlet {
 				params.put("search_word", search_word.trim());
 			}
 		}
+		//sort
+		params.put("sort", sort);
 		
 		//페이징 파라미터 설정
 		params.put("page_no", page_no);
@@ -63,6 +66,7 @@ public class CommunityController extends HttpServlet {
 		total_count = dao.communityTotalCount(params);	
 		List<CommunityDTO> communityList = dao.communityList(params);
 		dao.close();
+		
 
 		//페이징 파라미터 설정
 		total_page = (int)Math.ceil(total_count/(double)page_size);
@@ -77,7 +81,19 @@ public class CommunityController extends HttpServlet {
 		params.put("page_block_start", page_block_start);
 		params.put("page_block_end", page_block_end);
 		
-		String pagingArea = BbsPage.pagingArea(total_page, page_no, page_block_start, page_block_end, "commu.do?");
+		String link = "";
+		
+		if (category_1 != null) {
+			link = "category_1=" + category_1;
+		}
+		if (category_2 != null) {
+			link = "category_2=" + category_2;
+		}
+		if (category_3 != null) {
+			link = "category_3=" + category_3;
+		}
+		
+		String pagingArea = BbsPage.pagingArea(total_page, page_no, page_block_start, page_block_end, "commu.do?" + link + "&sort=" + sort + "&");
 //		System.out.println("paging : " + pagingArea);
 		params.put("paging", pagingArea);
 		

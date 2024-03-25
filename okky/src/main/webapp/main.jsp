@@ -102,6 +102,9 @@
         .content_title a {
             font-weight: 700;
         }
+        .content_title {
+        	font-weight: 700;
+        }
         #side_menu {
             margin-top: 30px;
             margin-left: 50px;
@@ -136,6 +139,9 @@
         }
         .smallBlue {
             color: #0090f9;
+        }
+        .content_title a:hover {
+        	color: #0090f9;
         }
     </style>
 </head>
@@ -296,7 +302,12 @@
 	                                    	<div>${list.pageLike } likes</div>
 	                                	</div>
 		                                <div class="content_title">
-		                                    ${list.title }
+		                                
+		                                <c:if test="${list.types eq 'QnA'}" > <a href="/okky/board/qna/viewQnA.do?qnaIdx=${list.idx}">${list.title } </a> </c:if>
+		                                <c:if test="${list.types eq 'Community'}" > <a href="/okky/board/commu/viewCommu.do?communityIdx=${list.idx}">${list.title } </a> </c:if>
+		                                <%-- 
+		                                <a href="/okky/board/qna/viewQnA.do?qnaIdx=${list.qnaIdx}">${list.title }</a>
+		                                    ${list.title } ;;;;; ${list.types } --%>
 		                                </div>
 	                           		</li>
 	                           		<li><hr></li>
