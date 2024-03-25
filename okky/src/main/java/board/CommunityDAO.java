@@ -9,6 +9,7 @@ import common.ConnectPool;
 public class CommunityDAO extends ConnectPool {
 
 	public CommunityDAO() {}
+	
 
 	public int communityTotalCount(Map<String, Object> map) {
 		int total_count = 0;
@@ -142,7 +143,9 @@ public class CommunityDAO extends ConnectPool {
 		System.out.println(map.get("sort"));
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
+		sb.append("SELECT");
+		sb.append(" (select count(*) from community_comment as cc where cc.communityIdx = c.communityIdx) as cnt,");
+		sb.append(" c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
 		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.category, c.readCnt");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
@@ -197,7 +200,7 @@ public class CommunityDAO extends ConnectPool {
 				dto.setReadCnt(rs.getInt("c.readCnt"));
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
-
+				dto.setAnswerIdx(rs.getInt("cnt"));
 				dto.setSkill1(rs.getString("c.skill1"));
 				dto.setSkill2(rs.getString("c.skill2"));
 				dto.setSkill3(rs.getString("c.skill3"));
@@ -245,7 +248,9 @@ public class CommunityDAO extends ConnectPool {
 		CommunityDTO dto = new CommunityDTO();
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
+		sb.append("SELECT");
+		sb.append(" (select count(*) from community_comment as cc where cc.communityIdx = c.communityIdx) as cnt,");
+		sb.append(" c.title, c.content, c.regDate, m.memberId, c.communityIdx, c.memberIdx");
 		sb.append(", c.modifyDate, c.skill1, c.skill2, c.skill3, c.pageLike, c.pageDislike, c.category, c.readCnt, m.nickName");
 		sb.append(" FROM community c inner join member m");
 		sb.append(" ON c.memberIdx = m.memberIdx");
@@ -268,7 +273,7 @@ public class CommunityDAO extends ConnectPool {
 				dto.setMemberIdx(rs.getInt("c.memberIdx"));
 				dto.setMemberId(rs.getString("m.memberId"));
 				dto.setNickName(rs.getString("m.nickName"));
-
+				dto.setAnswerIdx(rs.getInt("cnt"));
 				dto.setSkill1(rs.getString("c.skill1"));
 				dto.setSkill2(rs.getString("c.skill2"));
 				dto.setSkill3(rs.getString("c.skill3"));

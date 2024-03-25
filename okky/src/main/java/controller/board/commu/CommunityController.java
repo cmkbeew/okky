@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 
 public class CommunityController extends HttpServlet {
@@ -64,9 +65,17 @@ public class CommunityController extends HttpServlet {
 		//게시판 테이블 조회
 		CommunityDAO dao = new CommunityDAO();
 		total_count = dao.communityTotalCount(params);
+		
+		//댓글 갯수 조회
+	
+		
+		
+	
+		
 		List<CommunityDTO> communityList = dao.communityList(params);
 		dao.close();
 
+		
 
 		//페이징 파라미터 설정
 		total_page = (int)Math.ceil(total_count/(double)page_size);
@@ -80,6 +89,7 @@ public class CommunityController extends HttpServlet {
 		params.put("page_block_size", page_block_size);
 		params.put("page_block_start", page_block_start);
 		params.put("page_block_end", page_block_end);
+		
 
 		String link = "";
 

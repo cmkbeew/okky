@@ -335,7 +335,7 @@
 				                                답변
 				                            </div>
 				                            <div>
-				                                ${list. answerIdx}
+				                                ${list.answerIdx}
 				                            </div>
 				                        </button> 
 				                        <div class="writer">
@@ -434,7 +434,7 @@
                     </li>
 
                     <li>
-                        <a href="/okky/jobs/jobMain.jsp">
+                        <a href="/okky/jobs/jobMain.do">
                             <div>
                                 구인구직
                             </div>

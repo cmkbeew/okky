@@ -65,6 +65,7 @@ public class ViewQnaController extends HttpServlet {
 		String skill1 = "";
 		String skill2 = "";
 		String skill3 = "";
+		int answerIdx = 0;
 
 		if (qnaView != null) {
 			memberId = qnaView.getMemberId();
@@ -79,6 +80,7 @@ public class ViewQnaController extends HttpServlet {
 			skill1 = qnaView.getSkill1();
 			skill2 = qnaView.getSkill2();
 			skill3 = qnaView.getSkill3();
+			answerIdx = qnaView.getAnswerIdx();
 			content = (content != null ? content.replace("<br>", "\r\n") : "");
 			content = (content != null ? content.replace("&nbsp;", " ") : "");
 			category = qnaView.getCategory();
@@ -99,6 +101,7 @@ public class ViewQnaController extends HttpServlet {
 		params.put("skill1", skill1);
 		params.put("skill2", skill2);
 		params.put("skill3", skill3);
+		params.put("answerIdx", answerIdx);
 		
 		
 		request.setAttribute("params", params);

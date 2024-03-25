@@ -217,7 +217,7 @@
                 
                 <div id="commentArea">
                     <p>
-                        1개의 댓글
+                        ${params.answerIdx } 개의 댓글
                     </p>
                     <form action="./writeCommuComment.do" method="post">
                     	<input type="hidden" id="memberIdx" name="memberIdx" value="${sessionScope.memberIdx}" />
