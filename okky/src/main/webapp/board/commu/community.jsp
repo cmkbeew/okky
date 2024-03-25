@@ -286,7 +286,7 @@
                     </nav>
                     
                 <div>
-                	<a href="http://localhost:8080/okky/board/qna/qna.do">전체</a>
+                	<a href="/okky/board/commu/commu.do">전체</a>
                 	<button id="sortBtn">정렬</button>
                 	<ul id="sort" class="">
                 		<button id="order" name="order" value="c.communityIdx" onclick="order(this)"><li>최신순</li></button>

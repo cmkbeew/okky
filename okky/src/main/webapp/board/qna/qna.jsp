@@ -312,7 +312,7 @@
                 <!-- 변경 -->
                 <!-- <div style="visibility: hidden;"></div> -->
                 <div>
-                	<a href="http://localhost:8080/okky/board/qna/qna.do">전체</a>
+                	<a href="/okky/board/qna/qna.do">전체</a>
                 	
             
                 	<button id="sortBtn" class="filter-toggle">정렬</button>
