@@ -43,19 +43,7 @@ public class MailController extends HttpServlet {
 		} else {
 			req.getRequestDispatcher("./account.jsp").forward(req, resp);
 		}
-<<<<<<< HEAD
-	
-=======
-//
 
-//		1.타입파라미터 받아
-//		2. 타입에 따라서 분기한다
-//		-> 타입 이메일 ->
-//		패스워드
-//		삭제 (if)
-//		각각 처리 됐어 그러면 리다이랙트, 포워드,,,,,,,,,설정,,,,,,,,,
-
->>>>>>> rim
 	}
 
 }

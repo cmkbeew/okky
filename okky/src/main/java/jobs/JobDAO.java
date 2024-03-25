@@ -288,7 +288,6 @@ public class JobDAO extends ConnectPool {
 		return result;
 	}
 
-<<<<<<< HEAD
 	// 공고 조회 수 update
 	public void updateJobView(int recruitIdx) {
 		String sql = "UPDATE recruit SET readCnt = readCnt + 1 WHERE recruitIdx=?";
@@ -321,27 +320,4 @@ public class JobDAO extends ConnectPool {
 		}
 		return result;
 	}
-=======
-//	public void sortJob(String contractType, String sort) {
-//		StringBuilder sb = new StringBuilder();
-//
-//		sb.append("SELECT m.companyName, m.type, m.companyAddr, r.recruitIdx, r.position, r.career, r.contractType ");
-//		sb.append("FROM recruit AS r INNER JOIN member AS m ON m.memberIdx=r.memberIdx ");
-//		sb.append("WHERE companyName IS NOT NULL AND contractType = ?");
-//		if(sort.equals("recent")) {
-//			sb.append(" ORDER BY regDate DESC");
-//		} else {
-//			sb.append(" ORDER BY regDate");
-//		}
-//
-//		try {
-//			psmt = conn.prepareStatement(sb.toString());
-//			psmt.setString(1, contractType);
-//			psmt.executeQuery();
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			System.out.println("공고 글 작성 시 에러 발생");
-//		}
-//	}
->>>>>>> rim
 }

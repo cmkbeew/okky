@@ -39,7 +39,6 @@ public class ViewCommuController extends HttpServlet {
 		if (communityIdx > 0) {
 			CommunityDAO dao = new CommunityDAO();
 			communityView = dao.communityView(communityIdx);
-<<<<<<< HEAD
 //			dao.updatePageLike(qnaIdx);
 			dao.updateReadCnt(communityIdx); 
 			dao.close(); //여기서 안닫으면 BbsDAO에서 커넥션 맺은 후 거기에 일일히 다 쳐서 닫아야해. if(rs != null) rs.close() 이런거
@@ -52,13 +51,7 @@ public class ViewCommuController extends HttpServlet {
 			}
 			
 			cDao.close();
-=======
-//			dao.updatePageLike(communityIdx);
-//			dao.updatePageDislike(communityIdx);
-			dao.updateReadCnt(communityIdx);
-			dao.close();
 
->>>>>>> rim
 		}  else {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
@@ -118,22 +111,15 @@ public class ViewCommuController extends HttpServlet {
 
 
 		request.setAttribute("params", params);
-<<<<<<< HEAD
 		
 		// 댓글
 		request.setAttribute("cList", cList);
-		
-		request.getRequestDispatcher("/board/commu/viewCommunity.jsp").forward(request,  response);
-	}
-
-=======
 
 		request.getRequestDispatcher("/board/commu/viewCommunity.jsp").forward(request,  response);
 	}
 
 
 	@Override
->>>>>>> rim
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

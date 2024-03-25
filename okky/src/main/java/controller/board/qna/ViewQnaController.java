@@ -15,10 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
-=======
 
->>>>>>> rim
 
 public class ViewQnaController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,7 +34,6 @@ public class ViewQnaController extends HttpServlet {
 			QnADAO dao = new QnADAO();
 			qnaView = dao.qnaView(qnaIdx);
 			dao.updateReadCnt(qnaIdx);
-<<<<<<< HEAD
 			dao.close(); //여기서 안닫으면 BbsDAO에서 커넥션 맺은 후 거기에 일일히 다 쳐서 닫아야해. if(rs != null) rs.close() 이런거
 			
 			CommentDAO cDao = new CommentDAO();
@@ -48,12 +44,6 @@ public class ViewQnaController extends HttpServlet {
 			}
 			
 			cDao.close();
-=======
-//			dao.updatePageLike(qnaIdx);
-//			dao.updatePageDislike(qnaIdx);
-			dao.close();
-
->>>>>>> rim
 		}  else {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
@@ -109,27 +99,19 @@ public class ViewQnaController extends HttpServlet {
 		params.put("skill1", skill1);
 		params.put("skill2", skill2);
 		params.put("skill3", skill3);
-<<<<<<< HEAD
 		
 		
 		request.setAttribute("params", params);
 		
 		// 댓글
 		request.setAttribute("cList", cList);
-		
-=======
 
-
-
-		request.setAttribute("params", params);
-
->>>>>>> rim
 		request.getRequestDispatcher("/board/qna/viewQnA.jsp").forward(request,  response);
 	}
 
 
 
-	@Override
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

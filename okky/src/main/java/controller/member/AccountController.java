@@ -30,13 +30,7 @@ public class AccountController extends HttpServlet {
 		MemberDAO dao = new MemberDAO();
 		MemberDTO dto = dao.getCompanyInfo(memberId, name);
 		dao.close();
-<<<<<<< HEAD
-		
-=======
-		email = dto.getEmail();
-		req.setAttribute("email", email);
 
->>>>>>> rim
 		req.getRequestDispatcher("./account.jsp").forward(req, resp);
 	}
 

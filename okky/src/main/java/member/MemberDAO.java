@@ -196,13 +196,8 @@ public class MemberDAO extends ConnectPool {
 // 개인 정보 수정하기
 	public int modifyMyInfo(MemberDTO dto) {
 		int result = 0;
-<<<<<<< HEAD
 		StringBuilder sb = new StringBuilder();	
 		sb.append("UPDATE member SET nickname=?,skill1=?, skill2=?, skill3=?");
-=======
-		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE member SET nickname=?");
->>>>>>> rim
 		sb.append(" WHERE memberId=?");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
@@ -219,7 +214,6 @@ public class MemberDAO extends ConnectPool {
 
 		return result;
 	}
-<<<<<<< HEAD
 
 	
 //닉네임 중복 확인
@@ -242,10 +236,7 @@ public class MemberDAO extends ConnectPool {
 		
 		return result;
 	}
-// 비밀번호 변경	
-=======
 // 비밀번호 변경
->>>>>>> rim
 	public int changePwd(MemberDTO dto) {
 		int result = 0;
 		StringBuilder sb = new StringBuilder();
@@ -317,30 +308,7 @@ public class MemberDAO extends ConnectPool {
 		}
 		return result;
 	}
-<<<<<<< HEAD
-	
-=======
-//스킬 태그 입력
-	public int inputSkill (MemberDTO dto) {
-		int result = 0;
-		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE member SET skill1=?, skill2=?, skill3=?");
-		sb.append(" WHERE memberId =?");
-		try {
-			psmt = conn.prepareStatement(sb.toString());
-			psmt.setString(1, dto.getSkill1());
-			psmt.setString(2, dto.getSkill2());
-			psmt.setString(3, dto.getSkill3());
-			psmt.setString(4, dto.getMemberId());
-			result = psmt.executeUpdate();
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("스킬 태그 업로드 중 에러 발생");
-		}
-		return result;
-	}
 
->>>>>>> rim
 //	이력서 파일 입력
 	public int registerResume (MemberDTO dto) {
 		int result = 0;
@@ -364,7 +332,6 @@ public class MemberDAO extends ConnectPool {
 	public List<ApplyTableDTO> applyList(Map<String, Object> map) {
 		List<ApplyTableDTO> list = new Vector<>();
 		StringBuilder sb = new StringBuilder();
-<<<<<<< HEAD
 //		sb.append("SELECT RC.recruitIdx, RC.recruitTitle, RC.dueDate, RC.memberIdx, MB.memberId");
 //		sb.append(" FROM recruit AS RC");
 //		sb.append(" INNER JOIN member AS MB ON RC.memberIdx = MB.memberIdx" );
@@ -380,31 +347,14 @@ public class MemberDAO extends ConnectPool {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, map.get("memberId").toString());
 			rs = psmt.executeQuery();
-=======
-		sb.append("SELECT RC.recruitIdx, RC.recruitTitle, RC.dueDate, RC.memberIdx, MB.memberId");
-		sb.append(" FROM recruit AS RC");
-		sb.append(" INNER JOIN member AS MB ON RC.memberIdx = MB.memberIdx" );
-		sb.append(" WHERE MB.memberId = ?" );
-		sb.append(" ORDER BY RC.recruitIdx");
-
-		try {
-			psmt = conn.prepareStatement(sb.toString());
-			psmt.setString(1, map.get("memberId").toString());
-			rs = psmt.executeQuery();
-
->>>>>>> rim
 			while(rs.next()) {
 				ApplyTableDTO dto = new ApplyTableDTO();
 				dto.setMemberIdx(rs.getInt("MB.memberIdx"));
 				dto.setRecruitIdx(rs.getInt("RC.recruitIdx"));
 				dto.setRecruitTitle(rs.getString("RC.recruitTitle"));
 				dto.setDueDate(rs.getString("RC.dueDate"));
-<<<<<<< HEAD
 				dto.setOrgCompanyFile(rs.getString("MB.orgCompanyFile"));
 		
-=======
-
->>>>>>> rim
 				list.add(dto);
 			}
 		} catch(Exception e) {

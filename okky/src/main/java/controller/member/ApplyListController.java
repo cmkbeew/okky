@@ -26,12 +26,8 @@ public class ApplyListController extends HttpServlet {
 		Map<String, Object> params = new HashMap<>();
 		HttpSession session = req.getSession();
 		String id = session.getAttribute("memberId")== null ? "" :  session.getAttribute("memberId").toString();
-<<<<<<< HEAD
 		String orgCompanyFile = session.getAttribute("orgCompanyFile")== null ? "" :  session.getAttribute("orgCompanyFile").toString();
-		
-=======
 
->>>>>>> rim
 		params.put("memberId",id);
 
 		//게시판 테이블 조회
