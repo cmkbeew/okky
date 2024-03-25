@@ -78,7 +78,7 @@ public class FileUtil2 {
 
 	// 파일 다운로드
 	public static void download(HttpServletRequest req, HttpServletResponse resp, String orgFileName, String saveFileName) {
-		String saveDirectory = "D:\\java4\\jsp\\okkyFIle";
+		String saveDirectory = req.getServletContext().getRealPath("resumeFiles");
 
 		try {
 

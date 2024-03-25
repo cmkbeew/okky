@@ -32,8 +32,8 @@ public class RegiResumeController extends HttpServlet {
 		MemberDTO dto = new MemberDTO();
 		MemberDAO dao = new MemberDAO();
 
-		/* String saveDir = req.getServletContext().getRealPath("resumeFiles"); */
-		String saveDir = "D:\\java4\\jsp\\okkyFIle";
+		String saveDir = req.getServletContext().getRealPath("resumeFiles");
+//		String saveDir = "D:\\java4\\jsp\\okkyFIle";
 		String orgFileName = "";
 
 		try {
