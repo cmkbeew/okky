@@ -119,7 +119,7 @@ public class ModifyQnaController extends HttpServlet {
 			PrintWriter writer = response.getWriter();
 			writer.println("<script>");
 			writer.println("alert('글 수정 시 에러가 발생하였습니다.')");
-			writer.println("window.location.replace('list.do')");
+			writer.println("window.location.replace('/okky/main.do')");
 			writer.println("</script>");
 		}
 	}
