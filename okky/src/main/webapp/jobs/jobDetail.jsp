@@ -180,7 +180,7 @@
         	if(${sessionScope.type eq '1'}) {
         		if(${not empty sessionScope.orgCompanyFile}){
     	        	alert("지원 완료되었습니다.\n지원리스트 창으로 이동하겠습니다.");
-    	        	location.href = "/okky/member/applyList.do";
+    	        	location.href = "/okky/jobs/jobApply.do?recruitIdx=${jobView.recruitIdx}";
             	}
             	else {
             		alert("이력서가 없습니다.\n이력서 등록 창으로 이동합니다.");

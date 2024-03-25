@@ -351,7 +351,15 @@
 				                            <a href="viewCommu.do?communityIdx=${list.communityIdx}">
 				                                <strong>${list.title}</strong>
 				                                <p>
-				                                    ${list.content.substring(0,10).concat(" ...")}
+				                                <c:choose>
+				                                	<c:when test="${list.content.length() >= 70 }">
+				                                		${list.content.substring(0,70).concat(" ...")}
+				                                	</c:when>
+				                                	<c:otherwise>
+				                                	 	${list.content}
+				                                	</c:otherwise>
+				                                </c:choose>
+				                                 
 				                                </p>
 				                                <div class="writer">
 				                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
