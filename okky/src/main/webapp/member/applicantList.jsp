@@ -195,7 +195,7 @@
     
 </head>
 <body>
-	<%
+<%
 	int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.getAttribute("type").toString());
 	if (session.getAttribute("memberId") == null) {
 		out.println("<script>");
@@ -203,7 +203,7 @@
 		out.println("window.location.replace('/okky/member/login.do')");
 		out.println("</script>");
 	}
-	%>
+%> 
     <jsp:include page="/common/header.jsp" />
 	<div id="container">
 	    <aside id="sidebar">
