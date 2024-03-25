@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -245,13 +246,24 @@
                         <span>멋진 인재가 모여있는 곳</span>
                     </div>
                     <div class="bot-menu">
-                        <a href="/resume.do">
-                            <div id="talent-menu">
+                    	<c:if test="${sessionScope.type eq '1'}">
+                        	<a href="/okky/member/applyList.do">
+                        	<div id="talent-menu">
                                 <div class="t-content">
                                     <div>Resume</div>
                                     <div>이력서 등록</div>
                                 </div>
                             </div>
+                        </c:if>
+                        <c:if test="${sessionScope.type eq '2'}">
+                        	<a href="/okky/jobs/jobRecruit.do">
+                            <div id="talent-menu">
+                                <div class="t-content">
+                                    <div>Recruit</div>
+                                    <div>공고 등록</div>
+                                </div>
+                            </div>
+                        </c:if>
                         </a>
                     </div>
                 </div>

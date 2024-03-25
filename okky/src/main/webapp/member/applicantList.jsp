@@ -60,13 +60,11 @@
             opacity: 0.8;
            	border-radius : 20px;
         }
-
         /* 본문 영역 */
         #outer {
             width: 85%;
             height: 100%;
             float: left;
-            display: grid;
             place-items: center;
             grid-template-rows: 400px 1px 700px;
         }
@@ -150,21 +148,28 @@
             display: flex;
         }
         #jobList {
-            grid-row: 3 /4;
             margin: 30px 0;
-            width: 800px;
+            width: 100%;
             display: flex;
             justify-content: center;
         }
         #listTbl {
-            width: 700px;
-        }
-        #listTbl, th, td, tr {
+            width: 850px;
             border:1px solid grey;
             border-collapse: collapse;
+            box-shadow : 0 0 0 1px #666;
             padding :10px;
             font-size: 18px;
         }
+        th, tr {
+            padding :10px;
+            font-size: 18px;
+        }
+        td {
+         	border-bottom : 1px solid grey;
+         	padding :10px;
+            font-size: 18px;
+         }
         #listTbl th {
             background-color: #0090ff;
             border: none;
@@ -178,6 +183,7 @@
             box-shadow: 2px 2px 5px grey;
             cursor: pointer;
             border-radius: 3px;
+            color : white;
         }
         .linkBtn:hover {
             background-color:#0061ac ;
@@ -189,13 +195,22 @@
     
 </head>
 <body>
+	<%
+	int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.getAttribute("type").toString());
+	if (session.getAttribute("memberId") == null) {
+		out.println("<script>");
+		out.println("alert('로그인 후 접근이 가능합니다.')");
+		out.println("window.location.replace('/okky/member/login.do')");
+		out.println("</script>");
+	}
+	%>
     <jsp:include page="/common/header.jsp" />
 	<div id="container">
 	    <aside id="sidebar">
 	        <div>
 	            <ul>
 	                <li><h3>내 계정</h3></li>
-	                <a href="./mypage.do"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
+	                <a href="./mypage_co.do"><li class="detail"><img src="../img/user.png" alt="프로필아이콘">프로필</li></a>
 	                <a href="./account.do"><li class="detail"><img src="../img/cogwheel.png" alt="계정관리">계정 관리</li></a>
 	            </ul>
 	            <hr>
@@ -208,7 +223,7 @@
 	    <div id="outer">
 	        <div id="container1">
 	            <div id="jobList">
-	                <table id="listTbl">
+	                <table id="listTbl" >
 	                    <thead>
 	                        <tr>
 	                            <th>지원자 이름</th>

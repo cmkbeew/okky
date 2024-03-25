@@ -83,7 +83,7 @@
     }
 
     header #registBtn, header #myPageBtn{
-        background-color: #39b6ff;
+        background-color: #0090ff;
         color : #ffffff;
     }
     .buttons button:hover{
@@ -163,6 +163,7 @@
 <%
 String FLAG = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
 int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.getAttribute("type").toString());
+
 %>
     <header>
         <nav class="navi"> 
@@ -174,7 +175,7 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
                 <p> | </p>
                 <a href="/okky/jobs/jobMain.do"><li>구인구직</li></a>
                 <p> | </p>
-                <li style="display:flex; align-items: center; font-size: 13px;">다크모드&nbsp;<label class="switch"><input type="checkbox"><span class="slider round"></span></label></li>
+                <li style="display:flex; align-items: center; font-size: 13px;">다크모드&nbsp;<label class="switch"><input type="checkbox" id="toggle" name="toggle"><span class="slider round"></span></label></li>
             </ul>
             <div class="buttons">
             	<c:choose>
@@ -187,11 +188,13 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
 		                <button id="myPageBtn">마이페이지</button>
 	                </c:otherwise>
                 </c:choose>
+                
             </div>
         </nav>
     </header>
     <hr>
     <script>
+    
     <%if (FLAG == null || FLAG == "") {%>
         document.querySelector("#loginBtn").addEventListener("click", function(e){
             window.location.href = "/okky/member/login.do";
@@ -221,15 +224,18 @@ int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.g
             
             if(toggleBtn.value != "on") {
                 toggleBtn.value = "on";
-                document.querySelector("body").setAttribute("style","background-color:rgb(31 41 55); color:white");
                 document.querySelector("#logo").style.backgroundImage = "url('https://okky.kr/darkmode/dark-logo.svg')";
-                
+                document.querySelector("body").setAttribute("style","background-color:rgb(31 41 55); color:white");
+
             }
             else {
                 toggleBtn.value = "off";
                 document.querySelector("#logo").style.backgroundImage = "url('https://okky.kr/okky-munchkin-logo.svg')";
                 document.querySelector("body").setAttribute("style","background-color:white; color:black");
-            }
+                document.querySelector("body").setAttribute("style","background-color:white; color:black");
+
+           		 
+                }
         });
     </script>
 </body>

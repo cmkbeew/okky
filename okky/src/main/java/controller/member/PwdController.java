@@ -26,6 +26,7 @@ public class PwdController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String memberId = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
+		String pwd = session.getAttribute("pwd") == null ? "" : session.getAttribute("pwd").toString();
 		String pwd1 = req.getParameter("pwd");
 		String pwd2 = req.getParameter("newPwd");
 		String pwd2Ck = req.getParameter("newPwdCk");
@@ -38,6 +39,7 @@ public class PwdController extends HttpServlet {
 		}
 		int result = dao.changePwd(dto);
 		dao.close();
+		session.setAttribute("pwd", pwd2);
 		if(result > 0) {
 			resp.sendRedirect("./account.do");
 		} else {
