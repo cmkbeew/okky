@@ -12,29 +12,37 @@ import member.MemberDTO;
 import java.io.IOException;
 
 /**
- * Servlet implementation class AccountController
+ * Servlet implementation class CompareNname
  */
-public class AccountController extends HttpServlet {
+public class CompareNnameController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
 		HttpSession session = req.getSession();
-		String memberId = session.getAttribute("memberId") == null ? "" : session.getAttribute("memberId").toString();
-		String name = session.getAttribute("name") == null ? "" : session.getAttribute("name").toString();
-		String email =session.getAttribute("email") == null ? "" : session.getAttribute("email").toString();
+		String nickname= session.getAttribute("nickname") == null ? "" : session.getAttribute("nickname").toString();
+		String nicknameN = req.getParameter("nickname") == null? "" : req.getParameter("nickname");
 		
 		MemberDAO dao = new MemberDAO();
-		MemberDTO dto = dao.getCompanyInfo(memberId, name);
-		dao.close();
 		
-		req.getRequestDispatcher("./account.jsp").forward(req, resp);
+		int nickname_check = dao.getNNameCount(nicknameN);
+		if(nickname_check == 0) {
+			req.setAttribute("checkNickname", nicknameN);
+			req.setAttribute("nNameOkayMsg","사용가능한 닉네임입니다.");
+			req.getRequestDispatcher("./mypage.jsp").forward(req, resp);
+		} else {
+			String nicknameP = req.getParameter("nickname");
+			req.setAttribute("nickname",nicknameP);
+			req.setAttribute("nNameErrMsg", "중복 닉네임입니다.");
+			dao.close();
+			req.getRequestDispatcher("./mypage.jsp").forward(req, resp);
+		}
 	}
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doGet(req, resp);
+		
 	}
+
 }

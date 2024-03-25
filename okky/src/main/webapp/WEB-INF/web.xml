@@ -15,7 +15,7 @@
   </context-param>
   <context-param>
     <param-name>URL</param-name>
-    <param-value>jdbc:mariadb://192.168.45.34:3306/okky</param-value>
+    <param-value>jdbc:mariadb://localhost:3306/okky</param-value>
   </context-param>
   <context-param>
     <param-name>dbId</param-name>
@@ -280,5 +280,29 @@
   <servlet-mapping>
     <servlet-name>RegiResumeController</servlet-name>
     <url-pattern>/member/regiResume.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>JobApplyController</servlet-name>
+    <servlet-class>controller.jobs.JobApplyController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>JobApplyController</servlet-name>
+    <url-pattern>/jobs/jobApply.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CompareNnameController</servlet-name>
+    <servlet-class>controller.member.CompareNnameController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CompareNnameController</servlet-name>
+    <url-pattern>/member/nicknameCompare.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CopareEmailController</servlet-name>
+    <servlet-class>controller.member.CopareEmailController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CopareEmailController</servlet-name>
+    <url-pattern>/member/emailCompare.do</url-pattern>
   </servlet-mapping>
 </web-app>

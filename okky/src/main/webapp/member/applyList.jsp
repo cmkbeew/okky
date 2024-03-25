@@ -91,6 +91,7 @@
             grid-row: 1 /2;
             display: flex;
             flex-direction: row;
+            justify-content: center;
         }
 
         #innnerContainer {
@@ -154,20 +155,18 @@
         #fileUpload {
             display: none;
         }
-        #fileMent {
-            display: none;
-        }
 
         #saveBtn {
             font-size: 15px;
             width: 100px;
             height: 50px;
             border-radius: 8px;
-            border: 2px solid #71c1ff;
+            border: 2px solid #0090ff;
+            color : white;
             margin: 20px 15px;
             padding: 10px 15px;
             cursor: pointer;
-            background-color: #71c1ff;
+            background-color: #0090ff;
         }
 
         #saveBtn:hover {
@@ -194,25 +193,27 @@
 
         #jobList {
             margin: 30px 0;
-            width: 800px;
+            width: 100%;
             display: flex;
             justify-content: center;
         }
-
-        #listTbl {
-            width: 700px;
-        }
-
-        #listTbl,
-        th,
-        td,
-        tr {
-            border: 1px solid grey;
+		#listTbl {
+            width: 850px;
+            border:1px solid grey;
             border-collapse: collapse;
-            padding: 10px;
+            box-shadow : 0 0 0 1px #666;
+            padding :10px;
             font-size: 18px;
         }
-
+        th, tr {
+            padding :10px;
+            font-size: 18px;
+        }
+        td {
+         	border-bottom : 1px solid grey;
+         	padding :10px;
+            font-size: 18px;
+         }
         #listTbl th {
             background-color: #0090ff;
             border: none;
@@ -227,6 +228,7 @@
             box-shadow: 2px 2px 5px grey;
             cursor: pointer;
             border-radius: 3px;
+            color:white;
         }
 
         .linkBtn:hover {
@@ -241,6 +243,15 @@
 </head>
 
 <body>
+	<%
+	int type = session.getAttribute("type") == null ? 0 : Integer.parseInt(session.getAttribute("type").toString());
+	if (session.getAttribute("memberId") == null) {
+		out.println("<script>");
+		out.println("alert('로그인 후 접근이 가능합니다.')");
+		out.println("window.location.replace('/okky/member/login.do')");
+		out.println("</script>");
+	}
+	%>
     <jsp:include page="/common/header.jsp" />
     <div id="container">
         <aside id="sidebar">
@@ -273,11 +284,16 @@
                     <div id="innnerContainer">
                         <div id="resumeBox">
                             <div id="resumBoxBG">
-                                <p id="fileMent">${orgFileName}</p>
-                                    <label for="fileUpload">
-                                        <div id="filebox">이력서 파일 업로드</div>
-                                    </label>
-                                    <input type="file" id="fileUpload" name="file" accept=".pdf">
+                            <c:if test="${sessionScope.orgCompanyFile eq null}">
+                            	<p id="fileMent" style="color: red; font-weight:bold;">이력서 파일을 업로드해주세요.</p>
+                            </c:if>
+                            <c:if test="${not empty sessionScope.orgCompanyFile}">
+                            	<p id="fileMent" style="color: blue; font-weight:bold;">${sessionScope.orgCompanyFile}</p>
+                            </c:if>
+                            <label for="fileUpload">
+                                <div id="filebox">이력서 파일 업로드</div>
+                            </label>
+                            <input type="file" id="fileUpload" name="file" accept=".pdf">
                             </div>
                             
                         </div>
@@ -303,13 +319,13 @@
 
                             <c:choose>
                                 <c:when test="${not empty applyList }">
-                                    <!-- <c:set var="row_num" value="${params.total_count - (params.page_no -1) * params.page_size}"/>  -->
+                                   <%--  <c:set var="row_num" value=""/> --%>
                                     <c:forEach var="list" items="${applyList }" varStatus="loop">
                                         <tr>
                                             <td>${list.recruitIdx }</td>
                                             <td>${list.recruitTitle}</td>
                                             <td>${list.dueDate}</td>
-                                            <td class="lastCol"><button class="linkBtn" name="linkBtn">조회</button></td>
+                                            <td class="lastCol"><button class="linkBtn" name="linkBtn" onclick="location.href ='/okky/jobs/jobDetail.do?recruitIdx=${list.recruitIdx}'">조회</button></td>
                                         </tr>
                                         <!-- <%-- <c:set var="row_num" value="${row_num = row_num -1 }" /> --%> -->
                                     </c:forEach>
@@ -337,16 +353,15 @@
                 ment.style.display = "block";
                 ment.style.color = "blue";
                 ment.innerHTML = `<strong>`+fileUpload.files[0].name+`</strong>`;
-                alert(ment.innerHTML);
 	        	saveBtn.disabled = false;
             }
             else {
-            	
-                /* ment.style.display = "none"; */
+                ment.style.display = "display";
             }
         }); 
+
         saveBtn.addEventListener("click", function(e){
-        	alert("이력서 파일이 업르드 되었습니다.");
+        	alert("이력서 파일이 업로드 되었습니다.");
         });
     </script>
 

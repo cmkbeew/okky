@@ -55,6 +55,7 @@ public class RegiResumeController extends HttpServlet {
 		result = dao.registerResume(dto);
 		dao.close();
 		if(result > 0) {
+			session.setAttribute("orgCompanyFile", orgFileName);
 			resp.sendRedirect("./applyList.do");
 		} else {
 			req.getRequestDispatcher("./applyList.jsp").forward(req, resp);

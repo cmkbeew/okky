@@ -128,6 +128,7 @@ public class MemberDAO extends ConnectPool {
 					dto.setMemberIdx(rs.getInt("memberIdx"));
 					dto.setMemberId(rs.getString("memberId"));
 					dto.setPwd(rs.getString("pwd"));
+					dto.setEmail(rs.getString("email"));
 					dto.setName(rs.getString("name"));
 					dto.setNickname(rs.getString("nickname"));
 					dto.setType(rs.getString("type"));
@@ -136,6 +137,10 @@ public class MemberDAO extends ConnectPool {
 					dto.setCompanyNumber(rs.getString("companyNumber"));
 					dto.setManagerName(rs.getString("managerName"));
 					dto.setManagerPhone(rs.getString("managerPhone"));
+					dto.setSkill1(rs.getString("skill1"));
+					dto.setSkill2(rs.getString("skill2"));
+					dto.setSkill3(rs.getString("skill3"));
+					dto.setOrgCompanyFile(rs.getString("orgCompanyFile"));
 				}
 			}
 		} catch (Exception e) {
@@ -192,16 +197,41 @@ public class MemberDAO extends ConnectPool {
 	public int modifyMyInfo(MemberDTO dto) {
 		int result = 0;
 		StringBuilder sb = new StringBuilder();	
-		sb.append("UPDATE member SET nickname=?");
+		sb.append("UPDATE member SET nickname=?,skill1=?, skill2=?, skill3=?");
 		sb.append(" WHERE memberId=?");
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, dto.getNickname());
-			psmt.setString(2, dto.getMemberId());
+			psmt.setString(2, dto.getSkill1());
+			psmt.setString(3, dto.getSkill2());
+			psmt.setString(4, dto.getSkill3());
+			psmt.setString(5, dto.getMemberId());
 			result = psmt.executeUpdate();
 		} catch(Exception e) {
 			System.out.println("정보 수정 중 에러 발생");
 			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	
+//닉네임 중복 확인
+	public int getNNameCount(String nickname) {
+		int result = 0;
+		String sql = "SELECT COUNT(nickname) FROM member WHERE nickname=?";
+		
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, nickname);
+			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("회원 조회 시 에러 발생");
 		}
 		
 		return result;
@@ -240,6 +270,30 @@ public class MemberDAO extends ConnectPool {
 		}
 		return result;
 	}
+//닉네임 중복 확인
+		public int getEmailCount(String email) {
+			int result = 0;
+			String sql = "SELECT COUNT(email) FROM member WHERE email=?";
+			
+			try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setString(1, email);
+				
+				rs = psmt.executeQuery();
+				if(rs.next()) {
+					result = rs.getInt(1);
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+				System.out.println("이메일 중복 조회 시 에러 발생");
+			}
+			
+			return result;
+		}
+	
+	
+	
+	
 //	계정 삭제
 	public int deleteAccount(MemberDTO dto) {
 		int result = 0;
@@ -251,25 +305,6 @@ public class MemberDAO extends ConnectPool {
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("계정 삭제 중 에러 발생");
-		}
-		return result;
-	}
-//스킬 태그 입력
-	public int inputSkill (MemberDTO dto) {
-		int result = 0;
-		StringBuilder sb = new StringBuilder();
-		sb.append("UPDATE member SET skill1=?, skill2=?, skill3=?");
-		sb.append(" WHERE memberId =?");
-		try {
-			psmt = conn.prepareStatement(sb.toString());
-			psmt.setString(1, dto.getSkill1());
-			psmt.setString(2, dto.getSkill2());
-			psmt.setString(3, dto.getSkill3());
-			psmt.setString(4, dto.getMemberId());
-			result = psmt.executeUpdate();
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("스킬 태그 업로드 중 에러 발생");
 		}
 		return result;
 	}
@@ -297,23 +332,28 @@ public class MemberDAO extends ConnectPool {
 	public List<ApplyTableDTO> applyList(Map<String, Object> map) {
 		List<ApplyTableDTO> list = new Vector<ApplyTableDTO>();
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT RC.recruitIdx, RC.recruitTitle, RC.dueDate, RC.memberIdx, MB.memberId");
-		sb.append(" FROM recruit AS RC");
-		sb.append(" INNER JOIN member AS MB ON RC.memberIdx = MB.memberIdx" );
-		sb.append(" WHERE MB.memberId = ?" );
-		sb.append(" ORDER BY RC.recruitIdx");
-	
+//		sb.append("SELECT RC.recruitIdx, RC.recruitTitle, RC.dueDate, RC.memberIdx, MB.memberId");
+//		sb.append(" FROM recruit AS RC");
+//		sb.append(" INNER JOIN member AS MB ON RC.memberIdx = MB.memberIdx" );
+//		sb.append(" WHERE MB.memberId = ?" );
+//		sb.append(" ORDER BY RC.recruitIdx");
+		sb.append("SELECT MB.memberId, RC.recruitIdx, RC.recruitTitle, RC.duedate, MB.memberIdx, MB.orgCompanyFile");
+		sb.append(" FROM member AS MB");
+		sb.append(" inner join applyinfo AS AI ON MB.memberIdx = AI.memberIdx");
+		sb.append(" inner JOIN recruit AS RC ON AI.recruitIdx = RC.recruitIdx");
+		sb.append(" WHERE MB.memberId = ?"); 
+		
 		try {			
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, map.get("memberId").toString());
 			rs = psmt.executeQuery();
-			
 			while(rs.next()) {
 				ApplyTableDTO dto = new ApplyTableDTO();
-				dto.setMemberIdx(rs.getInt("RC.memberIdx"));
+				dto.setMemberIdx(rs.getInt("MB.memberIdx"));
 				dto.setRecruitIdx(rs.getInt("RC.recruitIdx"));
 				dto.setRecruitTitle(rs.getString("RC.recruitTitle"));
 				dto.setDueDate(rs.getString("RC.dueDate"));
+				dto.setOrgCompanyFile(rs.getString("MB.orgCompanyFile"));
 		
 				list.add(dto);
 			}

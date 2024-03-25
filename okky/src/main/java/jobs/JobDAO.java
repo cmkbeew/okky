@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import common.ConnectPool;
+import member.MemberDTO;
 
 public class JobDAO extends ConnectPool {
 	public JobDAO() {}
@@ -259,5 +260,22 @@ public class JobDAO extends ConnectPool {
 		}
 		
 		return dto;
+	}
+	//공고 글 이력시 지원
+	public int applyJob (JobDTO dto) {
+		int result = 0;
+		StringBuilder sb = new StringBuilder();
+		sb.append("INSERT INTO applyinfo(recruitIdx,regDate, memberIdx)");
+		sb.append(" VALUES (?, NOW(), ?)");
+		try {
+			psmt = conn.prepareStatement(sb.toString());
+			psmt.setInt(1, dto.getRecruitIdx());
+			psmt.setInt(2, dto.getMemberIdx());
+			result = psmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("이력서 지원 중 에러 발생");
+		}
+		return result;
 	}
 }
