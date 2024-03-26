@@ -367,29 +367,38 @@ public class MemberDAO extends ConnectPool {
 	public List<ApplyTableDTO> applicantList(Map<String, Object> map) {
 		List<ApplyTableDTO> list = new Vector<>();
 		StringBuilder sb = new StringBuilder();
-		sb.append("SELECT MB.name, MB.email,MB.memberId, RC.recruitTitle, RC.dueDate, AI.regDate");
-		sb.append(", RC.recruitIdx, RC.memberIdx, MB.orgCompanyFile, MB.saveCompanyFile");
-		sb.append(", (SELECT distinct MB.memberId FROM member AS MB");
-		sb.append(" INNER JOIN recruit AS RC ON RC.memberIdx = MB.memberIdx WHERE MB.memberId = ? )AS comId") ;
-		sb.append(" FROM member AS MB");
-		sb.append(" INNER JOIN applyinfo AS AI on MB.memberIdx = AI.memberIdx");
-		sb.append(" INNER JOIN recruit AS RC ON RC.recruitIdx = AI.recruitIdx");
+//		sb.append("SELECT MB.name, MB.email,MB.memberId, RC.recruitTitle, RC.dueDate, AI.regDate");
+//		sb.append(", RC.recruitIdx, RC.memberIdx, MB.orgCompanyFile, MB.saveCompanyFile");
+//		sb.append(", (SELECT distinct MB.memberId FROM member AS MB");
+//		sb.append(" INNER JOIN recruit AS RC ON RC.memberIdx = MB.memberIdx WHERE MB.memberId = ? )AS comId") ;
+//		sb.append(" FROM member AS MB");
+//		sb.append(" INNER JOIN applyinfo AS AI on MB.memberIdx = AI.memberIdx");
+//		sb.append(" INNER JOIN recruit AS RC ON RC.recruitIdx = AI.recruitIdx");
 
+		sb.append("SELECT MB.name AS name, MB.email AS email, MB.memberId AS memberId");
+		sb.append(", MB.orgCompanyFile AS orgCompanyFile, MB.saveCompanyFile AS saveCompanyFile");
+		sb.append(", AI.idx AS applyIdx, AI.regDate AS applyRegDate ");
+		sb.append(", RC.recruitIdx AS recruitIdx, RC.recruitTitle AS recruitTitle, RC.dueDate AS dueDate ");
+		sb.append(" FROM applyinfo AS AI");
+		sb.append(" INNER JOIN member AS MB ON AI.memberIdx = MB.memberIdx");
+		sb.append(" INNER JOIN recruit AS RC ON AI.recruitIdx = RC.recruitIdx");
+		sb.append(" WHERE RC.recruitIdx IN ( SELECT recruitIdx FROM recruit AS ORC INNER JOIN member AS OMB ON ORC.memberIdx = OMB.memberIdx WHERE OMB.memberId = ? )");
+		
 		try {
 			psmt = conn.prepareStatement(sb.toString());
 			psmt.setString(1, map.get("memberId").toString());
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				ApplyTableDTO dto = new ApplyTableDTO();
-				dto.setName(rs.getString("MB.name"));
-				dto.setRecruitTitle(rs.getString("RC.recruitTitle"));
-				dto.setEmail(rs.getString("MB.email"));
-				dto.setDueDate(rs.getString("RC.dueDate"));
-				dto.setRegDate(rs.getString("AI.regDate"));
-				dto.setMemberId((rs.getString("MB.memberId")));
-				dto.setOrgCompanyFile(rs.getString("MB.orgCompanyFIle"));
-				dto.setSaveCompanyFile(rs.getString("MB.saveCompanyFile"));
-
+				dto.setName(rs.getString("name"));
+				dto.setEmail(rs.getString("email"));
+				dto.setMemberId((rs.getString("memberId")));
+				dto.setOrgCompanyFile(rs.getString("orgCompanyFIle"));
+				dto.setSaveCompanyFile(rs.getString("saveCompanyFile"));
+				dto.setDueDate(rs.getString("dueDate"));
+				dto.setRegDate(rs.getString("applyRegDate"));
+				dto.setRecruitTitle(rs.getString("recruitTitle"));
+				
 				list.add(dto);
 			}
 		} catch(Exception e) {

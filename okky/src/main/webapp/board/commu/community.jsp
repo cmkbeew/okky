@@ -286,12 +286,12 @@
                     </nav>
                     
                 <div>
-                	<a href="http://localhost:8080/okky/board/qna/qna.do">전체</a>
+                	<a href="/okky/board/commu/commu.do">전체</a>
                 	<button id="sortBtn">정렬</button>
                 	<ul id="sort" class="">
                 		<button id="order" name="order" value="c.communityIdx" onclick="order(this)"><li>최신순</li></button>
                 		<button id="order" name="order" value="c.pageLike" onclick="order(this)"><li>추천순</li></button>
-                		<!-- <button id="order" name="order"  ><li>답변순</li></button> -->
+                		<button id="order" name="order" value="cnt" onclick="order(this)"  ><li>답변순</li></button>
                 		<button id="order" name="order" value="c.readCnt" onclick="order(this)"><li>조회순</li></button>
                 	</ul>
                 </div>
@@ -314,7 +314,7 @@
                     </div>
                 </div>
                 <div style="margin: 20px 0;">
-                    <input type="text" name="search_word" id="search_word" value="" maxlength="20"  style="height: 30px; width: 500px;"/>
+                    <input type="text" name="search_word" id="search_word" value="<c:if test="${not empty params.search_word}"> ${params.search_word } </c:if>" maxlength="20"  style="height: 30px; width: 500px;"/>
                     &nbsp; <input type="button" name="btn_search" id="btn_search" value="검색"/>
                 </div>
                

@@ -20,17 +20,20 @@
         #container {
             margin: 0 auto;
             width: 1200px;
-            height: 1100px;
+            height:auto;
+            display:flex;
+
         }
+        body {
+        height : auto;
+    }
 
         /* 사이드바 영역 */
         #sidebar {
             border-right: 1px solid rgb(158, 158, 158);
             box-shadow: 3px 0px 3px rgb(162, 162, 162);
             width: 15%;
-            height: 100%;
             display: block;
-            float: left;
         }
 
         h3 {
@@ -74,10 +77,8 @@
         #outer {
             width: 85%;
             height: 100%;
-            float: left;
             display: grid;
-            /*  place-items : center; */
-            grid-template-rows: 400px 1px 700px;
+   
         }
 
         .label {
