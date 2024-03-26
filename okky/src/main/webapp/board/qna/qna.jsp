@@ -319,7 +319,7 @@
                 	<ul id="sort" class="filter-menu">
                 		<button id="order" class="filter-sort" name="order" value="q.qnaIdx" onclick="order(this)"><li>최신순</li></button>
                 		<button id="order" class="filter-sort" name="order" value="q.pageLike" onclick="order(this)"><li>추천순</li></button>
-                		<!-- <button id="order" name="order"  ><li>답변순</li></button> -->
+                		<button id="order" name="order" value="cnt" onclick="order(this)"  ><li>답변순</li></button>
                 		<button id="order" class="filter-sort" name="order" value="q.readCnt" onclick="order(this)"><li>조회순</li></button>
                 	</ul>
                 	
