@@ -334,16 +334,7 @@
             
             <div class="search">
                 <div>
-                    <div class="orderBy">
-                        <select name="search_category" id="search_category" style="margin-left: 60px; margin-top: 22px; height: 30px; width: 100px;">
-                            <option value="" selected>선택</option>
-                            <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> >최신순</option>
-                            <option value="pageLike"<c:if test="${params.search_category eq 'pageLike'}"> selected </c:if> >추천순</option>
-                           <%--  <option value="qnaIdx"<c:if test="${params.search_category eq 'qnaIdx'}"> selected </c:if> 답변</option> --%>
-                            <option value="readCnt" <c:if test="${params.search_category eq 'readCnt'}"> selected </c:if> >조회순</option>
-                           
-                        </select>
-                    </div>
+                    
                 </div>
                 <div style="margin: 20px 0;">
                     <input type="text" name="search_word" id="search_word" value="<c:if test="${not empty params.search_word}"> ${params.search_word } </c:if>" maxlength="20"  style="height: 30px; width: 500px;"/>
@@ -502,13 +493,7 @@
 
     	e.preventDefault();
     	e.stopPropagation();
-    	
-    	const search_category = document.querySelector("#search_category");
-    	if (search_category.value.length < 1 || search_category.value == "" || search_category.value == null) {
-    		alert("검색 구분을 선택하세요");
-    		search_category.focus();
-    		return false;
-    	}
+    
     	
     	const search_word = document.querySelector("#search_word");
     	if (search_word.value.length < 1 || search_word.value == "" || search_word.value == null) {
