@@ -57,7 +57,6 @@ public class JobListController extends HttpServlet {
 		}
 		if(req.getParameter("addr_category") != null) {
 			ac  = req.getParameter("addr_category");
-
 		}
 		if(req.getParameterValues("career_category") != null) {
 			String[] career_category = req.getParameterValues("career_category");
