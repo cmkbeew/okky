@@ -49,4 +49,10 @@
 
   <hr/>
 
-  
+  ## 데이터베이스 테이블 관계도
+![database](https://github.com/cmkbeew/okky/assets/82045649/dc1ede1d-e32a-405b-991e-0d2473ce2f21)
+
+<hr/>
+
+## 프로젝트 수행 결과
+
