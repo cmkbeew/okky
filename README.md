@@ -10,6 +10,7 @@
 
 ### 2. 프로젝트 내용
 - 게시판 구조의 MVC모델을 활용한 커뮤니티 사이트 구현
+- CRUD 구현
 
 ### 3. 개발 환경
 |||
@@ -53,6 +54,3 @@
 ![database](https://github.com/cmkbeew/okky/assets/82045649/dc1ede1d-e32a-405b-991e-0d2473ce2f21)
 
 <hr/>
-
-## 프로젝트 수행 결과
-
