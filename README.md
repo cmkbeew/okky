@@ -54,3 +54,23 @@
 ![database](https://github.com/cmkbeew/okky/assets/82045649/dc1ede1d-e32a-405b-991e-0d2473ce2f21)
 
 <hr/>
+
+
+(구현 UI 및 기능 설명)
+
+![캡처_2024_05_09_01_06_53_377](https://github.com/cmkbeew/bookstore/assets/82045649/0d3e2c48-ea28-4a1a-b25c-dbe796accc2b)
+**메인 화면** - 사이트의 인기 게시글 확인 가능, 헤더를 통해 로그인 가능
+
+![캡처_2024_05_09_01_07_10_190](https://github.com/cmkbeew/bookstore/assets/82045649/7d3f6335-4873-408a-89d3-615921143fdc)
+**회원가입 페이지** <br>
+개인 회원 가입 시 UI
+<br>
+![기업회원가입](https://github.com/cmkbeew/bookstore/assets/82045649/40bf2478-2a55-45bc-afb8-9c4133464cea)
+기업 회원 가입 시 UI
+<br>개인 회원 입력 정보 + 기업 관련 추가 정보 입력
+![캡처_2024_05_09_01_07_56_571](https://github.com/cmkbeew/bookstore/assets/82045649/866a0a4b-bfa0-4527-a51d-a80e444fe68d)
+**개인 회원 마이페이지 UI** <br>
+![캡처_2024_05_09_01_34_40_579](https://github.com/cmkbeew/bookstore/assets/82045649/4586e31a-2278-4b8f-a99e-eb950cda9f75)
+마이페이지 공통
+![캡처_2024_05_09_01_35_03_640](https://github.com/cmkbeew/bookstore/assets/82045649/a13c4d3d-80d8-4513-a7b2-441ae4ca6b48)
+구인구직 페이지
