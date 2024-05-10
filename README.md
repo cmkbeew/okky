@@ -43,7 +43,7 @@
 
 ## 프로젝트 팀 구성 및 역할
 |이름|역할|담당업무|
-|:------:|:------:|:---|
+|:--------:|:--------:|:---|
 | **조현기** | **팀장** | <img src="https://img.shields.io/badge/DB설계-207BEA?style=for-the-badge"> <img src="https://img.shields.io/badge/회원가입 , 로그인페이지 UI 디자인 및 기능 구현-00A5FD?style=for-the-badge"> <img src="https://img.shields.io/badge/구인구직 페이지 UI 디자인 및 기능 구현-00C5E7?style=for-the-badge"> <img src="https://img.shields.io/badge/게시판 댓글 기능 구현-00DEB7?style=for-the-badge"> |
 | **류림** | 팀원 | <img src="https://img.shields.io/badge/DB설계-207BEA?style=for-the-badge">  <img src="https://img.shields.io/badge/QnA 게시판, 커뮤니티 게시판 UI 디자인 및 기능 구현-6770DB?style=for-the-badge"> <img src="https://img.shields.io/badge/메인페이지 UI 디자인 및 기능 구현-8965C9?style=for-the-badge"> |
 | **전주연** | 팀원 | <img src="https://img.shields.io/badge/DB설계-207BEA?style=for-the-badge"> <img src="https://img.shields.io/badge/마이페이지 관련 디자인 및 기능 구현-A0B0E6?style=for-the-badge"> <img src="https://img.shields.io/badge/헤더 디자인 및 기능 구현-E6EFFF?style=for-the-badge"> |
