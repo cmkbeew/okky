@@ -356,7 +356,7 @@
 	    </div>
 	</div>
 	<jsp:include page="/common/footer.jsp" />
-	<script>
+<script>
 	   const engChars = "abcdefghijklmnopqrstuvwxyz";
 		const EngChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		const numChars = "0123456789";
@@ -372,7 +372,6 @@
         let ment2 = document.getElementById("ment2")
         let email = document.getElementById("email");
         let emailment = document.getElementById("emailment");
-        
 // 칸 입력 시 변경 버튼 활성화
         pwd.addEventListener("change",function(e){
             if (pwd.value.length > 0 && newPwd.value.length > 0 && newPwdCk.value.length >0){
@@ -398,7 +397,6 @@
                 changeBtn.disabled = true;
             }
         });
-        
 // 비밀번호 확인
         changeBtn.addEventListener("click",function(e){
             if (pwd.value != '${pwd}' ){
@@ -429,18 +427,17 @@
              return false;
            	}
             alert("비밀번호가 변경되었습니다.");
-            
+
         });
 //이메일 중복체크 버튼
          document.getElementById("email").addEventListener("keyup",function(e){
              if(document.getElementById("email").value != '${email}'){
-            	 
+            	
                  document.getElementById("checkBtn").disabled = false;
              }
              else{
                  document.getElementById("checkBtn").disabled = true;
              }
-             
          });
 //이메일 변경 버튼
          document.getElementById("checkBtn").addEventListener("click",function(e){
@@ -456,8 +453,6 @@
     	    		}
             	}
 	        }
-            
-
          });
          //탈퇴 버튼
          document.getElementById("accountCkbox").addEventListener("click",function(e){
@@ -473,15 +468,13 @@
          document.getElementById("outBtn").addEventListener("click", function(e){
         	if(confirm("정말 탈퇴하시겠습니까?")){
         		alert("탈퇴 완료되었습니다. \n감사합니다.")
-        	} 
+        	}
         	else {
         		e.preventDefault();
                 return false;
         	}
         	
          });
-         
-         
          function combi_check(inputValue, chars) {
      		let cnt = 0;
      		for(let i=0; i<inputValue.length; i++) {
@@ -491,13 +484,12 @@
      		}
      		return cnt;
      	}
-
          function validate_check(inputValue, min, max, type) {
-     		if(type == 1) { // 영문 + 숫자 + 특수문자 
+     		if(type == 1) { // 영문 + 숫자 + 특수문자
      			if(inputValue.value.length >= min && inputValue.value.length <= max) {
      				// 영문 + 숫자 + 특수문자
-     				if((combi_check(inputValue.value, engChars) > 0 || combi_check(inputValue.value, EngChars) > 0) 
-     						&& combi_check(inputValue.value, numChars) > 0 
+     				if((combi_check(inputValue.value, engChars) > 0 || combi_check(inputValue.value, EngChars) > 0)
+     						&& combi_check(inputValue.value, numChars) > 0
      						&& combi_check(inputValue.value, specialChars) > 0) {
      					inputValue.style.border = "3px solid lightgreen";
      				} else {
@@ -515,7 +507,7 @@
      				// 4~15자 이내 => input 배경색 변경
      				if(inputValue.value.length >= min && inputValue.value.length <= max) {
      					// 영문 + 숫자
-     					if((combi_check(inputValue.value, engChars) > 0 || combi_check(inputValue.value, EngChars) > 0) 
+     					if((combi_check(inputValue.value, engChars) > 0 || combi_check(inputValue.value, EngChars) > 0)
      							&& combi_check(inputValue.value, numChars) > 0) {
      						inputValue.style.border = "3px solid lightgreen";
      					} else {
@@ -542,8 +534,8 @@
      				}
      			}
      		} else if(type == 4) { // 숫자만
-     			if(combi_check(inputValue.value, specialChars) > 0 
-     					|| combi_check(inputValue.value, engChars) > 0 
+     			if(combi_check(inputValue.value, specialChars) > 0
+     					|| combi_check(inputValue.value, engChars) > 0
      					|| combi_check(inputValue.value, EngChars) > 0
      					|| korCheck.test(inputValue.value)
      					) {
@@ -563,7 +555,6 @@
      			}
      		}
      	}
-        
          //새 비밀번호 체크
         newPwd.addEventListener("keyup", function(e) {
         	validate_check(newPwd, 6, 20, 1);

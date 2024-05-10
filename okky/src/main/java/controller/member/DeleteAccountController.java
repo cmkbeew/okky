@@ -34,7 +34,7 @@ public class DeleteAccountController extends HttpServlet {
 		dao.close();
 		session.invalidate();
 		if(result > 0) {
-			resp.sendRedirect("../main.jsp");
+			resp.sendRedirect("../main.do");
 		} else {
 			req.getRequestDispatcher("../main.jsp").forward(req, resp);
 		}

@@ -17,7 +17,7 @@ public class QnADAO extends ConnectPool {
 
 		StringBuilder sb = new StringBuilder(); 
 		sb.append("SELECT COUNT(*) FROM qna");
-		if (map.get("search_category") != null && map.get("search_word") != null) {
+		if (map.get("search_word") != null) {
 			sb.append(" WHERE title");
 			sb.append(" LIKE '%" + map.get("search_word") + "%'");
 		}
@@ -31,27 +31,7 @@ public class QnADAO extends ConnectPool {
 		if (map.get("category_3") != null) {
 			sb.append(" WHERE category LIKE '기타'");
 		}
-//		if (map.get("category") != null) {
-//			sb.append(" WHERE q.category LIKE ");
-//			sb.append(map.get("category"));
-//		}
-		
-//		if (map.get("search_category") != null && map.get("search_word") != null) {
-//			sb.append(" WHERE q.title");
-//			sb.append(" LIKE '%" + map.get("search_word") + "%'");
-//			sb.append(" ORDER BY " + map.get("search_category") + " DESC");
-//			
-//		}
-//		if (map.get("search_category") == null && map.get("search_word") == null) {
-//			if (map.get("sort") != "") {
-//				sb.append(" ORDER BY ");
-//				sb.append(map.get("sort"));
-//				sb.append(" DESC");
-//			}
-//			else if (map.get("sort") == "") {
-//				sb.append(" ORDER BY q.qnaIdx DESC");
-//			}
-//		}	
+
 		
 		try {
 			String sql = sb.toString();
@@ -140,13 +120,13 @@ public class QnADAO extends ConnectPool {
 //			sb.append(map.get("category"));
 //		}
 		
-		if (map.get("search_category") != null && map.get("search_word") != null) {
+		if (map.get("search_word") != null) {
 			sb.append(" WHERE q.title");
 			sb.append(" LIKE '%" + map.get("search_word") + "%'");
-			sb.append(" ORDER BY " + map.get("search_category") + " DESC");
+			sb.append(" ORDER BY  DESC");
 			
 		}
-		if (map.get("search_category") == null && map.get("search_word") == null) {
+		if (map.get("search_word") == null) {
 			if (map.get("sort") != "") {
 				sb.append(" ORDER BY ");
 				sb.append(map.get("sort"));

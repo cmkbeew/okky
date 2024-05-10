@@ -32,25 +32,25 @@ public class JobDAO extends ConnectPool {
 	}
 
 	// 기업 회원 count
-		public int getCompanyCount() {
-			int result = 0;
+	public int getCompanyCount() {
+		int result = 0;
 
-			String sql = "SELECT COUNT(memberIdx) FROM member WHERE TYPE='2'";
+		String sql = "SELECT COUNT(memberIdx) FROM member WHERE TYPE='2'";
 
-			try {
-				psmt = conn.prepareStatement(sql);
+		try {
+			psmt = conn.prepareStatement(sql);
 
-				rs = psmt.executeQuery();
-				rs.next();
+			rs = psmt.executeQuery();
+			rs.next();
 
-				result = rs.getInt(1);
-			} catch(Exception e) {
-				e.printStackTrace();
-				System.out.println("하루 게시된 공고 갯수 확인 시 에러 발생");
-			}
-
-			return result;
+			result = rs.getInt(1);
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("하루 게시된 공고 갯수 확인 시 에러 발생");
 		}
+
+		return result;
+	}
 
 	// 하루 게시된 공고 갯수
 	public int getDayRecruitCount() {

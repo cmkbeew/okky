@@ -17,8 +17,8 @@ public class CommunityDAO extends ConnectPool {
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("SELECT COUNT(*) FROM community");
-		if (map.get("search_category") != null && map.get("search_word") != null) {
-			sb.append(" WHERE " + map.get("search_category")); //컬럼명
+		if ( map.get("search_word") != null) {
+			sb.append(" WHERE title "  ); //컬럼명
 			sb.append(" LIKE '%" + map.get("search_word") + "%'"); //컬럼명 서치하는 키워드
 		}
 		if (map.get("category_1") != null) {
@@ -159,12 +159,12 @@ public class CommunityDAO extends ConnectPool {
 		if (map.get("category_3") != null) {
 			sb.append(" WHERE category LIKE '공지사항'");
 		}
-		if (map.get("search_category") != null && map.get("search_word") != null) {
+		if (map.get("search_word") != null) {
 			sb.append(" WHERE c.title");
 			sb.append(" LIKE '%" + map.get("search_word") + "%'");
-			sb.append(" ORDER BY " + map.get("search_category") + " DESC");
+			sb.append(" ORDER BY c.regDate DESC");
 		}
-		if (map.get("search_category") == null && map.get("search_word") == null) {
+		if (map.get("search_word") == null) {
 
 			if (map.get("sort") != "") {
 				sb.append(" ORDER BY ");

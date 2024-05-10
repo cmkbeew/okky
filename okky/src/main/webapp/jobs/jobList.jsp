@@ -196,7 +196,6 @@
                         <button class="btn_search" type="submit">Search</button>
                     </div>
                 </div>
-<!--             </form> -->
         </div>
 		<div class="mid-group">
 	        <div class="filter-group">

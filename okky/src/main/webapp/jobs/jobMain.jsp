@@ -246,6 +246,7 @@
                         <span>멋진 인재가 모여있는 곳</span>
                     </div>
                     <div class="bot-menu">
+
 <%--                     	<c:if test="${sessionScope.type eq '1'}"> --%>
 <!--                         	<a href="/okky/member/applyList.do"> -->
 <!--                         	<div id="talent-menu"> -->
@@ -265,6 +266,7 @@
 <!--                             </div> -->
 <%--                         </c:if> --%>
                         <c:choose>
+
                         	<c:when test="${sessionScope.type eq '1'}">
 	                        	<a href="/okky/member/applyList.do">
 	                        	<div id="talent-menu">
@@ -282,6 +284,7 @@
 		                                    <div>공고 등록</div>
 		                                </div>
                             		</div>
+                            		</a>
                         	</c:when>
                         	<c:otherwise>
 	                        	<a href="/okky/member/applyList.do">
@@ -291,9 +294,9 @@
 		                                    <div>이력서 등록</div>
 		                                </div>
 		                            </div>
+		                            </a>
                         	</c:otherwise>
                         </c:choose>
-                        </a>
                     </div>
                 </div>
             </div>

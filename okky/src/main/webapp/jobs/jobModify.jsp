@@ -189,8 +189,8 @@
                         <div>
                             <select name="contractType" id="contractType">
                                 <option value="">계약 형태</option>
-                                <option value="정규직" <c:if test="${jobView.contractType eq '정규직'}">selected</c:if>>정규직</option>
-                                <option value="계약직" <c:if test="${jobView.contractType eq '계약직'}">selected</c:if>>계약직</option>
+                                <option value="정규직" <c:if test="${jobView.contractType eq 'fulltime'}">selected</c:if>>정규직</option>
+                                <option value="계약직" <c:if test="${jobView.contractType eq 'contract'}">selected</c:if>>계약직</option>
                             </select>
                             <div id="contractTypeCheck" style="color: red; font-size: x-small; display: none;">계약 형태를 선택해주세요.</div>
                         </div>

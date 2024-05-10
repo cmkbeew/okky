@@ -43,11 +43,8 @@ public class CommunityController extends HttpServlet {
 		page_skip_cnt = (page_no-1)*page_size;
 
 		//검색 파라미터 설정
-		if (search_word != null && !search_word.isEmpty()
-				&& search_category != null && !search_category.isEmpty()) {
-			if (search_word.trim() != null && !search_word.trim().isEmpty()
-					&& search_category.trim() != null && !search_category.isEmpty()) {
-				params.put("search_category", search_category.trim());
+		if (search_word != null && !search_word.isEmpty()) {
+			if (search_word.trim() != null && !search_word.trim().isEmpty()) {
 				params.put("search_word", search_word.trim());
 			}
 		}
