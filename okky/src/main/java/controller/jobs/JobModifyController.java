@@ -51,6 +51,12 @@ public class JobModifyController extends HttpServlet {
 		String recruitContent = req.getParameter("recruitContent");
 		String dueDate = req.getParameter("dueDate");
 
+		if(contractType.equals("정규직")) {
+			contractType = "fulltime";
+		} else if(contractType.equals("계약직")) {
+			contractType = "contract";
+		}
+		
 		if (session.getAttribute("memberIdx") != null) {
 			String strMemberIdx = session.getAttribute("memberIdx").toString();
 			int memberIdx = strMemberIdx != null ? Integer.parseInt(strMemberIdx) : 0;

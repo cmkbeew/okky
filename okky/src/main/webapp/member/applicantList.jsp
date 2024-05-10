@@ -252,7 +252,7 @@
 								</c:when>
 								<c:otherwise>
 								<tr>
-									<td colspan="6" style="text-align: center;">지원한 공고 목록이 없습니다.</td>
+									<td colspan="6" style="text-align: center;">지원자 목록이 없습니다.</td>
 								</tr>
 								</c:otherwise>
 							</c:choose>

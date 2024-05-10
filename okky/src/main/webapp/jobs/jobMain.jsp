@@ -246,24 +246,53 @@
                         <span>멋진 인재가 모여있는 곳</span>
                     </div>
                     <div class="bot-menu">
-                    	<c:if test="${sessionScope.type eq '1'}">
-                        	<a href="/okky/member/applyList.do">
-                        	<div id="talent-menu">
-                                <div class="t-content">
-                                    <div>Resume</div>
-                                    <div>이력서 등록</div>
-                                </div>
-                            </div>
-                        </c:if>
-                        <c:if test="${sessionScope.type eq '2'}">
-                        	<a href="/okky/jobs/jobRecruit.do">
-                            <div id="talent-menu">
-                                <div class="t-content">
-                                    <div>Recruit</div>
-                                    <div>공고 등록</div>
-                                </div>
-                            </div>
-                        </c:if>
+<%--                     	<c:if test="${sessionScope.type eq '1'}"> --%>
+<!--                         	<a href="/okky/member/applyList.do"> -->
+<!--                         	<div id="talent-menu"> -->
+<!--                                 <div class="t-content"> -->
+<!--                                     <div>Resume</div> -->
+<!--                                     <div>이력서 등록</div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<%--                         </c:if> --%>
+<%--                         <c:if test="${sessionScope.type eq '2'}"> --%>
+<!--                         	<a href="/okky/jobs/jobRecruit.do"> -->
+<!--                             <div id="talent-menu"> -->
+<!--                                 <div class="t-content"> -->
+<!--                                     <div>Recruit</div> -->
+<!--                                     <div>공고 등록</div> -->
+<!--                                 </div> -->
+<!--                             </div> -->
+<%--                         </c:if> --%>
+                        <c:choose>
+                        	<c:when test="${sessionScope.type eq '1'}">
+	                        	<a href="/okky/member/applyList.do">
+	                        	<div id="talent-menu">
+	                                <div class="t-content">
+	                                    <div>Resume</div>
+	                                    <div>이력서 등록</div>
+	                                </div>
+	                            </div>
+                        	</c:when>
+                        	<c:when test="${sessionScope.type eq '2'}">
+                        		<a href="/okky/jobs/jobRecruit.do">
+		                            <div id="talent-menu">
+		                                <div class="t-content">
+		                                    <div>Recruit</div>
+		                                    <div>공고 등록</div>
+		                                </div>
+                            		</div>
+                        	</c:when>
+                        	<c:otherwise>
+	                        	<a href="/okky/member/applyList.do">
+		                        	<div id="talent-menu">
+		                                <div class="t-content">
+		                                    <div>Resume</div>
+		                                    <div>이력서 등록</div>
+		                                </div>
+		                            </div>
+                        	</c:otherwise>
+                        </c:choose>
                         </a>
                     </div>
                 </div>

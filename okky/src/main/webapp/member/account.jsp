@@ -330,7 +330,7 @@
 	                <c:if test="${not empty emailOkayMsg}">
 						<p style="color: blue; font-weight: bold;">${emailOkayMsg}</p>
 					</c:if>
-	                
+	                <p style="display: none" id="emailment"></p>
 	                
 	                <div class="saveBtnArea">
 	                    <input type="submit" id="saveBtn" name="saveBtn" value="저장" <c:if test="${empty emailOkayMsg}">disabled</c:if>>
@@ -371,6 +371,7 @@
         let ment1 = document.getElementById("ment1")
         let ment2 = document.getElementById("ment2")
         let email = document.getElementById("email");
+        let emailment = document.getElementById("emailment");
         
 // 칸 입력 시 변경 버튼 활성화
         pwd.addEventListener("change",function(e){
@@ -418,7 +419,16 @@
                 newPwd.focus();
                 return false;
             }
-           		alert("비밀번호가 변경되었습니다.");
+           	if(newPwd.style.border == "1px solid red" && newPwdCk.style.border == "1px solid red"){
+           	 ment1.style.display = "none";
+             ment2.style.display = "block";
+             ment2.style.color = "red";
+             ment2.innerHTML = `<strong>기준에 맞는 비밀번호로 변경해주세요.</strong>`;
+             e.preventDefault();
+             newPwd.focus();
+             return false;
+           	}
+            alert("비밀번호가 변경되었습니다.");
             
         });
 //이메일 중복체크 버튼
@@ -436,7 +446,14 @@
          document.getElementById("checkBtn").addEventListener("click",function(e){
     	    if (email.value.length > 0) {
     	    	if(email.value != '${email}'){
-            		location.href="./emailCompare.do?email="+email.value;
+    	    		if(email.style.border != "1px solid red" ){
+    	    		location.href="./emailCompare.do?email="+email.value;
+    	    		}
+    	    		else {
+    	                e.preventDefault();
+    	                email.focus();
+    	                return false;
+    	    		}
             	}
 	        }
             
@@ -560,14 +577,11 @@
 			// 이메일 형식(@, .) 확인
 		    if(emailCheck.test(email.value) === true) {
 		    	email.style.border = "3px solid lightgreen";
-		    	activeBtn();
 		    } else {
 		    	if(email.value.length == 0) {
 					email.style.border = "";
-					activeBtn();
 				} else {
 					email.style.border = "1px solid red";
-					activeBtn();
 				}
 		    }
 		}, false);
